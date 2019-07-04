@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('../fonts/iconfont.eot');
+  src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/iconfont.woff2') format('woff2'),
+       url('../fonts/iconfont.woff') format('woff'),
+       url('../fonts/iconfont.ttf') format('truetype');
+}
 html, body
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -7,4 +15,12 @@ html, body
 #app
   width: 100%
   height: 100%
-  overflow: hidden
+.iconfont 
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+.m-center
+  margin: 0 auto;
+  width: 1200px;

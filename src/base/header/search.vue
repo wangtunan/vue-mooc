@@ -7,7 +7,7 @@
       <input type="text" class="search-input" @focus="isFocus = !isFocus" @blur="isFocus = false">
     </div>
     <div class="search-icon">
-      <i class="el-icon-zoom-in"></i>
+      <i class="iconfont">&#xe63c;</i>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .header-search
     float: left;
     position: relative;
@@ -33,16 +34,16 @@ export default {
         display: none;
         opacity: 0;
       .search-input-box
-        border-color: #f01414;
+        border-color: $red;
       .search-icon
         border-radius: 12px;
         background-color: rgba(240,20,20,0.2)
-        color: #f01414;
+        color: $red;
     .search-tags
       position: absolute;
       right: 40px;
       bottom: 28px;
-      transition: all 0.3s linear;
+      transition: opacity 3s linear;
       .tag-item
         padding: 3px 8px;
         border-radius: 12px;
@@ -68,14 +69,14 @@ export default {
     .search-icon
       position:absolute;
       right: 0;
-      bottom: 26px;
+      bottom: 24px;
       width: 40px;
       height: 24px;
       line-height: 24px;
       text-align: center;
       font-size: 18px;
       color: #757a7e;
-      .el-icon-zoom-in
+      .iconfont
         font-weight: 700;
 </style>
  

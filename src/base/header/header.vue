@@ -12,25 +12,30 @@
 
     <!-- 搜索框模块 -->
     <search></search>
+
+    <!-- 登录模块 -->
+    <login-area></login-area>
   </div>
 </template>
 <script>
 import MNav from './nav.vue'
 import Search from './search.vue'
+import LoginArea from './login.vue'
 export default {
   components: {
     MNav,
-    Search
+    Search,
+    LoginArea
   }
 }
 </script>
 
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl';
-
   .header
     z-index: 99;
     position: relative;
+    padding-right: 10px;
     height: $headerHeight;
     background-color:#fff;
     box-shadow: 0 4px 8px $shadow;

@@ -1,3 +1,78 @@
 <template>
-  <div class="sidebar">sidebar</div>
+  <div class="sidebar">
+    <ul class="sidebar-list">
+      <li class="sidebar-item">
+        <i class="iconfont">&#xe671;</i>
+        <span class="sidebar-text">意见反馈</span>
+      </li>
+      <li class="sidebar-item">
+        <img class="sidebar-item-img" src="https://www.imooc.com/static/img/index/redPacket.png" width="18" height="20" alt="">
+        <span class="sidebar-text">邀请有礼</span>
+      </li>
+      <li class="sidebar-item">
+        <i class="iconfont">&#xe62d;</i>
+        <span class="sidebar-text">帮助中心</span>
+      </li>
+      <li class="sidebar-item">
+        <i class="iconfont">&#xe61a;</i>
+        <span class="sidebar-text">APP下载</span>
+        <div class="app-code code"></div>
+      </li>
+      <li class="sidebar-item">
+        <i class="iconfont">&#xe671;</i>
+        <span class="sidebar-text">官方微信</span>
+        <div class="wechat-code code"></div>
+      </li>
+    </ul>
+  </div>
 </template>
+<style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl'
+  .sidebar
+    z-index: 999;
+    position: fixed;
+    right: 0;
+    padding: 0 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    box-shadow: 0 4px 12px $shadow
+    border-radius: 5px;
+    .sidebar-item
+      padding: 16px 0;
+      width: 26px;
+      border-bottom: 1px solid #edf1f2;
+      text-align: center;
+      cursor: pointer;
+      &:hover
+        .iconfont
+          display: none;
+        .sidebar-text
+          display: block;
+        .sidebar-item-img
+          display: none;
+        .code
+          opacity: 1;
+          transform: scale(1);
+      .iconfont
+        font-size: 24px;
+        color: #d9dde1;
+      .sidebar-text
+        display: none;
+        font-size: 12px;
+        color: #07111b;
+      .code
+        position: absolute;
+        right: 56px;
+        bottom: -4px;
+        width: 172px;
+        height: 212px;
+        opacity: 0;
+        transform-origin: 100% 100%;
+        transform: scale(0);
+        transition: all 0.3s ease-in-out;
+        background: url('https://www.imooc.com/static/img/common/elevator.png?t=2') no-repeat 0 0;
+        &.app-code
+          bottom: -2px;
+          background-position: 0 -220px;
+</style>
