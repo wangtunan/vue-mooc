@@ -9,12 +9,16 @@
 <script>
 export default {
   data () {
+    let _self = this
     return {
       swiperList: [],
       swiperOption: {
         loop: true,
         autoplay: 4000,
-        pagination: '.swiper-pagination'
+        pagination: '.swiper-pagination',
+        onSlideChangeEnd: (swiper) => {
+          this.$emit('swiper', this.swiperList[swiper.realIndex].img)
+        }
       }
     }
   },
@@ -27,6 +31,8 @@ export default {
       { id: 5, img: 'https://img.mukewang.com/5cb833cf0001efb716000540.jpg' },
       { id: 6, img: 'https://img.mukewang.com/5c0fd2630001ef2118720632.jpg' }
     ]
+  },
+  methods: {
   }
 }
 </script>

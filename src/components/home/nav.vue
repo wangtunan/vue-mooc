@@ -1,30 +1,61 @@
 <template>
   <div class="home-nav-container">
-    <ul class="home-nav">
-      <li class="nav-item" v-for="(item,index) in navList" :key="index">
+    <ul class="home-nav" @mouseleave="handleMouseLeave">
+      <li class="nav-item" v-for="(item,index) in navList" :key="index" @mouseenter="handleMouseEnter(item)">
         <span class="nav-title">{{item.title}}</span>
         <span class="arr-right"></span>
       </li>
     </ul>
+    <div @mouseenter="handleContentEnter" @mouseleave="handleContentLeave">
+      <nav-content v-show="showNavContent" :content="currentNav"></nav-content>
+    </div>
   </div>
 </template>
 <script>
+import NavContent from './nav-content.vue'
+import { ERR_OK } from 'api/config.js'
+import { getHomeNav } from 'api/home.js'
 export default {
   data () {
     return {
-      navList: []
+      navList: [],
+      currentNav: {},
+      showNavContent: false
     }
   },
-  created () {
-    this.navList = [
-      { title: '前沿 / 区块链 / 人工智能', type: 'A' },
-      { title: '前端 / 小程序 / JS', type: 'B' },
-      { title: '后端 / JAVA / Python', type: 'C' },
-      { title: '移动 / Android / iOS', type: 'D' },
-      { title: '云计算 / 大数据 / 容器', type: 'E' },
-      { title: '运维 / 测试 / 数据库', type: 'F' },
-      { title: 'UI设计 / 3D动画 / 游戏', type: 'G' }
-    ]
+  mounted () {
+    this.getHomeNavList()
+  },
+  methods: {
+    handleMouseEnter (item) {
+      this.showNavContent = true
+      this.currentNav = item.data
+    },
+    handleMouseLeave () {
+      this.timer = setTimeout(() => {
+        this.showNavContent = false
+      }, 150)
+    },
+    handleContentEnter () {
+      clearTimeout(this.timer)
+    },
+    handleContentLeave () {
+      this.showNavContent = false
+      this.currentNav = {}
+    },
+    // 获取首页导航信息
+    getHomeNavList () {
+      getHomeNav().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.navList = data
+          this.currentNav = data[0].data
+        }
+      })
+    }
+  },
+  components: {
+    NavContent
   }
 }
 </script>
@@ -39,7 +70,6 @@ export default {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     box-shadow: 0 12px 24px 0 $shadow;
-    overflow: hidden;
     .home-nav
       position: absolute;
       left: 0;
@@ -48,7 +78,7 @@ export default {
       .nav-item
         position: relative;
         margin-left: 12px;
-        padding-left: 12px;
+        padding-left: 16px;
         height: 60px;
         line-height: 60px;
         font-size: 14px;

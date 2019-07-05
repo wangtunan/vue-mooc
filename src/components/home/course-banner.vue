@@ -31,6 +31,7 @@ export default {
     left: 216px;
     right: 0;
     bottom: 0;
+    padding: 0 18px;
     height: 128px;
     display: flex;
     align-items: center;
@@ -50,7 +51,7 @@ export default {
       cursor: pointer;
       &:hover
         .icon
-          margin-top: 15px;
+          margin-top: 18px;
       .icon
         display: block;
         margin: 22px auto 5px;
@@ -80,10 +81,11 @@ export default {
       & > p
         text-align: center;
       .title
-        margin-bottom: 4px;
+        margin-bottom: 2px;
         color: #07111B;
         font-size: 14px;
       .desc
+        line-height: 24px;
         font-size: 12px;
         color: #93999F;
 </style>
