@@ -6,16 +6,14 @@
       <i class="title-icon right-icon" :style="getBackgroundPosition(course.rightIcon)"></i>
     </h2>
 
-    <!-- <div class="split-banner">
-      <div class="split-banner-item">
-        <h2 class="split-title">站上微信小程序风口，实现职业华丽转身</h2>
-        <p class="split-subtitle">入门技能+项目开发，逐步深入学习微信小程序开发</p>
+    <div class="split-banner" v-if="course.banner && course.banner.length > 0">
+      <div class="split-banner-item" v-for="(item,index) in course.banner" :key="index">
+        <img :src="item.url" alt="">
+        <h2 class="title main">{{item.title}}</h2>
+        <p class="title sub">{{item.subtitle}}</p>
+        <div class="mask"></div>
       </div>
-      <div class="split-banner-item">
-        <h2 class="split-title">慕课微课</h2>
-        <p class="split-subtitle">超值课程最低一元体验</p>
-      </div>
-    </div> -->
+    </div>
 
     <ul class="course-list">
       <li class="course-item" v-for="(item,index) in course.data" :key="index">
@@ -32,6 +30,9 @@
           <span>{{item.type}}</span>
           <span>{{item.rank}}</span>
           <span><i class="iconfont icon-user">&#xe607;</i>{{item.number}}</span>
+          <span>
+            <star class="star-box" :score="item.star"></star>
+          </span>
         </p>
         <p class="price">
           <span>¥ {{item.price + '.00'}}</span>
@@ -45,6 +46,7 @@
   </div>
 </template>
 <script>
+import Star from 'base/star/star.vue'
 export default {
   props: {
     course: {
@@ -58,6 +60,9 @@ export default {
         'background-position': position
       }
     }
+  },
+  components: {
+    Star
   }
 }
 </script>
@@ -83,6 +88,47 @@ export default {
           margin-right: 20px;
         &.right-icon
           margin-left: 20px;
+    .split-banner
+      display: flex;
+      align-items: center;
+      margin-top: 24px;
+      .split-banner-item
+        position: relative;
+        flex: 1;
+        margin: 0 8px 16px 8px;
+        height: 108px;
+        background-color: rgba(7,17,27,0.5);
+        & > img
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: #ccc;
+          border-radius: 8px;
+        .title
+          z-index: 3;
+          position: absolute;
+          left: 0;
+          right: 0;
+          color: #fff;
+          text-align: center;
+          &.main
+            top: 30%;
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 700;
+          &.sub
+            top: 55%;
+            font-size: 12px;
+            line-height: 24px;
+        .mask
+          z-index: 1;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          background-color: rgba(7,17,27,0.4);
+          border-radius: 8px;
     .course-list
       display: flex;
       align-items: flex-start;
@@ -93,6 +139,9 @@ export default {
         flex: 0 0 20%;
         margin-bottom: 32px;
         cursor: pointer;
+        &:hover
+          .course-name
+            color: #F20D0D;
         .img-box
           position: relative;
           margin: 0 auto 8px;
@@ -120,7 +169,6 @@ export default {
               background-color: rgba(28, 31, 33, 0.6);
           .badge
             position: absolute;
-            
             width: 42px;
             border: 2px solid #fff;
             border-radius: 12px;
@@ -159,6 +207,7 @@ export default {
           .icon-user
             margin-right: -2px;
             font-weight: 600;
+ 
         .price
           span
             color: #4D555D;

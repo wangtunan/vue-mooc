@@ -1,5 +1,6 @@
 # vue-mooc
 
+[预览地址](https://wangtunan.github.io/vue-mooc/#/home) 
 ## Project setup
 ```
 npm install
@@ -24,6 +25,3 @@ npm run test
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

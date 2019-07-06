@@ -15,7 +15,7 @@
           "rank": "中级",
           "number": 6062,
           "star": 5,
-          "price": "266.00",
+          "price": 266,
           "img": "https://img2.mukewang.com/szimg/5ac2dfe100014a9005400300.jpg"
         },
         {
@@ -26,7 +26,7 @@
           "rank": "高级",
           "number": 453,
           "star": 5,
-          "price": 366.00,
+          "price": 366,
           "img": "https://img1.mukewang.com/szimg/5cda946c0826e4c006000338.jpg"
         },
         {
@@ -37,7 +37,7 @@
           "rank": "中级",
           "number": 1333,
           "star": 5,
-          "price": 348.00,
+          "price": 348,
           "img": "https://img1.mukewang.com/szimg/5c7e6835087ef3d806000338.jpg"
         },
         {
@@ -48,10 +48,10 @@
           "rank": "初级",
           "number": 433,
           "star": 5,
-          "price": 245.00,
+          "price": 245,
           "img": "https://img2.mukewang.com/szimg/5d08d0b308c9749706000338.jpg",
           "isDiscount": true,
-          "oldPrice": 288.00 
+          "oldPrice": 288 
         },
         {
           "name": "全面系统python3入门+进阶课程 零基础学python 小白也能听懂 ",
@@ -61,7 +61,7 @@
           "rank": "初级",
           "number": 8882,
           "star": 5,
-          "price": 366.00,
+          "price": 366,
           "img": "https://img3.mukewang.com/szimg/59b8a486000107fb05400300.jpg"
         }
       ]
@@ -80,10 +80,10 @@
           "rank": "中级",
           "number": 557,
           "star": 5,
-          "price": "199.00",
+          "price": "199",
           "img": "https://img2.mukewang.com/szimg/5d1032ab08719e0906000338.jpg",
           "isDiscount": true,
-          "oldPrice": 236.00 
+          "oldPrice": 236 
         },
         {
           "name": "Angular8开发拼多多webapp 从基础到项目实战",
@@ -191,24 +191,371 @@
           "price": 328,
           "img": "https://img3.mukewang.com/szimg/5d1ad17f08cd16e800000000.jpg",
           "isDiscount": true,
-          "oldPrice": 388.00 
+          "oldPrice": 388 
         }
       ]
     },
     "guide": {
       "title": "新／手／入／门",
       "leftIcon": "center -144px",
-      "rightIcon": "center -180px"
+      "rightIcon": "center -180px",
+      "banner": [
+        { 
+          "title": "站上微信小程序风口，实现职业华丽转身",
+          "subtitle": "入门技能+项目开发，逐步深入学习微信小程序开发",
+          "url": "https://img.mukewang.com/5cbd837c0001b18b05670108.jpg"
+        },
+        { 
+          "title": "慕课微课",
+          "subtitle": "超值课程最低一元体验",
+          "url": "https://img.mukewang.com/5bf224930001991905670108.jpg"
+        }
+      ],
+      "data": [
+        {
+          "name": "Java 零基础入门",
+          "tags": ["JAVA攻城狮培养计划"],
+          "type": "就业班",
+          "rank": "中级",
+          "number": 1152,
+          "star": 5,
+          "price": 568,
+          "img": "https://climg.mukewang.com/5c80971c0001b50306000338.jpg"
+        },
+        {
+          "name": "Python零基础入门",
+          "tags": ["Python攻城狮培养计划"],
+          "type": "就业班",
+          "rank": "中级",
+          "number": 858,
+          "star": 5,
+          "price": 666,
+          "img": "https://climg.mukewang.com/5c877f8d0001361006000338.jpg"
+        },
+        {
+          "name": "Android 零基础入门",
+          "tags": ["Android攻城狮培养计划"],
+          "type": "就业班",
+          "rank": "中级",
+          "number": 387,
+          "star": 5,
+          "price": 699,
+          "img": "https://climg.mukewang.com/5c809855000179c506000338.jpg"
+        },
+        {
+          "name": "玩转MySQL8.0新特性",
+          "tags": ["Java","MySQL"],
+          "type": "就业班",
+          "rank": "入门",
+          "number": 11845,
+          "star": 5,
+          "price": "0",
+          "img": "https://img2.mukewang.com/5c760767084b92ce06000338-240-135.jpg"
+        },
+        {
+          "name": "微信小程序入门与实战 常用组件API开发技巧项目实战",
+          "tags": ["Html5","小程序"],
+          "type": "实战",
+          "rank": "初级",
+          "number": 18042,
+          "star": 5,
+          "price": 149,
+          "img": "https://img3.mukewang.com/szimg/5c0493ce000126b106000338.jpg"
+        },
+        {
+          "name": "前端零基础入门 ",
+          "tags": ["Web前端攻城狮培养计划"],
+          "type": "就业班",
+          "rank": "初级",
+          "number": 1647,
+          "star": 5,
+          "price": 699,
+          "img": "https://climg.mukewang.com/5c7e2b5800013ea906000338.jpg"
+        },
+        {
+          "name": "Flutter入门与案例实战",
+          "tags": ["Android"],
+          "type": "实战",
+          "rank": "入门",
+          "number": 16096,
+          "star": 5,
+          "price": "0",
+          "img": "https://img.mukewang.com/5c18cf540001ac8206000338-240-135.jpg"
+        },
+        {
+          "name": "PHP小白零基础入门",
+          "tags": ["PHP攻城狮培养计划"],
+          "type": "就业班",
+          "rank": "初级",
+          "number": 892,
+          "star": 5,
+          "price": "658",
+          "img": "https://climg.mukewang.com/5993e8880001521206000338.jpg"
+        },
+        {
+          "name": "深入浅出Java多线程",
+          "tags": ["Java"],
+          "type": "实战",
+          "rank": "入门",
+          "number": 170123,
+          "star": 5,
+          "price": "0",
+          "img": "https://img4.mukewang.com/5704a9550001f74606000338-240-135.jpg"
+        },
+        {
+          "name": "从0开始 独立完成企业级Java电商网站开发(服务端)",
+          "tags": ["Linux","SSM"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 7541,
+          "star": 5,
+          "price": "348",
+          "img": "https://img2.mukewang.com/szimg/58f57d200001461105400300.jpg"
+        }
+      ]
     },
     "improve": {
       "title": "技／能／提／升",
       "leftIcon": "center -216px",
-      "rightIcon": "center -252px"
+      "rightIcon": "center -252px",
+      "banner": [
+        { 
+          "title": "Vue高级工程师实战之路",
+          "subtitle": "从Vue基础语法入门最流行的SSR技术实现，完美学习路线打造快速晋升之路！",
+          "url": "https://img.mukewang.com/5bf225290001b0f105670108.jpg"
+        },
+        { 
+          "title": "Python开发一站式学习",
+          "subtitle": "从入门到开发，学习 好玩 好用 好未来的Python语言",
+          "url": "https://img.mukewang.com/5b86024c0001e0a805670108.jpg"
+        }
+      ],
+      "data": [
+        {
+          "name": "JavaScript版 数据结构与算法",
+          "process": 25,
+          "tags": ["JavaScript","算法与数据结构"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 1514,
+          "star": 5,
+          "price": 266,
+          "img": "https://img4.mukewang.com/szimg/5c62a4dc0812e84106000338.jpg"
+        },
+        {
+          "name": "Socket网络编程进阶与实战",
+          "tags": ["Java","Android"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 1344,
+          "star": 5,
+          "price": 348,
+          "img": "https://img2.mukewang.com/szimg/5bc3f1420001abf206000338.jpg"
+        },
+        {
+          "name": "Spring Boot 2.0深度实践之系列总览",
+          "tags": ["Java","SpringBoot"],
+          "type": "实战",
+          "rank": "高级",
+          "number": 20499,
+          "star": 5,
+          "price": 0,
+          "img": "https://img1.mukewang.com/5bbafd180001688d06000338-240-135.jpg"
+        },
+        {
+          "name": "2019版 微服务时代Spring Boot企业微信点餐系统",
+          "script": "升级",
+          "tags": ["Java","SpringBoot"],
+          "type": "实战",
+          "rank": "高级",
+          "number": 20499,
+          "star": 5,
+          "price": 0,
+          "img": "https://img1.mukewang.com/5bbafd180001688d06000338-240-135.jpg"
+        },
+        {
+          "name": "系统学习Docker 践行DevOps理念",
+          "tags": ["Docker","Kubernetes"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 1611,
+          "star": 5,
+          "price": 299,
+          "img": "https://img4.mukewang.com/szimg/5a9614850001bc3405400300.jpg"
+        },
+        {
+          "name": "全面掌握Django ORM",
+          "tags": ["Python","Django"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 1511,
+          "star": 5,
+          "price": 0,
+          "img": "https://img3.mukewang.com/5c0f95640001d03c06000338-240-135.jpg"
+        },
+        {
+          "name": "纯正商业级应用 Node.js Koa2开发微信小程序服务端",
+          "script": "热门",
+          "tags": ["Node.js","小程序"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 764,
+          "star": 5,
+          "price": 366,
+          "img": "https://img1.mukewang.com/szimg/5ccec7ba08430b1d06000338.jpg"
+        },
+
+        {
+          "name": "MyBatis-Plus入门",
+          "tags": ["Python","Django"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 1511,
+          "star": 5,
+          "price": 0,
+          "img": "https://img4.mukewang.com/5ce2698608207d4006000338-240-135.jpg"
+        },
+        {
+          "name": "Vue.js源码全方位深入解析 ",
+          "process": 38,
+          "tags": ["Vue.js"],
+          "type": "实战",
+          "rank": "高级",
+          "number": 2180,
+          "star": 5,
+          "price": 488,
+          "img": "https://img3.mukewang.com/szimg/5b17bad10001535305400300.jpg"
+        },
+        {
+          "name": "Grid布局基础",
+          "tags": ["CSS","CSS3"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 7693,
+          "star": 5,
+          "price": 0,
+          "img": "https://img.mukewang.com/5c98c090094329d806000338-240-135.jpg"
+        }
+      ]
     },
     "technology": {
       "title": "前／沿／技／术",
       "leftIcon": "center -288px",
-      "rightIcon": "center -324px"
+      "rightIcon": "center -324px",
+      "banner": [
+        { 
+          "title": "盘点最主流的前端框架有哪些？",
+          "subtitle": "上万人的选择打消你对主流框架的疑惑",
+          "url": "https://img.mukewang.com/5b8602900001bd8905670108.jpg"
+        },
+        { 
+          "title": "改变职场命运，修炼全栈工程师的必修课",
+          "subtitle": "练就编程十八般武艺，快速转型全栈开发，做全能型工程师！",
+          "url": "https://img.mukewang.com/5b70eebd0001bf7a05670108.jpg"
+        }
+      ],
+      "data": [
+        {
+          "name": "Google老师亲授 TensorFlow2.0 入门到进阶",
+          "tags": ["Python","算法与数据结构"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 409,
+          "star": 5,
+          "price": 399,
+          "img": "https://img4.mukewang.com/szimg/5ce7e7970894f48706000338.jpg"
+        },
+        {
+          "name": "深度学习之目标检测常用算法原理+实践精讲",
+          "tags": ["深度学习","计算机视觉"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 409,
+          "star": 5,
+          "price": 499,
+          "img": "https://img3.mukewang.com/szimg/5bfb523c0001290905400300.jpg"
+        },
+        {
+          "name": "2018 AWS技术峰会  自动化运维、微服务及容器技术分论坛",
+          "tags": ["云计算"],
+          "type": "实战",
+          "rank": "高级",
+          "number": 2370,
+          "star": 5,
+          "price": 0,
+          "img": "https://img.mukewang.com/5be8f5a40001482306000338-240-135.jpg"
+        },
+        {
+          "name": "新一代大数据计算引擎  Flink从入门到实战",
+          "tags": ["大数据", "Flink"],
+          "type": "实战",
+          "rank": "高级",
+          "number": 311,
+          "star": 5,
+          "price": 388,
+          "img": "https://img3.mukewang.com/szimg/5c87891f08dd162706000338.jpg"
+        },
+        {
+          "name": "NLP实践TensorFlow打造聊天机器人",
+          "tags": ["深度学习","自然语言处理"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 611,
+          "star": 4,
+          "price": 348,
+          "img": "https://img4.mukewang.com/szimg/5b6910d30001adad05400300.jpg"
+        },
+        {
+          "name": "私有区块链，我们一起GO",
+          "tags": ["Go","区块链"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 14639,
+          "star": 5,
+          "price": 0,
+          "img": "https://img.mukewang.com/5b4705c90001fc9506000338-240-135.jpg"
+        },
+        {
+          "name": "Python3+TensorFlow打造人脸识别智能小程序",
+          "tags": ["深度学习","计算机视觉"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 348,
+          "star": 5,
+          "price": 466,
+          "img": "https://img3.mukewang.com/szimg/5c9a0db9088d218306000338.jpg"
+        },
+        {
+          "name": "TensorFlow与Flask结合打造手写体数字识别",
+          "tags": ["深度学习","计算机视觉"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 14639,
+          "star": 4,
+          "price": 0,
+          "img": "https://img1.mukewang.com/5afe7ffa00018fff06000338-240-135.jpg"
+        },
+        {
+          "name": "Hadoop基础与电商行为日志分析 新手入门大数据",
+          "tags": ["大数据","Hadoop"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 348,
+          "star": 2,
+          "price": 288,
+          "img": "https://img3.mukewang.com/szimg/5c203a4b0001dcf306000338.jpg"
+        },
+        {
+          "name": "自然语言处理（NLP）入门与实践",
+          "tags": ["机器学习","自然语言处理"],
+          "type": "实战",
+          "rank": "初级",
+          "number": 7609,
+          "star": 3,
+          "price": 0,
+          "img": "https://img4.mukewang.com/5bd8219400016e5e06000336-240-135.jpg"
+        }
+      ]
     }
   }
 }
