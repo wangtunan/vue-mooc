@@ -85,6 +85,7 @@ export default {
       flex-wrap: wrap;
       position: absolute;
       left: 0;
+      right: 0;
       bottom: 0;
       padding: 36px 0 0 48px;
       background-color: #F8FAFC;

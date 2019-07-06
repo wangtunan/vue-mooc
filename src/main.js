@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from 'router/index.js'
 
 // element-ui
-// import ElementUI from 'element-ui'
-// import 'element-ui/lib/theme-chalk/index.css'
-// Vue.use(ElementUI)
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 
 // swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'

@@ -7,6 +7,8 @@
   </swiper>
 </template>
 <script>
+import { getSliderList } from 'api/home.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     let _self = this
@@ -23,16 +25,17 @@ export default {
     }
   },
   created () {
-    this.swiperList = [
-      { id: 1, img: 'https://img.mukewang.com/5d1e0a1800013ca916000540.jpg' },
-      { id: 2, img: 'https://img.mukewang.com/5d1c5aec00011c1016000540.jpg' },
-      { id: 3, img: 'https://img.mukewang.com/5d108b1500010bfe18720632.jpg' },
-      { id: 4, img: 'https://img.mukewang.com/5d1466c5000172a516000540.jpg' },
-      { id: 5, img: 'https://img.mukewang.com/5cb833cf0001efb716000540.jpg' },
-      { id: 6, img: 'https://img.mukewang.com/5c0fd2630001ef2118720632.jpg' }
-    ]
+    this.getBanner()
   },
   methods: {
+    getBanner () {
+      getSliderList().then((res) => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.swiperList = data
+        }
+      })
+    }
   }
 }
 </script>

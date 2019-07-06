@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import { ERR_OK } from 'api/config.js'
+import { baseUrl } from 'api/config.js'
 
 const service = axios.create({
-  baseURL: '',
+  baseURL: baseUrl,
   timeout: 10000
 })
 

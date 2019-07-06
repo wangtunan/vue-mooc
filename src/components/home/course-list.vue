@@ -1,6 +1,6 @@
 <template>
   <div class="course-list-container m-center">
-    <h2 class="course-title">
+    <h2 class="home-title">
       <i class="title-icon left-icon" :style="getBackgroundPosition(course.leftIcon)"></i>
       {{course.title}}
       <i class="title-icon right-icon" :style="getBackgroundPosition(course.rightIcon)"></i>
@@ -25,7 +25,7 @@
           <div class="badge rate" v-if="item.process > 0">{{item.process}}%</div>
           <div class="badge script" v-if="item.script">{{item.script}}</div>
         </div>
-        <p class="course-name multline-ellipsis">{{item.name}}</p>
+        <p class="course-name">{{item.name}}</p>
         <p class="info">
           <span>{{item.type}}</span>
           <span>{{item.rank}}</span>
@@ -68,26 +68,9 @@ export default {
 </script>
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl';
+  @import '~assets/stylus/mixin.styl';
   .course-list-container
     padding: 36px 0 48px;
-    .course-title
-      text-align: center;
-      font-size: 20px;
-      color: #4D555D;
-      font-weight: 600;
-      line-height: 36px;
-      letter-spacing: 1px;
-      .title-icon
-        display: inline-block;
-        vertical-align: top;
-        width: 56px;
-        height: 36px;
-        background: url('https://www.imooc.com/static/img/index/icon.png');
-        background-size: cover;
-        &.left-icon
-          margin-right: 20px;
-        &.right-icon
-          margin-left: 20px;
     .split-banner
       display: flex;
       align-items: center;
@@ -195,6 +178,7 @@ export default {
           font-weight: 700;
           line-height: 24px;
           color: #07111B;
+          multline-ellipsis(2);
         .info
           margin-top: 5px;
           font-size: 12px;

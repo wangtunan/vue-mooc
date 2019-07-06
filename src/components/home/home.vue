@@ -24,6 +24,15 @@
 
     <!-- 前言技术 -->
     <course-list :course="technologyList"></course-list>
+
+    <!-- 猿问和手记 -->
+    <waterfull :article="articleList"></waterfull>
+
+    <!-- 精英讲师 -->
+    <elite-teacher></elite-teacher>
+
+    <!-- 全明星 -->
+    <all-star></all-star>
   </div>
 </template>
 <script>
@@ -31,12 +40,16 @@ import HomeNav from './nav.vue'
 import HomeSwiper from 'base/swiper/swiper.vue'
 import CourseBanner from './course-banner.vue'
 import CourseList from './course-list.vue'
-import { getHomeCourse } from 'api/home.js'
+import Waterfull from './waterfull.vue'
+import EliteTeacher from './elite-teacher.vue'
+import AllStar from './all-star.vue'
+import { getHomeCourse, getArticle } from 'api/home.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   name: 'Home',
   data () {
     return {
+      articleList: {}, // 猿问和手记
       technologyList: {}, // 前言技术
       improveList: {}, // 技能提升
       guideList: {}, // 新手入门
@@ -47,11 +60,13 @@ export default {
   },
   created () {
     this.getCourseList()
+    this.getArticleList()
   },
   methods: {
     handelSwiper (img) {
       this.currentSwiper = img
     },
+    // 获取课程信息
     getCourseList () {
       getHomeCourse().then(res => {
         let { code, data } = res
@@ -61,6 +76,16 @@ export default {
           this.guideList = data.guide
           this.improveList = data.improve
           this.technologyList = data.technology
+        }
+      })
+    },
+    // 获取猿问和手记
+    getArticleList () {
+      getArticle().then((res) => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.articleList = data
+          console.log(this.articleList)
         }
       })
     }
@@ -76,7 +101,10 @@ export default {
     HomeNav,
     HomeSwiper,
     CourseBanner,
-    CourseList
+    CourseList,
+    Waterfull,
+    EliteTeacher,
+    AllStar
   }
 }
 </script>
