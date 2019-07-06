@@ -1,0 +1,214 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": {
+    "practice": {
+      "title": "实／战／推／荐",
+      "leftIcon": "center 0",
+      "rightIcon": "center -36px",
+      "data": [
+        {
+          "name": "Vue2.5开发去哪儿网App 从零基础入门到实战项目",
+          "process": 100,
+          "tags": ["Vue.js"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 6062,
+          "star": 5,
+          "price": "266.00",
+          "img": "https://img2.mukewang.com/szimg/5ac2dfe100014a9005400300.jpg"
+        },
+        {
+          "name": "Java电商秒杀系统深度优化 从容应对亿级流量挑战",
+          "process": 0,
+          "tags": ["SpringBoot", "中间件"],
+          "type": "实战",
+          "rank": "高级",
+          "number": 453,
+          "star": 5,
+          "price": 366.00,
+          "img": "https://img1.mukewang.com/szimg/5cda946c0826e4c006000338.jpg"
+        },
+        {
+          "name": "Flutter从入门到进阶 实战携程网App",
+          "process": 0,
+          "tags": ["Android","iOS"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 1333,
+          "star": 5,
+          "price": 348.00,
+          "img": "https://img1.mukewang.com/szimg/5c7e6835087ef3d806000338.jpg"
+        },
+        {
+          "name": "阿里新零售数据库设计与实战 ",
+          "process": 0,
+          "tags": ["Java","MySQL"],
+          "type": "实战",
+          "rank": "初级",
+          "number": 433,
+          "star": 5,
+          "price": 245.00,
+          "img": "https://img2.mukewang.com/szimg/5d08d0b308c9749706000338.jpg",
+          "isDiscount": true,
+          "oldPrice": 288.00 
+        },
+        {
+          "name": "全面系统python3入门+进阶课程 零基础学python 小白也能听懂 ",
+          "process": 0,
+          "tags": ["Python"],
+          "type": "实战",
+          "rank": "初级",
+          "number": 8882,
+          "star": 5,
+          "price": 366.00,
+          "img": "https://img3.mukewang.com/szimg/59b8a486000107fb05400300.jpg"
+        }
+      ]
+    },
+    "new": {
+      "title": "新／上／好／课",
+      "leftIcon": "center -72",
+      "rightIcon": "center -108px",
+      "data": [
+        {
+          "name": "编程必备基础知识 计算机组成原理+操作系统+计算机网络",
+          "process": 0,
+          "script": "新课",
+          "tags": ["算法与数据结构","数学"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 557,
+          "star": 5,
+          "price": "199.00",
+          "img": "https://img2.mukewang.com/szimg/5d1032ab08719e0906000338.jpg",
+          "isDiscount": true,
+          "oldPrice": 236.00 
+        },
+        {
+          "name": "Angular8开发拼多多webapp 从基础到项目实战",
+          "process": 0,
+          "tags": ["Angular"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 247,
+          "star": 5,
+          "price": 177,
+          "img": "https://img4.mukewang.com/szimg/5cf8c8ad087a447906000338.jpg",
+          "isDiscount": true,
+          "oldPrice": 199
+        },
+        {
+          "name": "Python数据预处理（二）- 清洗文本数据",
+          "process": 0,
+          "script": "新课",
+          "tags": ["Python","自然语言处理"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 579,
+          "star": 5,
+          "price": 99,
+          "img": "https://img2.mukewang.com/5ce4b17908d9928706000338-240-135.jpg"
+        },
+        {
+          "name": "前端下一代开发语言TypeScript  从基础到axios实战",
+          "process": 58,
+          "tags": ["JavaScript"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 1255,
+          "star": 5,
+          "price": 99,
+          "img": "https://img1.mukewang.com/szimg/5cbf00c608f52a3b06000338.jpg"
+        },
+        {
+          "name": "Google老师亲授 TensorFlow2.0 入门到进阶",
+          "process": 0,
+          "tags": ["Python","深度学习"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 408,
+          "star": 5,
+          "price": 399,
+          "img": "https://img2.mukewang.com/szimg/5ce7e7970894f48706000338.jpg"
+        },
+        {
+          "name": "强力Django + 杀手级xadmin开发在线教育网站",
+          "process": 0,
+          "script": "新课",
+          "tags": ["Python","Django"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 22,
+          "star": 5,
+          "price": 369,
+          "img": "https://img1.mukewang.com/szimg/5d1978e80875170506000338.jpg"
+        },
+        {
+          "name": "极速入门SpringCloud之API网关与服务发现",
+          "process": 0,
+          "tags": ["Java","Spring Cloud"],
+          "type": "实战",
+          "rank": "初级",
+          "number": 3386,
+          "star": 5,
+          "price": 99,
+          "img": "https://img.mukewang.com/5d0771a608ce48cb02000114-240-135.jpg"
+        },
+        {
+          "name": "SpringCloud  Finchley三版本(M2+RELEASE+SR2)微服务实战",
+          "process": 0,
+          "script": "升级",
+          "tags": ["微服务","Spring Cloud"],
+          "type": "实战",
+          "rank": "高级",
+          "number": 4162,
+          "star": 5,
+          "price": 366,
+          "img": "https://img1.mukewang.com/szimg/5cb68a1408ed350506000338.jpg"
+        },
+        {
+          "name": "Flink最锋利的武器---FlinkSQL入门和实战",
+          "process": 0,
+          "script": "新课",
+          "tags": ["微服务","Spring Cloud"],
+          "type": "实战",
+          "rank": "初级",
+          "number": 644,
+          "star": 5,
+          "price": 99,
+          "img": "https://img3.mukewang.com/5d0aee3909399f1f06000338-240-135.jpg"
+        },
+        {
+          "name": "Zookeeper源码分析",
+          "process": 0,
+          "script": "新课",
+          "tags": ["算法与数据结构","数学"],
+          "type": "实战",
+          "rank": "中级",
+          "number": 23,
+          "star": 5,
+          "price": 328,
+          "img": "https://img3.mukewang.com/szimg/5d1ad17f08cd16e800000000.jpg",
+          "isDiscount": true,
+          "oldPrice": 388.00 
+        }
+      ]
+    },
+    "guide": {
+      "title": "新／手／入／门",
+      "leftIcon": "center -144px",
+      "rightIcon": "center -180px"
+    },
+    "improve": {
+      "title": "技／能／提／升",
+      "leftIcon": "center -216px",
+      "rightIcon": "center -252px"
+    },
+    "technology": {
+      "title": "前／沿／技／术",
+      "leftIcon": "center -288px",
+      "rightIcon": "center -324px"
+    }
+  }
+}

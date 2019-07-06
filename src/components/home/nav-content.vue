@@ -22,7 +22,10 @@
           <p class="information">
             <span class="money" v-if="course.money >0">¥{{course.money}} / </span>
             <span>{{course.rank}} / </span>
-            <span>{{course.number}}</span>
+            <span>
+              <i class="iconfont user-icon">&#xe607;</i>
+              {{course.number}}
+            </span>
           </p>
         </div>
       </div>
@@ -115,5 +118,9 @@ export default {
             .money
               font-size: 12px;
               line-height: 20px;
+              font-weight: 700;
+            .user-icon
+              margin-right: -3px;
+              font-size: 14px;
               font-weight: 700;
 </style>

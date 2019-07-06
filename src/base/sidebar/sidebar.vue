@@ -19,7 +19,7 @@
         <div class="app-code code"></div>
       </li>
       <li class="sidebar-item">
-        <i class="iconfont">&#xe671;</i>
+        <i class="iconfont">&#xe628;</i>
         <span class="sidebar-text">官方微信</span>
         <div class="wechat-code code"></div>
       </li>
