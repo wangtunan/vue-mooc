@@ -19,7 +19,7 @@ export default {
         autoplay: 4000,
         pagination: '.swiper-pagination',
         onSlideChangeEnd: (swiper) => {
-          this.$emit('swiper', this.swiperList[swiper.realIndex].img)
+          _self.$emit('swiper', this.swiperList[swiper.realIndex].img)
         }
       }
     }

@@ -73,6 +73,15 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    article: {
+      required: true
+    }
+  }
+}
+</script>
 <style lang="stylus" scoped>
   @import '~assets/stylus/mixin.styl';
   .waterfull-container
@@ -197,6 +206,11 @@
           font-size: 12px;
           .question-flag
             color: rgba(0, 180, 60, 0.7);
+            & > span
+              display: inline-block;
+              vertical-align: top;
+              margin-left: 3px;
+              margin-top: 2px;
           .question-title
             margin: 8px 0;
             font-size: 14px;
@@ -217,14 +231,5 @@
             color: rgba(0, 180, 60, 0.6);
             font-size: 12px;
 </style>
-<script>
-export default {
-  props: {
-    article: {
-      type: Array | Object,
-      required: true
-    }
-  }
-}
-</script>
+
 
