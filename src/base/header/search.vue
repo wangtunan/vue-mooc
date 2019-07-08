@@ -24,6 +24,11 @@ export default {
 
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl';
+  @media screen and (max-width: 1479px)
+    .header-search
+      margin-left: 15px!important;
+      .search-input-box
+        width: 140px!important;
   .header-search
     float: left;
     position: relative;

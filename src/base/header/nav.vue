@@ -18,12 +18,12 @@ export default {
   created () {
     // 初始化导航栏的数据
     this.navList = [
-      { title: '课程', icon: '', path: '/' },
-      { title: '实战课程', icon: '', path: '/' },
-      { title: '就业班', icon: '', path: '/' },
+      { title: '课程', path: '/' },
+      { title: '实战课程', path: '/' },
+      { title: '就业班', path: '/' },
       { title: '专栏', icon: 'https://www.imooc.com/static/img/common/new.png', path: '/' },
-      { title: '猿问', icon: '', path: '/' },
-      { title: '手记', icon: '', path: '/' }
+      { title: '猿问', path: '/' },
+      { title: '手记', path: '/' }
     ]
   },
   methods: {
@@ -44,6 +44,9 @@ export default {
     overflow: hidden;
     .nav-item
       float: left;
+      @media screen and (max-width: 1479px)
+        .nav-link
+          padding: 0 10px!important;
       .nav-link
         display: block;
         position: relative;
@@ -57,4 +60,5 @@ export default {
           right: 4px;
           width: 16px;
           height: 16px;
+    
 </style>

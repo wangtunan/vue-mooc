@@ -16,3 +16,11 @@ export function getHomeCourse() {
 export function getArticle () {
   return axios.get('/home/article')
 }
+// 获取精英讲师信息
+export function getTeacher () {
+  return axios.get('/home/teacher')
+}
+// 获取全明星信息
+export function getAllStar() {
+  return axios.get('/home/allstar')
+}

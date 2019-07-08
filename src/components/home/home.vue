@@ -6,7 +6,11 @@
     <!-- 导航和轮播 -->
     <div class="home-container m-center">
       <home-nav></home-nav>
-      <home-swiper @swiper="handelSwiper"></home-swiper>
+      <home-swiper @swiper="handelSwiper">
+        <swiper-slide v-for="(item,index) in swiperList" :key="index">
+          <img :src="item.img" :key="item.img" alt="" class="swiper-img">
+        </swiper-slide>
+      </home-swiper>
       <course-banner></course-banner>
     </div>
 
@@ -29,10 +33,10 @@
     <waterfull :article="articleList"></waterfull>
 
     <!-- 精英讲师 -->
-    <elite-teacher></elite-teacher>
+    <elite-teacher :teacher-list="teacherList"></elite-teacher>
 
     <!-- 全明星 -->
-    <all-star></all-star>
+    <all-star :allstar="allstar"></all-star>
   </div>
 </template>
 <script>
@@ -43,12 +47,15 @@ import CourseList from './course-list.vue'
 import Waterfull from './waterfull.vue'
 import EliteTeacher from './elite-teacher.vue'
 import AllStar from './all-star.vue'
-import { getHomeCourse, getArticle } from 'api/home.js'
+import { getSliderList, getHomeCourse, getArticle, getTeacher, getAllStar } from 'api/home.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   name: 'Home',
   data () {
     return {
+      swiperList: [], //首页轮播信息
+      allstar: [], // 全明星
+      teacherList: [], // 精英讲师
       articleList: {}, // 猿问和手记
       technologyList: {}, // 前言技术
       improveList: {}, // 技能提升
@@ -59,12 +66,24 @@ export default {
     }
   },
   created () {
+    this.getBanner()
     this.getCourseList()
     this.getArticleList()
+    this.getTeacherList()
+    this.getAllStarList()
   },
   methods: {
-    handelSwiper (img) {
-      this.currentSwiper = img
+    handelSwiper (index) {
+      this.currentSwiper = this.swiperList[index].img
+    },
+    // 首页轮播信息
+    getBanner () {
+      getSliderList().then((res) => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.swiperList = data
+        }
+      })
     },
     // 获取课程信息
     getCourseList () {
@@ -85,7 +104,24 @@ export default {
         let { code, data } = res
         if (code === ERR_OK) {
           this.articleList = data
-          console.log(this.articleList)
+        }
+      })
+    },
+    // 获取精英讲师信息
+    getTeacherList () {
+      getTeacher().then(res => {
+        let { code, data} = res
+        if (code === ERR_OK) {
+          this.teacherList = data
+        }
+      })
+    },
+    // 获取精英讲师信息
+    getAllStarList () {
+      getAllStar().then(res => {
+        let { code, data} = res
+        if (code === ERR_OK) {
+          this.allstar = data
         }
       })
     }
@@ -122,10 +158,13 @@ export default {
       height: 180px;
       opacity: 0.3;
       filter: blur(100px);
-      // background: url('https://img.mukewang.com/5cb833cf0001efb716000540.jpg')
     .home-container
       position: relative;
       box-shadow: 0 12px 24px 0 $shadow;
       border-radius: 8px;
       background-color: #93999f;
+      .swiper-img
+        display: block;
+        width: 100%;
+        height: 316px;
 </style>
