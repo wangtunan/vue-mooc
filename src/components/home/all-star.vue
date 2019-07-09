@@ -91,7 +91,7 @@ export default {
             line-height: 16px;
             color: #07111B;
           .star-type
-            line-height: 16px;
+            line-height: 24px;
             font-size: 12px;
             color: #93999F;
           .star-crown

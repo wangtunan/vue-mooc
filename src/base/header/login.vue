@@ -18,10 +18,30 @@
       </a>
     </li>
     <li class="item sign">
-      <span class="sign-btn">登录</span>/<span class="sign-btn">注册</span>
+      <span class="sign-btn" @click="handleLoginClick">登录</span>/<span class="sign-btn" @click="handleRegisterClick">注册</span>
     </li>
   </ul>
 </template>
+<script>
+import { mapMutations } from 'vuex'
+export default {
+  methods: {
+    // 登录点击
+    handleLoginClick () {
+      this.setShowLogin(true)
+    },
+    // 注册点击
+    handleRegisterClick () {
+      this.etShowLogin(true)
+    },
+    // vuex
+    ...mapMutations({
+      'setShowLogin': 'login/SET_SHOW_LOGIN'
+    })
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl'
   .login-area
