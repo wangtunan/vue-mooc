@@ -1,12 +1,12 @@
 {
   "code": 0,
-  "msg": "登录成功",
+  "msg": "注册成功",
   "data": {
     "account": "admin",
     "phone": "18277776666",
     "avatar": "https://img.mukewang.com/5882f5f70001525e01000100-100-100.jpg",
     "name": "BlueMan_汪汪汪",
-    "experience": 18163,
-    "integral": 133
+    "experience": 0,
+    "integral": 0
   }
 }

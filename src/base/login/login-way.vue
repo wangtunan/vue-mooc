@@ -15,10 +15,13 @@
         </div>
       </el-form-item>
     </el-form>
-    <div class="login-btn">登陆</div>
+    <div class="login-btn" @click="handleLoginClick">登陆</div>
   </div>
 </template>
 <script>
+import { mapMutations } from 'vuex'
+import { userLogin } from 'api/user.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
@@ -28,6 +31,27 @@ export default {
         autoLogin: true
       }
     }
+  },
+  methods: {
+    // 登录
+    handleLoginClick () {
+      userLogin(this.loginWayForm).then(res => {
+        let { code, data } = res
+        if (code !== ERR_OK) {
+          this.$message.error('登录失败')
+          return false
+        }
+        // 缓存用户数据
+        this.setUserInfo(data)
+        // 关闭弹窗
+        this.setShowLogin(false)
+      })
+    },
+    // vuex
+    ...mapMutations('login', {
+      'setUserInfo': 'SET_USER_INFO',
+      'setShowLogin': 'SET_SHOW_LOGIN'
+    })
   }
 }
 </script>

@@ -17,52 +17,54 @@
         <span class="login-text">购物车</span>
       </a>
     </li>
-    <!-- <li class="item sign">
+    <template v-if="userInfo && userInfo.avatar">
+      <li class="item bell">
+        <i class="iconfont">&#xe6eb;</i>
+      </li>
+      <li class="item userinfo">
+        <div class="img-box">
+          <img :src="userInfo.avatar" alt="">
+        </div>
+        <div class="userinfo-wrapper">
+          <div class="userinfo-message-wrapper">
+            <img :src="userInfo.avatar" alt="">
+            <div class="userinfo-message">
+              <p class="name ellipsis">{{userInfo.name}}</p>
+              <p class="number">
+                <span class="number-item">经验 <b>{{userInfo.experience}}</b></span>
+                <span class="number-item">积分 <b>{{userInfo.integral}}</b></span>
+              </p>
+            </div>
+          </div>
+          <div class="fast-nav">
+            <div class="fast-nav-item">
+              <i class="iconfont">&#xe60e;</i>
+              我的课程
+            </div>
+            <div class="fast-nav-item">
+              <i class="iconfont">&#xe611;</i>
+              订单中心
+            </div>
+            <div class="fast-nav-item">
+              <i class="iconfont">&#xe61b;</i>
+              积分商城
+            </div>
+            <div class="fast-nav-item">
+              <i class="iconfont">&#xe680;</i>
+              个人设置
+            </div>
+          </div>
+          <p class="exit-btn" @click="handleUserLogout">安全退出</p>
+        </div>
+      </li>
+    </template>
+    <li class="item sign" v-else>
       <span class="sign-btn" @click="handleLoginClick">登录</span>/<span class="sign-btn" @click="handleRegisterClick">注册</span>
-    </li> -->
-    <li class="item bell">
-      <i class="iconfont">&#xe6eb;</i>
-    </li>
-    <li class="item userinfo">
-      <div class="img-box">
-        <img src="https://img.mukewang.com/5882f5f70001525e01000100-100-100.jpg" alt="">
-      </div>
-      <div class="userinfo-wrapper">
-        <div class="userinfo-message-wrapper">
-          <img src="https://img.mukewang.com/5882f5f70001525e01000100-100-100.jpg" alt="">
-          <div class="userinfo-message">
-            <p class="name ellipsis">BlueMan_汪汪汪</p>
-            <p class="number">
-              <span class="number-item">经验 <b>18100</b></span>
-              <span class="number-item">积分 <b>133</b></span>
-            </p>
-          </div>
-        </div>
-        <div class="fast-nav">
-          <div class="fast-nav-item">
-            <i class="iconfont">&#xe60e;</i>
-            我的课程
-          </div>
-          <div class="fast-nav-item">
-            <i class="iconfont">&#xe611;</i>
-            订单中心
-          </div>
-          <div class="fast-nav-item">
-            <i class="iconfont">&#xe61b;</i>
-            积分商城
-          </div>
-          <div class="fast-nav-item">
-            <i class="iconfont">&#xe680;</i>
-            个人设置
-          </div>
-        </div>
-        <p class="exit-btn">安全退出</p>
-      </div>
     </li>
   </ul>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   methods: {
     // 登录点击
@@ -75,11 +77,21 @@ export default {
       this.setShowLogin(true)
       this.setLoginAction('register')
     },
+    // 退出
+    handleUserLogout () {
+      this.setUserInfo({})
+      this.$router.push('/home')
+    },
     // vuex
     ...mapMutations('login', {
       'setShowLogin': 'SET_SHOW_LOGIN',
-      'setLoginAction': 'SET_LOGIN_ACTION'
+      'setLoginAction': 'SET_LOGIN_ACTION',
+      'setUserInfo': 'SET_USER_INFO'
     })
+  },
+  computed: {
+    // vuex
+    ...mapGetters(['userInfo'])
   }
 }
 </script>

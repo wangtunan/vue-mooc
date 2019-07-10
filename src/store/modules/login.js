@@ -1,5 +1,5 @@
 import * as types from '../mutation-types.js'
-import { getUserInfo } from 'utils/cache.js'
+import { getUserInfo,setUserInfo } from 'utils/cache.js'
 const state = {
   showLogin: false,
   action: '',
@@ -14,6 +14,7 @@ const mutations = {
   },
   [types.SET_USER_INFO] (state, userinfo) {
     state.userinfo = userinfo
+    setUserInfo(userinfo)
   }
 }
 
