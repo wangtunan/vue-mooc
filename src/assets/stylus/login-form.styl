@@ -1,0 +1,47 @@
+.login-way
+    position:relative;
+    padding: 0 32px 0px
+    .el-form-item
+      &.password-item
+        margin-bottom: 15px;
+        >>> .el-input__clear
+          padding-top: 4px;
+          font-size: 20px;
+      &.auto-login-item
+        .auto-login-btn-box
+          float: right;
+          margin-top: 2px;
+          span
+            padding: 0 10px;
+            color: #545c63;
+            cursor: pointer;
+            &:hover
+              color: #f20d0d;
+            &:last-child
+              border-left: 1px solid rgba(28,31,33,.1);
+        >>> .el-checkbox
+          margin-right: 0px;
+        >>> .el-form-item__content
+          line-height: unset;
+          color: #9199a1;
+        >>> .el-checkbox__inner
+          &:after
+            content: '';
+            transition: none!important;
+      >>> .el-input__inner
+        height: 48px;
+        border: none;
+        border-radius: 8px;
+        background-color: rgba(28,31,33,.06);
+        font-size: 16px;
+    .login-btn
+      padding: 11px 32px;
+      background-color: #f20d0d;
+      border-radius: 24px;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+      line-height: 24px;
+      &:hover
+        background-color: #C20A0A;

@@ -6,26 +6,74 @@
         v-for="(item,index) in loginTabs"
         :key="index"
         :class="{active: index==currentTabIndex}"
-        @click="currentTabIndex=index"
+        @click="handleLoginTabClick(index)"
         >{{item}}</span>
       <span class="login-close iconfont" @click="setShowLogin(false)">&#xe619;</span>
     </div>
+    <component :is="componentName"></component>
+    <div class="three-login-way" v-show="componentName!='qrcode-way'">
+      <span class="phone-login">{{threeTitle}}</span>
+      <span class="three-way-item">
+        <i class="iconfont weibo">&#xe699;</i>
+        <i class="iconfont wechart">&#xe646;</i>
+        <i class="iconfont qq">&#xe6a0;</i>
+      </span>
+    </div>
+    <div class="qrcode-way" @click="handleQrcodeClick" :style="getQrcodeBackground"></div>
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import LoginWay from './login-way.vue'
+import RegisterWay from './register-way.vue'
+import QrcodeWay from './qrcode-way.vue'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   data () {
     return {
       loginTabs: ['登录', '注册'],
-      currentTabIndex: 0
+      currentTabIndex: 0,
+      componentName: 'login-way'
     }
   },
+  created () {
+    this.currentTabIndex = this.loginAction === 'login' ? 0 : 1
+  },
   methods: {
+    // 登陆tab点击
+    handleLoginTabClick(index) {
+      this.currentTabIndex = index
+    },
+    // 二维码点击事件
+    handleQrcodeClick () {
+      this.componentName = this.componentName === 'qrcode-way' ? 'login-way' : 'qrcode-way'
+    },
     // vuex
     ...mapMutations({
       'setShowLogin': 'login/SET_SHOW_LOGIN'
     })
+  },
+  computed: {
+    getQrcodeBackground () {
+      let background = this.componentName === 'qrcode-way' ? `url('https://www.imooc.com/static/img/pcLogin.png') no-repeat 0 0` : `url('https://www.imooc.com/static/img/erweima.png') no-repeat 0 0`
+      return {
+        background: background
+      }
+    },
+    threeTitle () {
+      return this.currentTabIndex === 0 ? '手机短信登陆' : '其它登陆方式'
+    },
+    // vuex
+    ...mapGetters(['loginAction'])
+  },
+  watch: {
+    currentTabIndex(newVal) {
+      this.componentName = newVal === 0 ? 'login-way' : 'register-way'      
+    }
+  },
+  components: {
+    LoginWay,
+    RegisterWay,
+    QrcodeWay
   }
 }
 </script>
@@ -76,5 +124,44 @@ export default {
             width: 16px;
             height: 4px;
             border-radius: 4px;
-            background-color: $red;  
+            background-color: $red; 
+    .three-login-way
+      margin-top: 22px;
+      padding: 0 32px;
+      .phone-login
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 24px;
+        padding-left: 24px;
+        padding-right: 24px;
+        border-right: 1px solid #1a1C1F21
+        line-height: 24px;
+        font-size: 14px;
+        color: #f20d0d;
+      .three-way-item
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 24px;
+        .iconfont
+          margin: 0 12px;
+          display: inline-block;
+          vertical-align: middle;
+          color: #b5b9bc;
+          font-size: 24px;
+          cursor: pointer;
+          &.weibo:hover
+            color: #f20d0d;
+          &.wechart:hover
+            color: #00B33B;
+          &.qq:hover
+            color: #0088CC;
+    .qrcode-way
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 60px;
+      height: 60px;
+      background:url('https://www.imooc.com/static/img/erweima.png') no-repeat 0 0;
+      border-bottom-right-radius: 12px;
+      cursor: pointer; 
 </style>

@@ -17,8 +17,47 @@
         <span class="login-text">购物车</span>
       </a>
     </li>
-    <li class="item sign">
+    <!-- <li class="item sign">
       <span class="sign-btn" @click="handleLoginClick">登录</span>/<span class="sign-btn" @click="handleRegisterClick">注册</span>
+    </li> -->
+    <li class="item bell">
+      <i class="iconfont">&#xe6eb;</i>
+    </li>
+    <li class="item userinfo">
+      <div class="img-box">
+        <img src="https://img.mukewang.com/5882f5f70001525e01000100-100-100.jpg" alt="">
+      </div>
+      <div class="userinfo-wrapper">
+        <div class="userinfo-message-wrapper">
+          <img src="https://img.mukewang.com/5882f5f70001525e01000100-100-100.jpg" alt="">
+          <div class="userinfo-message">
+            <p class="name ellipsis">BlueMan_汪汪汪</p>
+            <p class="number">
+              <span class="number-item">经验 <b>18100</b></span>
+              <span class="number-item">积分 <b>133</b></span>
+            </p>
+          </div>
+        </div>
+        <div class="fast-nav">
+          <div class="fast-nav-item">
+            <i class="iconfont">&#xe60e;</i>
+            我的课程
+          </div>
+          <div class="fast-nav-item">
+            <i class="iconfont">&#xe611;</i>
+            订单中心
+          </div>
+          <div class="fast-nav-item">
+            <i class="iconfont">&#xe61b;</i>
+            积分商城
+          </div>
+          <div class="fast-nav-item">
+            <i class="iconfont">&#xe680;</i>
+            个人设置
+          </div>
+        </div>
+        <p class="exit-btn">安全退出</p>
+      </div>
     </li>
   </ul>
 </template>
@@ -29,14 +68,17 @@ export default {
     // 登录点击
     handleLoginClick () {
       this.setShowLogin(true)
+      this.setLoginAction('login')
     },
     // 注册点击
     handleRegisterClick () {
-      this.etShowLogin(true)
+      this.setShowLogin(true)
+      this.setLoginAction('register')
     },
     // vuex
-    ...mapMutations({
-      'setShowLogin': 'login/SET_SHOW_LOGIN'
+    ...mapMutations('login', {
+      'setShowLogin': 'SET_SHOW_LOGIN',
+      'setLoginAction': 'SET_LOGIN_ACTION'
     })
   }
 }
@@ -47,7 +89,6 @@ export default {
   .login-area
     float: right;
     position: relative;
-    overflow: hidden;
     .item
       float: left;
       line-height: 72px;
@@ -94,4 +135,102 @@ export default {
           cursor: pointer;
           &:hover
             color: $red;
+      &.bell
+        padding: 2px 20px 0;
+        height: 100%;
+        box-sizing: border-box;
+        cursor: pointer;
+        &:hover
+          .iconfont
+            color: #F01414
+        .iconfont
+          font-size: 22px;
+      &.userinfo
+        position: relative;
+        padding: 0 20px 0 15px;
+        height: 75px;
+        cursor: pointer;
+        &:hover
+          .img-box
+            box-shadow: 0 0 0 2px #F01414;
+          .userinfo-wrapper
+            display: block;
+        .img-box
+          margin-top: 22px;
+          width: 32px;
+          height: 32px;
+          background-color: #ccc;
+          border-radius: 50%;
+          &>img
+            display:block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        .userinfo-wrapper
+          display: none;
+          position: absolute;
+          right: 0;
+          top: 72px;
+          width: 306px;
+          padding: 24px;
+          background-color: #fff;
+          border-bottom-left-radius: 12px;
+          border-bottom-right-radius: 12px;
+          box-shadow: 0 4px 8px $shadow;
+          box-sizing: border-box;
+          .userinfo-message-wrapper
+            display: flex;
+            align-items: center;
+            & > img
+              display: block;
+              margin-right: 20px;
+              width: 72px;
+              height: 72px;
+              border-radius: 50%;
+            .userinfo-message
+              flex: 1;
+              & > p
+                line-height: 1;
+                &.name
+                  font-size: 16px;
+                  color: #07111b;
+                  line-height: 24px;
+                &.number
+                  margin-top: 4px;
+                  font-size: 12px;
+                  line-height: 12px;
+                  .number-item
+                    margin-right: 10px;
+                    & > b
+                      margin-left: 2px;
+                      font-weight: 750;
+                      color: #93999f;
+          .fast-nav
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            .fast-nav-item
+              flex: 0 0 126px;
+              width: 126px;
+              height: 36px;
+              margin-right: 2px;
+              margin-bottom: 2px;
+              line-height: 36px;
+              color: #4d555d;
+              background-color: #F8FAFC;
+              border-radius: 2px;
+              text-indent: 10px;
+              &:hover
+                background-color: #D9DDE1;
+              .iconfont
+                margin-right: 5px;
+                color: #000;
+                font-weight: 700;
+                font-size: 16px;
+          .exit-btn
+            font-size: 14px;
+            line-height: 24px;
+            &:hover
+              color: #F01414;
 </style>
