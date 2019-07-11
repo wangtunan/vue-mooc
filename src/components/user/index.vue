@@ -29,6 +29,9 @@
 import AccountBind from './account-bind.vue'
 import Information from './information.vue'
 import OperateLog from './operate-log.vue'
+import Authenticate from './authenticate.vue'
+import Certificate from './certificate.vue'
+import MAddress from './address.vue'
 export default {
   data () {
     return {
@@ -42,9 +45,9 @@ export default {
       { id: 1, title: '账号绑定', componentName: 'account-bind' },
       { id: 2, title: '个人信息', componentName: 'information' },
       { id: 3, title: '操作记录', componentName: 'operate-log' },
-      { id: 4, title: '实名认证', componentName: '' },
-      { id: 5, title: '学籍认证', componentName: '' },
-      { id: 6, title: '收件地址', componentName: '' }
+      { id: 4, title: '实名认证', componentName: 'authenticate' },
+      { id: 5, title: '学籍认证', componentName: 'certificate' },
+      { id: 6, title: '收件地址', componentName: 'm-address' }
     ]
   },
   methods: {
@@ -57,7 +60,10 @@ export default {
   components: {
     AccountBind,
     Information,
-    OperateLog
+    OperateLog,
+    Authenticate,
+    Certificate,
+    MAddress
   }
 }
 </script>
