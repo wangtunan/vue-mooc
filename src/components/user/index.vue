@@ -27,6 +27,8 @@
 </template>
 <script>
 import AccountBind from './account-bind.vue'
+import Information from './information.vue'
+import OperateLog from './operate-log.vue'
 export default {
   data () {
     return {
@@ -37,9 +39,9 @@ export default {
   },
   created () {
     this.navList = [
-      { id: 1, title: '账号绑定', componentName: '' },
-      { id: 2, title: '个人信息', componentName: '' },
-      { id: 3, title: '操作记录', componentName: '' },
+      { id: 1, title: '账号绑定', componentName: 'account-bind' },
+      { id: 2, title: '个人信息', componentName: 'information' },
+      { id: 3, title: '操作记录', componentName: 'operate-log' },
       { id: 4, title: '实名认证', componentName: '' },
       { id: 5, title: '学籍认证', componentName: '' },
       { id: 6, title: '收件地址', componentName: '' }
@@ -49,10 +51,13 @@ export default {
     // 导航点击事件
     handleNavClick (item, index) {
       this.currentNavIndex = index
+      this.componentName = item.componentName
     }
   },
   components: {
-    AccountBind
+    AccountBind,
+    Information,
+    OperateLog
   }
 }
 </script>

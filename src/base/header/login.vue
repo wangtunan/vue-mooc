@@ -21,11 +21,11 @@
       <li class="item bell">
         <i class="iconfont">&#xe6eb;</i>
       </li>
-      <li class="item userinfo">
+      <li class="item userinfo" @mouseenter="showUserInfo = true" @mouseleave="showUserInfo = false">
         <div class="img-box">
           <img :src="userInfo.avatar" alt="">
         </div>
-        <div class="userinfo-wrapper">
+        <div class="userinfo-wrapper" v-show="showUserInfo">
           <div class="userinfo-message-wrapper">
             <img :src="userInfo.avatar" alt="">
             <div class="userinfo-message">
@@ -36,7 +36,7 @@
               </p>
             </div>
           </div>
-          <div class="fast-nav">
+          <div class="fast-nav" @click="showUserInfo = false">
             <div class="fast-nav-item">
               <i class="iconfont">&#xe60e;</i>
               我的课程
@@ -49,23 +49,31 @@
               <i class="iconfont">&#xe61b;</i>
               积分商城
             </div>
-            <div class="fast-nav-item">
+            <div class="fast-nav-item" @click="handleSettingClick">
               <i class="iconfont">&#xe680;</i>
               个人设置
             </div>
           </div>
-          <p class="exit-btn" @click="handleUserLogout">安全退出</p>
+          <p class="exit-btn" >
+            <span @click="handleUserLogout">安全退出</span>
+          </p>
         </div>
       </li>
     </template>
     <li class="item sign" v-else>
-      <span class="sign-btn" @click="handleLoginClick">登录</span>/<span class="sign-btn" @click="handleRegisterClick">注册</span>
+      <span class="sign-btn" @click="handleLoginClick">登录</span>/
+      <span class="sign-btn" @click="handleRegisterClick">注册</span>
     </li>
   </ul>
 </template>
 <script>
 import { mapMutations, mapGetters } from 'vuex'
 export default {
+  data () {
+    return {
+      showUserInfo: false
+    }
+  },
   methods: {
     // 登录点击
     handleLoginClick () {
@@ -77,10 +85,14 @@ export default {
       this.setShowLogin(true)
       this.setLoginAction('register')
     },
-    // 退出
+    // 安全退出
     handleUserLogout () {
       this.setUserInfo({})
       this.$router.push('/home')
+    },
+    // 个人设置点击
+    handleSettingClick () {
+      this.$router.push('/user')
     },
     // vuex
     ...mapMutations('login', {
@@ -165,8 +177,6 @@ export default {
         &:hover
           .img-box
             box-shadow: 0 0 0 2px #F01414;
-          .userinfo-wrapper
-            display: block;
         .img-box
           margin-top: 22px;
           width: 32px;
@@ -179,7 +189,6 @@ export default {
             height: 100%;
             border-radius: 50%;
         .userinfo-wrapper
-          display: none;
           position: absolute;
           right: 0;
           top: 72px;
@@ -241,8 +250,10 @@ export default {
                 font-weight: 700;
                 font-size: 16px;
           .exit-btn
-            font-size: 14px;
             line-height: 24px;
+            & > span
+              font-size: 14px;
+              line-height: 24px;
             &:hover
               color: #F01414;
 </style>

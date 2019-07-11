@@ -1,9 +1,9 @@
 <template>
   <div class="account-bind">
-    <p class="last-login-record">
+    <p class="last-login-record" ref="loginRecord">
       上次登录时间：2019-07-10 22:04:17 地点：
       <span>查看最近操作记录</span>
-      <i class="iconfont">&#xe619;</i>
+      <i class="iconfont" @click="handleCloseRecord">&#xe619;</i>
     </p>
     <dl>
       <dt class="bind-title">
@@ -66,6 +66,13 @@ export default {
       { id: 3, icon: 'password', type: '密码', title: '已设置', subtitle: '用于保护账号信息和登录安全' },
       { id: 4, icon: 'social', type: '社交账号', title: '', subtitle: '绑定第三方账号，可以直接登录，还可以将内容同步到以下平台，与更多好友分享' }
     ]
+  },
+  methods: {
+    handleCloseRecord () {
+      const loginRecord = this.$refs.loginRecord
+      loginRecord.style.height = 0
+      loginRecord.style.opacity = 0
+    }
   }
 }
 </script>
@@ -78,6 +85,8 @@ export default {
       height: 40px;
       line-height: 40px;
       background-color: #fff4e5;
+      transition: all 0.1s linear;
+      opacity: 1;
       font-size: 12px;
       color: #f56108;
       .iconfont
