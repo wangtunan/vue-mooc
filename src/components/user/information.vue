@@ -11,6 +11,11 @@
 </template>
 <script>
 export default {
+  props: {
+    userinfo: {
+      type: Object
+    }
+  },
   data () {
     return {
       information: []
@@ -18,11 +23,11 @@ export default {
   },
   created () {
     this.information = [
-      { id: 1, type: '昵称', value: 'BlueMan_汪汪汪' },
-      { id: 2, type: '职位', value: 'Web前端工程师' },
-      { id: 3, type: '城市', value: '' },
-      { id: 4, type: '性别', value: '男' },
-      { id: 5, type: '个性签名', value: '' }
+      { id: 1, type: '昵称', value: this.userinfo.name },
+      { id: 2, type: '职位', value: this.userinfo.job },
+      { id: 3, type: '城市', value: this.userinfo.city },
+      { id: 4, type: '性别', value: this.userinfo.sex },
+      { id: 5, type: '个性签名', value: this.userinfo.signature }
     ]
   }
 }

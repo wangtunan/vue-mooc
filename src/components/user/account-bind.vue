@@ -1,8 +1,7 @@
 <template>
   <div class="account-bind">
     <p class="last-login-record" ref="loginRecord">
-      上次登录时间：2019-07-10 22:04:17 地点：
-      <span>查看最近操作记录</span>
+      上次登录时间：{{userinfo.lastLoginTime}}  地点：<span @click="handleRecordClick">查看最近操作记录</span>
       <i class="iconfont" @click="handleCloseRecord">&#xe619;</i>
     </p>
     <dl>
@@ -10,7 +9,7 @@
         账号绑定
         <span class="bind-rate">完成 <strong>4/4</strong></span>
       </dt>
-      <dd class="bind-item" v-for="(item,index) in bindList" :key="index">
+      <dd class="bind-item" v-for="(item,index) in userinfo.binds" :key="index">
         <i class="iconfont" v-if="item.icon=='email'">&#xe75d;</i>
         <i class="iconfont" v-if="item.icon=='phone'">&#xe61a;</i>
         <i class="iconfont" v-if="item.icon=='password'">&#xe61e;</i>
@@ -18,32 +17,18 @@
         <div class="bind-introduction">
           <p class="bind-title">
             <span class="bind-type">{{item.type}}</span>
-            {{item.title}}
+            {{getBindValue(item)}}
           </p>
-          <p class="bind-subtitle">{{item.subtitle}}</p>
+          <p class="bind-subtitle">{{item.desc}}</p>
           <ul class="social-list" v-if="item.icon=='social'">
-            <li class="social-item">
-              <i class="iconfont">&#xe699;</i>
+            <li class="social-item" v-for="(social,index) in item.account" :key="index">
+              <i class="iconfont" :class="{yellow: social.value}" v-if="social.type=='weibo'">&#xe699;</i>
+              <i class="iconfont" :class="{blue: social.value}" v-if="social.type=='qq'">&#xe646;</i>
+              <i class="iconfont" :class="{green: social.value}" v-if="social.type=='wechat'">&#xe6a0;</i>
               <div class="social-content">
-                <p class="social-type">微博</p>
-                <p class="social-bind-type">未绑定</p>
-                <span class="social-bind-btn">立即绑定</span>
-              </div>
-            </li>
-            <li class="social-item">
-              <i class="iconfont">&#xe646;</i>
-              <div class="social-content">
-                <p class="social-type">微信</p>
-                <p class="social-bind-type">未绑定</p>
-                <span class="social-bind-btn">立即绑定</span>
-              </div>
-            </li>
-            <li class="social-item">
-              <i class="iconfont">&#xe6a0;</i>
-              <div class="social-content">
-                <p class="social-type">QQ</p>
-                <p class="social-bind-type">未绑定</p>
-                <span class="social-bind-btn">立即绑定</span>
+                <p class="social-type">{{social.title}}</p>
+                <p class="social-bind-type" :class="{green: social.value}">{{social.value ? '已绑定' : '未绑定'}}</p>
+                <span class="social-bind-btn">{{social.value ? '添加绑定' : '解除绑定'}}</span>
               </div>
             </li>
           </ul>
@@ -54,24 +39,31 @@
 </template>
 <script>
 export default {
-  data () {
-    return {
-      bindList: []
+  props: {
+    userinfo: {
+      type: Object
     }
   },
-  created () {
-    this.bindList = [
-      { id: 1, icon: 'email', type: '邮箱', title: '5834xxx138@qq.com 已绑定', subtitle: '可用邮箱加密码登录慕课网，可用邮箱找回密码' },
-      { id: 2, icon: 'phone', type: '手机', title: '187******92', subtitle: '可用手机号加密码登录慕课网，可通过手机号找回密码' },
-      { id: 3, icon: 'password', type: '密码', title: '已设置', subtitle: '用于保护账号信息和登录安全' },
-      { id: 4, icon: 'social', type: '社交账号', title: '', subtitle: '绑定第三方账号，可以直接登录，还可以将内容同步到以下平台，与更多好友分享' }
-    ]
-  },
   methods: {
+    // 关闭记录
     handleCloseRecord () {
       const loginRecord = this.$refs.loginRecord
       loginRecord.style.height = 0
       loginRecord.style.opacity = 0
+    },
+    // 记录点击
+    handleRecordClick () {
+      this.$emit('componentClick', 'record')
+    },
+    // 获取绑定的值
+    getBindValue (item) {
+      if (item.icon !== 'password' && item.icon !== 'social') {
+        return item.value ? `${item.value} 已绑定` : '未绑定'
+      } else if(item.value) {
+        return '已设置'
+      } else {
+        return ''
+      }
     }
   }
 }
@@ -95,6 +87,9 @@ export default {
         padding: 0 10px;
         cursor: pointer;
         font-size: 12px;
+      & > span
+        color: #008cc8;
+        cursor: pointer;
     .bind-title
       height: 40px;
       line-height: 40px;
@@ -154,6 +149,12 @@ export default {
               text-align: center;
               line-height: 80px;
               color: #c8cdd2;
+              &.blue
+                color: #0788CA;
+              &.green
+                color: #13BC6C;
+              &.yellow
+                color: #FDD449;
             .social-content
               display: inline-block;
               margin-top: 4px;
@@ -165,6 +166,8 @@ export default {
                 margin: 5px 0 8px;
                 font-size: 12px;
                 color: #ef1514;
+                &.green
+                  color: green;
               .social-bind-btn
                 padding: 3px 5px;
                 font-size: 12px;

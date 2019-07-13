@@ -12,3 +12,7 @@ export function userRegister(params) {
     data: params
   })
 }
+// 获取用户详细信息接口
+export function getUserInfo() {
+  return axios.get('/user/info')
+}
