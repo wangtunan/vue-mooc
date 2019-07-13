@@ -15,9 +15,9 @@
         <p>地址：{{item.address}}</p>
         <p>邮编：{{item.postcode}}</p>
         <div class="address-btn">
-          <span class="default" v-if="!item.isDefault">设为默认地址</span>
-          <span @click="handleEditClick">修改</span>
-          <span @click="handleDeleteClick">删除</span>
+          <span class="default" v-if="!item.isDefault" @click="handleSetDefault(item)">设为默认地址</span>
+          <span @click="handleEditClick(item)">修改</span>
+          <span @click="handleDeleteClick(index)">删除</span>
         </div>
         <div class="default-icon" v-if="item.isDefault">默认</div>
       </dd>
@@ -50,49 +50,98 @@
   </div>
 </template>
 <script>
+import { setUserAddress, getUserAddress } from 'utils/cache.js'
 export default {
   data() {
     return {
-      editForm: {}, // 收货地址编辑表单
       isAdd: false, // 是否为新增
       dialogVisible: false, // 编辑弹窗是否课件
-      addressList: [] // 收货地址列表
+      addressList: [], // 收货地址列表
+      editForm: {
+        name: '',
+        phone: '',
+        area: '',
+        address: '',
+        postcode: '',
+        isDefault: false
+      }
     };
   },
   created() {
-    this.addressList = [
-      { id: 1,name: "王天风",phone: "18277776666",area: "广东省广州市",address: "天河区天河客运站十三巷一号街110号",postcode: "000000",isDefault: true },
-      { id: 2,name: "汪图南",phone: "18277776666",area: "广东省广州市",address: "天河区天河客运站十三巷一号街110号",postcode: "000000",isDefault: false },
-      { id: 3,name: "王培峰",phone: "18277776666",area: "广东省广州市",address: "天河区天河客运站十三巷一号街110号",postcode: "000000",isDefault: false },
-      { id: 4,name: "叶凡",phone: "18277776666",area: "广东省广州市",address: "天河区天河客运站十三巷一号街110号",postcode: "000000",isDefault: false }
-    ];
+    this.getAddress()
   },
   methods: {
     // 新增收货地址
     handleAddClick() {
-      this.isAdd = true;
-      this.dialogVisible = true;
+      this.isAdd = true
+      this.dialogVisible = true
+      this.editForm = {
+        name: '',
+        phone: '',
+        area: '',
+        address: '',
+        postcode: '',
+        isDefault: false
+      }
     },
     // 修改收货地址
-    handleEditClick () {
+    handleEditClick (item) {
       this.isAdd = false
       this.dialogVisible = true
+      this.editForm = Object.assign({}, item)
     },
     // 删除收货地址
-    handleDeleteClick () {
-      this.$conform('此操作将删除该收件地址，是否确定？', '提示', {
+    handleDeleteClick (index) {
+      this.$confirm('此操作将删除该收件地址，是否确定？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$message.success('删除成功')
+        let address = this.addressList.slice()
+        address.splice(index,1)
+        this.addressList = address
+        setUserAddress(address)
       })
     },
     // 确认收货地址
     handleSubmitClick () {
-      this.dialogVisible = fale
-    }
+      let address = this.addressList.slice()
+      if (this.isAdd) {
+        address.push(this.editForm)
+      } else {
+        address.forEach((item,index) => {
+          if (item.name === this.editForm.name) {
+            address[index] = this.editForm
+          }
+        })
+      }
+      // 判断是否只有一条，是的话设置为默认
+      if (address.length === 1) {
+        address[0].isDefault = true
+      }
+      this.addressList = address
+      setUserAddress(address) 
+      this.dialogVisible = false
+      this.editForm = {
+        name: '',
+        phone: '',
+        area: '',
+        address: '',
+        postcode: '',
+        isDefault: false
+      }
+    },
     // 设为默认收货地址
+    handleSetDefault (address) {
+      this.addressList.forEach((item,index) => {
+        this.addressList[index].isDefault = item.name === address.name
+      })
+      setUserAddress(this.addressList)
+    },
+    // 获取收货地址
+    getAddress () {
+      this.addressList = getUserAddress()
+    }
   },
   computed: {
     title() {

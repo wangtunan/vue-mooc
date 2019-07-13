@@ -42,6 +42,8 @@ export default {
         this.setUserInfo(data)
         // 关闭弹窗
         this.setShowLogin(false)
+        // 重载页面
+        window.location.reload()        
       })
     },
     // vuex
