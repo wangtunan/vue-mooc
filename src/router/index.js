@@ -8,6 +8,8 @@ Vue.use(Router)
 const Home = () => import('components/home/home.vue')
 // 个人中心路由
 const UserCenter = () => import('components/user/index.vue')
+// 订单中心路由
+const OrderIndex = () => import('components/order/index.vue')
 const routes = [
   {
     path: '/',
@@ -23,6 +25,14 @@ const routes = [
     path: '/user',
     name: 'UserCenter',
     component:UserCenter,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/order',
+    name: 'OrderIndex',
+    component:OrderIndex,
     meta: {
       requireAuth: true
     }

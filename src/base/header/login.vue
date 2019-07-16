@@ -41,7 +41,7 @@
               <i class="iconfont">&#xe60e;</i>
               我的课程
             </div>
-            <div class="fast-nav-item">
+            <div class="fast-nav-item" @click="handleOrderClick">
               <i class="iconfont">&#xe611;</i>
               订单中心
             </div>
@@ -89,6 +89,10 @@ export default {
     handleUserLogout () {
       this.setUserInfo({})
       this.$router.push('/home')
+    },
+    // 订单中心
+    handleOrderClick () {
+      this.$router.push('/order')
     },
     // 个人设置点击
     handleSettingClick () {
