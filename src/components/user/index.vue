@@ -3,15 +3,15 @@
     <div class="user-center-container">
       <div class="user-left-nav">
         <div class="user-avatar">
-          <img src="https://img.mukewang.com/5882f5f70001525e01000100-200-200.jpg" alt="">
+          <img :src="userInfo.avatar" alt="">
         </div>
-        <p class="user-name ellipsis">BlueMan_汪汪汪</p>
-        <p class="user-id">ID: 4770893</p>
+        <p class="user-name ellipsis">{{userInfo.name}}</p>
+        <p class="user-id">ID: {{userInfo.ID}}</p>
         <p class="user-auth">
-          <i class="iconfont">&#xe607;</i>
-          <i class="iconfont">&#xe60e;</i>
-          <i class="iconfont">&#xe61a;</i>
-          <i class="iconfont">&#xe75d;</i>
+          <i class="iconfont" :class="{red: userInfo.mainBind.authenticate}" :title="userInfo.mainBind.authenticate?'已实名认证': '未实名认证'">&#xe607;</i>
+          <i class="iconfont" :class="{red: userInfo.mainBind.certificate}" :title="userInfo.mainBind.certificate?'已学籍认证': '未学籍认证'">&#xe60e;</i>
+          <i class="iconfont" :class="{red: userInfo.mainBind.phone}" :title="userInfo.mainBind.phone?'已绑定手机': '未绑定手机'">&#xe61a;</i>
+          <i class="iconfont" :class="{red: userInfo.mainBind.email}" :title="userInfo.mainBind.email?'已绑定邮箱': '未绑定邮箱'">&#xe75d;</i>
         </p>
         <dl class="user-nav">
           <dt class="nav-title"> 账户管理</dt>
@@ -21,7 +21,13 @@
           </dt>
         </dl>
       </div>
-      <component :is="componentName" class="user-right-content"></component>
+      <component
+        v-if="Object.keys(userInfo).length > 0"
+        :is="componentName"
+        class="user-right-content"
+        :userinfo="userInfo"
+        @componentClick="handleComponentClick"
+      ></component>
     </div>
   </div>
 </template>
@@ -32,16 +38,19 @@ import OperateLog from './operate-log.vue'
 import Authenticate from './authenticate.vue'
 import Certificate from './certificate.vue'
 import MAddress from './address.vue'
+import { getUserInfo } from 'api/user.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      componentName: 'account-bind',
-      currentNavIndex: 0,
-      navList: []
+      componentName: 'account-bind', // 默认的动态组件的名称
+      currentNavIndex: 0, // 当前激活的到昂
+      navList: [], // 导航列表
+      userInfo: {}, // 用户详细信息
     }
   },
   created () {
-    this.navList = [
+    this.navList = [  
       { id: 1, title: '账号绑定', componentName: 'account-bind' },
       { id: 2, title: '个人信息', componentName: 'information' },
       { id: 3, title: '操作记录', componentName: 'operate-log' },
@@ -50,11 +59,32 @@ export default {
       { id: 6, title: '收件地址', componentName: 'm-address' }
     ]
   },
+  mounted () {
+    this.getUserDetailInfo()
+  },
   methods: {
     // 导航点击事件
     handleNavClick (item, index) {
       this.currentNavIndex = index
       this.componentName = item.componentName
+    },
+    // 动态组件点击事件
+    handleComponentClick (type) {
+      switch (type) {
+        case "record":
+          this.componentName = 'operate-log'
+          this.currentNavIndex = 2
+          break;
+      }
+    },
+    // 获取用户详细信息接口
+    getUserDetailInfo () {
+      getUserInfo().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.userInfo = data
+        }
+      })
     }
   },
   components: {
@@ -113,8 +143,10 @@ export default {
             background-color: #fff;
             border-radius: 50%;
             font-size: 16px;
-            color: #f01414;
+            color: #333;
             font-weight: 600;
+            &.red
+              color: #f01414
         .user-nav
           text-align: left;
           .nav-title
