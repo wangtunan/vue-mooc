@@ -1,0 +1,84 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": [
+    {
+      "id": "19042XXXXXX8454",
+      "time": "2019-04-24 10:29:20",
+      "oldPrice": "388.00",
+      "discount": "60",
+      "realPrice": "328.00",
+      "payType": "支付宝支付",
+      "status": 2,
+      "statusText": "已完成",
+      "course": [
+        {
+          "name": "基于TypeScript从零重构axios",
+          "img": "https://szimg.mukewang.com/5cbf00c608f52a3b06000338-160-90.jpg",
+          "realPrice": "328.00"
+        }
+      ]
+    },
+    {
+      "id": "19031XXXXXX6364",
+      "time": "2019-04-24 10:29:20",
+      "oldPrice": "1113.00",
+      "discount": "260",
+      "realPrice": "853.00",
+      "payType": "支付宝支付",
+      "status": 2,
+      "statusText": "已完成",
+      "course": [
+        {
+          "name": "Vue 2.0开发企业级移动端音乐Web APP",
+          "img": "https://szimg.mukewang.com/5be39caf00018a8d05400300-160-90.jpg",
+          "realPrice": "328.00"
+        },
+        {
+          "name": "Get全栈技能点 Vue2.0 / Node.js / MongoDB 打造商城系统",
+          "img": "https://szimg.mukewang.com/59eeb1b00001c1aa05400300-160-90.jpg",
+          "realPrice": "266.71"
+        },
+        {
+          "name": "纯正商业级应用-微信小程序开发实战",
+          "img": "https://szimg.mukewang.com/5b4bfb7000019d2e10800600-160-90.jpg",
+          "realPrice": "280.50"
+        }
+      ]
+    },
+    {
+      "id": "19022XXXXXX4739",
+      "time": "2019-02-20 09:59:14",
+      "oldPrice": "299.00",
+      "discount": "74",
+      "realPrice": "225.00",
+      "payType": "支付宝支付",
+      "status": 2,
+      "statusText": "已完成",
+      "course": [
+        {
+          "name": "从基础到实战 手把手带你掌握新版Webpack4",
+          "img": "https://szimg.mukewang.com/5c6bdb3e08e4674a06000338-160-90.jpg",
+          "realPrice": "225.00"
+        }
+      ]
+    },
+    {
+      "id": "19021XXXXXX4762",
+      "time": "2019-02-13 10:20:45",
+      "oldPrice": "266.00",
+      "discount": "85",
+      "realPrice": "181.00",
+      "payType": "支付宝支付",
+      "status": 2,
+      "statusText": "已完成",
+      "course": [
+        {
+          "name": "JavaScript版 数据结构与算法",
+          "img": "https://szimg.mukewang.com/5c62a4dc0812e84106000338-160-90.jpg",
+          "realPrice": "181.00"
+        }
+      ]
+    }
+  ]
+}

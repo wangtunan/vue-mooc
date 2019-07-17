@@ -22,28 +22,37 @@
           <i class="iconfont">&#xe70b;</i>
           订单编号：{{item.id}}
           <span class="order-time">{{item.time}}</span>
+          <i class="iconfont delete" title="删除订单">&#xe622;</i>
         </h2>
-        <dl>
-          <dd class="order-content" v-for="(course,index) in item.course" :key="index">
-            <div class="img-box">
-              <img :src="course.img" width="160" height="90" alt="">
-            </div>
-            <div class="order-name-box">
-              <p class="order-name">{{course.name}}</p>
-              <p class="order-real-price">{{course.realPrice}}</p>
-            </div>
-            <div class="order-price-box">
-              <p class="price-item">原价 ¥{{course.oldPrice}}</p>
-              <p class="price-item">折扣 -¥{{course.discount}}</p>
-              <p class="price-item">实付 ¥{{course.oldPrice}}</p>
-            </div>
-          </dd>
-        </dl>
+        <div class="order-list-box">
+          <dl>
+            <dd class="order-content" v-for="(course,index) in item.course" :key="index">
+              <div class="img-box">
+                <img :src="course.img" width="160" height="90" alt="">
+              </div>
+              <div class="order-name-box">
+                <p class="order-name">{{course.name}}</p>
+                <p class="order-real-price">实付 ¥{{course.realPrice}}</p>
+              </div>
+            </dd>
+          </dl>
+          <div class="order-price-box">
+            <p class="price-item old">原价 ¥{{item.oldPrice}}</p>
+            <p class="price-item">折扣 -¥{{item.discount}}</p>
+            <p class="price-item real">实付 ¥{{item.oldPrice}}</p>
+          </div>
+          <div class="order-status-box">
+            <p class="order-status">{{item.statusText}}</p>
+            <p class="order-pay">{{item.payType}}</p>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
 </template>
 <script>
+import { orderList } from 'api/order.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
@@ -60,43 +69,21 @@ export default {
       { id: 4, title: '已失效', status: 3, number: 1 },
       { id: 5, title: '订单回收站', status: 4, number: 3 }
     ]
-    this.orderList = [
-      {
-        id: '19042XXXXXX8454',
-        time: '2019-04-24 10:29:20',
-        course: [
-          {
-            name: '基于TypeScript从零重构axios',
-            img: 'https://szimg.mukewang.com/5cbf00c608f52a3b06000338-160-90.jpg',
-            oldPrice: '388.00',
-            discount: '60',
-            realPrice: '328.00',
-            payType: '支付宝支付',
-            status: 2
-          }
-        ]
-      },
-      {
-        id: '19042XXXXXX8454',
-        time: '2019-04-24 10:29:20',
-        course: [
-          {
-            name: '基于TypeScript从零重构axios',
-            img: 'https://szimg.mukewang.com/5cbf00c608f52a3b06000338-160-90.jpg',
-            oldPrice: '388.00',
-            discount: '60',
-            realPrice: '328.00',
-            payType: '支付宝支付',
-            status: 2
-          }
-        ]
-      }
-    ]
+    this.getOrderList()
   },
   methods: {
     // 导航点击
     handleNavClick (index) {
       this.currentIndex = index
+    },
+    // 获取用户订单列表
+    getOrderList () {
+      orderList().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.orderList = data
+        }
+      })
     }
   }
 }
@@ -135,4 +122,98 @@ export default {
           background-color: #4d555d;
           border-radius: 16px;
           color: #fff;
+    .order-list
+      margin-top: 24px;
+      .order-item
+        padding: 10px 32px 32px 32px;
+        margin-bottom: 24px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px 2px rgba(0,0,0,0.1);
+        background-color: #fff;
+        cursor: pointer;
+        &:hover
+          box-shadow: 0 2px 12px 4px rgba(0,0,0,0.1);
+          .order-title
+            .iconfont.delete
+              display: block;
+        .order-title
+          margin-bottom: 24px;
+          font-size: 12px;
+          font-weight: 700;
+          color: #333;
+          line-height: 48px;
+          border-bottom: 1px solid #b7bbbf;
+          .iconfont
+            margin-right: 5px;
+            color: #f01414;
+            &.delete
+              display: none;
+              float: right;
+              color: #93999f;
+          .order-time
+            margin-left: 25px;
+            color: #93999f;
+        .order-list-box
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          position: relative;
+          dl
+            flex: 1;
+            border-right: 1px solid #d9dde1;
+            .order-content
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 24px;
+              padding-bottom: 24px;
+              border-bottom: 1px solid #d9dde1;
+              &:last-child
+                border-bottom: none;
+                margin-bottom: 0px;
+                padding-bottom: 0px;
+              .img-box
+                flex: 0 0 160px;
+                width: 160px;
+              .order-name-box
+                flex: 1;
+                margin-left: 20px;
+                text-align: left;
+                height: 90px;
+                .order-name
+                  margin-bottom: 8px;
+                  color: #07111b;
+                  line-height: 24px;
+                .order-real-price
+                  font-size: 12px;
+                  color: #f01414;
+          .order-price-box, .order-status-box
+            flex: 0 0 200px;
+            width: 200px;
+            text-align: left;
+            font-size: 12px;
+            color: #93999f;
+            & > p
+              line-height: 24px;
+          .order-price-box
+            margin-right: 200px;
+            padding-top: 10px;
+            padding-left: 20px;
+            box-sizing: border-box;
+            .old
+              text-decoration: line-through;
+            .real
+              color: #f01414;
+          .order-status-box
+            padding-top: 20px;
+            text-align: center;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            border-left: 1px solid #d9dde1;
+            .order-status
+              font-size: 14px;
+              color: #4d555d;
 </style>
