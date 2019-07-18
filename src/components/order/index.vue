@@ -20,6 +20,7 @@
 </template>
 <script>
 import List from './list.vue'
+import Balance from './balance.vue'
 export default {
   data () {
     return {
@@ -50,7 +51,8 @@ export default {
     }
   },
   components: {
-    List
+    List,
+    Balance
   }
 }
 </script>

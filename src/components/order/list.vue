@@ -15,7 +15,7 @@
     <ul class="order-list">
       <li
         class="order-item"
-        v-for="item in orderList"
+        v-for="item in filterOrderList"
         :key="item.id"
       >
         <h2 class="order-title">
@@ -32,18 +32,27 @@
               </div>
               <div class="order-name-box">
                 <p class="order-name">{{course.name}}</p>
-                <p class="order-real-price">实付 ¥{{course.realPrice}}</p>
+                <p class="order-real-price"><span v-if="item.status==2">实付</span> ¥{{course.realPrice}}</p>
               </div>
             </dd>
           </dl>
           <div class="order-price-box">
-            <p class="price-item old">原价 ¥{{item.oldPrice}}</p>
-            <p class="price-item">折扣 -¥{{item.discount}}</p>
-            <p class="price-item real">实付 ¥{{item.oldPrice}}</p>
+            <template v-if="item.status==2">
+              <p class="price-item old">原价 ¥{{item.oldPrice}}</p>
+              <p class="price-item">折扣 -¥{{item.discount}}</p>
+              <p class="price-item real"> 实付 ¥<span>{{item.oldPrice}}</span></p>
+            </template>
+              <p class="price-item real" v-else> ¥<span>{{item.oldPrice}}</span></p>            
           </div>
           <div class="order-status-box">
-            <p class="order-status">{{item.statusText}}</p>
-            <p class="order-pay">{{item.payType}}</p>
+            <template v-if="item.status==1">
+              <p class="order-pay-btn">立即支付</p>
+              <p class="order-cancel">取消订单</p>
+            </template>
+            <template v-else>
+              <p class="order-status">{{item.statusText}}</p>
+              <p class="order-pay">{{item.payType}}</p>
+            </template>
           </div>
         </div>
       </li>
@@ -63,11 +72,11 @@ export default {
   },
   created () {
     this.navList = [
-      { id: 1, title: '全部', status: 0, number: 11 },
-      { id: 2, title: '未支付', status: 1, number: 0 },
-      { id: 3, title: '已完成', status: 2, number: 11 },
-      { id: 4, title: '已失效', status: 3, number: 1 },
-      { id: 5, title: '订单回收站', status: 4, number: 3 }
+      { id: 1, title: '全部', status: 0},
+      { id: 2, title: '未支付', status: 1},
+      { id: 3, title: '已完成', status: 2},
+      { id: 4, title: '已失效', status: 3},
+      { id: 5, title: '订单回收站', status: 4}
     ]
     this.getOrderList()
   },
@@ -82,6 +91,17 @@ export default {
         let { code, data } = res
         if (code === ERR_OK) {
           this.orderList = data
+        }
+      })
+    }
+  },
+  computed:{
+    filterOrderList () {
+      return this.orderList.filter (item => {
+        if (this.currentIndex === 0) {
+          return true
+        } else {
+          return item.status === this.navList[this.currentIndex].status
         }
       })
     }
@@ -203,6 +223,11 @@ export default {
             .old
               text-decoration: line-through;
             .real
+              & > span
+                margin-left: 5px;
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 16px;
               color: #f01414;
           .order-status-box
             padding-top: 20px;
@@ -216,4 +241,13 @@ export default {
             .order-status
               font-size: 14px;
               color: #4d555d;
+            .order-pay-btn
+              margin: 0px auto 5px;
+              width:120px;
+              height:36px;
+              border-radius: 18px;
+              background-color: #f01414;
+              color: #fff;
+              text-align: center;
+              line-height: 36px;
 </style>
