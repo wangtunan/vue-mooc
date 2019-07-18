@@ -21,6 +21,8 @@
 <script>
 import List from './list.vue'
 import Balance from './balance.vue'
+import Curpon from './curpon.vue'
+import Consult from './consult.vue'
 export default {
   data () {
     return {
@@ -52,7 +54,9 @@ export default {
   },
   components: {
     List,
-    Balance
+    Balance,
+    Curpon,
+    Consult
   }
 }
 </script>

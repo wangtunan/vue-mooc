@@ -1,0 +1,111 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": [
+    {
+      "status": 0,
+      "price": "30",
+      "condition": "满99可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01"
+    },
+    {
+      "status": 0,
+      "price": "60",
+      "condition": "满199可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01"
+    },
+    {
+      "status": 0,
+      "price": "90",
+      "condition": "满399可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01"
+    },
+    {
+      "status": 0,
+      "price": "120",
+      "condition": "满599可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01"
+    },
+    {
+      "status": 1,
+      "price": "30",
+      "condition": "满99可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01",
+      "order": "201907182240",
+      "useTime": "2019.03.01"
+    },
+    {
+      "status": 1,
+      "price": "60",
+      "condition": "满199可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01",
+      "order": "201907192240",
+      "useTime": "2019.03.01"
+    },
+    {
+      "status": 1,
+      "price": "90",
+      "condition": "满399可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01",
+      "order": "201907202240",
+      "useTime": "2019.03.01"
+    },
+    {
+      "status": 1,
+      "price": "120",
+      "condition": "满599可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01",
+      "order": "201907212240",
+      "useTime": "2019.03.01"
+    },
+
+    {
+      "status": 2,
+      "price": "30",
+      "condition": "满99可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01"
+    },
+    {
+      "status": 2,
+      "price": "60",
+      "condition": "满199可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01"
+    },
+    {
+      "status": 2,
+      "price": "90",
+      "condition": "满399可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01"
+    },
+    {
+      "status": 2,
+      "price": "120",
+      "condition": "满599可用",
+      "range": "全部实战课程",
+      "effectStartTime": "2019.03.01",
+      "effectEndTime": "2019.07.01"
+    }
+  ]
+}
