@@ -16,3 +16,7 @@ export function curponList () {
 export function consultList () {
   return axios.get('/user/consult')
 }
+// 用户消费记录接口
+export function billList () {
+  return axios.get('/user/bill')
+}

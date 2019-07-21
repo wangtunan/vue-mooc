@@ -23,6 +23,8 @@ import List from './list.vue'
 import Balance from './balance.vue'
 import Curpon from './curpon.vue'
 import Consult from './consult.vue'
+import Bill from './bill.vue'
+import Invoice from './invoice.vue'
 export default {
   data () {
     return {
@@ -34,7 +36,6 @@ export default {
     this.navList = [
       { id: 1, title: '我的订单', component: 'list' },
       { id: 2, title: '我的余额', component: 'balance' },
-      { id: 3, title: '电子兑换码', component: 'redemption-code' },
       { id: 4, title: '我的优惠券', component: 'curpon' },
       { id: 5, title: '课程咨询', component: 'consult' },
       { id: 6, title: '发票管理', component: 'invoice' },
@@ -56,7 +57,9 @@ export default {
     List,
     Balance,
     Curpon,
-    Consult
+    Consult,
+    Bill,
+    Invoice
   }
 }
 </script>
