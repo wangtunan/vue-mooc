@@ -54,6 +54,12 @@
               个人设置
             </div>
           </div>
+          <div class="course-history">
+            <i class="iconfont">&#xe62f;</i>
+            <span class="course-name ellipsis">{{userInfo.lastCourse && userInfo.lastCourse.name}}</span>
+            <span class="course-chapter ellipsis">{{userInfo.lastCourse && userInfo.lastCourse.chapter}}</span>
+            <span class="course-btn">继续</span>
+          </div>
           <p class="exit-btn" >
             <span @click="handleUserLogout">安全退出</span>
           </p>
@@ -193,6 +199,7 @@ export default {
             height: 100%;
             border-radius: 50%;
         .userinfo-wrapper
+          z-index: 999;
           position: absolute;
           right: 0;
           top: 72px;
@@ -234,7 +241,7 @@ export default {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            margin: 20px 0;
+            margin: 20px 0 10px;
             .fast-nav-item
               flex: 0 0 126px;
               width: 126px;
@@ -253,6 +260,36 @@ export default {
                 color: #000;
                 font-weight: 700;
                 font-size: 16px;
+          .course-history
+            position: relative;
+            margin-bottom: 8px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #edf1f2;
+            color: #787d82;
+            line-height: 1;
+            .iconfont
+              display: inline-block;
+              vertical-align: middle;
+              font-size: 16px;
+              font-weight: 700;
+            span
+              padding-left: 4px;
+              width: 90%;
+              display: inline-block;
+              vertical-align: middle;
+              &.course-name
+                font-weight: 700;
+                line-height: 24px;
+              &.course-chapter
+                width: calc(90% - 20px);
+                margin-top: 8px;
+                padding-left: 20px;
+              &.course-btn
+                position: absolute;
+                right: 0;
+                bottom: 15px;
+                text-align: right;
+                color: #00b43c;
           .exit-btn
             line-height: 24px;
             & > span

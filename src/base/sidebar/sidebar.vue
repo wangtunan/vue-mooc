@@ -29,7 +29,7 @@
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl'
   .sidebar
-    z-index: 999;
+    z-index: 66;
     position: fixed;
     right: 0;
     padding: 0 16px;

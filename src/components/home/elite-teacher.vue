@@ -8,19 +8,25 @@
       </h2>
     </div>
 
-    <div class="elite-teacher-slider m-center">
-      <div class="teacher-item" v-for="(item,index) in teacherList" :key="index" v-if="index<5">
-        <div class="img-box">
-          <img :src="item.avatar" alt="">
-        </div>
-        <div class="teacher-name">
-          <p class="name">{{item.name}}</p>
-          <p class="label">{{item.label}}</p>
-        </div>
-        <p class="teacher-intro">
-          {{item.introduction}}
-        </p>
-      </div>
+    <div class="m-center">
+      <el-carousel :interval="interval" arrow="always" height="280px">
+        <el-carousel-item v-for="(page,index) in pages" :key="index">
+          <div class="elite-teacher-slider">
+            <div class="teacher-item" v-for="(item,index) in page" :key="index">
+              <div class="img-box">
+                <img :src="item.avatar" alt="">
+              </div>
+              <div class="teacher-name">
+                <p class="name">{{item.name}}</p>
+                <p class="label">{{item.label}}</p>
+              </div>
+              <p class="teacher-intro">
+                {{item.introduction}}
+              </p>
+            </div>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
     </div>
   </div>
 </template>
@@ -31,6 +37,11 @@ export default {
     teacherList: {
       type: Array,
       required: true
+    }
+  },
+  data () {
+    return {
+      interval: 5000, // 轮播的间隔
     }
   },
   computed: {
@@ -56,12 +67,24 @@ export default {
     background: url('https://www.imooc.com/static/img/index/eliteTbg.jpg') no-repeat center center
     background-size: cover;
   .home-title
-    padding: 36px 0 48px;
+    padding: 36px 0 28px;
     color: #fff;
     .left-icon
       background-position: center -432px;
     .right-icon
       background-position: center -468px;
+  >>> .el-carousel
+    padding-top: 20px;
+    .el-carousel__item
+      overflow: unset;
+    .el-carousel__arrow
+      top: 45%;
+      &.el-carousel__arrow--left
+        left: 0px;
+    .el-carousel__button
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
   .elite-teacher-slider
     display:flex;
     align-items: center;

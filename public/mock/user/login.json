@@ -7,6 +7,10 @@
     "avatar": "https://img.mukewang.com/5882f5f70001525e01000100-100-100.jpg",
     "name": "BlueMan_汪汪汪",
     "experience": 18163,
-    "integral": 133
+    "integral": 133,
+    "lastCourse": {
+      "name": "React16.4开发简书项目 从零基础入门到实战",
+      "chapter": "7-2 使用 styled-components 完成 Header 组件布局（1）"
+    }
   }
 }
