@@ -10,6 +10,8 @@ const Home = () => import('components/home/home.vue')
 const UserCenter = () => import('components/user/index.vue')
 // 订单中心路由
 const OrderIndex = () => import('components/order/index.vue')
+// 课程
+const CourseIndex = () => import('components/course/index.vue')
 const routes = [
   {
     path: '/',
@@ -36,6 +38,11 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+  {
+    path: '/course',
+    name: 'CourseIndex',
+    component:CourseIndex
   }
 ]
 const router = new Router({

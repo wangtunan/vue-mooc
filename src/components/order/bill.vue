@@ -38,7 +38,6 @@ export default {
         let { code, data } = res
         if (code === ERR_OK) {
           this.bill = data
-          console.log(this.bill.data)
         }
       })
     }

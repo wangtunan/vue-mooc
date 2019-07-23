@@ -18,7 +18,7 @@ export default {
   created () {
     // 初始化导航栏的数据
     this.navList = [
-      { title: '课程', path: '/' },
+      { title: '课程', path: '/course' },
       { title: '实战课程', path: '/' },
       { title: '就业班', path: '/' },
       { title: '专栏', icon: 'https://www.imooc.com/static/img/common/new.png', path: '/' },
