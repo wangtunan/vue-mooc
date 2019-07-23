@@ -31,7 +31,7 @@
       .iconfont
         position: absolute;
         right: 5px;
-        top: 30px;
+        top: 20px;
         font-size: 24px;
         color: #9199a1;
         cursor: pointer;
