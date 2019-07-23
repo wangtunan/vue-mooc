@@ -66,7 +66,7 @@ export default {
   .course-nav
     dl
       position: relative;
-      padding: 16px 0 16px 52px;
+      padding: 16px 0 10px 52px;
       border-bottom: 1px solid #edf1f2;
       font-size: 14px;
       dt
