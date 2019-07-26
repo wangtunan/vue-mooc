@@ -6,3 +6,9 @@ export function getCourseNav (params) {
     data: params
   })
 }
+// 获取课程信息
+export function getCourseList (params) {
+  return axios.post('/course/list', {
+    data: params
+  })
+}

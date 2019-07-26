@@ -1,6 +1,6 @@
 <template>
-  <div class="course-nav mx-center">
-    <dl v-for="(item,index) in navList" :key="index">
+  <div class="course-nav" v-if="list.length">
+    <dl v-for="(item,index) in list" :key="index">
       <dt :key="item.code">{{item.type}}：</dt>
       <dd
         v-for="(nav,index) in item.data"
@@ -12,20 +12,22 @@
   </div> 
 </template>
 <script>
-import { getCourseNav } from 'api/course.js'
-import { ERR_OK } from 'api/config.js'
 export default {
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   data () {
     return {
       directionIndex: 0,
       categortIndex: 0,
       difficultIndex: 0,
       params: {}, // 选择的导航信息
-      navList: [] // 导航数据
     }
-  },
-  mounted () {
-    this.getCourseNavList()
   },
   methods: {
     // 导航点击事件
@@ -38,15 +40,7 @@ export default {
         this.difficultIndex = index
       }
     },
-    // 获取课程导航信息
-    getCourseNavList () {
-      getCourseNav(this.params).then(res => {
-        let { code, data } = res
-        if (code === ERR_OK) {
-          this.navList = data
-        }
-      })
-    },
+    
     // 获取active样式
     getActiveClass (item,index) {
       let newIndex = -1

@@ -1,5 +1,5 @@
 <template>
-  <div class="course-search mx-center">
+  <div class="course-search">
     <div class="search-tag">
       <img src="https://www.imooc.com/static/img/course/logo-course2.png" width="96" height="60" alt="">
       <img src="https://www.imooc.com/static/img/course/course-top.png" width="96" height="60" alt="">
