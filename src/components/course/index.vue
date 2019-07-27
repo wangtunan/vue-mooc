@@ -24,7 +24,7 @@
             <div class="tags">
               <span class="tag-item" v-for="(tag,index) in item.tags" :key="index">{{tag}}</span>
             </div>
-            <div class="rate" v-if="item.rate">{{item.rate}}</div>
+            <div class="rate" v-if="item.rate">{{item.rate}}%</div>
           </div>
           <div class="course-content">
             <h2 class="title ellipsis">{{item.title}}</h2>
@@ -35,7 +35,7 @@
             <p class="desc">{{item.desc}}</p>
             <p>
               <span class="price">{{item.price}}</span>
-              <span class="collect" :class="{like: item.isLike}">
+              <span class="collect" :class="{like: item.isLike}" @click="handleCollectClick(item,index)">
                 <i class="iconfont">&#xe610;</i>
                 {{item.isLike ? '已收藏' : '收藏'}}
               </span>
@@ -70,6 +70,10 @@ export default {
     this.getCourseListData()
   },
   methods: {
+    // 收藏or取消收藏点击事件
+    handleCollectClick (item, index) {
+      this.courseList[index].isLike = !this.courseList[index].isLike
+    },
     // 获取课程导航信息
     getCourseNavList () {
       getCourseNav(this.params).then(res => {
@@ -85,7 +89,6 @@ export default {
         let { code, data } = res
         if(code === ERR_OK) {
           this.courseList = data
-          console.log(this.courseList)
         }
       })
     }
