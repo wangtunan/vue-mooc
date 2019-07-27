@@ -58,7 +58,7 @@ export default {
       line-height: 60px;
       .iconfont
         position: absolute;
-        right: 5px;
+        right: 15px;
         top: 20px;
         font-size: 24px;
         color: #9199a1;
