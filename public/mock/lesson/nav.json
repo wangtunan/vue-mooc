@@ -1,0 +1,57 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": [
+    {
+      "type": "方向",
+      "code": "direction",
+      "data": ["全部", "前端开发", "后端开发", "移动端开发", "算法&数学", "前言技术", "云计算&大数据", "运维&测试", "数据库", "UI设计&多媒体"]
+    },
+    {
+      "type": "分类",
+      "code": "category",
+      "data": [
+        {
+          "direction": "全部",
+          "data": ["全部"]
+        },
+        {
+          "direction": "前端开发",
+          "data": ["HTML/CSS", "JavaScript", "Vue.js", "React.JS", "Angular", "Node.js", "jQuery", "WebApp", "小程序", "前端工具"]
+        },
+        {
+          "direction": "后端开发",
+          "data": ["Java", "SpringBoot","Spring Cloud", "SSM", "Python", "爬虫", "Django",  "Fask", "Tornado", "Go", "PHP", "Swoole", "C", "C++"]
+        },
+        {
+          "direction": "移动端开发",
+          "data": ["Android", "iOS", "React native", "Ionic"]
+        },
+        {
+          "direction": "算法&数学",
+          "data": ["算法与数据结构", "数学", "算法", "数据结构"]
+        },
+        {
+          "direction": "前言技术",
+          "data": ["微服务", "区块链", "机器学习","深度学习", "计算机视觉", "自然语言处理","数据分析&挖掘"]
+        },
+        {
+          "direction": "云计算&大数据",
+          "data": ["大数据","Hadoop", "Spark", "Hbase", "Flink",  "Storm", "云计算", "Docker", "Kubernetes"]
+        },
+        {
+          "direction": "运维&测试",
+          "data": ["运维", "自动化运维", "运维工具", "中间件", "Linux", "测试", "功能测试", "性能测试","自动化测试", "接口测试", "移动测试", "Nginx"]
+        },
+        {
+          "direction": "数据库",
+          "data": ["MySQL", "Redis", "MongoDB", "Oracle", "SQL Server", "NoSql"]
+        },
+        {
+          "direction": "UI设计&多媒体",
+          "data": ["动效动画", "设计基础", "设计工具", "APPUI设计", "产品交互"]
+        }
+      ]
+    }
+  ]
+}
