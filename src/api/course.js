@@ -8,7 +8,5 @@ export function getCourseNav (params) {
 }
 // 获取课程信息
 export function getCourseList (params) {
-  return axios.post('/course/list', {
-    data: params
-  })
+  return axios.post('/course/list', params)
 }

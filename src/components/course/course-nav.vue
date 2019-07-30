@@ -1,17 +1,17 @@
 <template>
-  <div class="course-nav" v-if="list.length">
-    <dl v-for="(item,index) in list" :key="index">
-      <dt :key="item.code">{{item.type}}：</dt>
-      <dd
-        v-for="(nav,index) in item.data"
-        :key="index+Math.random()"
-        :class="{active: getActiveClass(item,index)}"
-        @click="handleNavClick(item,index)"
-      >{{nav}}</dd>
-    </dl>
+  <div>
+    <!-- 方向 -->
+    <nav-item v-if="directionList.length" :list="directionList" :currentIndex="directionIndex" type="方向"  @navClick="handleDirectionClick"></nav-item>
+
+    <!-- 分类 -->
+    <nav-item v-if="computeCategoryList.length" :list="computeCategoryList" :currentIndex="categortIndex" type="分类" @navClick="handleCategoryClick"></nav-item>
+
+    <!-- 难度 -->
+    <nav-item v-if="difficultList.length" :list="difficultList" :currentIndex="difficultIndex" type="难度" @navClick="handleDifficultClick"></nav-item>
   </div> 
 </template>
 <script>
+import NavItem from './nav-item.vue'
 export default {
   props: {
     list: {
@@ -23,65 +23,76 @@ export default {
   },
   data () {
     return {
-      directionIndex: 0,
-      categortIndex: 0,
-      difficultIndex: 0,
-      params: {}, // 选择的导航信息
+      directionIndex: 0, // 方向索引
+      directionList: [], // 方向数据
+      categortIndex: 0, // 分类索引
+      categortList: [], // 分类数据
+      difficultIndex: 0, // 难度索引
+      difficultList: [], // 难度数据
+      params: {
+        direction: '全部',
+        category: '全部',
+        difficult: '全部'
+      },
     }
   },
+  created () {
+    this.normalizeList()
+  },
   methods: {
-    // 导航点击事件
-    handleNavClick (item,index) {
-      if (item.code === 'direction') {
-        this.directionIndex = index
-      } else if (item.code === 'category') {
-        this.categortIndex = index
-      } else {
-        this.difficultIndex = index
-      }
+    // 反向导航点击事件
+    handleDirectionClick (params) {
+      this.directionIndex = params.index
+      this.params.direction = params.data
     },
-    
-    // 获取active样式
-    getActiveClass (item,index) {
-      let newIndex = -1
-      if (item.code === 'direction') {
-        newIndex = this.directionIndex
-      } else if (item.code === 'category') {
-        newIndex = this.categortIndex
-      } else {
-        newIndex = this.difficultIndex
-      }
-      return index === newIndex
+    // 分类导航点击事件
+    handleCategoryClick (params) {
+      this.categortIndex = params.index
+      this.params.category = params.data
+    },
+    // 难度导航点击事件
+    handleDifficultClick (params) {
+      this.difficultIndex = params.index
+      this.params.difficult = params.data
+    },
+    // 格式化数据
+    normalizeList () {
+      let list = this.list.slice()
+      list.forEach(item => {
+        if (item.code === 'direction') {
+          this.directionList = item.data
+        } else if (item.code === 'category') {
+          this.categortList = item.data
+        } else if (item.code === 'difficult') {
+          this.difficultList = item.data
+        }
+      })
     }
+  },
+  watch: {
+    params: {
+      handler () {
+        this.$emit('change', this.params)
+      },
+      deep: true
+    }
+  },
+  computed: {
+    computeCategoryList () {
+      let result = []
+      let categortList = this.categortList.slice()
+      if (this.directionIndex !==0) {
+        let direction = this.directionList[this.directionIndex]
+        categortList = categortList.filter(item => item.direction === direction || item.direction === '全部')
+      }
+      categortList.forEach(item => {
+        result = result.concat(item.data)
+      })
+      return result
+    }
+  },
+  components: {
+    NavItem
   }
 }
 </script>
-<style lang="stylus" scoped>
-  .course-nav
-    dl
-      position: relative;
-      padding: 16px 0 10px 52px;
-      border-bottom: 1px solid #edf1f2;
-      font-size: 14px;
-      dt
-        position: absolute;
-        left: 0;
-        top: 22px;
-        color: #07111b;
-        font-weight: 700;
-      dd
-        display: inline-block;
-        padding: 0 10px;
-        margin: 0 5px 10px 0;
-        height: 30px;
-        line-height: 30px;
-        color: #1c1f21;
-        cursor: pointer;
-        &.active
-          background-color: rgba(242,13,13,.06);
-          border-radius: 6px;
-          color: #f01414;
-          font-weight: 700;
-        &:hover
-          color: #f01414;
-</style>
