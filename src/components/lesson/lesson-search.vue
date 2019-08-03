@@ -2,7 +2,7 @@
   <div class="lesson-search-container">
     <div class="lesson-search ml-center">
       <img src="https://coding.imooc.com/static/module/index/img/header-icon1.png" alt="" height="96">
-      <img src="https://coding.imooc.com/static/module/index/img/header-icon2.png?222" height="96" alt="">
+      <img class="sub-img" src="https://coding.imooc.com/static/module/index/img/header-icon2.png?222" height="96" alt="">
       <div class="search-box">
         <div class="input-box">
           <input type="text" placeholder="搜索感兴趣的实战课程内容" class="input">
@@ -42,7 +42,7 @@ export default {
       & > img
         display: inline-block;
         vertical-align: middle;
-        &:last-child
+        &.sub-img
           margin-left: 20px;
       .search-box
         float: right;
