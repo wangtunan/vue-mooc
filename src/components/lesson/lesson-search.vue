@@ -10,34 +10,22 @@
             <i class="iconfont">&#xe63c;</i>
           </div>
         </div>
-        <dl class="hot-box">
+        <dl class="hot-box" v-if="hot.length">
           <dt>热搜：</dt>
-          <dd class="hot-item" v-for="(item,index) in hotList" :key="index">{{item}}</dd>
+          <dd class="hot-item" v-for="(item,index) in hot" :key="index">{{item}}</dd>
         </dl>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { getHot } from 'api/common.js'
-import { ERR_OK } from 'api/config.js'
 export default {
-  data () {
-    return {
-      hotList: [] // 热搜列表
-    }
-  },
-  mounted () {
-    this.getHotData()
-  },
-  methods: {
-    getHotData () {
-      getHot().then(res => {
-        let { code, data } = res
-        if (code === ERR_OK) {
-          this.hotList = data
-        }
-      }) 
+  props: {
+    hot: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   }
 }
