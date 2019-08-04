@@ -10,231 +10,51 @@
           @click="handleFilterClick(filter,index)"
         >{{filter}}</li>
       </ul>
+      <div class="hide-course-box">
+        <el-switch v-model="isHide" active-color="#13ce66" inactive-color="#9199a1"></el-switch>隐藏已参与的课程
+        <span class="like-number" :class="{active: isShowLike}" @click="handleShowLikeClick">
+          <i class="iconfont">&#xe610;</i>
+          我的收藏{{computeLikeLesson}}
+        </span>
+      </div>
     </div>
     <ul class="lesson-list">
-      <li class="list-item">
+      <li class="list-item" v-for="(item, index) in computeList" :key="index">
         <div class="img-box">
-          <img src="https://img1.sycdn.imooc.com/szimg/5d1032ab08719e0906000338-360-202.jpg" alt="">
-          <span class="type">新课</span>
-          <span class="rate">50%</span>
+          <img :src="item.img" alt="">
+          <span class="type" v-if="item.type">{{item.type}}</span>
+          <span class="rate" v-if="item.rate">{{item.rate}}</span>
           <div class="lesson-mask">
-            <div class="teacher-info">
-              <img src="https://img1.sycdn.imooc.com/user/5abe468b0001664107390741-100-100.jpg" alt="">
-              <span class="name">DellLee</span>
+            <div class="teacher-info" v-if="item.teacher">
+              <img :src="item.teacher.avatar" alt="">
+              <span class="name">{{item.teacher.name}}</span>
             </div>
             <div class="update-info">
               <span>更新于</span>
-              <span>2天前</span>
+              <span>{{item.lastUpdate}}</span>
             </div>
           </div>
         </div>
         <div class="lesson-content">
-          <h2 class="title">前端要学的测试课 从Jest入门到 TDD/BDD双实战</h2>
+          <h2 class="title">{{item.title}}</h2>
           <p>
-            <span>中级</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>1800</span>
-            <span class="comment">68人评价</span>
+            <span>{{item.rank}}</span>
+            <span class="number"><i class="iconfont">&#xe607;</i>{{item.number}}</span>
+            <span class="comment">{{item.comment}}人评价</span>
           </p>
-          <p class="desc">以Vue/React项目进行自动化测试实战，让你技术水平和架构思维双提升</p>
+          <p class="desc">{{item.desc}}</p>
           <p class="price">
-            <span class="old">¥226.00</span>
-            <span class="new">¥299.00</span>
+            <span class="old">¥{{item.oldPrice}}</span>
+            <span class="new" v-if="item.newPrice">¥{{item.newPrice}}</span>
             <span class="price-right">
-              <span class="like"><i class="iconfont">&#xe610;</i>收藏</span>
+              <span class="like" :class="{active: item.isLike}" @click="handleLikeClick(item,index)">
+                <i class="iconfont">&#xe610;</i>
+                {{item.isLike ? '已收藏' : '收藏'}}
+              </span>
               <span class="cart">加入购物车</span>
             </span>
           </p>
-          <p>
-            <span class="discount">限时优惠</span>
-          </p>
-        </div>
-      </li>
-
-      <li class="list-item">
-        <div class="img-box">
-          <img src="https://img1.sycdn.imooc.com/szimg/5d1032ab08719e0906000338-360-202.jpg" alt="">
-          <span class="type">新课</span>
-          <span class="rate">50%</span>
-          <div class="lesson-mask">
-            <div class="teacher-info">
-              <img src="https://img1.sycdn.imooc.com/user/5abe468b0001664107390741-100-100.jpg" alt="">
-              <span class="name">DellLee</span>
-            </div>
-            <div class="update-info">
-              <span>更新于</span>
-              <span>2天前</span>
-            </div>
-          </div>
-        </div>
-        <div class="lesson-content">
-          <h2 class="title">前端要学的测试课 从Jest入门到 TDD/BDD双实战</h2>
-          <p>
-            <span>中级</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>1800</span>
-            <span class="comment">68人评价</span>
-          </p>
-          <p class="desc">以Vue/React项目进行自动化测试实战，让你技术水平和架构思维双提升</p>
-          <p class="price">
-            <span class="old">¥226.00</span>
-            <span class="new">¥299.00</span>
-            <span class="price-right">
-              <span class="like"><i class="iconfont">&#xe610;</i>收藏</span>
-              <span class="cart">加入购物车</span>
-            </span>
-          </p>
-          <p>
-            <span class="discount">限时优惠</span>
-          </p>
-        </div>
-      </li>
-
-      <li class="list-item">
-        <div class="img-box">
-          <img src="https://img1.sycdn.imooc.com/szimg/5d1032ab08719e0906000338-360-202.jpg" alt="">
-          <span class="type">新课</span>
-          <span class="rate">50%</span>
-          <div class="lesson-mask">
-            <div class="teacher-info">
-              <img src="https://img1.sycdn.imooc.com/user/5abe468b0001664107390741-100-100.jpg" alt="">
-              <span class="name">DellLee</span>
-            </div>
-            <div class="update-info">
-              <span>更新于</span>
-              <span>2天前</span>
-            </div>
-          </div>
-        </div>
-        <div class="lesson-content">
-          <h2 class="title">前端要学的测试课 从Jest入门到 TDD/BDD双实战</h2>
-          <p>
-            <span>中级</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>1800</span>
-            <span class="comment">68人评价</span>
-          </p>
-          <p class="desc">以Vue/React项目进行自动化测试实战，让你技术水平和架构思维双提升</p>
-          <p class="price">
-            <span class="old">¥226.00</span>
-            <span class="new">¥299.00</span>
-            <span class="price-right">
-              <span class="like"><i class="iconfont">&#xe610;</i>收藏</span>
-              <span class="cart">加入购物车</span>
-            </span>
-          </p>
-          <p>
-            <span class="discount">限时优惠</span>
-          </p>
-        </div>
-      </li>
-
-      <li class="list-item">
-        <div class="img-box">
-          <img src="https://img1.sycdn.imooc.com/szimg/5d1032ab08719e0906000338-360-202.jpg" alt="">
-          <span class="type">新课</span>
-          <span class="rate">50%</span>
-          <div class="lesson-mask">
-            <div class="teacher-info">
-              <img src="https://img1.sycdn.imooc.com/user/5abe468b0001664107390741-100-100.jpg" alt="">
-              <span class="name">DellLee</span>
-            </div>
-            <div class="update-info">
-              <span>更新于</span>
-              <span>2天前</span>
-            </div>
-          </div>
-        </div>
-        <div class="lesson-content">
-          <h2 class="title">前端要学的测试课 从Jest入门到 TDD/BDD双实战</h2>
-          <p>
-            <span>中级</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>1800</span>
-            <span class="comment">68人评价</span>
-          </p>
-          <p class="desc">以Vue/React项目进行自动化测试实战，让你技术水平和架构思维双提升</p>
-          <p class="price">
-            <span class="old">¥226.00</span>
-            <span class="new">¥299.00</span>
-            <span class="price-right">
-              <span class="like"><i class="iconfont">&#xe610;</i>收藏</span>
-              <span class="cart">加入购物车</span>
-            </span>
-          </p>
-          <p>
-            <span class="discount">限时优惠</span>
-          </p>
-        </div>
-      </li>
-
-      <li class="list-item">
-        <div class="img-box">
-          <img src="https://img1.sycdn.imooc.com/szimg/5d1032ab08719e0906000338-360-202.jpg" alt="">
-          <span class="type">新课</span>
-          <span class="rate">50%</span>
-          <div class="lesson-mask">
-            <div class="teacher-info">
-              <img src="https://img1.sycdn.imooc.com/user/5abe468b0001664107390741-100-100.jpg" alt="">
-              <span class="name">DellLee</span>
-            </div>
-            <div class="update-info">
-              <span>更新于</span>
-              <span>2天前</span>
-            </div>
-          </div>
-        </div>
-        <div class="lesson-content">
-          <h2 class="title">前端要学的测试课 从Jest入门到 TDD/BDD双实战</h2>
-          <p>
-            <span>中级</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>1800</span>
-            <span class="comment">68人评价</span>
-          </p>
-          <p class="desc">以Vue/React项目进行自动化测试实战，让你技术水平和架构思维双提升</p>
-          <p class="price">
-            <span class="old">¥226.00</span>
-            <span class="new">¥299.00</span>
-            <span class="price-right">
-              <span class="like"><i class="iconfont">&#xe610;</i>收藏</span>
-              <span class="cart">加入购物车</span>
-            </span>
-          </p>
-          <p>
-            <span class="discount">限时优惠</span>
-          </p>
-        </div>
-      </li>
-
-      <li class="list-item">
-        <div class="img-box">
-          <img src="https://img1.sycdn.imooc.com/szimg/5d1032ab08719e0906000338-360-202.jpg" alt="">
-          <span class="type">新课</span>
-          <span class="rate">50%</span>
-          <div class="lesson-mask">
-            <div class="teacher-info">
-              <img src="https://img1.sycdn.imooc.com/user/5abe468b0001664107390741-100-100.jpg" alt="">
-              <span class="name">DellLee</span>
-            </div>
-            <div class="update-info">
-              <span>更新于</span>
-              <span>2天前</span>
-            </div>
-          </div>
-        </div>
-        <div class="lesson-content">
-          <h2 class="title">前端要学的测试课 从Jest入门到 TDD/BDD双实战</h2>
-          <p>
-            <span>中级</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>1800</span>
-            <span class="comment">68人评价</span>
-          </p>
-          <p class="desc">以Vue/React项目进行自动化测试实战，让你技术水平和架构思维双提升</p>
-          <p class="price">
-            <span class="old">¥226.00</span>
-            <span class="new">¥299.00</span>
-            <span class="price-right">
-              <span class="like"><i class="iconfont">&#xe610;</i>收藏</span>
-              <span class="cart">加入购物车</span>
-            </span>
-          </p>
-          <p>
+          <p v-if="item.isDiscount">
             <span class="discount">限时优惠</span>
           </p>
         </div>
@@ -244,8 +64,18 @@
 </template>
 <script>
 export default {
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   data () {
     return {
+      isShowLike: false, // 是否展示已收藏课程
+      isHide: false, // 是否隐藏已参与的课程
       currentFilterIndex: 0, // 当前筛选项的索引
       filter: ['默认排序', '最新', '销量', '更新'] // 筛选项
     }
@@ -254,6 +84,54 @@ export default {
     // 筛选项点击事件
     handleFilterClick (filter, index) {
       this.currentFilterIndex = index
+    },
+    // 收藏or取消收藏点击事件
+    handleLikeClick (item, index) {
+      let list = this.list.slice()
+      list[index].isLike = !item.isLike
+      this.$emit('update:list', list)
+    },
+    // 展示已收藏的课程
+    handleShowLikeClick () {
+      this.isShowLike = true
+    }
+  },
+  computed: {
+    // 课程筛选列表
+    computeList () {
+      let list = this.list.slice()
+      
+      // 处理最新
+      if (this.currentFilterIndex === 1) {
+        list = list.filter(item => item.type === '新课')
+      }
+
+      // 处理销量
+      if (this.currentFilterIndex === 2) {
+        list = list.sort((a, b) => {
+          return b.number - a.number
+        })
+      }
+
+      // 处理更新
+      if (this.currentFilterIndex === 3) {
+        list = list.filter(item => item.lastUpdate)
+      }
+
+      // 处理已收藏的课程
+      if (this.isShowLike) {
+        list = list.filter(item => item.isLike)
+      }
+      return list
+    },
+    // 已收藏课程数量
+    computeLikeLesson () {
+      return this.list.filter(item => item.isLike).length || 0
+    }
+  },
+  watch: {
+    isHide () {
+      this.isShowLike = false
     }
   }
 }
@@ -265,6 +143,8 @@ export default {
     .list-filter
       padding: 20px 12px;
       border-top: 1px solid #d9dde1;
+      & > ul
+        display: inline-block;
       .filter-item
         display: inline-block;
         margin-right: 12px;
@@ -277,12 +157,39 @@ export default {
         &.active
           background-color: #545c63;
           color: #fff;
+      .hide-course-box
+        float: right;
+        color: #787d82;
+        font-size: 12px;
+        .el-switch
+          margin-right: 15px;
+      .like-number
+        display: inline-block;
+        margin-left: 25px;
+        padding: 0 12px;
+        line-height: 24px;
+        border-radius: 12px;
+        background-color: rgba(204,136,0,.1);
+        color: #c80;
+        font-size: 12px;
+        cursor: pointer;
+        &:hover, &.active
+          color: #fff;
+          background-color: rgba(204,136,0,1);
     .lesson-list
       .list-item
         display: inline-block;
+        vertical-align: top;
         margin-right: 24px;
         margin-bottom: 36px;
         width: 270px;
+        cursor: pointer;
+        &:hover
+          .img-box
+            box-shadow: 0 8px 4px 0 rgba(7,17,27,0.1);
+          .lesson-content
+            .title
+              color: #f01414;
         &:nth-child(5n) {
           margin-right: 0;
         }
@@ -359,6 +266,7 @@ export default {
             font-weight: 700;
             line-height: 24px;
             color: #2b333b;
+            word-break: break-all;
             multline-ellipsis(2);
           & > p
             line-height: 20px;
@@ -370,6 +278,8 @@ export default {
             &.desc
               margin-top: 4px;
               multline-ellipsis(2);
+              &:hover
+                color: #4d555d;
             &.price
               margin-bottom: 4px;
             .number
@@ -386,9 +296,16 @@ export default {
               float: right;
               .like
                 margin-right: 10px;
+                cursor: pointer;
+                &:hover
+                  color: #4d555d;
+                &.active
+                  color: #f01414;
               .cart
                 padding-left: 10px;
                 border-left: 2px solid #d9dde1;
+                &:hover
+                  color: #4d555d;
             .discount
               padding: 4px;
               border-radius: 4px;

@@ -4,10 +4,10 @@
     <lesson-search :hot="hotList"></lesson-search>
 
     <!-- 导航 -->
-    <lesson-nav :nav="navList" v-if="navList.length"></lesson-nav>
+    <lesson-nav :nav="navList" v-if="navList.length" @change="handleNavChange"></lesson-nav>
 
     <!-- 列表 -->
-    <lesson-list></lesson-list>
+    <lesson-list :list.sync="lessonList"></lesson-list>
     
     <!-- 分页 -->
     <pagination :total.sync="total"></pagination>
@@ -19,12 +19,14 @@ import LessonNav from './lesson-nav.vue'
 import LessonList from './lesson-list.vue'
 import Pagination from 'base/pagination/pagination.vue'
 import { getHot } from 'api/common.js'
-import { getLessonNav } from 'api/lesson.js'
+import { getLessonNav, getLessonList } from 'api/lesson.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      params: {}, // 获取列表参数
       total: 100, // 课程总页数
+      lessonList: [], // 课程列表
       navList: [], // 导航列表
       hotList: [] // 热词列表
     }
@@ -32,8 +34,14 @@ export default {
   mounted () {
     this.getHotData()
     this.getLessonNavData()
+    this.getLessonListData()
   },
   methods: {
+    // 导航值更新事件
+    handleNavChange (category) {
+      this.params.category = category
+      this.getLessonListData()
+    },
     // 获取热搜词数据
     getHotData () {
       getHot().then(res => {
@@ -49,6 +57,15 @@ export default {
         let { code, data } = res
         if (code === ERR_OK) {
           this.navList = data
+        }
+      })
+    },
+    // 获取课程列表数据
+    getLessonListData () {
+      getLessonList(this.params).then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.lessonList = data
         }
       })
     }

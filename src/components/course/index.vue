@@ -7,7 +7,7 @@
     <course-nav :list="navList" v-if="navList.length" @change="handleNavChange"></course-nav>
     
     <!-- 课程列表 -->
-    <course-list :list="courseList" v-if="courseList.length"></course-list>
+    <course-list :list.sync="courseList" v-if="courseList.length"></course-list>
 
     <!-- 分页 -->
     <pagination :total.sync="total"></pagination>

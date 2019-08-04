@@ -58,6 +58,14 @@ export default {
       filterIndex: 0, // 课程筛选索引
     }
   },
+  methods: {
+    // 收藏or取消收藏点击事件
+    handleCollectClick (item, index) {
+      let list = this.list.slice()
+      list[index].isLike = !item.isLike
+      this.$emit('update:list', list)
+    }
+  },
   computed: {
     computeList () {
       let result = this.list.slice()
@@ -165,6 +173,7 @@ export default {
               font-weight: 700;
             .collect
               float: right;
+              cursor: pointer;
               &:hover
                 color: #4d555d;
                 font-weight: 700;

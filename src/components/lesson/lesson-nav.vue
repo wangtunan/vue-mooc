@@ -17,7 +17,7 @@
         v-for="(category,index) in computeCategoryList"
         :key="index"
         :class="{active: index == currentCategoryIndex}"
-        @click="handleCategoryClick(item,index)"
+        @click="handleCategoryClick(category,index)"
       >{{category}}</dd>
     </dl>
   </div>
@@ -55,8 +55,9 @@ export default {
       this.currentDirectionIndex = index
     },
     // 类型点击事件
-    handleCategoryClick (item, index) {
+    handleCategoryClick (category, index) {
       this.currentCategoryIndex = index
+      this.$emit('change', category)
     }
   },
   computed: {
