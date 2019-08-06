@@ -12,8 +12,12 @@ const UserCenter = () => import('components/user/index.vue')
 const OrderIndex = () => import('components/order/index.vue')
 // 免费课程
 const CourseIndex = () => import('components/course/index.vue')
+// 免费课程详情
+const CourseDetail = () => import('components/course-detail/index.vue')
 // 实战课程
 const LessonIndex = () => import('components/lesson/index.vue')
+// 实战课程详情
+const LessonDetail = () => import('components/lesson-detail/index.vue')
 const routes = [
   {
     path: '/',
@@ -44,13 +48,23 @@ const routes = [
   {
     path: '/course',
     name: 'CourseIndex',
-    component:CourseIndex
+    component: CourseIndex
+  },
+  {
+    path: '/course/:id',
+    name: 'CourseDetail',
+    component: CourseDetail
   },
   {
     path: '/lesson',
     name: 'LessonIndex',
     component:LessonIndex
-  }
+  },
+  {
+    path: '/lesson/:id',
+    name: 'LessonDetail',
+    component: LessonDetail
+  },
 ]
 const router = new Router({
   routes: routes,

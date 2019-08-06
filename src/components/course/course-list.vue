@@ -1,5 +1,6 @@
 <template>
   <div class="course-list-wrapper">
+    <!-- 课程筛选 -->
     <div class="course-filter">
       <span
         v-for="(item,index) in filter"
@@ -13,8 +14,9 @@
       </div>
     </div>
 
+    <!-- 课程列表 -->
     <ul class="course-list" v-if="computeList.length">
-      <li class="list-item" v-for="(item,index) in computeList" :key="index">
+      <li class="list-item" v-for="(item,index) in computeList" :key="index" @click="handleCourseClick(item)">
         <div class="img-box">
           <img :src="item.img" alt="">
           <div class="tags">
@@ -64,6 +66,11 @@ export default {
       let list = this.list.slice()
       list[index].isLike = !item.isLike
       this.$emit('update:list', list)
+    },
+    // 课程点击事件
+    handleCourseClick () {
+      let random = new Date().getTime()
+      this.$router.push({ path: `/course/${random}` })
     }
   },
   computed: {

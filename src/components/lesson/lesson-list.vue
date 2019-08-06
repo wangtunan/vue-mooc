@@ -1,5 +1,6 @@
 <template>
   <div class="lesson-list-wrapper ml-center">
+    <!-- 筛选类表 -->
     <div class="list-filter">
       <ul>
         <li
@@ -18,12 +19,14 @@
         </span>
       </div>
     </div>
+
+    <!-- 课程列表 -->
     <ul class="lesson-list">
-      <li class="list-item" v-for="(item, index) in computeList" :key="index">
+      <li class="list-item" v-for="(item, index) in computeList" :key="index" @click="handleLessonClick(item)">
         <div class="img-box">
           <img :src="item.img" alt="">
           <span class="type" v-if="item.type">{{item.type}}</span>
-          <span class="rate" v-if="item.rate">{{item.rate}}</span>
+          <span class="rate" v-if="item.rate">{{item.rate}}%</span>
           <div class="lesson-mask">
             <div class="teacher-info" v-if="item.teacher">
               <img :src="item.teacher.avatar" alt="">
@@ -94,6 +97,11 @@ export default {
     // 展示已收藏的课程
     handleShowLikeClick () {
       this.isShowLike = true
+    },
+    // 课程点击事件
+    handleLessonClick () {
+      let random = new Date().getTime()
+      this.$router.push(`/lesson/${random}`)
     }
   },
   computed: {
