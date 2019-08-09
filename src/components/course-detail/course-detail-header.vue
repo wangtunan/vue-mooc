@@ -11,19 +11,19 @@
           <span class="iconfont">&#xe6a0;</span>
           <span class="iconfont">&#xe699;</span>
         </p>
-        <h2 class="title">Vue2.5入门</h2>
+        <h2 class="title">{{base.title}}</h2>
         <div class="information">
           <div class="teacher">
-            <img src="https://img1.mukewang.com/5abe468b0001664107390741-80-80.jpg" class="avatar" alt="">
+            <img  :src="base.teacher.avatar" class="avatar" alt="">
             <div class="teacher-introduce">
-              <p class="name">DellLee</p>
-              <p class="job">Web前端工程师</p>
+              <p class="name">{{base.teacher.name}}</p>
+              <p class="job">{{base.teacher.job}}</p>
             </div>
             <dl>
-              <dd>难度：中级</dd>
-              <dd>时长：2小时23分钟</dd>
-              <dd>学习人数：93246</dd>
-              <dd>综合评分：96.3</dd>
+              <dd>难度：{{base.rank}}</dd>
+              <dd>时长：{{base.duration}}</dd>
+              <dd>学习人数：{{base.number}}</dd>
+              <dd>综合评分：{{base.score}}</dd>
             </dl>
           </div>
         </div>
@@ -31,6 +31,19 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    base: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
   .course-detail-header
     height: 200px;

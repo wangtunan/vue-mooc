@@ -1,0 +1,88 @@
+<template>
+  <div class="chapter">
+    <div class="chapter-introduce">{{list.introduce}}</div>
+    <div class="chapter-item" v-for="(chapter,index) in list.data" :key="index">
+      <h2 class="chapter-title">{{chapter.title}}</h2>
+      <p class="chapter-desc">{{chapter.desc}}</p>
+      <ul>
+        <li class="term-item" v-for="(term,index) in chapter.term" :key="index">
+          <p>
+            <span class="iconfont play">&#xe615;</span>
+            <span>{{term.title}}({{term.duration}})</span>
+            <span class="right">
+              <i class="iconfont complete" v-if="term.rate == 100">&#xe60f;</i>
+              <i class="iconfont doning" v-else-if="term.rate > 0 && term.rate < 100">&#xe601;</i>
+              <i class="iconfont ready" v-else>&#xe6e8;</i>
+            </span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    list: {
+      type: [Object],
+      default () {
+        return {}
+      }
+    }
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+  .chapter
+    & > div
+      margin-bottom: 8px;
+      padding: 24px 32px 32px;
+      background-color: #fff;
+      box-shadow: 0 8px 16px rgba(7,17,27,0.1);
+      border-radius: 12px;
+      color: #1c1f21;
+      font-size: 14px;
+      &.chapter-introduce
+        line-height: 28px;
+      &.chapter-item
+        .chapter-title
+          font-size: 16px;
+          line-height: 24px;
+          font-weight: 700;
+        .chapter-desc
+          margin-top: 2px;
+          margin-bottom: 16px;
+          font-size: 12px;
+          color: #545c63;
+        .term-item
+          width: 100%;
+          padding-left: 12px;
+          line-height: 48px;
+          cursor: pointer;
+          & > p
+            display: flex;
+            align-items: center;
+            & > span
+              &:nth-child(2)
+                flex: 1;
+          &:hover
+            background-color: rgba(242,13,13,.05);
+            border-radius: 4px;
+            color: #f20d0d;
+            .play
+              color: #f20d0d;
+            .right
+              & > i
+                color: #f20d0d!important;
+          .play
+            margin-right: 8px;
+            font-size: 24px;
+            color: #9199a1;
+          .right
+            margin-right:15px;
+            font-size: 16px;
+            color: #d9dde1;
+            .complete, .doning
+              color: #00b43c;
+</style>

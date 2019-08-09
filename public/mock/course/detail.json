@@ -1,0 +1,122 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": {
+    "base": {
+      "title": "Vue2.5入门",
+      "rank": "中级",
+      "duration": "2小时13分钟",
+      "number": 93372,
+      "score": 96.2,
+      "teacher": {
+        "avatar": "https://img4.mukewang.com/5abe468b0001664107390741-80-80.jpg",
+        "name": "DellLee",
+        "job": "Web前端工程师"
+      }
+    },
+    "chapter": {
+      "introduce": "简介：对于很多刚接触Vue的同学，最难做到的就是编程思路的切换，这门课程，我们将通过形象的例子给大家讲解Vue的基础语法及编程思路，带大家快速的上手Vue的基础开发，这门课也包含了关于组件话和vue-cli等内容的基础讲解。",
+      "data": [
+        {
+          "title": "第1章 课程介绍",
+          "desc": "对课程讲解内容做完整陈述，帮助大家理清学习思路。",
+          "term": [
+            {
+              "title": "1-1 课程介绍",
+              "duration": "02:25",
+              "rate": 100
+            }
+          ]
+        },
+        {
+          "title": "第2章 Vue基础语法",
+          "desc": "本章节通过浅显易懂的实例来给大家讲解Vue2.0的基本语法，包含计算属性，侦听器，基础模版指令等。",
+          "term": [
+            {
+              "title": "2-1 创建第一个Vue实例",
+              "duration": "09:18",
+              "rate": 100
+            },
+            {
+              "title": "2-2 挂载点，模版与实例",
+              "duration": "04:24",
+              "rate": 100
+            },
+            {
+              "title": "2-3 Vue实例中的数据,事件和方法",
+              "duration": "12:26",
+              "rate": 100
+            },
+            {
+              "title": "2-4 Vue中的属性绑定和双向数据绑定",
+              "duration": "08:38",
+              "rate": 100
+            },
+            {
+              "title": "2-5 Vue中的计算属性和侦听器",
+              "duration": "09:00",
+              "rate": 100
+            },
+            {
+              "title": "2-6 v-if, v-show与v-for指令",
+              "duration": "09:21",
+              "rate": 100
+            }
+          ]
+        },
+        {
+          "title": "第3章 Vue中的组件",
+          "desc": "本章节讲解Vue中组件的概念和使用，结合对组件的完整理解，我们还将做一个TodoList功能模块。",
+          "term": [
+            {
+              "title": "3-1 todolist功能开发",
+              "duration": "06:50",
+              "rate": 100
+            },
+            {
+              "title": "3-2 todolist组件拆分",
+              "duration": "11:09",
+              "rate": 100
+            },
+            {
+              "title": "3-3 组件与实例的关系",
+              "duration": "05:03",
+              "rate": 100
+            },
+            {
+              "title": "3-4 实现todolist的删除功能",
+              "duration": "11:31",
+              "rate": 50
+            }
+          ]
+        },
+        {
+          "title": "第4章 Vue-cli的使用",
+          "desc": "本章节我们讲给大家介绍如何使用Vue-cli脚手架工具构建项目，并讲解单文件组件和局部全局样式的知识。",
+          "term": [
+            {
+              "title": "4-1 vue-cli的简介与使用",
+              "duration": "16:39",
+              "rate": 0
+            },
+            {
+              "title": "4-2 使用vue-cli开发TodoList",
+              "duration": "17:04",
+              "rate": 0
+            },
+            {
+              "title": "4-3 全局样式与局部样式",
+              "duration": "04:18",
+              "rate": 0
+            },
+            {
+              "title": "4-4 课程总结",
+              "duration": "04:04",
+              "rate": 0
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
