@@ -117,6 +117,87 @@
           ]
         }
       ]
-    }
+    },
+    "recommend": {
+      "title": "推荐课程",
+      "data": [
+        {
+          "url": "https://img2.mukewang.com/szimg/5becd5ad0001b89306000338-360-202.jpg",
+          "title": "Vue.js2.5+cube-ui重构饿了么App（经典再升级）",
+          "price": "198.00",
+          "type": "实战",
+          "rank": "中级",
+          "number": "8463"
+        },
+        {
+          "url": "https://img2.mukewang.com/szimg/5c0493ce000126b106000338-360-202.jpg",
+          "title": "微信小程序入门与实战 常用组件API开发技巧项目实战",
+          "price": "149.00",
+          "type": "实战",
+          "rank": "初级",
+          "number": "18300"
+        },
+        {
+          "url": "https://img4.mukewang.com/szimg/58f57d200001461105400300-360-202.jpg",
+          "title": "从0开始 独立完成企业级Java电商网站服务端开发(长期维护)",
+          "price": "348.00",
+          "type": "实战",
+          "rank": "中级",
+          "number": "7697"
+        },
+        {
+          "url": "https://img4.mukewang.com/szimg/5c60ed0008c8ddcc06000338-360-202.jpg",
+          "title": "2019版 微服务时代Spring Boot企业微信点餐系统",
+          "price": "348.00",
+          "type": "实战",
+          "rank": "中级",
+          "number": "4495"
+        },
+        {
+          "url": "https://img3.mukewang.com/szimg/5ac2dfe100014a9005400300-360-202.jpg",
+          "title": "Vue2.5开发去哪儿网App 从零基础入门到实战项目",
+          "price": "266.00",
+          "type": "实战",
+          "rank": "中级",
+          "number": "6308"
+        }
+      ]
+    },
+    "related": {
+      "title": "相关课程",
+      "data": [
+        {
+          "url": "https://img4.mukewang.com/5b7bfaa20001ec6006000338-240-135.jpg",
+          "title": "快速入门Web阅读器开发",
+          "rank": "中级",
+          "number": "8463"
+        },
+        {
+          "url": "https://img3.mukewang.com/5d3fe66408c059fd06000338-240-135.jpg",
+          "title": "vuex基础入门",
+          "rank": "初级",
+          "number": "18300"
+        },
+        {
+          "url": "https://img3.mukewang.com/szimg/58f57d200001461105400300-360-202.jpg",
+          "title": "从0开始 独立完成企业级Java电商网站服务端开发(长期维护)",
+          "rank": "中级",
+          "number": "7697"
+        },
+        {
+          "url": "https://www.imooc.com/courseimg/s/cover015_s.jpg",
+          "title": "【告白神器】N种语言实现4版本抖音告白程序",
+          "rank": "中级",
+          "number": "4495"
+        },
+        {
+          "url": "https://img2.mukewang.com/5c21e60d0822d58e06000338-240-135.jpg",
+          "title": "3小时速成 Vue2.x 核心技术",
+          "rank": "中级",
+          "number": "6308"
+        }
+      ]
+    },
+    "tags": ["职场必杀技清单", "Vue.js项目实例", "React Native开发跨平台", "最实用的前端开发框架教程", "React.js高级实战"]
   }
 }

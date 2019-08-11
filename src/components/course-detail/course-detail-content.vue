@@ -21,11 +21,19 @@
       <div class="information-left">
         <component :is="componentName" :list="content"></component>
       </div>
-      <div class="information-right"></div>
+      <div class="information-right">
+        <detail-tips></detail-tips>
+        <recommend :list="recommend.data" :title="recommend.title"></recommend>
+        <detail-tags :list="tags" v-if="tags.length"></detail-tags>
+        <recommend :list="related.data" :title="related.title"></recommend>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import DetailTips from './course-detail-tips.vue'
+import Recommend from 'base/recommend/recommend.vue'
+import DetailTags from './course-detail-tags.vue'
 export default {
   props: {
     data: {
@@ -58,9 +66,24 @@ export default {
     content () {
       const key = this.navList[this.currentNavIndex].key
       return this.data[key] || {}
+    },
+    // 推荐课程
+    recommend () {
+      return this.data.recommend || {}
+    },
+    // 相关课程
+    related () {
+      return this.data.related || {}
+    },
+    // 专题标签
+    tags () {
+      return this.data.tags || []
     }
   },
   components: {
+    DetailTips,
+    Recommend,
+    DetailTags,
     chapter: () => import('base/chapter/chapter.vue')
   }
 }
@@ -110,4 +133,6 @@ export default {
         margin-left: 32px;
         flex: 0 0 320px;
         width: 320px;
+        & > div
+          margin-bottom: 36px;
 </style>
