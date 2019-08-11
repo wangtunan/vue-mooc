@@ -11,7 +11,10 @@
             <span>{{term.title}}({{term.duration}})</span>
             <span class="right">
               <i class="iconfont complete" v-if="term.rate == 100">&#xe60f;</i>
-              <i class="iconfont doning" v-else-if="term.rate > 0 && term.rate < 100">&#xe601;</i>
+              <span class="doning" v-else-if="term.rate > 0 && term.rate < 100">
+                最近学习
+                <i class="iconfont" >&#xe601;</i>
+              </span>
               <i class="iconfont ready" v-else>&#xe6e8;</i>
             </span>
           </p>
@@ -36,7 +39,7 @@ export default {
 <style lang="stylus" scoped>
   .chapter
     & > div
-      margin-bottom: 8px;
+      margin-bottom: 16px;
       padding: 24px 32px 32px;
       background-color: #fff;
       box-shadow: 0 8px 16px rgba(7,17,27,0.1);
@@ -85,4 +88,9 @@ export default {
             color: #d9dde1;
             .complete, .doning
               color: #00b43c;
+              font-size: 12px;
+            .doning
+              i
+                margin-left: 10px;
+                font-size: 12px;
 </style>

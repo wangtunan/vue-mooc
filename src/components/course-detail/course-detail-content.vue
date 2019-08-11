@@ -22,7 +22,7 @@
         <component :is="componentName" :list="content"></component>
       </div>
       <div class="information-right">
-        <detail-tips></detail-tips>
+        <detail-tips :lastest="lastest"></detail-tips>
         <recommend :list="recommend.data" :title="recommend.title"></recommend>
         <detail-tags :list="tags" v-if="tags.length"></detail-tags>
         <recommend :list="related.data" :title="related.title"></recommend>
@@ -53,10 +53,9 @@ export default {
     // 初始化导航数据
     this.navList = [
       { title: '课程章节', number: 0, componentName: 'chapter', key: "chapter" },
-      { title: '问答评论', number: 1155, componentName: '' },
+      { title: '问答', number: 1155, componentName: 'question-answer', key: 'answer' },
       { title: '同学笔记', number: 0, componentName: '' },
-      { title: '用户评价', number: 251, componentName: '' },
-      { title: 'WIKI', number: 0, componentName: '' }
+      { title: '用户评价', number: 251, componentName: '' }
     ]
   },
   computed: {
@@ -78,13 +77,18 @@ export default {
     // 专题标签
     tags () {
       return this.data.tags || []
+    },
+    // 学习情况
+    lastest () {
+      return this.data.lastest || {}
     }
   },
   components: {
     DetailTips,
     Recommend,
     DetailTags,
-    chapter: () => import('base/chapter/chapter.vue')
+    chapter: () => import('base/chapter/chapter.vue'),
+    QuestionAnswer: () => import('base/question-answer/question-answer.vue')
   }
 }
 </script>

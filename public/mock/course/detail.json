@@ -14,6 +14,11 @@
         "job": "Web前端工程师"
       }
     },
+    "lastest": {
+      "percent": 73,
+      "chapter": "3-4 实现todolist的删除功能",
+      "duration": 121
+    },
     "chapter": {
       "introduce": "简介：对于很多刚接触Vue的同学，最难做到的就是编程思路的切换，这门课程，我们将通过形象的例子给大家讲解Vue的基础语法及编程思路，带大家快速的上手Vue的基础开发，这门课也包含了关于组件话和vue-cli等内容的基础讲解。",
       "data": [
@@ -115,6 +120,100 @@
               "rate": 0
             }
           ]
+        }
+      ]
+    },
+    "answer": {
+      "total": 36,
+      "resolve": 26,
+      "data": [
+        {
+          "title": "jest-enzyme支持typescript吗，根据官网怎么配都不行。",
+          "avatar": "https://img.mukewang.com/user/577220cf00016fe902790279-100-100.jpg",
+          "answer": {
+            "number": 1,
+            "content": "这个我没实验过，我自己研究下再告诉你"
+          },
+          "view": 5,
+          "time": "1",
+          "chapter": "5-4 Enzyme 的配置及使用",
+          "status": {
+            "resolve": true,
+            "type": "讲师回答",
+            "name": "DellLee"
+          }
+        },
+        {
+          "title": "老师，能不能把前几节课的代码上传一下",
+          "avatar": "https://img.mukewang.com/user/545847c10001f40702200220-100-100.jpg",
+          "answer": {
+            "number": 1,
+            "content": "基础的代码我没有留，同学还是照着敲一下吧。我回头找一下，如果有我赶紧就传上去。"
+          },
+          "view": 11,
+          "time": "1",
+          "chapter": "2-3 使用 Jest 修改自动化测试样例",
+          "status": {
+            "resolve": true,
+            "type": "讲师回答",
+            "name": "DellLee"
+          }
+        },
+        {
+          "title": "这一节课有个小问题",
+          "avatar": "https://img.mukewang.com/user/5a01401500018d9903000300-100-100.jpg",
+          "answer": {
+            "number": 1,
+            "content": "同学你好，我知道有这个小问题，但是如果解决的话，课程内容太多了，这是实现问题，和自动化测试关系不大，所以如果你希望完美做这个功能，继续TDD补充测试和逻辑即可。"
+          },
+          "view": 8,
+          "time": "2",
+          "chapter": "4-12 UndoList 编辑功能实现 (2)",
+          "status": {
+            "resolve": true,
+            "type": "讲师回答",
+            "name": "DellLee"
+          }
+        },
+        {
+          "title": "jest coverage配置问题",
+          "avatar": "https://img.mukewang.com/user/545863080001255902200220-100-100.jpg",
+          "view": 6,
+          "time": "2",
+          "chapter": "4-4 使用 TDD 的方式开发 Header 组件（1）"
+        },
+        {
+          "title": "jQuery requires a window with a document",
+          "avatar": "https://img.mukewang.com/user/5405241d00010c6501000100-100-100.jpg",
+          "answer": {
+            "number": 1,
+            "content": "你这个是不是没有配置jest的环境，没有模拟window对象呀"
+          },
+          "view": 30,
+          "time": "3",
+          "chapter": "3-5 Jest  中对 DOM 节点操作的测试",
+          "status": {
+            "resolve": true,
+            "type": "同学回答",
+            "name": "前端战五渣"
+          }
+        },
+        {
+          "title": "老师，做UI测试用哪个库比较好，主要就是测试一下是否精确的还原UI给的设计稿",
+          "avatar": "https://img.mukewang.com/user/57613b890001cba501000100-100-100.jpg",
+          "answer": {
+            "number": 1,
+            "content": "这个你需要用E2E测试，这门课程不讲这个东西"
+          },
+          "view": 12,
+          "time": "5",
+          "chapter": "2-5 Jest 中的匹配器",
+          "isMe": true,
+          "status": {
+            "resolve": true,
+            "type": "讲师回答",
+            "name": "DellLee"
+          }
         }
       ]
     },

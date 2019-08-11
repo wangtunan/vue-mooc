@@ -1,6 +1,17 @@
 <template>
   <div class="course-detail-tips">
-    <div class="tips-btn">开始学习</div>
+    <!-- 学习情况 -->
+    <div class="learn-info" v-if="lastest && lastest.percent > 0">
+      <p>
+        <span class="percent">已学习{{lastest.percent}}%</span>
+        <span class="duration">学习耗时{{lastest.duration}}分钟</span>
+      </p>
+      <my-progress :percent="lastest.percent"></my-progress>
+      <p class="latest">上次学习至：{{lastest.chapter}}</p>
+    </div>
+    <div class="tips-btn">{{lastest.percent > 0 ? '继续学习' : '开始学习'}}</div>
+
+    <!-- 课程须知 -->
     <div class="tips-content">
       <dl>
         <dt>课程须知</dt>
@@ -20,12 +31,43 @@
     </div>
   </div>
 </template>
+<script>
+import MyProgress from 'base/progress/progress.vue'
+export default {
+  props: {
+    lastest: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  },
+  components: {
+    MyProgress
+  }
+}
+</script>
 <style lang="stylus" scoped>
   .course-detail-tips
     padding: 24px 32px 32px;
     background-color: #fff;
     box-shadow: 0 8px 16px 0 rgba(7,17,27,.1);
     border-radius: 12px;
+    .learn-info
+      padding-bottom: 12px;
+      font-size: 12px;
+      color: #545c63;
+      & > p
+        margin-bottom: 9px;
+        line-height: 24px;
+        &.latest
+          margin-top: 24px;
+          line-height: 1;
+        .percent
+          font-size: 14px;
+          font-weight: 700;
+        .duration
+          float: right;
     .tips-btn
       padding: 11px 32px;
       border-radius: 24px;
