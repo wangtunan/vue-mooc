@@ -4,7 +4,7 @@
   "data": {
     "practice": {
       "title": "实／战／推／荐",
-      "leftIcon": "center 0",
+      "leftIcon": "center 0px",
       "rightIcon": "center -36px",
       "data": [
         {
@@ -68,7 +68,7 @@
     },
     "new": {
       "title": "新／上／好／课",
-      "leftIcon": "center -72",
+      "leftIcon": "center -72px",
       "rightIcon": "center -108px",
       "data": [
         {
