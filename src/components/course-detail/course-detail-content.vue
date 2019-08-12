@@ -55,7 +55,7 @@ export default {
       { title: '课程章节', number: 0, componentName: 'chapter', key: "chapter" },
       { title: '问答', number: 1155, componentName: 'question-answer', key: 'answer' },
       { title: '同学笔记', number: 0, componentName: '' },
-      { title: '用户评价', number: 251, componentName: '' }
+      { title: '用户评价', number: 251, componentName: 'comment', key: 'comment' }
     ]
   },
   computed: {
@@ -88,7 +88,8 @@ export default {
     Recommend,
     DetailTags,
     chapter: () => import('base/chapter/chapter.vue'),
-    QuestionAnswer: () => import('base/question-answer/question-answer.vue')
+    QuestionAnswer: () => import('base/question-answer/question-answer.vue'),
+    comment: () => import('base/comment/comment.vue')
   }
 }
 </script>
