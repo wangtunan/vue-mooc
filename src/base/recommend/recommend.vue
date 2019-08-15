@@ -1,6 +1,6 @@
 <template>
   <div class="recommend">
-    <h3 class="recommend-title">{{title}}</h3>
+    <h3 class="recommend-title" v-if="title">{{title}}</h3>
     <ul>
       <li v-for="(item,index) in list" :key="index" class="recommend-item">
         <div class="img-box">

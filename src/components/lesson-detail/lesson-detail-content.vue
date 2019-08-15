@@ -21,11 +21,18 @@
       <div class="info-left">
         <component :is="componentName" :list="componentList"></component>
       </div>
-      <div class="info-right"></div>
+      <div class="info-right">
+        <detail-score :score="data.base"></detail-score>
+        <detail-teacher :teacher="data.teacher"></detail-teacher>
+        <recommend :list="data.recommend.data" :title="data.recommend.title"></recommend>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import DetailScore from './lesson-detal-score.vue'
+import DetailTeacher from './lesson-detail-teacher.vue'
+import Recommend from 'base/recommend/recommend.vue'
 export default {
   props: {
     data: {
@@ -56,6 +63,9 @@ export default {
     }
   },
   components: {
+    DetailScore,
+    DetailTeacher,
+    Recommend,
     chapter: () => import('base/chapter/chapter.vue')
   }
 }
