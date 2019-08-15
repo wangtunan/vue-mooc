@@ -8,3 +8,7 @@ export function getLessonNav () {
 export function getLessonList (params) {
   return axios.post('/lesson/list', params)
 }
+// 实战课程详情
+export function getLessonDetail (id) {
+  return axios.get(`/lesson/detail/${id}`)
+}

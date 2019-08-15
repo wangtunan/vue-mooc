@@ -1,0 +1,432 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": {
+    "base": {
+      "title": "前端要学的测试课 从Jest入门到 TDD/BDD双实战",
+      "rank": "中级",
+      "duration": "18小时0分钟",
+      "number": 207,
+      "praise": 100,
+      "isComplete": true
+    },
+    "learn": {
+      "rate": 52,
+      "exp": 330,
+      "duration": "6小时2分钟",
+      "lastest": "上次学至：5-1 什么是TDD？（同4-1）"
+    },
+    "teacher": {
+      "avatar": "https://img1.sycdn.imooc.com/user/5abe468b0001664107390741-100-100.jpg",
+      "name": "DellLee",
+      "job": "Web前端工程师",
+      "introduce": "BAT资深前端工程师，负责数据平台技术研发。曾任去哪儿网高级前端工程师，主导去哪儿网内部前端监控系统设计，负责去哪儿网门票用户端的前端设计开发。曾任国内知名培训机构高级前端讲师，负责React，Angular，Vue，Hybrid，RN的课程讲授，具备丰富前端授课经验。对优雅编程及工程化有深度思考及见解，教会你写代码，同时帮助你把代码写的更漂亮！"
+    },
+    "recommend": {
+      "title": "推荐课程",
+      "data": [
+        {
+          "url": "https://img2.mukewang.com/szimg/5becd5ad0001b89306000338-360-202.jpg",
+          "title": "Vue.js2.5+cube-ui重构饿了么App（经典再升级）",
+          "price": "198.00",
+          "type": "实战",
+          "rank": "中级",
+          "number": "8463"
+        },
+        {
+          "url": "https://img2.mukewang.com/szimg/5c0493ce000126b106000338-360-202.jpg",
+          "title": "微信小程序入门与实战 常用组件API开发技巧项目实战",
+          "price": "149.00",
+          "type": "实战",
+          "rank": "初级",
+          "number": "18300"
+        },
+        {
+          "url": "https://img4.mukewang.com/szimg/58f57d200001461105400300-360-202.jpg",
+          "title": "从0开始 独立完成企业级Java电商网站服务端开发(长期维护)",
+          "price": "348.00",
+          "type": "实战",
+          "rank": "中级",
+          "number": "7697"
+        },
+        {
+          "url": "https://img4.mukewang.com/szimg/5c60ed0008c8ddcc06000338-360-202.jpg",
+          "title": "2019版 微服务时代Spring Boot企业微信点餐系统",
+          "price": "348.00",
+          "type": "实战",
+          "rank": "中级",
+          "number": "4495"
+        },
+        {
+          "url": "https://img3.mukewang.com/szimg/5ac2dfe100014a9005400300-360-202.jpg",
+          "title": "Vue2.5开发去哪儿网App 从零基础入门到实战项目",
+          "price": "266.00",
+          "type": "实战",
+          "rank": "中级",
+          "number": "6308"
+        }
+      ]
+    },
+    "chapter": {
+      "introduce": "",
+      "data": [
+        {
+          "title": "第1章 课程导学",
+          "term": [
+            {
+              "title": "1-1 前端要学的测试课",
+              "duration": "10:14",
+              "rate": 100
+            }
+          ]
+        },
+        {
+          "title": "第2章 Jest 前端自动化测试框架基础入门",
+          "term": [
+            {
+              "title": "2-1 自动化测试背景及原理",
+              "duration": "22:35",
+              "rate": 100
+            },
+            {
+              "title": "2-2 前端自动化测试框架 Jest",
+              "duration": "06:26",
+              "rate": 100
+            },
+            {
+              "title": "2-3 使用 Jest 修改自动化测试样例",
+              "duration": "14:44",
+              "rate": 100
+            },
+            {
+              "title": "2-4 Jest 的简单配置",
+              "duration": "19:29",
+              "rate": 100
+            },
+            {
+              "title": "2-5 Jest 中的匹配器",
+              "duration": "26:14",
+              "rate": 100
+            },
+            {
+              "title": "2-6 Jest 命令行工具的使用",
+              "duration": "27:38",
+              "rate": 100
+            },
+            {
+              "title": "2-7 异步代码的测试方法（1）",
+              "duration": "17:56",
+              "rate": 100
+            },
+            {
+              "title": "2-8 异步代码的测试方法（2）",
+              "duration": "15:26",
+              "rate": 100
+            },
+            {
+              "title": "2-9 Jest 中的钩子函数",
+              "duration": "21:05",
+              "rate": 100
+            },
+            {
+              "title": "2-10 钩子函数的作用域 ",
+              "duration": "09:47",
+              "rate": 100
+            },
+            {
+              "title": "2-11 Jest 中的 Mock（1）",
+              "duration": "19:02",
+              "rate": 100
+            },
+            {
+              "title": "2-12 Jest 中的 Mock（2）",
+              "duration": "14:30",
+              "rate": 100
+            },
+            {
+              "title": "2-13 章节小结",
+              "duration": "06:13",
+              "rate": 100
+            }
+          ]
+        },
+        {
+          "title": "第3章 Jest难点进阶",
+          "term": [
+            {
+              "title": "3-1 snapshot 快照测试",
+              "duration": "24:18",
+              "rate": 100
+            },
+            {
+              "title": "3-2 mock 深入学习",
+              "duration": "17:55",
+              "rate": 100
+            },
+            {
+              "title": "3-3 mock timers",
+              "duration": "15:24",
+              "rate": 100
+            },
+            {
+              "title": "3-4 ES6 中类的测试",
+              "duration": "24:44",
+              "rate": 100
+            },
+            {
+              "title": "3-5 Jest  中对 DOM 节点操作的测试",
+              "duration": "08:00",
+              "rate": 100
+            }
+          ]
+        },
+        {
+          "title": "第4章 Vue 中的 TDD 与 单元测试",
+          "term": [
+            {
+              "title": "4-1 什么是TDD？",
+              "duration": "09:42",
+              "rate": 100
+            },
+            {
+              "title": "4-2 Vue 环境中配置 Jest",
+              "duration": "17:38",
+              "rate": 100
+            },
+            {
+              "title": "4-3 vue-test-utils 的配置及使用",
+              "duration": "25:35",
+              "rate": 100
+            },
+            {
+              "title": "4-4 使用 TDD 的方式开发 Header 组件（1）",
+              "duration": "30:48",
+              "rate": 100
+            },
+            {
+              "title": "4-5 使用 TDD 的方式开发 Header 组件 (2)",
+              "duration": "10:35",
+              "rate": 100
+            },
+            {
+              "title": "4-6 Header 组件样式新增及快照测试",
+              "duration": "09:35",
+              "rate": 100
+            },
+
+            {
+              "title": "4-7 通用代码提取封装",
+              "duration": "05:56",
+              "rate": 100
+            },
+            {
+              "title": "4-8 UndoList 的实现（1）",
+              "duration": "14:51",
+              "rate": 100
+            },
+            {
+              "title": "4-9 UndoList 的实现（2）",
+              "duration": "13:48",
+              "rate": 100
+            },
+            {
+              "title": "4-10 UndoList 样式修饰及测试代码优化",
+              "duration": "16:41",
+              "rate": 100
+            },
+            {
+              "title": "4-11 UndoList 编辑功能实现(1)",
+              "duration": "12:56",
+              "rate": 100
+            },
+            {
+              "title": "4-12 UndoList 编辑功能实现 (2)",
+              "duration": "31:01",
+              "rate": 100
+            },
+            {
+              "title": "4-13 CodeCoverage 代码覆盖率",
+              "duration": "13:16",
+              "rate": 100
+            },
+            {
+              "title": "4-14 章节小结 ",
+              "duration": "05:56",
+              "rate": 100
+            }
+          ]
+        },
+        {
+          "title": "第5章 React中的 TDD 与 单元测试",
+          "term": [
+            {
+              "title": "5-1 什么是TDD？（同4-1）",
+              "duration": "09:42",
+              "rate": 20
+            },
+            {
+              "title": "5-2 React 环境中配置 Jest（1）",
+              "duration": "16:03",
+              "rate": 0
+            },
+            {
+              "title": "5-3 React 环境中配置 Jest（2）",
+              "duration": "13:33",
+              "rate": 0
+            },
+            {
+              "title": "5-4 Enzyme 的配置及使用",
+              "duration": "32:00",
+              "rate": 0
+            },
+            {
+              "title": "5-5 使用 TDD 的方式开发 Header 组件 (1)",
+              "duration": "19:52",
+              "rate": 0
+            },
+            {
+              "title": "5-6 使用 TDD 的方式开发 Header 组件 (2)",
+              "duration": "26:01",
+              "rate": 0
+            },
+            {
+              "title": "5-7 Header 组件样式新增及快照测试",
+              "duration": "09:42",
+              "rate": 0
+            },
+            {
+              "title": "5-8 通用代码提取封装",
+              "duration": "09:07",
+              "rate": 0
+            },
+            {
+              "title": "5-9 UndoList 的实现（1）",
+              "duration": "12:46",
+              "rate": 0
+            },
+            {
+              "title": "5-10 UndoList 的实现（2）",
+              "duration": "16:04",
+              "rate": 0
+            },
+            {
+              "title": "5-11 UndoList 样式修饰及测试代码优化",
+              "duration": "19:39",
+              "rate": 0
+            },
+            {
+              "title": "5-12 UndoList 编辑功能实现 （1）",
+              "duration": "17:08",
+              "rate": 0
+            },
+            {
+              "title": "5-13 UndoList 编辑功能实现 （2）",
+              "duration": "14:42",
+              "rate": 0
+            },
+            {
+              "title": "5-14 UndoList 编辑功能实现（3）",
+              "duration": "16:26",
+              "rate": 0
+            },
+            {
+              "title": "5-15 CodeCoverage 代码覆盖率",
+              "duration": "08:49",
+              "rate": 0
+            },
+            {
+              "title": "5-16 章节小结",
+              "duration": "05:43",
+              "rate": 0
+            }
+          ]
+        },
+        {
+          "title": "第6章 Vue中的 BDD 与 集成测试",
+          "term": [
+            {
+              "title": "6-1 BDD 的概念以及与 TDD 的对比",
+              "duration": "15:53",
+              "rate": 0
+            },
+            {
+              "title": "6-2 使用 BDD 和集成测试进行 Vuex 项目的测试（1）",
+              "duration": "12:41",
+              "rate": 0
+            },
+            {
+              "title": "6-3 使用 BDD 和集成测试进行 Vuex 项目的测试（2）",
+              "duration": "13:24",
+              "rate": 0
+            },
+            {
+              "title": "6-4 异步测试(1)",
+              "duration": "29:05",
+              "rate": 0
+            },
+            {
+              "title": "6-5 异步测试(2)",
+              "duration": "08:26",
+              "rate": 0
+            },
+            {
+              "title": "6-6 路由页面的代码组织",
+              "duration": "12:02",
+              "rate": 0
+            }
+          ]
+        },
+        {
+          "title": "第7章 React中的 BDD 与 集成测试",
+          "term": [
+            {
+              "title": "7-1 BDD 的概念以及与 TDD 的对比",
+              "duration": "16:36",
+              "rate": 0
+            },
+            {
+              "title": "7-2 使用 BDD 和集成测试进行 Redux 项目的测试（1）",
+              "duration": "17:16",
+              "rate": 0
+            },
+            {
+              "title": "7-3 使用 BDD 和集成测试进行 Redux 项目的测试（2）",
+              "duration": "18:03",
+              "rate": 0
+            },
+            {
+              "title": "7-4 异步测试(1)",
+              "duration": "17:00",
+              "rate": 0
+            },
+            {
+              "title": "7-5 异步测试(2)",
+              "duration": "19:49",
+              "rate": 0
+            },
+            {
+              "title": "7-6 异步测试(3)",
+              "duration": "07:35",
+              "rate": 0
+            },
+            {
+              "title": "7-7 路由页面的代码组织",
+              "duration": "13:07",
+              "rate": 0
+            }
+          ]
+        },
+        {
+          "title": "第8章 前端自动化测试的思考总结",
+          "term": [
+            {
+              "title": "8-1 课程总结 ",
+              "duration": "13:44",
+              "rate": 0
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

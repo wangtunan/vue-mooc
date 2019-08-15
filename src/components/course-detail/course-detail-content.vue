@@ -54,7 +54,7 @@ export default {
     this.navList = [
       { title: '课程章节', number: 0, componentName: 'chapter', key: "chapter" },
       { title: '问答', number: 1155, componentName: 'question-answer', key: 'answer' },
-      { title: '同学笔记', number: 0, componentName: '' },
+      // { title: '同学笔记', number: 0, componentName: '' },
       { title: '用户评价', number: 251, componentName: 'comment', key: 'comment' }
     ]
   },

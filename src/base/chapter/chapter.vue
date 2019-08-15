@@ -1,6 +1,6 @@
 <template>
   <div class="chapter">
-    <div class="chapter-introduce">{{list.introduce}}</div>
+    <div class="chapter-introduce" v-if="list.introduce">{{list.introduce}}</div>
     <div class="chapter-item" v-for="(chapter,index) in list.data" :key="index">
       <h2 class="chapter-title">{{chapter.title}}</h2>
       <p class="chapter-desc">{{chapter.desc}}</p>
@@ -21,6 +21,10 @@
         </li>
       </ul>
     </div>
+    <p class="complete-info">
+      <i class="iconfont">&#xe786;</i>
+      本课程已完结
+    </p>
   </div>
 </template>
 <script>
@@ -93,4 +97,15 @@ export default {
               i
                 margin-left: 10px;
                 font-size: 12px;
+    .complete-info
+      margin-bottom: 16px;
+      padding: 12px 0 12px 32px;
+      font-size: 16px;
+      color: #93999f;
+      line-height: 24px;
+      .iconfont
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 12px;
+        font-size: 24px;
 </style>
