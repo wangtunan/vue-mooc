@@ -21,7 +21,7 @@
       <div class="info-left">
         <component :is="componentName" :list="componentList"></component>
       </div>
-      <div class="info-right">
+      <div class="info-right" v-if="showSideBar">
         <detail-score :score="data.base"></detail-score>
         <detail-teacher :teacher="data.teacher"></detail-teacher>
         <recommend :list="data.recommend.data" :title="data.recommend.title"></recommend>
@@ -48,9 +48,9 @@ export default {
   created () {
     // 初始化导航数据
     this.navList = [
-      { title: '课程', code: 0, componentName: 'chapter', key: 'chapter' },
-      { title: '问答', code: 1, componentName: '', key: '' },
-      { title: '同学', code: 2, componentName: '', key: '' }
+      { title: '课程', code: 0, componentName: 'chapter', key: 'chapter', show: true },
+      { title: '问答', code: 1, componentName: 'comment', key: 'comment', show: true },
+      { title: '同学', code: 2, componentName: 'classmate', key: 'classmate', show: false }
     ]
   },
   computed: {
@@ -60,18 +60,24 @@ export default {
     componentList () {
       let key = this.navList[this.currentNavIndex].key
       return this.data[key]
+    },
+    showSideBar () {
+      return this.navList[this.currentNavIndex].show
     }
   },
   components: {
     DetailScore,
     DetailTeacher,
     Recommend,
-    chapter: () => import('base/chapter/chapter.vue')
+    chapter: () => import('base/chapter/chapter.vue'),
+    comment: () => import('base/comment/comment.vue'),
+    classmate: () => import('./lesson-detail-classmate.vue')
   }
 }
 </script>
 <style lang="stylus" scoped>
   .lesson-detail-contnet
+    margin-bottom: 40px;
     .nav-list
       margin-top: -60px;
       .nav-item

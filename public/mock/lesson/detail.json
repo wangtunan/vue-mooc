@@ -67,6 +67,98 @@
         }
       ]
     },
+    "comment": {
+      "limit": 30,
+      "rate": 31,
+      "score": {
+        "total": 9.6,
+        "content": 9.8,
+        "difficult": 9.6,
+        "logic": 9.5
+      },
+      "data": [
+        {
+          "name": "网络侦探",
+          "avatar": "https://img.mukewang.com/5599e8e100010c2110800960-40-40.jpg",
+          "score": 10,
+          "time": "2019-08-01",
+          "comment": "就弱基础Vue入门来说真的是很不错的入门课程，html引入Vue的写法和Vue的工程化开发方式也有介绍，认真学完再去学官方文档会轻松不少。",
+          "like": 11
+        },
+        {
+          "name": "Cassie_MC",
+          "avatar": "https://img3.mukewang.com/58f85af900019f2102240224-40-40.jpg",
+          "score": 10,
+          "time": "2019-08-01",
+          "comment": "非常适合入门了，没有上来就搭环境，而是深入浅出的结合小demo，把Vue的基础知识结构快速搭建起来，让入学者没有负担，还能有所收获。",
+          "like": 22
+        },
+        {
+          "name": "凌晨晚餐",
+          "avatar": "https://img.mukewang.com/5a3f4e1c0001b4bf02500250-40-40.jpg",
+          "score": 10,
+          "time": "2019-08-01",
+          "comment": "之前只用过react，看这个课程，对vue有了初步的了解，挺好的",
+          "like": 33
+        },
+        {
+          "name": "慕丝3222080",
+          "avatar": "https://img1.mukewang.com/5458655200013d9802200220-40-40.jpg",
+          "score": 8,
+          "time": "2019-08-01",
+          "comment": "感谢老师，入门很有帮助！",
+          "like": 44
+        },
+        {
+          "name": "熬夜会牙痛_代码打多会掉头发",
+          "avatar": "https://img2.mukewang.com/545862fe00017c2602200220-40-40.jpg",
+          "score": 6,
+          "time": "2019-08-01",
+          "comment": "老师讲的很细，思路清晰，视频时长也不算长，学起来很轻松",
+          "like": 55
+        },
+        {
+          "name": "网络侦探",
+          "avatar": "https://img.mukewang.com/5599e8e100010c2110800960-40-40.jpg",
+          "score": 10,
+          "time": "2019-08-01",
+          "comment": "就弱基础Vue入门来说真的是很不错的入门课程，html引入Vue的写法和Vue的工程化开发方式也有介绍，认真学完再去学官方文档会轻松不少。",
+          "like": 11
+        },
+        {
+          "name": "Cassie_MC",
+          "avatar": "https://img3.mukewang.com/58f85af900019f2102240224-40-40.jpg",
+          "score": 10,
+          "time": "2019-08-01",
+          "comment": "非常适合入门了，没有上来就搭环境，而是深入浅出的结合小demo，把Vue的基础知识结构快速搭建起来，让入学者没有负担，还能有所收获。",
+          "like": 22
+        },
+        {
+          "name": "凌晨晚餐",
+          "avatar": "https://img.mukewang.com/5a3f4e1c0001b4bf02500250-40-40.jpg",
+          "score": 10,
+          "time": "2019-08-01",
+          "comment": "之前只用过react，看这个课程，对vue有了初步的了解，挺好的",
+          "like": 33
+        },
+        {
+          "name": "慕丝3222080",
+          "avatar": "https://img1.mukewang.com/5458655200013d9802200220-40-40.jpg",
+          "score": 8,
+          "time": "2019-08-01",
+          "comment": "感谢老师，入门很有帮助！",
+          "like": 44
+        },
+        {
+          "name": "熬夜会牙痛_代码打多会掉头发",
+          "avatar": "https://img2.mukewang.com/545862fe00017c2602200220-40-40.jpg",
+          "score": 6,
+          "time": "2019-08-01",
+          "comment": "老师讲的很细，思路清晰，视频时长也不算长，学起来很轻松",
+          "like": 55
+        }
+      ]
+    },
     "chapter": {
       "introduce": "",
       "data": [
@@ -427,6 +519,98 @@
           ]
         }
       ]
-    }
+    },
+    "classmate": [
+      { 
+        "type": "exp",
+        "avatar": "https://img.mukewang.com/user/53df9a800001b15201000100-100-100.jpg",
+        "name": "若强",
+        "value": "610经验"
+      },
+      { 
+        "type": "exp",
+        "avatar": "https://img.mukewang.com/user/545861e40001199702200220-100-100.jpg",
+        "name": "慕标3186756",
+        "value": "540经验"
+      },
+      { 
+        "type": "exp",
+        "avatar": "https://img.mukewang.com/user/54b26b910001f20401000100-100-100.jpg",
+        "name": "qq_勿忘巛心安_0",
+        "value": "540经验"
+      },
+      { 
+        "type": "exp",
+        "avatar": "https://img.mukewang.com/user/5458477300014deb02200220-100-100.jpg",
+        "name": "慕UI3321033",
+        "value": "460经验"
+      },
+      { 
+        "type": "exp",
+        "avatar": "https://img.mukewang.com/user/545866c40001561502200220-100-100.jpg",
+        "name": "南山大哥哥",
+        "value": "440经验"
+      },
+      { 
+        "type": "duration",
+        "avatar": "https://img.mukewang.com/user/53df9a800001b15201000100-100-100.jpg",
+        "name": "若强",
+        "value": "24小时20分"
+      },
+      { 
+        "type": "duration",
+        "avatar": "https://img.mukewang.com/user/545861e40001199702200220-100-100.jpg",
+        "name": "慕标3186756",
+        "value": "23小时27分"
+      },
+      { 
+        "type": "duration",
+        "avatar": "https://img.mukewang.com/user/54b26b910001f20401000100-100-100.jpg",
+        "name": "qq_勿忘巛心安_0",
+        "value": "21小时43分"
+      },
+      { 
+        "type": "duration",
+        "avatar": "https://img.mukewang.com/user/5458477300014deb02200220-100-100.jpg",
+        "name": "慕UI3321033",
+        "value": "19小时59分"
+      },
+      { 
+        "type": "duration",
+        "avatar": "https://img.mukewang.com/user/545866c40001561502200220-100-100.jpg",
+        "name": "南山大哥哥",
+        "value": "19小时47分"
+      },
+      { 
+        "type": "last",
+        "avatar": "https://img.mukewang.com/user/53df9a800001b15201000100-100-100.jpg",
+        "name": "若强",
+        "value": "9秒前"
+      },
+      { 
+        "type": "last",
+        "avatar": "https://img.mukewang.com/user/545861e40001199702200220-100-100.jpg",
+        "name": "慕标3186756",
+        "value": "13秒前"
+      },
+      { 
+        "type": "last",
+        "avatar": "https://img.mukewang.com/user/54b26b910001f20401000100-100-100.jpg",
+        "name": "qq_勿忘巛心安_0",
+        "value": "19秒前"
+      },
+      { 
+        "type": "last",
+        "avatar": "https://img.mukewang.com/user/5458477300014deb02200220-100-100.jpg",
+        "name": "慕UI3321033",
+        "value": "19秒前"
+      },
+      { 
+        "type": "last",
+        "avatar": "https://img.mukewang.com/user/545866c40001561502200220-100-100.jpg",
+        "name": "南山大哥哥",
+        "value": "23秒前"
+      }
+    ]
   }
 }
