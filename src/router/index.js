@@ -18,6 +18,8 @@ const CourseDetail = () => import('components/course-detail/index.vue')
 const LessonIndex = () => import('components/lesson/index.vue')
 // 实战课程详情
 const LessonDetail = () => import('components/lesson-detail/index.vue')
+// 消息中心
+const NoticeIndex = () => import('components/notice/notice.vue')
 const routes = [
   {
     path: '/',
@@ -65,6 +67,14 @@ const routes = [
     name: 'LessonDetail',
     component: LessonDetail
   },
+  {
+    path: '/notice',
+    name: 'NoticeIndex',
+    component:NoticeIndex,
+    meta: {
+      requireAuth: true
+    }
+  }
 ]
 const router = new Router({
   routes: routes,

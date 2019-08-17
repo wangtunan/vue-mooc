@@ -18,7 +18,7 @@
       </a>
     </li>
     <template v-if="userInfo && userInfo.avatar">
-      <li class="item bell">
+      <li class="item bell" @click="handleBellClick">
         <i class="iconfont">&#xe6eb;</i>
       </li>
       <li class="item userinfo" @mouseenter="showUserInfo = true" @mouseleave="showUserInfo = false">
@@ -103,6 +103,10 @@ export default {
     // 个人设置点击
     handleSettingClick () {
       this.$router.push('/user')
+    },
+    // 消息点击
+    handleBellClick () {
+      this.$router.push('/notice')
     },
     // vuex
     ...mapMutations('login', {
