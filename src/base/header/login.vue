@@ -11,7 +11,7 @@
         <span class="login-text">下载APP</span>
       </a>
     </li>
-    <li class="item cart">
+    <li class="item cart" @click="handleCartClick">
       <a href="javascript:;">
         <i class="iconfont">&#xe63b;</i>
         <span class="login-text">购物车</span>
@@ -107,6 +107,10 @@ export default {
     // 消息点击
     handleBellClick () {
       this.$router.push('/notice')
+    },
+    // 购物车点击
+    handleCartClick () {
+      this.$router.push('/cart')
     },
     // vuex
     ...mapMutations('login', {
