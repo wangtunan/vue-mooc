@@ -10,16 +10,18 @@ const Home = () => import('components/home/home.vue')
 const UserCenter = () => import('components/user/index.vue')
 // 订单中心路由
 const OrderIndex = () => import('components/order/index.vue')
-// 免费课程
+// 免费课程路由
 const CourseIndex = () => import('components/course/index.vue')
-// 免费课程详情
+// 免费课程详情路由
 const CourseDetail = () => import('components/course-detail/index.vue')
-// 实战课程
+// 实战课程路由
 const LessonIndex = () => import('components/lesson/index.vue')
-// 实战课程详情
+// 实战课程详情路由
 const LessonDetail = () => import('components/lesson-detail/index.vue')
-// 消息中心
+// 消息中心路由
 const NoticeIndex = () => import('components/notice/notice.vue')
+// 购物车路由
+const CartIndex = () => import('components/cart/cart.vue')
 const routes = [
   {
     path: '/',
@@ -71,6 +73,14 @@ const routes = [
     path: '/notice',
     name: 'NoticeIndex',
     component:NoticeIndex,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/cart',
+    name: 'CartIndex',
+    component:CartIndex,
     meta: {
       requireAuth: true
     }

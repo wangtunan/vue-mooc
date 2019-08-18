@@ -1,0 +1,41 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": [
+    {
+      "isCheck": true,
+      "img": "https://szimg.mukewang.com/5a123d7e00011fa705400300-160-90.jpg",
+      "name": "【实战课程】移动端App UI设计入门与实战",
+      "price": "199.00",
+      "package": []
+    },
+    {
+      "isCheck": true,
+      "img": "https://szimg.mukewang.com/5afb8aa900014cc705400300-160-90.jpg",
+      "name": "【实战课程】Spring Boot仿抖音短视频小程序开发 全栈式实战项目",
+      "price": "348.00",
+      "package": []
+    },
+    {
+      "isCheck": true,
+      "img": "https://szimg.mukewang.com/5c106a8f0001d0ea06000338-160-90.jpg",
+      "name": "【实战课程】新版React Native+Redux打造高质量上线App",
+      "price": "399.00",
+      "package": []
+    },
+    {
+      "isCheck": true,
+      "img": "https://szimg.mukewang.com/5c7e6835087ef3d806000338-160-90.jpg",
+      "name": "【实战课程】Flutter从入门到进阶 实战携程网App",
+      "price": "348.00",
+      "package": []
+    },
+    {
+      "isCheck": true,
+      "img": "https://szimg.mukewang.com/5c90dc020849c59a06000338-160-90.jpg",
+      "name": "【实战课程】玩转MongoDB4.0(最新版) 从入门到实践",
+      "price": "288.00",
+      "package": []
+    }
+  ]
+}
