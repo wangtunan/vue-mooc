@@ -11,10 +11,13 @@
         <span class="login-text">下载APP</span>
       </a>
     </li>
-    <li class="item cart" @click="handleCartClick">
+    <li class="item cart" @mouseenter="showMiniCart = true" @mouseleave="handleCarItemtMouseLeave">
       <a href="javascript:;">
         <i class="iconfont">&#xe63b;</i>
         <span class="login-text">购物车</span>
+        <div class="mini-chart-container" @mouseenter="handleCartMouseEnter" @mouseleave="showMiniCart = false">
+          <mini-cart  v-if="showMiniCart" @close="showMiniCart=false"></mini-cart>
+        </div>
       </a>
     </li>
     <template v-if="userInfo && userInfo.avatar">
@@ -77,10 +80,21 @@ import { mapMutations, mapGetters } from 'vuex'
 export default {
   data () {
     return {
+      showMiniCart: false,
       showUserInfo: false
     }
   },
   methods: {
+    // 购物车：项鼠标移出
+    handleCarItemtMouseLeave () {
+      this.timer = setTimeout(() => {
+        this.showMiniCart = false
+      }, 150)
+    },
+    // 购物车：鼠标移入
+    handleCartMouseEnter () {
+      clearTimeout(this.timer)
+    },
     // 登录点击
     handleLoginClick () {
       this.setShowLogin(true)
@@ -122,6 +136,12 @@ export default {
   computed: {
     // vuex
     ...mapGetters(['userInfo'])
+  },
+  components: {
+    MiniCart: () => import('components/cart/mini-cart.vue')
+  },
+  beforeDestroy () {
+    clearTimeout(this.timer)
   }
 }
 </script>
@@ -158,6 +178,7 @@ export default {
           padding: 0 12px;
           width: 60px;
       &.cart
+        position: relative;
         margin: 18px 0;
         padding: 0 18px;
         border: 1px solid #d9dde1;
@@ -169,6 +190,11 @@ export default {
         .iconfont
           margin-right: 5px;
           font-weight: 700;
+        .mini-chart-container
+          z-index: 999;
+          position: absolute;
+          right: 0;
+          top: 53px;
       &.sign
         margin-left: 10px;
         .sign-btn

@@ -30,9 +30,9 @@
           <dl>
             <dt>
               <span class="total">商品总金额：</span>
-              <span>¥ 1582.00</span>
+              <span>¥ {{getTotal}}</span>
               <span class="real">应付：</span>
-              <span class="real-price">¥ 1582.00</span>
+              <span class="real-price">¥ {{getTotal}}</span>
             </dt>
             <dd>支持花呗</dd>
             <dd>可开发票</dd>
@@ -65,6 +65,17 @@ export default {
           this.cartList = data
         }
       })
+    }
+  },
+  computed: {
+    // 获取总计金额
+    getTotal () {
+      let list = this.cartList.slice()
+      let reuslt = 0
+      list.forEach(item => {
+        reuslt  = reuslt + parseFloat(item.price)
+      })
+      return reuslt || 0
     }
   }
 }

@@ -50,7 +50,7 @@
             <p class="title">总计金额：</p>
             <p class="price">¥ {{getTotal()}}</p>
           </div>
-          <div class="account-btn">去结算</div>
+          <div class="account-btn" @click="handleAccountClick">去结算</div>
         </div>
       </div>
     </div>
@@ -81,6 +81,10 @@ export default {
     // 删除事件
     handleDeleteClick (index) {
       this.cartList.splice(index, 1)
+    },
+    // 去结算
+    handleAccountClick () {
+      this.$router.push('/cart/confirm')
     },
     // 获取购物车列表接口数据
     getCartListData () {
@@ -258,4 +262,5 @@ export default {
             line-height: 24px;
             color: #fff;
             font-size: 16px;
+            cursor: pointer;
 </style>
