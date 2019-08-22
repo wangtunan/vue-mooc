@@ -14,6 +14,7 @@ module.exports = {
         'assets': resolve('src/assets'),
         'base': resolve('src/base'),
         'components': resolve('src/components'),
+        'pages': resolve('src/pages'),
         'utils': resolve('src/utils'),
         'router': resolve('src/router')
       }
