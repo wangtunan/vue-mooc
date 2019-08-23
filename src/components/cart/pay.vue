@@ -9,7 +9,7 @@
     <div class="pay-container m-center">
       <dl>
         <dt class="pay-title">
-          <span>订单：125446897456498</span>
+          <span>订单号：{{$route.params.order}}</span>
           <span class="detail" @click="showList=!showList">{{showList ? '收起' : '详情'}}</span>
         </dt>
         <template v-if="showList">
@@ -86,6 +86,7 @@
 import CartHeader from './cart-header.vue'
 import { getCartList, getPayWay } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
+const MAX_LIST = 2
 export default {
   data () {
     return {
@@ -106,6 +107,9 @@ export default {
         let { code, data } = res
         if (code === ERR_OK) {
           this.cartList = data
+          if (this.cartList.length > MAX_LIST) {
+            this.showList = false
+          }
         }
       })
     },
@@ -136,12 +140,13 @@ export default {
       }
     },
     // 获取分期标题
-    getTagTitle (item) {
+    getTagTitle () {
       const titleMap = {
         '2': '白条分期',
         '3': '花呗分期'
       }
-      return titleMap[item.type]
+      console.log(this.type)
+      return titleMap[this.type]
     },
     // 获取分期描述
     getPriceDesc (item) {
@@ -164,6 +169,9 @@ export default {
     },
     rate () {
       return this.payWayList[this.currentWayIndex].rate || 0
+    },
+    type () {
+      return this.payWayList[this.currentWayIndex].type || ''
     }
   },
   components: {
@@ -333,6 +341,22 @@ export default {
                 color: #fff;
           dd
             border-left: 1px solid #d9dde1;
+            .number
+              font-size: 14px;
+              & > span
+                display: inline-block;
+                vertical-align: middle;
+                &.tag-title
+                  margin-right: 10px;
+                  padding: 3px 5px;
+                  background-color: #f01414;
+                  border-radius: 3px;
+                  color: #fff;
+                  font-weight: 700;
+                  line-height: 1;
+                &.price-desc
+                  font-size: 20px;
+                  font-weight: 700;
         .pay-bottom
           margin-top: 48px;
           padding-top: 36px;

@@ -53,7 +53,8 @@ export default {
     },
     // 购物车课程点击
     handleCartItemClick () {
-      this.$router({ path: '/lesson', query: { id: new Date().getTime() } })
+      this.$router.push({ path: '/lesson', query: { id: new Date().getTime() } })
+      this.$emit('close')
     },
     // 购物车课程删除点击
     handleDeleteClick (index) {

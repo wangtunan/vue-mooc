@@ -20,7 +20,6 @@ export default {
     this.navList = [
       { title: '课程', path: '/course' },
       { title: '实战课程', path: '/lesson' },
-      { title: '就业班', path: '/' },
       { title: '专栏', icon: 'https://www.imooc.com/static/img/common/new.png', path: '/' },
       { title: '猿问', path: '/' },
       { title: '手记', path: '/' }
