@@ -16,7 +16,7 @@
         <i class="iconfont">&#xe63b;</i>
         <span class="login-text">购物车</span>
         <div class="mini-chart-container" @mouseenter="handleCartMouseEnter" @mouseleave="showMiniCart = false">
-          <mini-cart  v-if="showMiniCart" @close="showMiniCart=false"></mini-cart>
+          <mini-cart  v-if="showMiniCart" :list="cartList" @close="showMiniCart=false" @delete="handleDeleteClick"></mini-cart>
         </div>
       </a>
     </li>
@@ -76,13 +76,19 @@
   </ul>
 </template>
 <script>
+import { getCartList } from 'api/cart.js'
+import { ERR_OK } from 'api/config.js'
 import { mapMutations, mapGetters } from 'vuex'
 export default {
   data () {
     return {
+      cartList: [], // 购物车列表数据
       showMiniCart: false,
       showUserInfo: false
     }
+  },
+  mounted () {
+    this.getCartListData()
   },
   methods: {
     // 购物车：项鼠标移出
@@ -94,6 +100,10 @@ export default {
     // 购物车：鼠标移入
     handleCartMouseEnter () {
       clearTimeout(this.timer)
+    },
+    // 购物车：课程删除
+    handleDeleteClick (index) {
+      this.cartList.splice(index, 1)
     },
     // 登录点击
     handleLoginClick () {
@@ -125,6 +135,15 @@ export default {
     // 购物车点击
     handleCartClick () {
       this.$router.push('/cart')
+    },
+    // 获取购物车数据
+    getCartListData () {
+      getCartList().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.cartList = data
+        }
+      })
     },
     // vuex
     ...mapMutations('login', {

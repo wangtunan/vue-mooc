@@ -24,6 +24,8 @@ const NoticeIndex = () => import('components/notice/notice.vue')
 const CartIndex = () => import('components/cart/cart.vue')
 // 购物车确认路由
 const CartConfirm = () => import('components/cart/confirm.vue')
+// 购物车支付路由
+const CartPay = () => import('components/cart/pay.vue')
 const routes = [
   {
     path: '/',
@@ -91,6 +93,14 @@ const routes = [
     path: '/cart/confirm',
     name: 'CartConfirm',
     component:CartConfirm,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/cart/pay/:order',
+    name: 'CartPay',
+    component:CartPay,
     meta: {
       requireAuth: true
     }

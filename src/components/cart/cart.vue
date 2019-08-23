@@ -1,15 +1,11 @@
 <template>
   <div class="cart">
     <!-- 头部 -->
-    <div class="cart-header">
-      <div class="m-center">
-        <p class="info">
-          <span class="cart-name">我的购物车</span>
-          <span class="number">共{{cartList.length}}门，已选{{checkNumber}}门</span>
-          <span class="history-order" @click="handleHistoryClick">我的订单历史</span>
-        </p>
-      </div>
-    </div>
+    <cart-header>
+      <span class="cart-name">我的购物车</span>
+      <span class="number">共{{cartList.length}}门，已选{{checkNumber}}门</span>
+      <span class="history-order" @click="handleHistoryClick">我的订单历史</span>
+    </cart-header>
 
     <!-- 购物车列表 -->
     <div class="cart-list m-center">
@@ -58,6 +54,7 @@
 </template>
 
 <script>
+import CartHeader from './cart-header.vue'
 import { getCartList } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -114,29 +111,25 @@ export default {
     checkNumber () {
       return this.cartList.filter(item => item.isCheck).length
     }
+  },
+  components: {
+    CartHeader
   }
 }
 </script>
 <style lang="stylus" scoped>
   .cart
     margin-bottom: 60px;
-    .cart-header
-      height: 160px;
-      background: url('https://order.imooc.com/static/module/pay/myorder/img/cart-header-bg.jpg') repeat-x left bottom;
-      .info
-        line-height: 115px;
-        color: #4d555d;
-        font-size: 14px;
-        .cart-name
-          margin-right: 25px;
-          font-size: 32px;
-          color: #07111b;
-        .history-order
-          float: right;
-          padding-top: 5px;
-          cursor: pointer;
-          &:hover
-            color: #f01414;
+    .cart-name
+      margin-right: 25px;
+      font-size: 32px;
+      color: #07111b;
+    .history-order
+      float: right;
+      padding-top: 5px;
+      cursor: pointer;
+      &:hover
+        color: #f01414;
     .cart-list
       margin-top: -40px;
       padding: 0 36px 32px;

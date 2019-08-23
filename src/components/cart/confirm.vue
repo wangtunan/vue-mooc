@@ -1,17 +1,12 @@
 <template>
   <div class="cart-confirm">
     <!-- 头部 -->
-    <div class="cart-header">
-      <div class="m-center">
-        <p class="info">
-          <span class="cart-name">确认订单</span>
-        </p>
-      </div>
-    </div>
+    <cart-header>
+      <span class="cart-name">确认订单</span>
+    </cart-header>
 
-    
+    <!-- 列表部分 -->
     <div class="confirm-list m-center">
-      <!-- 列表部分 -->
       <dl>
         <dt class="confirm-title">商品信息</dt>
         <dd class="confirm-item" v-for="(item,index) in cartList" :key="index">
@@ -24,7 +19,6 @@
           <div class="confirm-price">¥ {{item.price}}</div>
         </dd>
       </dl>
-      <!-- 确认支付 -->
       <div class="confirm-bottom">
         <div class="left">
           <dl>
@@ -39,12 +33,13 @@
             <dd>7天可退款</dd>
           </dl>
         </div>
-        <div class="right">提交订单</div>
+        <div class="right" @click="handleSubmitOrder">提交订单</div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import CartHeader from './cart-header.vue'
 import { getCartList } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -57,6 +52,11 @@ export default {
     this.getCartListData()
   },
   methods: {
+    // 提交订单
+    handleSubmitOrder () {
+      let randomOrder = new Date().getTime()
+      this.$router.push(`/cart/pay/${randomOrder}`)
+    },
     // 获取购物车列表接口数据
     getCartListData () {
       getCartList().then(res => {
@@ -77,29 +77,19 @@ export default {
       })
       return reuslt || 0
     }
+  },
+  components: {
+    CartHeader
   }
 }
 </script>
 <style lang="stylus" scoped>
   .cart-confirm
     margin-bottom: 60px;
-    .cart-header
-      height: 160px;
-      background: url('https://order.imooc.com/static/module/pay/myorder/img/cart-header-bg.jpg') repeat-x left bottom;
-      .info
-        line-height: 115px;
-        color: #4d555d;
-        font-size: 14px;
-        .cart-name
-          margin-right: 25px;
-          font-size: 32px;
-          color: #07111b;
-        .history-order
-          float: right;
-          padding-top: 5px;
-          cursor: pointer;
-          &:hover
-            color: #f01414;
+    .cart-name
+      margin-right: 25px;
+      font-size: 32px;
+      color: #07111b;
     .confirm-list
       margin-top: -40px;
       padding: 36px 32px 0 32px;

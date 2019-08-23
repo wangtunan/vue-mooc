@@ -1,0 +1,41 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": [
+    {
+      "type": 0,
+      "name": "支付宝",
+      "way": [],
+      "img": "https://order.imooc.com/static/module/pay/center/img/pay_s.png"
+    },
+    {
+      "type": 1,
+      "name": "微信",
+      "way": [],
+      "img": "https://order.imooc.com/static/module/pay/center/img/pay_s.png"
+    },
+    {
+      "type": 2,
+      "name": "京东支付",
+      "way": [3, 6 , 12],
+      "rate": "10.45",
+      "img": "https://order.imooc.com/static/module/pay/center/img/jdpay.png"
+    },
+    {
+      
+      "type": 3,
+      "name": "蚂蚁花呗",
+      "way": [3, 6 , 12],
+      "rate": "11.45",
+      "img": "https://order.imooc.com/static/module/pay/center/img/huabeifenqi.png"
+    },
+    {
+      
+      "type": 4,
+      "name": "我的余额",
+      "way": [],
+      "balance": 9000,
+      "img": "https://order.imooc.com/static/module/pay/center/img/yue.png"
+    }
+  ]
+}

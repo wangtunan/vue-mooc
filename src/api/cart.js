@@ -4,3 +4,7 @@ import axios from 'utils/axios.js'
 export function getCartList ()  {
   return axios.get('/cart/list')
 }
+// 支付方式接口
+export function getPayWay () {
+  return axios.get('/cart/pay/way')
+}

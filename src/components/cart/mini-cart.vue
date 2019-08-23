@@ -6,20 +6,20 @@
         我的购物车
         <span class="total">共加入0门课程</span>
       </dt>
-      <template v-if="list.length > 0">
-        <dd class="cart-item" v-for="(item,index) in list" :key="index">
+      <div class="cart-item-wrapper" v-if="list.length > 0">
+        <dd class="cart-item" v-for="(item,index) in list" :key="index" @click="handleCartItemClick">
           <div class="img-box">
             <img :src="item.img" alt="">
           </div>
           <div class="cart-content">
-            <p class="name"></p>
-            <p>
-              <span class="price">¥ 348.00</span>
-              <span class="delete">删除</span>
+            <p class="name">{{item.name}}</p>
+            <p class="price-box">
+              <span class="price">¥ {{item.price}}</span>
+              <span class="delete" @click.stop="handleDeleteClick(index)">删除</span>
             </p>
           </div>
         </dd>
-      </template>
+      </div>
       <div v-else class="empty-box">
         <span class="iconfont">&#xe63b;</span>
         <h2 class="empty-title">购物车里空空如也</h2>
@@ -51,6 +51,14 @@ export default {
       this.$router.push('/cart')
       this.$emit('close')
     },
+    // 购物车课程点击
+    handleCartItemClick () {
+      this.$router({ path: '/lesson', query: { id: new Date().getTime() } })
+    },
+    // 购物车课程删除点击
+    handleDeleteClick (index) {
+      this.$emit('delete', index)
+    },
     // 订单中心点击
     handleOrderClick () {
       this.$router.push('/order')
@@ -81,6 +89,40 @@ export default {
         float: right;
         color: #9199A1;
         font-size: 12px;
+    .cart-item-wrapper
+      max-height: 300px;
+      overflow-y: scroll;
+      border-bottom: 1px solid #D3D6D9;
+      .cart-item
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        line-height: 1;
+        &:hover
+          background-color: #f8fafc;
+        .img-box
+          flex: 0 0 100px;
+          margin-right: 10px;
+          width: 100px;
+          height: 56px;
+          & > img
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: #eee;
+        .cart-content
+          flex: 1;
+          color: #07111b;
+          font-size: 12px;
+          line-height: 16px;
+          .price-box
+            margin-top: 8px;
+            color: rgba(240,20,20,0.6);
+            .delete
+              float: right;
+              cursor: pointer;
+              &:hover
+                color: #f01414;
     .empty-box
       height: 284px;
       border-bottom: 1px solid #D3D6D9;
