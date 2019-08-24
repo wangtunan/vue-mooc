@@ -1,3 +1,224 @@
 <template>
-  <div class="read">read</div>
+  <div class="read m-center">
+    <!-- 头部 -->
+    <div class="read-header">
+      <img src="https://www.imooc.com/static/img/column/sub-logo2.png" alt="">
+      <p class="total-course">共20个专栏</p>
+    </div>
+
+    <!-- 导航 -->
+    <div class="read-nav">
+      <dl>
+        <dt>分类：</dt>
+        <dd
+          :class="{active: index == currentIndex}"
+          v-for="(type,index) in typeList" :key="index"
+          @click="currentIndex = index"
+        >{{type}}</dd>
+      </dl>
+    </div>
+
+    <!-- 列表 -->
+    <div class="read-list">
+      <ul>
+        <li class="read-item" v-for="(item,index) in filterReadList" :key="index">
+          <div class="img-box">
+            <img :src="item.img" alt="">
+          </div>
+          <div class="read-content">
+            <p class="title">{{item.title}}</p>
+            <p class="read-desc">{{item.desc}}</p>
+            <p class="author">
+              <img :src="item.author.avatar" class="avatar" alt="">
+              <span class="name">{{item.author.name}}</span>
+              <span class="split">/</span>
+              <span class="job">{{item.author.job}}</span>
+            </p>
+            <dl class="try-read">
+              <dd class="try-item" v-for="(read,index) in item.tryRead" :key="index">
+                <span class="icon">试读</span>
+                <span class="name">{{read}}</span>
+              </dd>
+            </dl>
+            <p class="other">
+              <span class="price">¥ {{item.price}}</span>
+              <span class="trem">共{{item.term}}小节</span>
+              <span class="number">共{{item.number}}人购买</span>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
+<script>
+import { getReadList } from 'api/read.js'
+import { ERR_OK } from 'api/config.js'
+export default {
+  data () {
+    return {
+      readList: [], // 专栏列表数据
+      currentIndex: 0 // 当前分类的索引
+    }
+  },
+  mounted () {
+    this.getReadListData()
+  },
+  methods: {
+    // 获取专栏列表数据
+    getReadListData () {
+      getReadList().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.readList = data
+        }
+      })
+    }
+  },
+  computed: {
+    // 专栏分类
+    typeList () {
+      let result = []
+      let navSet = new Set(['全部'])
+      this.readList.forEach(item => {
+        navSet.add(item.type)
+      })
+      result = Array.from(navSet)
+      return result
+    },
+    // filter后的专栏数据
+    filterReadList () {
+      let list = this.readList.slice()
+      let currType = this.typeList[this.currentIndex]
+      if (this.currentIndex !== 0) {
+        list = list.filter(item => item.type === currType)
+      }
+      return list
+    }
+  }
+}
+</script>
+<style lang="stylus" scoped>
+  .read
+    .read-header
+      margin-top: 20px;
+      padding-right: 296px;
+      border-bottom: 1px solid rgba(7,17,27,0.1);
+      img
+        display: inline-block;
+        height: 60px;
+      .total-course
+        float: right;
+        line-height: 60px;
+        font-size: 14px;
+        color: #9199a1;
+    .read-nav
+      dl
+        position: relative;
+        padding: 16px 0px 10px 52px;
+        border-bottom: 1px solid rgba(7,17,27,0.1);
+        font-size: 14px;
+        dt
+          position: absolute;
+          left: 0;
+          top: 23px;
+          font-weight: 700;
+        dd
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 5px;
+          margin-bottom: 10px;
+          padding: 0 10px;
+          line-height: 30px;
+          cursor: pointer;
+          &.active
+            color: #f01414;
+            background-color: rgba(242,13,13,0.06);
+            border-radius: 6px;
+            font-weight: 700;
+    .read-list
+      .read-item
+        display: flex;
+        align-items: flex-start;
+        margin: 50px 0;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(7,17,27,0.1);
+        cursor: pointer;
+        &:last-child
+          border-bottom: none;
+        &:hover
+          .img-box
+            & > img
+              transform: scale(1.2);
+          .read-content
+            .title
+              color: #6698ff;
+        .img-box
+          margin-right: 30px;
+          width: 138px;
+          height: 157px;
+          & > img
+            display: block;
+            width: 100%;
+            height: 100%;
+            transform: scale(1);
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+        .read-content
+          flex: 1;
+          .title
+            font-size: 20px;
+            font-weight: 700;
+            color: #1c1f21;
+            line-height: 36px;
+          .read-desc
+            font-size: 14spx;
+            color: #545c63;
+            line-height: 24px;
+            font-weight: 700;
+          .author
+            margin: 8px 0;
+            font-size: 12px;
+            img, span
+              display: inline-block;
+              vertical-align: middle;
+            .avatar
+              margin-right: 10px;
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+            .split
+              padding: 0 10px;
+          .try-read
+            padding: 10px 0;
+            .try-item
+              display: inline-block;
+              vertical-align: middle;
+              margin-bottom: 12px;
+              width: 33.33%;
+              font-size: 12px;
+              color: #545c63;
+              line-height: 24px;
+              cursor: pointer;
+              &:hover
+                color: #6698ff; 
+              .icon
+                margin-right: 10px;
+                padding: 4px;
+                background-color: rgba(102,152,255, 0.1);
+                color: #6698ff;
+                font-weight: 700;
+          .other
+            font-size: 12px;
+            line-height: 24px;
+            color: #9199a1;
+            & > span
+              display: inline-block;
+              vertical-align: middle;
+              padding: 0 5px;
+              &.price
+                margin-right: 10px;
+                font-size: 16px;
+                color: #6698ff;
+                font-weight: 700;
+</style>

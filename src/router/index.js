@@ -26,6 +26,8 @@ const CartIndex = () => import('components/cart/cart.vue')
 const CartConfirm = () => import('components/cart/confirm.vue')
 // 购物车支付路由
 const CartPay = () => import('components/cart/pay.vue')
+// 专栏路由
+const ReadIndex = () => import('components/read/read.vue')
 const routes = [
   {
     path: '/',
@@ -104,6 +106,11 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+  {
+    path: '/read',
+    name: 'ReadIndex',
+    component:ReadIndex,
   }
 ]
 const router = new Router({

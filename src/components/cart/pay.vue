@@ -145,7 +145,6 @@ export default {
         '2': '白条分期',
         '3': '花呗分期'
       }
-      console.log(this.type)
       return titleMap[this.type]
     },
     // 获取分期描述
