@@ -21,7 +21,7 @@
     <!-- 列表 -->
     <div class="read-list">
       <ul>
-        <li class="read-item" v-for="(item,index) in filterReadList" :key="index">
+        <li class="read-item" v-for="(item,index) in filterReadList" :key="index" @click="handleReadClick">
           <div class="img-box">
             <img :src="item.img" alt="">
           </div>
@@ -65,6 +65,11 @@ export default {
     this.getReadListData()
   },
   methods: {
+    // 专栏点击事件
+    handleReadClick () {
+      let random = new Date().getTime()
+      this.$router.push(`/read/${random}`)
+    },
     // 获取专栏列表数据
     getReadListData () {
       getReadList().then(res => {

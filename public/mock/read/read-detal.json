@@ -1,0 +1,145 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": {
+    "title": "你不知道的前端性能优化技巧",
+    "img": "https://img3.mukewang.com/5d283a2c0001b89205400720.jpg",
+    "desc": "前端进阶必修系列课",
+    "teacher": {
+      "name": "BinaryCoding",
+      "job": "前端性能优化极客"
+    },
+    "term": "27",
+    "number": 588,
+    "price": "48.00",
+    "chapter": [
+      {
+        "title": "第1章 优化的概念",
+        "data": [
+          {
+            "title": "1 你的前端性能还能再抢救一下",
+            "isTry": true,
+            "time": "2019-07"
+          },
+          {
+            "title": "2 解读雅虎35条军规（上）",
+            "isTry": true,
+            "time": "2019-07"
+          },
+          {
+            "title": "3 解读雅虎35条军规（下）",
+            "isTry": true,
+            "time": "2019-07"
+          },
+          {
+            "title": "4 你要不要看这些优化指标？",
+            "isTry": false,
+            "time": "2019-07"
+          }
+        ]
+      },
+      {
+        "title": "第2章 性能工具介绍",
+        "data": [
+          {
+            "title": "5 性能优化百宝箱（上）",
+            "isTry": false,
+            "time": "2019-07"
+          },
+          {
+            "title": "6 性能优化百宝箱（下）",
+            "isTry": false,
+            "time": "2019-07"
+          }
+        ]
+      },
+      {
+        "title": "第3章 网络部分",
+        "data": [
+          {
+            "title": "7 聊聊 DNS Prefetch",
+            "isTry": false,
+            "time": "2019-07"
+          },
+          {
+            "title": "8 Webpack 性能优化两三事",
+            "isTry": false,
+            "time": "2019-07"
+          },
+          {
+            "title": "9 图片加载优化（上）",
+            "isTry": false,
+            "time": "2019-07"
+          },
+          {
+            "title": "10 图片加载优化（下）",
+            "isTry": false,
+            "time": "2019-07"
+          }
+        ]
+      },
+      {
+        "title": "第4章 缓存部分",
+        "data": [
+          {
+            "title": "11 十八般缓存",
+            "isTry": false,
+            "time": "2019-07"
+          },
+          {
+            "title": "12 CDN 缓存",
+            "isTry": false,
+            "time": "2019-07"
+          },
+          {
+            "title": "13 本地缓存（Web Storage）",
+            "isTry": false,
+            "time": "2019-07"
+          },
+          {
+            "title": "14 浏览器缓存（上）",
+            "isTry": false,
+            "time": "2019-07"
+          }
+        ]
+      }
+    ],
+    "recommend": [
+      {
+        "title": "从0到1 实战朋友圈移动Web App开发",
+        "img": "https://img2.mukewang.com/5d3138f000015f4c05400720.jpg",
+        "price": "48",
+        "number": "472",
+        "term": "36"
+      },
+      {
+        "title": "你不知道的前端性能优化技巧",
+        "img": "https://img3.mukewang.com/5d283a2c0001b89205400720.jpg",
+        "price": "48",
+        "number": "508",
+        "term": "27"
+      },
+      {
+        "title": "零基础实现微信电商小程序开发",
+        "img": "https://img2.mukewang.com/5d22a6be0001d12805400720.jpg",
+        "price": "68",
+        "number": "491",
+        "term": "50"
+      },
+      {
+        "title": "Python入门指南",
+        "img": "https://img.mukewang.com/5d5510fa00011fa605400720.jpg",
+        "price": "46",
+        "number": "86",
+        "term": "33"
+      },
+      {
+        "title": "Spring Cloud微服务开发实践",
+        "img": "https://img3.mukewang.com/5d12d7e500013ada03600480.jpg",
+        "price": "88",
+        "number": "299",
+        "term": "39"
+      }
+    ]
+  }
+}

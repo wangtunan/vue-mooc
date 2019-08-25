@@ -28,6 +28,8 @@ const CartConfirm = () => import('components/cart/confirm.vue')
 const CartPay = () => import('components/cart/pay.vue')
 // 专栏路由
 const ReadIndex = () => import('components/read/read.vue')
+// 专栏详情路由
+const ReadDetaiil = () => import('components/read-detail/read-detail.vue')
 const routes = [
   {
     path: '/',
@@ -111,6 +113,11 @@ const routes = [
     path: '/read',
     name: 'ReadIndex',
     component:ReadIndex,
+  },
+  {
+    path: '/read/:id',
+    name: 'ReadDetaiil',
+    component:ReadDetaiil,
   }
 ]
 const router = new Router({
