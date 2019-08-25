@@ -21,7 +21,7 @@ export default {
       { title: '课程', path: '/course' },
       { title: '实战课程', path: '/lesson' },
       { title: '专栏', icon: 'https://www.imooc.com/static/img/common/new.png', path: '/read' },
-      { title: '猿问', path: '/' },
+      { title: '猿问', path: '/question' },
       { title: '手记', path: '/' }
     ]
   },

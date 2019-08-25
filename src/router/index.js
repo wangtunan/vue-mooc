@@ -30,6 +30,8 @@ const CartPay = () => import('components/cart/pay.vue')
 const ReadIndex = () => import('components/read/read.vue')
 // 专栏详情路由
 const ReadDetaiil = () => import('components/read-detail/read-detail.vue')
+// 猿问路由
+const QuestionIndex = () => import('components/question/question.vue')
 const routes = [
   {
     path: '/',
@@ -118,6 +120,11 @@ const routes = [
     path: '/read/:id',
     name: 'ReadDetaiil',
     component:ReadDetaiil,
+  },
+  {
+    path: '/question',
+    name: 'QuestionIndex',
+    component:QuestionIndex
   }
 ]
 const router = new Router({
