@@ -32,6 +32,8 @@ const ReadIndex = () => import('components/read/read.vue')
 const ReadDetaiil = () => import('components/read-detail/read-detail.vue')
 // 猿问路由
 const QuestionIndex = () => import('components/question/question.vue')
+// 手记路由
+const ArticleIndex = () => import('components/article/article.vue')
 const routes = [
   {
     path: '/',
@@ -125,6 +127,11 @@ const routes = [
     path: '/question',
     name: 'QuestionIndex',
     component:QuestionIndex
+  },
+  {
+    path: '/article',
+    name: 'ArticleIndex',
+    component:ArticleIndex
   }
 ]
 const router = new Router({

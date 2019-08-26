@@ -176,7 +176,7 @@ export default {
     .question-list-container
       display: flex;
       align-items: flex-start;
-      margin-top: 20px;
+      margin-top: 30px;
       .left
         flex: 1;
         .question-list

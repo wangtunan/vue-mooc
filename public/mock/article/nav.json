@@ -1,0 +1,64 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": [
+    {
+      "type": "recommend",
+      "title": "推荐"
+    },
+    {
+      "type": "information",
+      "title": "资讯"
+    },
+    {
+      "type": "new",
+      "title": "最新文章"
+    },
+    {
+      "type": "blockchain",
+      "title": "区块链"
+    },
+    {
+      "type": "ai",
+      "title": "人工智能"
+    },
+    {
+      "type": "clouddata",
+      "title": "云计算/大数据",
+      "data": ["全部", "云计算", "容器", "Kubernetes", "OpenStack", "Flink", "AWS", "阿里云", "Storm", "Hbase", "Hadoop", "Spark", "R语言", "Docker", "挖掘", "大数据"]
+    },
+    {
+      "type": "fe",
+      "title": "前端开发",
+      "data": ["全部", "Sass/Less", "Vue.js", "前端工具", "CSS3", "bootstrap", "JavaScript", "Jquery", "Hhtml5", "Node.js", "Html/Css", "ReactJs", "AngularJs", "WebApp", "Vuex", "Webpack", "小程序"]
+    },
+    {
+      "type": "be",
+      "title": "后端开发",
+      "data": ["全部", "Ruby", "C#", "Go", "C", "C++", "Python", "Java", "PHP", "SpringBoot", "Yii", "ThinkPHP", "SSM", "Django", "爬虫", "Flask", "Spring", "JVM", ".Net", "MVVM"]
+    },
+    {
+      "type": "mobile",
+      "title": "移动端开发",
+      "data": ["全部", "IOS", "Android", "WEEX", "Ionic", "React Native", "Gradle", "Swift"]
+    },
+    {
+      "type": "tools",
+      "title": "工具资源"
+    },
+    {
+      "type": "work",
+      "title": "职场生活",
+      "data": ["全部", "产品", "面试", "搞笑", "幽默段子", "征文", "资讯", "职场生活"]
+    },
+    {
+      "type": "funny",
+      "title": "幽默段子"
+    },
+    {
+      "type": "other",
+      "title": "其它",
+      "data": ["全部", "正则表达式", "源码", "架构", "安全", "Git", "开源", "设计模式", "API", "操作系统", "活动", "编解码", "ffmpeg"]
+    }
+  ]
+}
