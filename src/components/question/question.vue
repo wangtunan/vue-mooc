@@ -30,53 +30,19 @@
         <div class="left">
           <div class="question-list">
             <ul>
-              <li class="question-item">
+              <li class="question-item" v-for="(item,index) in questionList" :key="index">
                 <div class="finish">
                   <span class="iconfont">&#xe786;</span>
-                  <span>23</span>
+                  <span>{{item.answer}}</span>
                 </div>
                 <div class="content-box">
-                  <h3 class="title">Chrome59到底支不支持forEach函数？</h3>
+                  <h3 class="title">{{item.title}}</h3>
                   <p class="tag">
-                    <img src="https://img.mukewang.com/59e96f340001faac02400240.jpg" alt="">
+                    <img :src="item.icon" alt="">
                     <span class="name">JavaScript</span>
                     <span class="view-box">
                       <i class="iconfont">&#xe681;</i>
-                      <span class="view-number">11919</span>
-                    </span>
-                  </p>
-                </div>
-              </li>
-              <li class="question-item">
-                <div class="finish">
-                  <span class="iconfont">&#xe786;</span>
-                  <span>23</span>
-                </div>
-                <div class="content-box">
-                  <h3 class="title">Chrome59到底支不支持forEach函数？</h3>
-                  <p class="tag">
-                    <img src="https://img.mukewang.com/59e96f340001faac02400240.jpg" alt="">
-                    <span class="name">JavaScript</span>
-                    <span class="view-box">
-                      <i class="iconfont">&#xe681;</i>
-                      <span class="view-number">11919</span>
-                    </span>
-                  </p>
-                </div>
-              </li>
-              <li class="question-item">
-                <div class="finish">
-                  <span class="iconfont">&#xe786;</span>
-                  <span>23</span>
-                </div>
-                <div class="content-box">
-                  <h3 class="title">Chrome59到底支不支持forEach函数？</h3>
-                  <p class="tag">
-                    <img src="https://img.mukewang.com/59e96f340001faac02400240.jpg" alt="">
-                    <span class="name">JavaScript</span>
-                    <span class="view-box">
-                      <i class="iconfont">&#xe681;</i>
-                      <span class="view-number">11919</span>
+                      <span class="view-number">{{item.view}}</span>
                     </span>
                   </p>
                 </div>
@@ -85,22 +51,53 @@
           </div>
           <pagination :total="total" :page.sync="page"></pagination>
         </div>
-        <div class="right"></div>
+        <div class="right">
+          <recommend-author :title="recommend.title" :list="recommend.data"></recommend-author>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import Pagination from 'base/pagination/pagination.vue'
+import RecommendAuthor from 'base/recommend/recommend-author.vue'
+import { getQuestionList } from 'api/question.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      question: {}, // 猿问数据
       total: 100,
       page: 1
     }
   },
+  mounted () {
+    this.getQuestionListData()
+  },
+  methods: {
+    // 获取猿问数据
+    getQuestionListData () {
+      getQuestionList().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.question = data
+        }
+      })
+    }
+  },
+  computed: {
+    // 猿问列表数据
+    questionList () {
+      return this.question.data || []
+    },
+    // 回答排行榜
+    recommend () {
+      return this.question.recommend || []
+    }
+  },
   components: {
-    Pagination
+    Pagination,
+    RecommendAuthor
   }
 }
 </script>
@@ -186,7 +183,7 @@ export default {
           padding: 28px 32px;
           background-color: #fff;
           border-radius: 12px;
-          box-shadow: 0 0 8px 4px rgba(7,17,27,0.1);
+          box-shadow: 0 4px 8px 2px rgba(7,17,27,.1)
           .question-item
             display: flex;
             align-items: center;
@@ -205,6 +202,11 @@ export default {
                 display: block;
                 text-align: center;
                 line-height: 18px;
+                font-size: 16px;
+                font-weight: 700;
+                &:last-child
+                  font-weight: 400;
+                  font-size: 14px;
             .content-box
               flex: 1;
               .title
@@ -237,7 +239,7 @@ export default {
                       display: inline-block;
                       vertical-align: middle;
       .right
-        margin-left: 20px;
+        margin-left: 30px;
         flex: 0 0 280px;
         width: 280px;   
 </style>
