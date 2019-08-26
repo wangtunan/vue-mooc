@@ -9,6 +9,7 @@
       :key="index">
       &#xe610;
     </span>
+    <span class="star-text">{{ text }}</span>
   </div>
 </template>
 <script>
@@ -76,12 +77,27 @@ export default {
         color: color
       }
     }
+  },
+  computed: {
+    // 计算：显示评分或者评分内容
+    text () {
+      let result = ''
+      if (this.showValue) {
+        result = this.currentValue
+      } else if(this.showText) {
+        result = this.texts[this.currentValue - 1]
+      }
+      return result
+    }
   }
 }
 </script>
 <style lang="stylus" scoped>
   .star
     display: inline-block;
-    .star-item
+    & > span
       display: inline-block;
+      &.star-text
+        padding-left: 5px;
+        font-size: 12px;
 </style>
