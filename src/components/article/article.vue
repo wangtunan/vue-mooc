@@ -27,26 +27,35 @@
       </div>
       
       <div class="list">
-        <article-list></article-list>
+        <article-list :filter-list="filterList" :list="list" v-if="list && list.length"></article-list>
       </div>
 
-      <div class="recommend">recommend</div>
+      <div class="recommend">
+        <recommend-read title="慕课专栏" :list="recommendReadList"></recommend-read>
+        <recommend-article title="推荐文章" :list="recommendArticleList"></recommend-article>
+        <recommend-author title="推荐作者" :list="recommendAuthorList" :author="true"></recommend-author>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import ArticleList from './article-list.vue'
-import { getArticleNavList } from 'api/article.js'
+import RecommendRead from 'base/recommend/recommend-read.vue'
+import RecommendAuthor from 'base/recommend/recommend-author.vue'
+import RecommendArticle from 'base/recommend/recommend-article.vue'
+import { getArticleNavList, getArticleList } from 'api/article.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
       currentNavIndex: 0, // 当前导航的索引
+      articleList: {}, // 猿问列表数据
       navList: [] // 导航数据
     }
   },
   mounted () {
     this.getArticleNavListData()
+    this.getArticleListData()
   },
   methods: {
     // 获取手记导航数据
@@ -57,10 +66,47 @@ export default {
           this.navList = data
         }
       })
+    },
+    // 获取猿问列表数据
+    getArticleListData () {
+      getArticleList().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.articleList = data
+        }
+      })
+    }
+  },
+  computed: {
+    filterList () {
+      let currentNav = this.navList[this.currentNavIndex]
+      return currentNav ? currentNav.data : []
+    },
+    list () {
+      let currentNav = this.navList[this.currentNavIndex]
+      let articleList = this.articleList      
+      if (!currentNav || !articleList.data) {
+        return
+      }
+      const type = currentNav.type
+      const list = articleList.data.slice()
+      return list.filter(item => item.type === type)
+    },
+    recommendReadList () {
+      return this.articleList ? this.articleList.read : []
+    },
+    recommendAuthorList () {
+      return this.articleList ? this.articleList.author : []
+    },
+    recommendArticleList () {
+      return this.articleList ? this.articleList.article : []      
     }
   },
   components: {
-    ArticleList
+    ArticleList,
+    RecommendRead,
+    RecommendAuthor,
+    RecommendArticle
   }
 }
 </script>
@@ -153,4 +199,6 @@ export default {
       .recommend
         flex: 0 0 280px;
         width: 280px;
+        & > div
+          margin-bottom: 24px;
 </style>

@@ -10,7 +10,11 @@
         </div>
         <div class="recommend-content">
           <p class="name ellipsis">{{item.name}}</p>
-          <p class="other-info">
+          <p class="other-info" v-if="author">
+            <span class="answer">{{item.article}}篇文章</span>
+            <span class="like">共{{item.fans}}个粉丝</span>
+          </p>
+          <p class="other-info" v-else>
             <span class="answer">{{item.answer}}个回答</span>
             <span class="like">共{{item.like}}个支持</span>
           </p>
@@ -32,6 +36,10 @@ export default {
       default () {
         return []
       }
+    },
+    author: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -40,7 +48,7 @@ export default {
   .recommend
     .recommend-title
       margin-bottom: 12px;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 700;
       line-height: 24px;
     .recommend-item
