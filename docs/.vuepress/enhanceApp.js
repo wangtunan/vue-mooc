@@ -1,10 +1,12 @@
 import Vue from 'vue'
+import Star from '../../src/base/star/index.js'
 export default({
   Vue,
   options, 
   router
 }) => {
-  Register()
+  Vue.use(Star)
+  // Register()
 }
 function Register () {
   const files = require.context('./components', true, /.vue$/)

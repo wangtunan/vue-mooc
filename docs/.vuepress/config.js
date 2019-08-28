@@ -1,5 +1,6 @@
 module.exports = {
   title: 'vue-mooc',
+  description: '使用Vue全家桶，高防慕课网PC端项目',
   head: [
     ['link', { rel: 'icon', href: '/icon.png' }]
   ],

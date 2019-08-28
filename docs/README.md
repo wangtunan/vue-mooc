@@ -1,16 +1,16 @@
 ---
 home: true
 lang: zh-CN
-heroText: A  Personal Blog
+heroText: A  Vue Family  Project
 heroImage: /logo.jpg
 actionText: 开始 →
 actionLink: /guide/
 features:
-- title: A Blog
-  details: 专注写作前端博客，记录日常所得。
-- title: For Me
-  details: 故九万里，则风斯在下矣，而后乃今培风；背负青天，而莫之夭阏者，而后乃今将图南。
-- title: For Interview
-  details: 广州，已入坑ღ( ´･ᴗ･` )比心
+- title: 规范
+  details: 良好的代码规范，更贴近于团队项目。
+- title: 全面
+  details: 使用Vue全家桶，全面、系统、深入的学习Vue。
+- title: 自主
+  details: 不拒绝使用轮子，但更希望自己是轮子的制造者。
 footer: Copyright © 2019-present Wangtunan
 ---
