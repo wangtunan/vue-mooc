@@ -31,7 +31,7 @@
           <p>
             <span class="name">{{comment.name}}</span>
             <span class="score">
-              <star :score="comment.score/2" :size="16"></star>
+              <star :value="comment.score/2" :size="16" :disabled="true"></star>
               {{comment.score}}分
             </span>
           </p>

@@ -4,6 +4,9 @@ import store from '../store/index.js'
 import { getUserInfo } from 'utils/cache.js'
 Vue.use(Router)
 
+// 测试路由
+const Test  = () => import('pages/test/test.vue')
+
 // 首页路由
 const Home = () => import('components/home/home.vue')
 // 个人中心路由
@@ -39,6 +42,11 @@ const routes = [
     path: '/',
     name: 'Index',
     redirect: '/home'
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component:Test 
   },
   {
     path: '/home',

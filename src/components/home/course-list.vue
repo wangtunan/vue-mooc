@@ -31,7 +31,7 @@
           <span>{{item.rank}}</span>
           <span><i class="iconfont icon-user">&#xe607;</i>{{item.number}}</span>
           <span>
-            <star class="star-box" :score="item.star"></star>
+            <star class="star-box" :value="item.star" :disabled="true"></star>
           </span>
         </p>
         <p class="price">
