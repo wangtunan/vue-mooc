@@ -15,7 +15,8 @@
       v-if="showText || showValue"
       class="star-text"
       :style="{
-        color: textColor
+        'color': textColor,
+        'font-size': size + 'px'
       }"
     >{{ text }}</span>
   </div>
@@ -33,7 +34,7 @@ export default {
       default: 14
     },
     max: {
-      type: [Number,String],
+      type: Number,
       default: 5
     },
     color: {

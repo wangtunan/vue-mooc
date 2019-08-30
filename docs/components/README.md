@@ -7,4 +7,4 @@
 ## 参考
 **基础公共组件**的封装，借鉴了[element-ui](https://element.eleme.cn/#/zh-CN)，**业务公共组件**的封装来源于`vue-mooc`项目上的沉淀。
 ## 目录
-根据[指南](/guide/start)部分提到的项目结构，我们将基础公共组件防止在`src/base`目录下，将业务公共组件防止在`src/components`目录下，而业务真实页面我们则防止在`src/pages`目录下。
+根据[指南](/guide/start)部分提到的项目结构，我们将基础公共组件放置在`src/base`目录下，将业务公共组件放置在`src/components`目录下，而业务真实页面我们则放置在`src/pages`目录下。
