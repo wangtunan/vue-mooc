@@ -11,6 +11,8 @@ const Test  = () => import('pages/test/test.vue')
 const Home = () => import('components/home/home.vue')
 // 个人中心路由
 const UserCenter = () => import('components/user/index.vue')
+// 我的课程路由
+const UserCourse = () => import('components/user-course/index.vue')
 // 订单中心路由
 const OrderIndex = () => import('components/order/index.vue')
 // 免费课程路由
@@ -62,6 +64,14 @@ const routes = [
     }
   },
   {
+    path: '/user/course',
+    name: 'UserCourse',
+    component: UserCourse,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
     path: '/order',
     name: 'OrderIndex',
     component:OrderIndex,
@@ -72,7 +82,7 @@ const routes = [
   {
     path: '/course',
     name: 'CourseIndex',
-    component: CourseIndex
+    component: CourseIndex,
   },
   {
     path: '/course/:id',
