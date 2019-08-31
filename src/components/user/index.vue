@@ -8,10 +8,10 @@
         <p class="user-name ellipsis">{{userInfo.name}}</p>
         <p class="user-id">ID: {{userInfo.ID}}</p>
         <p class="user-auth">
-          <i class="iconfont" :class="{red: userInfo.mainBind.authenticate}" :title="userInfo.mainBind.authenticate?'已实名认证': '未实名认证'">&#xe607;</i>
-          <i class="iconfont" :class="{red: userInfo.mainBind.certificate}" :title="userInfo.mainBind.certificate?'已学籍认证': '未学籍认证'">&#xe60e;</i>
-          <i class="iconfont" :class="{red: userInfo.mainBind.phone}" :title="userInfo.mainBind.phone?'已绑定手机': '未绑定手机'">&#xe61a;</i>
-          <i class="iconfont" :class="{red: userInfo.mainBind.email}" :title="userInfo.mainBind.email?'已绑定邮箱': '未绑定邮箱'">&#xe75d;</i>
+          <i class="iconfont" :class="{red: mainBind.authenticate}" :title="mainBind.authenticate?'已实名认证': '未实名认证'">&#xe607;</i>
+          <i class="iconfont" :class="{red: mainBind.certificate}" :title="mainBind.certificate?'已学籍认证': '未学籍认证'">&#xe60e;</i>
+          <i class="iconfont" :class="{red: mainBind.phone}" :title="mainBind.phone?'已绑定手机': '未绑定手机'">&#xe61a;</i>
+          <i class="iconfont" :class="{red: mainBind.email}" :title="mainBind.email?'已绑定邮箱': '未绑定邮箱'">&#xe75d;</i>
         </p>
         <dl class="user-nav">
           <dt class="nav-title"> 账户管理</dt>
@@ -85,6 +85,11 @@ export default {
           this.userInfo = data
         }
       })
+    }
+  },
+  computed: {
+    mainBind () {
+      return this.userInfo.mainBind || {}
     }
   },
   components: {

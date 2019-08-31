@@ -1,0 +1,159 @@
+<template>
+  <div class="practice-course">
+    <dl>
+      <dt>
+        <span
+          v-for="(tab,index) in tabList"
+          :key="index"
+          :class="{active: currentTabIndex==index}"
+          @click="handleTabClick(tab,index)"
+        >{{tab.title}}</span>
+      </dt>
+      <dd class="course-item">
+        <div class="img-box">
+          <img src="https://img.mukewang.com/5d6639170827e93500000000-240-135.jpg" alt="">
+        </div>
+        <div class="course-content">
+          <p class="title">从0到1 实现HTTP服务器开发 <span class="status">更新完成</span></p>
+          <p class="learn">
+            <span class="rate">已学0%</span>
+            <span class="duration">用时0分</span>
+            <span class="chapter">学至1-1 课程导学</span>
+          </p>
+          <p class="other">
+            <span>笔记0</span>
+            <span>代码0</span>
+            <span>问答0</span>
+            <span class="learn-btn">继续学习</span>
+          </p>
+        </div>
+      </dd>
+      <dd class="course-item">
+        <div class="img-box">
+          <img src="https://img.mukewang.com/5d6639170827e93500000000-240-135.jpg" alt="">
+        </div>
+        <div class="course-content">
+          <p class="title">从0到1 实现HTTP服务器开发 <span class="status">更新完成</span></p>
+          <p class="learn">
+            <span class="rate">已学0%</span>
+            <span class="duration">用时0分</span>
+            <span class="chapter">学至1-1 课程导学</span>
+          </p>
+          <p class="other">
+            <span>笔记0</span>
+            <span>代码0</span>
+            <span>问答0</span>
+            <span class="learn-btn">继续学习</span>
+          </p>
+        </div>
+      </dd>
+    </dl>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
+  data () {
+    return {
+      currentTabIndex: 0, // 当前选项卡的索引
+      tabList: [] // 选项卡数据
+    }
+  },
+  created () {
+    // 初始化选项卡数据
+    this.tabList = [
+      { title: '我的实战', type: 0 },
+      { title: '我的收藏', type: 1 }
+    ]
+  },
+  methods: {
+    // 选项卡点击事件
+    handleTabClick (tab, index) {
+      this.currentTabIndex = index
+    }
+  }
+}
+</script>
+<style lang="stylus" scoped>
+  .practice-course
+    dt
+      border-bottom: 1px solid #d0d6d9;
+      & > span
+        margin-right: 48px;
+        display: inline-block;
+        vertical-align: middle;
+        height: 48px;
+        line-height: 48px;
+        box-sizing: border-box;
+        font-size: 14px;
+        color: #787d82
+        cursor: pointer;
+        &:last-child
+          margin-right: 0;
+        &.active
+          color: #f01414;
+          border-bottom: 2px solid #f01414;
+    .course-item
+      display: flex;
+      align-items: flex-start;
+      padding: 30px 0;
+      border-bottom: 1px solid #eff1f0;
+      .img-box
+        flex: 0 0 200px;
+        width: 200px;
+        height: 113px;
+        & > img
+          display: block;
+          width: 100%;
+          height: 100%;
+      .course-content
+        flex: 1;
+        margin-left: 30px;
+        .title
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 30px;
+          .status
+            float: right;
+            margin-right: 25px;
+            font-size: 14px;
+            color: #787d82;
+        .learn
+          padding: 10px 0 22px;
+          & > span
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 15px;
+            color: #787d82;
+            line-height: 20px;
+            font-size: 14px;
+            &:last-child
+              margin-right: 0;
+            &.rate
+              color: #f01414;
+        .other
+          & > span
+            margin-right: 100px;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+            color: #787d82;
+            &.learn-btn
+              float: right;
+              margin-right: 0;
+              width: 104px;
+              height: 36px;
+              background-color: #f01414;
+              border-radius: 18px;
+              text-align: center;
+              line-height: 36px;
+              color: #fff;
+              cursor: pointer;
+</style>

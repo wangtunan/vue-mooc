@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="fast-nav" @click="showUserInfo = false">
-            <div class="fast-nav-item">
+            <div class="fast-nav-item" @click="handleCourseClick">
               <i class="iconfont">&#xe60e;</i>
               我的课程
             </div>
@@ -120,7 +120,11 @@ export default {
       this.setUserInfo({})
       this.$router.push('/home')
     },
-    // 订单中心
+    // 我的课程点击
+    handleCourseClick () {
+      this.$router.push('/user/course')
+    },
+    // 订单中心点击
     handleOrderClick () {
       this.$router.push('/order')
     },
