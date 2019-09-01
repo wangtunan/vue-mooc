@@ -48,8 +48,8 @@ export default {
     this.navList = [
       { title: '免费课程', code: 0,  componentName: 'FreeCourse', key: 'free' },
       { title: '实战', code: 1, componentName: 'PracticeCourse', key: 'practice' },
-      { title: '猿问', code: 2, componentName: 'CourseQuestion', key: 'question' },
-      { title: '手记', code: 3, componentName: 'FreeCourse', key: '' },
+      { title: '猿问', code: 2, componentName: 'Question', key: 'question' },
+      { title: '手记', code: 3, componentName: 'Article', key: 'article' },
       { title: '专栏', code: 4, componentName: 'FreeCourse', key: '' }
     ]
   },
@@ -87,7 +87,8 @@ export default {
     CourseHeader,
     FreeCourse: () => import('./free-course.vue'),
     PracticeCourse: () => import('./pratice-course.vue'),
-    CourseQuestion: () => import('./course-question.vue')
+    Question: () => import('./question.vue'),
+    Article: () => import('./article.vue')
   }
 }
 </script>
