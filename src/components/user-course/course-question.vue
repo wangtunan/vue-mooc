@@ -1,5 +1,5 @@
 <template>
-  <div class="practice-course">
+  <div class="course-question">
     <dl>
       <dt>
         <span
@@ -11,33 +11,20 @@
       </dt>
       <dd class="course-item" v-for="(item,index) in filterList" :key="index">
         <div class="img-box">
-          <img :src="item.img" alt="">
+          <img src="https://img3.mukewang.com/5ab477e700015ea202400240.jpg" alt="">
         </div>
         <div class="course-content">
-          <p class="title">{{item.title}} <span class="status" v-if="!item.isExtelnal">更新完成</span></p>
-          <template v-if="item.isExtelnal">
-            <p class="desc">{{item.desc}}</p>
-            <p class="other">
-              <span class="price">¥ {{item.price}}</span>
-              <span>{{item.rank}}</span>
-              <span>人数 {{item.number}}</span>
-              <span>评分 {{item.score}}</span>
-              <span class="learn-btn">继续学习</span>
-            </p>
-          </template>
-          <template v-else>
-            <p class="learn">
-              <span class="rate">已学0%</span>
-              <span>用时0分</span>
-              <span>学至1-1 课程导学</span>
-            </p>
-            <p class="other">
-              <span>笔记0</span>
-              <span>代码0</span>
-              <span>问答0</span>
-              <span class="learn-btn">继续学习</span>
-            </p>
-          </template>
+          <p class="from">来自 {{item.from}}</p>
+          <p class="title">{{item.title}}</p>
+          <p class="answer-box" v-if="item.isAnswer">
+            <span class="title">我的回答</span>
+            <span class="answer">{{item.answer}}</span>
+          </p>
+          <p class="other">
+            <span>{{item.time}}</span>
+            <span v-if="item.isAnswer">{{item.reply}}个回复</span>
+            <span v-else>{{item.answer}}个回答</span>
+          </p>
         </div>
       </dd>
     </dl>
@@ -62,8 +49,9 @@ export default {
   created () {
     // 初始化选项卡数据
     this.tabList = [
-      { title: '我的实战', type: 0 },
-      { title: '我的收藏', type: 1 }
+      { title: '我的提问', type: 0 },
+      { title: '我的回答', type: 1 },
+      { title: '我的关注', type: 2 }
     ]
   },
   methods: {
@@ -81,7 +69,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .practice-course
+  .course-question
     dt
       border-bottom: 1px solid #d0d6d9;
       & > span
@@ -107,54 +95,39 @@ export default {
       &:last-child
         border-bottom: none;
       .img-box
-        flex: 0 0 200px;
-        width: 200px;
-        height: 113px;
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
         & > img
           display: block;
           width: 100%;
           height: 100%;
       .course-content
         flex: 1;
-        margin-left: 30px;
+        margin-left: 20px;
+        .from
+          font-size: 12px;
+          color: #787d82;
+          line-height: 20px;
         .title
           font-size: 18px;
           font-weight: 700;
           line-height: 30px;
-          .status
-            float: right;
-            margin-right: 25px;
+        .answer-box
+          margin-top: 10px;
+          .title
+            display: block;
             font-size: 14px;
-            color: #787d82;
-        .learn, .desc
-          padding: 10px 0 22px;
-          font-size: 14px;
-          color: #787d82;
-          & > span
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 15px;
-            line-height: 20px;
-            &:last-child
-              margin-right: 0;
-            &.rate, &.price
-              color: #f01414;
+            line-height: 24px;
+          .answer
+            line-height: 24px;
+            font-size: 14px;
         .other
+          margin-top: 10px;
           & > span
-            margin-right: 100px;
+            margin-right: 20px;
             display: inline-block;
             vertical-align: middle;
             font-size: 14px;
-            color: #787d82;
-            &.learn-btn
-              float: right;
-              margin-right: 0;
-              width: 104px;
-              height: 36px;
-              background-color: #f01414;
-              border-radius: 18px;
-              text-align: center;
-              line-height: 36px;
-              color: #fff;
-              cursor: pointer;
+            color: #b5b9bc;
 </style>

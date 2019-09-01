@@ -3,36 +3,36 @@
     <div class="m-center">
       <div class="left">
         <div class="img-box">
-          <img src="https://img2.mukewang.com/5882f5f70001525e01000100-140-140.jpg" alt="">
+          <img :src="base.avatar" alt="">
         </div>
         <div class="user-info">
-          <p class="name">BlueMan_汪汪汪</p>
+          <p class="name">{{base.name}}</p>
           <p class="other">
-            <span>男</span>
-            <span>Web前端工程师</span>
+            <span>{{base.sex}}</span>
+            <span>{{base.job}}</span>
           </p>
         </div>
       </div>
       <div class="right">
         <dl>
           <dd>
-            <span>1157h</span>
+            <span>{{base.duration}}h</span>
             <span>学习时长</span>
           </dd>
           <dd>
-            <span>18943</span>
+            <span>{{base.exp}}</span>
             <span>经验</span>
           </dd>
           <dd>
-            <span>122</span>
+            <span>{{base.integral}}</span>
             <span>积分</span>
           </dd>
           <dd>
-            <span>5</span>
+            <span>{{base.like}}</span>
             <span>关注</span>
           </dd>
           <dd>
-            <span>1</span>
+            <span>{{base.fans}}</span>
             <span>粉丝</span>
           </dd>
           <dt @click="handleSettingClick">
@@ -45,6 +45,14 @@
 </template>
 <script>
 export default {
+  props: {
+    base: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  },
   methods: {
     // 个人设置点击
     handleSettingClick () {

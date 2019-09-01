@@ -1,0 +1,455 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": {
+    "base": {
+      "avatar": "https://img2.mukewang.com/5882f5f70001525e01000100-140-140.jpg",
+      "name": "BlueMan_汪汪汪",
+      "sex": "男",
+      "job": "Web前端工程师",
+      "duration": "11571",
+      "exp": 18943,
+      "integral": 123,
+      "like": 5,
+      "fans": 1
+    },
+    "free": [
+      {
+        "type": 0,
+        "typeText": "慕课小课",
+        "img": "https://img.mukewang.com/5d6639170827e93500000000-240-135.jpg",
+        "title": "从0到1 实现HTTP服务器开发",
+        "status": "更新完毕",
+        "learn": {
+          "rate": 0,
+          "duration": "0分",
+          "chapter": "1-1 课程导学"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 1,
+        "typeText": "最近学习",
+        "img": "https://img.mukewang.com/5ad5cc490001e53006000338-240-135.jpg",
+        "title": "vue2.5入门",
+        "status": "更新完毕",
+        "learn": {
+          "rate": 0,
+          "duration": "0分",
+          "chapter": "2-3 Vue实例中的数据,事件和方法"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 1,
+        "typeText": "最近学习",
+        "img": "https://img.mukewang.com/572b06470001a42e06000338-240-135.jpg",
+        "title": "PHP进阶篇",
+        "status": "更新完毕",
+        "learn": {
+          "rate": 46,
+          "duration": "1小时18分",
+          "chapter": "2-3 Vue实例中的数据,事件和方法"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 1,
+        "typeText": "最近学习",
+        "img": "https://img.mukewang.com/5731805200012a9c06000338-240-135.jpg",
+        "title": "Canvas绘图详解",
+        "status": "更新完毕",
+        "learn": {
+          "rate": 96,
+          "duration": "9小时0分",
+          "chapter": "9-1 在Canvas中使用其他HTML元素"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 1,
+        "typeText": "最近学习",
+        "img": "https://img.mukewang.com/57fcab030001707f06000338-240-135.jpg",
+        "title": "CSS深入理解之padding",
+        "status": "更新完毕",
+        "learn": {
+          "rate": 80,
+          "duration": "5小时53分",
+          "chapter": "5-1 CSS padding与布局"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 1,
+        "typeText": "最近学习",
+        "img": "https://img.mukewang.com/552498510001ac2306000338-240-135.jpg",
+        "title": "css3实现网页平滑过渡效果",
+        "status": "更新完毕",
+        "learn": {
+          "rate": 13,
+          "duration": "41分",
+          "chapter": "1-3 使用radio制作导航（html结构搭建..."
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 1,
+        "typeText": "最近学习",
+        "img": "https://img.mukewang.com/574671a30001bffe06000338-240-135.jpg",
+        "title": "分页页码制作",
+        "status": "更新完毕",
+        "learn": {
+          "rate": 0,
+          "duration": "9分",
+          "chapter": "1-1 直角分页页码制作"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 2,
+        "typeText": "我的收藏",
+        "img": "https://img.mukewang.com/58a14cad0001321c06000338-240-135.jpg",
+        "title": "webpack深入与实战",
+        "status": "更新至4-7",
+        "learn": {
+          "rate": 36,
+          "duration": "14小时53分",
+          "chapter": "1-1 webpack 基本介绍"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      }
+    ],
+    "practice": [
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5ac2dfe100014a9005400300-280-160.jpg",
+        "title": "Vue2.5开发去哪儿网App 从零基础入门到实战项目",
+        "status": "已完结",
+        "learn": {
+          "rate": 100,
+          "duration": "205小时36分",
+          "chapter": "学至3-6Vue中的样式绑定"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 2
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5d36a6000837a91d06000338-280-160.jpg",
+        "title": "前端要学的测试课 从Jest入门到 TDD/BDD双实战",
+        "status": "已完结",
+        "learn": {
+          "rate": 52,
+          "duration": "6小时2分",
+          "chapter": "学至5-1什么是TDD？（同4-1）"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5c6bdb3e08e4674a06000338-280-160.jpg",
+        "title": "从基础到实战 手把手带你掌握新版Webpack4.0",
+        "status": "已完结",
+        "learn": {
+          "rate": 100,
+          "duration": "99小时51分",
+          "chapter": "学至4-8打包分析，Preloading,  Prefetching"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5b3082da0001d7e905400300-280-160.jpg",
+        "title": "React16.4开发简书项目 从零基础入门到实战",
+        "status": "已完结",
+        "learn": {
+          "rate": 60,
+          "duration": "10小时46分",
+          "chapter": "学至7-6使用 React-Redux 进行应用数据的管理"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5baf3f0a000180df06000338-280-160.jpg",
+        "title": "Vue全家桶+SSR+Koa2全栈开发美团网",
+        "status": "已完结",
+        "learn": {
+          "rate": 90,
+          "duration": "70小时28分",
+          "chapter": "学至7-8首页菜单（2）"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5b4bfb7000019d2e10800600-280-160.jpg",
+        "title": "纯正商业级应用-微信小程序开发实战",
+        "status": "已完结",
+        "learn": {
+          "rate": 99,
+          "duration": "69小时56分",
+          "chapter": "学至17-3promisic完美实现全小程序async和await"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/59eeb1b00001c1aa05400300-280-160.jpg",
+        "title": "Get全栈技能点Vue2.0/Node.js/MongoDB打造商城系统",
+        "status": "已完结",
+        "learn": {
+          "rate": 29,
+          "duration": "5小时13分",
+          "chapter": "学至8-2Linux平台下安装配置MongoDB"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5cbf00c608f52a3b06000338-280-160.jpg",
+        "title": "下一代前端开发语言 TypeScript从零重构axios",
+        "status": "已完结",
+        "learn": {
+          "rate": 58,
+          "duration": "6小时11分",
+          "chapter": "学至8-4-4 拦截器的设计与实现 - demo 编写"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5be39caf00018a8d05400300-280-160.jpg",
+        "title": "Vue2.0开发企业级移动端音乐Web App",
+        "status": "已完结",
+        "learn": {
+          "rate": 100,
+          "duration": "129小时0分",
+          "chapter": "学至13-3编译打包-路由组件实现懒加载"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5b17bad10001535305400300-280-160.jpg",
+        "title": "Vue.js源码全方位深入解析",
+        "status": "已完结",
+        "learn": {
+          "rate": 38,
+          "duration": "16小时31分",
+          "chapter": "学至6-10parse（7）"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5c62a4dc0812e84106000338-280-160.jpg",
+        "title": "JavaScript版 数据结构与算法",
+        "status": "已完结",
+        "learn": {
+          "rate": 25,
+          "duration": "2小时22分",
+          "chapter": "学至1-3说明与承诺"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/58d8c6da0001ff8505400300-280-160.jpg",
+        "title": "Angular4.0从入门到实战 打造股票管理网站",
+        "status": "已完结",
+        "learn": {
+          "rate": 100,
+          "duration": "66小时10分",
+          "chapter": "学至6-12本章小结"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/5becd5ad0001b89306000338-280-160.jpg",
+        "title": "Vue.js2.5+cube-ui重构饿了么App（经典再升级）",
+        "status": "已完结",
+        "learn": {
+          "rate": 73,
+          "duration": "125小时9分",
+          "chapter": "学至3-1目录结构 & header 组件"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 0,
+        "typeText": "我的实战",
+        "img": "https://img.mukewang.com/szimg/586e0f55000158db05400300-280-160.jpg",
+        "title": "HTML5独立开发书城Web App",
+        "status": "已完结",
+        "learn": {
+          "rate": 68,
+          "duration": "35小时46分",
+          "chapter": "学至1-2HTML5的应用场景"
+        },
+        "note": 0,
+        "code": 0,
+        "question": 0
+      },
+      {
+        "type": 1,
+        "typeText": "我的收藏",
+        "isExtelnal": true,
+        "img": "https://img.mukewang.com/szimg/586e0f55000158db05400300-280-160.jpg",
+        "title": "从0到1手把手教你用Node.js+KOA2打造超好用的Web框架",
+        "desc": "提升JS内功/理解异步编程本质/培养面向对象思维，独立完成Node.js服务端开发，进阶全栈！",
+        "price": "366.00",
+        "rank": "中级",
+        "number": 910,
+        "score": "9.99"
+      },
+      {
+        "type": 1,
+        "typeText": "我的收藏",
+        "isExtelnal": true,
+        "img": "https://img1.sycdn.imooc.com/szimg/5c7e6835087ef3d806000338-280-160.jpg",
+        "title": "Flutter从入门到进阶 实战携程网App",
+        "desc": "从入门到进阶，系统掌握Flutter开发核心技术",
+        "price": "348.00",
+        "rank": "中级",
+        "number": 1619,
+        "score": "9.98"
+      }
+    ],
+    "question": [
+      {
+        "type": 0,
+        "typeText": "我的提问",
+        "title": "1213421321321321321312321321321321",
+        "from": "幽默段子",
+        "time": "1天前",
+        "answer": 1
+      },
+      {
+        "type": 0,
+        "typeText": "我的提问",
+        "title": "1213421321321321321312321321321321",
+        "from": "幽默段子",
+        "time": "2天前",
+        "answer": 99
+      },
+      {
+        "type": 0,
+        "typeText": "我的提问",
+        "title": "1213421321321321321312321321321321",
+        "from": "幽默段子",
+        "time": "3天前",
+        "answer": 50
+      },
+      {
+        "type": 1,
+        "typeText": "我的回答",
+        "isAnswer": true,
+        "title": "1213421321321321321312321321321321",
+        "from": "幽默段子",
+        "answer": "112233",
+        "time": "3天前",
+        "reply": 0
+      },
+      {
+        "type": 1,
+        "typeText": "我的回答",
+        "isAnswer": true,
+        "title": "1213421321321321321312321321321321",
+        "from": "幽默段子",
+        "answer": "112233",
+        "time": "3天前",
+        "reply": 0
+      },
+      {
+        "type": 1,
+        "typeText": "我的回答",
+        "isAnswer": true,
+        "title": "1213421321321321321312321321321321",
+        "from": "幽默段子",
+        "answer": "112233",
+        "time": "3天前",
+        "reply": 0
+      },
+      {
+        "type": 2,
+        "typeText": "我的关注",
+        "title": "vue 项目打包后，dist放在服务器上，之前通过访问本地json文件，获取的数据都获取不了了",
+        "from": "webpack",
+        "answer": 1,
+        "time": "1天前"
+      },
+      {
+        "type": 2,
+        "typeText": "我的关注",
+        "title": "vue 项目打包后，dist放在服务器上，之前通过访问本地json文件，获取的数据都获取不了了",
+        "from": "webpack",
+        "answer": 10,
+        "time": "2天前"
+      },
+      {
+        "type": 2,
+        "typeText": "我的关注",
+        "title": "vue 项目打包后，dist放在服务器上，之前通过访问本地json文件，获取的数据都获取不了了",
+        "from": "webpack",
+        "answer": 100,
+        "time": "3天前"
+      }
+    ]
+  }
+}

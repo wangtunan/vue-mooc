@@ -16,3 +16,7 @@ export function userRegister(params) {
 export function getUserInfo() {
   return axios.get('/user/info')
 }
+// 获取用户课程信息接口
+export function getUserCourse () {
+  return axios.get('/user/course')
+}

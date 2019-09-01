@@ -9,40 +9,21 @@
           @click="handleTabClick(tab,index)"
         >{{tab.title}}</span>
       </dt>
-      <dd class="course-item">
+      <dd class="course-item" v-for="(item,index) in filterList" :key="index">
         <div class="img-box">
-          <img src="https://img.mukewang.com/5d6639170827e93500000000-240-135.jpg" alt="">
+          <img :src="item.img" alt="">
         </div>
         <div class="course-content">
-          <p class="title">从0到1 实现HTTP服务器开发 <span class="status">更新完成</span></p>
+          <p class="title">{{item.title}} <span class="status">{{item.status}}</span></p>
           <p class="learn">
-            <span class="rate">已学0%</span>
-            <span class="duration">用时0分</span>
-            <span class="chapter">学至1-1 课程导学</span>
+            <span class="rate">已学{{item.learn.rate}}%</span>
+            <span class="duration">用时{{item.learn.duration}}</span>
+            <span class="chapter">学习至{{item.learn.chapter}}</span>
           </p>
           <p class="other">
-            <span>笔记0</span>
-            <span>代码0</span>
-            <span>问答0</span>
-            <span class="learn-btn">继续学习</span>
-          </p>
-        </div>
-      </dd>
-      <dd class="course-item">
-        <div class="img-box">
-          <img src="https://img.mukewang.com/5d6639170827e93500000000-240-135.jpg" alt="">
-        </div>
-        <div class="course-content">
-          <p class="title">从0到1 实现HTTP服务器开发 <span class="status">更新完成</span></p>
-          <p class="learn">
-            <span class="rate">已学0%</span>
-            <span class="duration">用时0分</span>
-            <span class="chapter">学至1-1 课程导学</span>
-          </p>
-          <p class="other">
-            <span>笔记0</span>
-            <span>代码0</span>
-            <span>问答0</span>
+            <span>笔记{{item.note}}</span>
+            <span>代码{{item.code}}</span>
+            <span>问答{{item.question}}</span>
             <span class="learn-btn">继续学习</span>
           </p>
         </div>
@@ -79,6 +60,12 @@ export default {
     handleTabClick (tab, index) {
       this.currentTabIndex = index
     }
+  },
+  computed: {
+    filterList () {
+      let currTab = this.tabList[this.currentTabIndex]
+      return this.list.filter(item => item.type === currTab.type)
+    }
   }
 }
 </script>
@@ -106,6 +93,8 @@ export default {
       align-items: flex-start;
       padding: 30px 0;
       border-bottom: 1px solid #eff1f0;
+      &:last-child
+        border-bottom: none;
       .img-box
         flex: 0 0 200px;
         width: 200px;

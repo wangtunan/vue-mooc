@@ -1,7 +1,7 @@
 <template>
   <div class="user-course">
     <!-- 头部 -->
-    <course-header></course-header>
+    <course-header :base="base"></course-header>
 
     <!-- 内容部分 -->
     <div class="m-center">
@@ -25,7 +25,7 @@
           </ul>
         </div>
         <div class="content-container">
-          <component :is="componentName"></component>
+          <component :is="componentName" :list="currentList"></component>
         </div>
       </div>
     </div>
@@ -33,43 +33,67 @@
 </template>
 <script>
 import CourseHeader from './course-header.vue'
+import { getUserCourse } from 'api/user.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      currentNavIndex: 0, // 当前课程的导航索引 
+      currentNavIndex: 0, // 当前课程的导航索引
+      userCourse: {}, // 用户课程信息
       navList: [] // 导航数据
     }
   },
   created () {
     // 初始化导航数据
     this.navList = [
-      { title: '免费课程', code: 0,  componentName: 'FreeCourse', key: '' },
-      { title: '实战', code: 1, componentName: 'PracticeCourse', key: '' },
-      { title: '猿问', code: 2, componentName: 'FreeCourse', key: '' },
+      { title: '免费课程', code: 0,  componentName: 'FreeCourse', key: 'free' },
+      { title: '实战', code: 1, componentName: 'PracticeCourse', key: 'practice' },
+      { title: '猿问', code: 2, componentName: 'CourseQuestion', key: 'question' },
       { title: '手记', code: 3, componentName: 'FreeCourse', key: '' },
       { title: '专栏', code: 4, componentName: 'FreeCourse', key: '' }
     ]
+  },
+  mounted () {
+    this.getUserCourseData()
   },
   methods: {
     // 导航点击
     handleNavClick (item,index) {
       this.currentNavIndex = index
+    },
+    // 获取用户课程信息
+    getUserCourseData () {
+      getUserCourse().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.userCourse = data
+        }
+      })
     }
   },
   computed: {
     componentName () {
       return this.navList[this.currentNavIndex].componentName
+    },
+    base () {
+      return this.userCourse.base || {}
+    },
+    currentList () {
+      let currNav = this.navList[this.currentNavIndex]
+      return this.userCourse[currNav.key] || []
     }
   },
   components: {
     CourseHeader,
     FreeCourse: () => import('./free-course.vue'),
-    PracticeCourse: () => import('./pratice-course.vue')
+    PracticeCourse: () => import('./pratice-course.vue'),
+    CourseQuestion: () => import('./course-question.vue')
   }
 }
 </script>
 <style lang="stylus" scoped>
   .user-course
+    margin-bottom: 50px;
     .user-course-content
       display: flex;
       align-items: flex-start;
