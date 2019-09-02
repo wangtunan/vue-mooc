@@ -32,7 +32,7 @@
               <img :src="item.teacher.avatar" alt="">
               <span class="name">{{item.teacher.name}}</span>
             </div>
-            <div class="update-info">
+            <div class="update-info" v-if="item.lastUpdate">
               <span>更新于</span>
               <span>{{item.lastUpdate}}</span>
             </div>

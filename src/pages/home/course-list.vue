@@ -16,7 +16,7 @@
     </div>
 
     <ul class="course-list">
-      <li class="course-item" v-for="(item,index) in course.data" :key="index">
+      <li class="course-item" v-for="(item,index) in course.data" :key="index" @click="handleCourseClick">
         <div class="img-box">
           <img :src="item.img" alt="">
           <div class="tags" v-if="item.tags && item.tags.length > 0">
@@ -55,6 +55,11 @@ export default {
     }
   },
   methods: {
+    // 课程点击
+    handleCourseClick () {
+      let random = new Date().getTime()
+      this.$router.push(`/lesson/${random}`)
+    },
     getBackgroundPosition (position) {
       return {
         'background-position': position

@@ -8,7 +8,7 @@ Vue.use(Router)
 const Test  = () => import('pages/test/test.vue')
 
 // 首页路由
-const Home = () => import('components/home/home.vue')
+const Home = () => import('pages/home/home.vue')
 // 个人中心路由
 const UserCenter = () => import('components/user/index.vue')
 // 我的课程路由
