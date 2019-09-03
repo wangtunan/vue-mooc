@@ -8,3 +8,7 @@ export function getSearchHistory () {
 export function getHot () {
   return axios.get('/common/hot')
 }
+// 获取底部版权footer数据
+export function getFooter () {
+  return axios.get('/common/footer')
+}

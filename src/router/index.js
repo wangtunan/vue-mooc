@@ -10,30 +10,18 @@ const CourseIndex = () => import('pages/course/index.vue') // 免费课程路由
 const CourseDetail = () => import('pages/course-detail/index.vue') // 免费课程详情路由
 const LessonIndex = () => import('pages/lesson/index.vue') // 实战课程路由
 const LessonDetail = () => import('pages/lesson-detail/index.vue') // 实战课程详情路由
+const ReadIndex = () => import('pages/read/read.vue') // 专栏路由
+const ReadDetaiil = () => import('pages/read-detail/read-detail.vue') // 专栏详情路由
+const QuestionIndex = () => import('pages/question/question.vue') // 猿问路由
+const ArticleIndex = () => import('pages/article/article.vue') // 手记路由
+const UserCenter = () => import('pages/user/index.vue') // 个人中心路由
+const UserCourse = () => import('pages/user-course/index.vue') // 我的课程路由
+const OrderIndex = () => import('pages/order/index.vue') // 订单中心路由
+const NoticeIndex = () => import('pages/notice/notice.vue') // 消息中心路由
+const CartIndex = () => import('pages/cart/cart.vue') // 购物车路由
+const CartConfirm = () => import('pages/cart/confirm.vue') // 购物车确认路由
+const CartPay = () => import('pages/cart/pay.vue') // 购物车支付路由
 
-
-// 个人中心路由
-const UserCenter = () => import('components/user/index.vue')
-// 我的课程路由
-const UserCourse = () => import('components/user-course/index.vue')
-// 订单中心路由
-const OrderIndex = () => import('components/order/index.vue')
-// 消息中心路由
-const NoticeIndex = () => import('components/notice/notice.vue')
-// 购物车路由
-const CartIndex = () => import('components/cart/cart.vue')
-// 购物车确认路由
-const CartConfirm = () => import('components/cart/confirm.vue')
-// 购物车支付路由
-const CartPay = () => import('components/cart/pay.vue')
-// 专栏路由
-const ReadIndex = () => import('components/read/read.vue')
-// 专栏详情路由
-const ReadDetaiil = () => import('components/read-detail/read-detail.vue')
-// 猿问路由
-const QuestionIndex = () => import('components/question/question.vue')
-// 手记路由
-const ArticleIndex = () => import('components/article/article.vue')
 const routes = [
   {
     path: '/',

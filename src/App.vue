@@ -5,16 +5,16 @@
     <router-view></router-view>
     <m-footer></m-footer>
 
-    <login v-if="showLogin"></login>
-    <m-mask v-if="showLogin" @maskClick="handleMaskClick"></m-mask>
+    <template v-if="showLogin">
+      <login></login>
+      <m-mask @click="handleMaskClick"></m-mask>
+    </template>
   </div>
 </template>
 <script>
-import MHeader from 'base/header/header.vue'
-import MFooter from 'base/footer/footer.vue'
-import MSidebar from 'base/sidebar/sidebar.vue'
-import Login from 'base/login/login.vue'
-import MMask from 'base/mask/mask.vue'
+import MHeader from 'components/header/header.vue'
+import MFooter from 'components/footer/footer.vue'
+import MSidebar from 'components/sidebar/sidebar.vue'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'app',
@@ -41,8 +41,8 @@ export default {
     MHeader,
     MFooter,
     MSidebar,
-    Login,
-    MMask
+    Login: () => import('components/login/login.vue'),
+    MMask: () => import('components/mask/mask.vue')
   }
 }
 </script>

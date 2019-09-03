@@ -3,11 +3,15 @@
     <div class="footer-container m-center">
       <div class="footer-links">
         <ul>
-          <li class="link-item" v-for="(item,index) in links" :key="index">{{item}}</li>
+          <li
+            class="link-item"
+            v-for="(item,index) in footer.links"
+            :key="index"
+          >{{item.title}}</li>
         </ul>
       </div>
       <div class="copyright">
-        <p>© 2019 imooc.com  京ICP备 12003892号-11 北京奥鹏文化传媒有限公司</p>
+        <p>© {{year}} {{footer.website}}  {{footer.caseCode}}  {{footer.company}}</p>
       </div>
       <div class="share">
         <div class="share-item wechart">
@@ -24,10 +28,29 @@
   </div>
 </template>
 <script>
+import { getFooter } from 'api/common.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      links: ['企业合作','人才招聘','联系我们','讲师招募','帮助中心','意见反馈','慕课大学','代码托管', '友情链接']
+      footer: {}
+    }
+  },
+  created () {
+    this.year = new Date().getFullYear()
+  },
+  mounted () {
+    this.getFooterData()
+  },
+  methods: {
+    // 获取底部版权数据
+    getFooterData () {
+      getFooter().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.footer = data
+        }
+      })
     }
   }
 }

@@ -161,7 +161,7 @@ export default {
     ...mapGetters(['userInfo'])
   },
   components: {
-    MiniCart: () => import('components/cart/mini-cart.vue')
+    MiniCart: () => import('components/cart/cart.vue')
   },
   beforeDestroy () {
     clearTimeout(this.timer)

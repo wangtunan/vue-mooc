@@ -6,7 +6,7 @@ export default {
   methods: {
     // 派发出去的点击事件
     handleMaskClick () {
-      this.$emit('maskClick')
+      this.$emit('click')
     }
   }
 }

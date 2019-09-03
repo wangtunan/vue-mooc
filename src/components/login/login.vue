@@ -14,7 +14,7 @@
     <div class="three-login-way" v-show="componentName!='qrcode-way'">
       <span class="phone-login">{{threeTitle}}</span>
       <span class="three-way-item">
-        <i class="iconfont weibo">&#xe699;</i>
+        <i class="iconfont weibo">&#xe653;</i>
         <i class="iconfont wechart">&#xe646;</i>
         <i class="iconfont qq">&#xe6a0;</i>
       </span>
