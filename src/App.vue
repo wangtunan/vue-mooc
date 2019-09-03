@@ -5,10 +5,7 @@
     <router-view></router-view>
     <m-footer></m-footer>
 
-    <template v-if="showLogin">
-      <login></login>
-      <m-mask @click="handleMaskClick"></m-mask>
-    </template>
+    <login v-if="showLogin" @maskClick="handleMaskClick"></login>
   </div>
 </template>
 <script>

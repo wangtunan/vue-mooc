@@ -40,9 +40,9 @@
 </template>
 <script>
 import ArticleList from './article-list.vue'
-import RecommendRead from 'base/recommend/recommend-read.vue'
-import RecommendAuthor from 'base/recommend/recommend-author.vue'
-import RecommendArticle from 'base/recommend/recommend-article.vue'
+import RecommendRead from 'components/recommend/recommend-read.vue'
+import RecommendAuthor from 'components/recommend/recommend-author.vue'
+import RecommendArticle from 'components/recommend/recommend-article.vue'
 import { getArticleNavList, getArticleList } from 'api/article.js'
 import { ERR_OK } from 'api/config.js'
 export default {

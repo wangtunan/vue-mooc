@@ -19,7 +19,7 @@
 </template>
 <script>
 import MNav from './nav.vue'
-import Search from './search.vue'
+import Search from 'components/search/search.vue'
 import LoginArea from './login.vue'
 export default {
   components: {

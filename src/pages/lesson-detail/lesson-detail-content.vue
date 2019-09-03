@@ -32,7 +32,7 @@
 <script>
 import DetailScore from './lesson-detal-score.vue'
 import DetailTeacher from './lesson-detail-teacher.vue'
-import Recommend from 'base/recommend/recommend.vue'
+import Recommend from 'components/recommend/recommend.vue'
 export default {
   props: {
     data: {
@@ -69,8 +69,8 @@ export default {
     DetailScore,
     DetailTeacher,
     Recommend,
-    chapter: () => import('base/chapter/chapter.vue'),
-    comment: () => import('base/comment/comment.vue'),
+    Chapter: () => import('components/chapter/chapter.vue'),
+    Comment: () => import('components/comment/comment.vue'),
     classmate: () => import('./lesson-detail-classmate.vue')
   }
 }

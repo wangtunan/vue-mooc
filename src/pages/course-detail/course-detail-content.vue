@@ -32,7 +32,7 @@
 </template>
 <script>
 import DetailTips from './course-detail-tips.vue'
-import Recommend from 'base/recommend/recommend.vue'
+import Recommend from 'components/recommend/recommend.vue'
 import DetailTags from './course-detail-tags.vue'
 export default {
   props: {
@@ -87,9 +87,9 @@ export default {
     DetailTips,
     Recommend,
     DetailTags,
-    chapter: () => import('base/chapter/chapter.vue'),
-    QuestionAnswer: () => import('base/question-answer/question-answer.vue'),
-    comment: () => import('base/comment/comment.vue')
+    Chapter: () => import('components/chapter/chapter.vue'),
+    QuestionAnswer: () => import('components/question-answer/question-answer.vue'),
+    Comment: () => import('components/comment/comment.vue')
   }
 }
 </script>
