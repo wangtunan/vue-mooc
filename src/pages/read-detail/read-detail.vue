@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import RecommendRead from 'base/recommend/recommend-read.vue'
+import RecommendRead from 'components/recommend/recommend-read.vue'
 import { getReadDetail } from 'api/read.js'
 import { ERR_OK } from 'api/config.js'
 export default {

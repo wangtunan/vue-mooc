@@ -38,8 +38,7 @@ export default {
     MHeader,
     MFooter,
     MSidebar,
-    Login: () => import('components/login/login.vue'),
-    MMask: () => import('components/mask/mask.vue')
+    Login: () => import('components/login/login.vue')
   }
 }
 </script>
