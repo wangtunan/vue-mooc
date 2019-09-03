@@ -11,7 +11,7 @@
           <img :src="item.img" :key="item.img" alt="" class="swiper-img">
         </swiper-slide>
       </home-swiper>
-      <course-banner></course-banner>
+      <home-banner></home-banner>
     </div>
 
     <!--  实战导航 -->
@@ -30,23 +30,23 @@
     <course-list :course="technologyList"></course-list>
 
     <!-- 猿问和手记 -->
-    <waterfull :article="articleList"></waterfull>
+    <home-article :article="articleList"></home-article>
 
     <!-- 精英讲师 -->
-    <elite-teacher :teacher-list="teacherList"></elite-teacher>
+    <home-teacher :teacher-list="teacherList"></home-teacher>
 
     <!-- 全明星 -->
-    <all-star :allstar="allstar"></all-star>
+    <home-student :allstar="allstar"></home-student>
   </div>
 </template>
 <script>
-import HomeNav from './nav.vue'
+import HomeNav from './home-nav.vue'
 import HomeSwiper from 'base/swiper/swiper.vue'
-import CourseBanner from './course-banner.vue'
+import HomeBanner from './home-banner.vue'
 import CourseList from './course-list.vue'
-import Waterfull from './waterfull.vue'
-import EliteTeacher from './elite-teacher.vue'
-import AllStar from './all-star.vue'
+import HomeArticle from './home-article.vue'
+import HomeTeacher from './home-teacher.vue'
+import HomeStudent from './home-student.vue'
 import { getSliderList, getHomeCourse, getArticle, getTeacher, getAllStar } from 'api/home.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -136,11 +136,11 @@ export default {
   components: {
     HomeNav,
     HomeSwiper,
-    CourseBanner,
+    HomeBanner,
     CourseList,
-    Waterfull,
-    EliteTeacher,
-    AllStar
+    HomeArticle,
+    HomeTeacher,
+    HomeStudent
   }
 }
 </script>

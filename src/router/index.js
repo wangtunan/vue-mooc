@@ -4,25 +4,20 @@ import store from '../store/index.js'
 import { getUserInfo } from 'utils/cache.js'
 Vue.use(Router)
 
-// 测试路由
-const Test  = () => import('pages/test/test.vue')
+const Test  = () => import('pages/test/test.vue') // 测试路由
+const Home = () => import('pages/home/index.vue') // 首页路由
+const CourseIndex = () => import('pages/course/index.vue') // 免费课程路由
+const CourseDetail = () => import('pages/course-detail/index.vue') // 免费课程详情路由
+const LessonIndex = () => import('pages/lesson/index.vue') // 实战课程路由
+const LessonDetail = () => import('pages/lesson-detail/index.vue') // 实战课程详情路由
 
-// 首页路由
-const Home = () => import('pages/home/home.vue')
+
 // 个人中心路由
 const UserCenter = () => import('components/user/index.vue')
 // 我的课程路由
 const UserCourse = () => import('components/user-course/index.vue')
 // 订单中心路由
 const OrderIndex = () => import('components/order/index.vue')
-// 免费课程路由
-const CourseIndex = () => import('components/course/index.vue')
-// 免费课程详情路由
-const CourseDetail = () => import('components/course-detail/index.vue')
-// 实战课程路由
-const LessonIndex = () => import('components/lesson/index.vue')
-// 实战课程详情路由
-const LessonDetail = () => import('components/lesson-detail/index.vue')
 // 消息中心路由
 const NoticeIndex = () => import('components/notice/notice.vue')
 // 购物车路由
