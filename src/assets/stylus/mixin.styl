@@ -3,6 +3,7 @@ ellipsis()
   text-overflow: ellipsis
   white-space: nowrap;
   overflow: hidden;
+
 // 多行折叠省略
 multline-ellipsis($line)
   display: -webkit-box;
@@ -10,12 +11,14 @@ multline-ellipsis($line)
   -webkit-line-clamp: $line;
   text-overflow: ellipsis;
   overflow: hidden;
+
 // 取消滚动条
 no-scrollbar ()
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar
     width: 0!important;
+
 // 全局遮罩
 mask($bg, $index)
   &::after
@@ -27,6 +30,7 @@ mask($bg, $index)
     right: 0;
     bottom: 0
     background-color: $bg ? $bg : rgba(0,0,0,0.6);
+
 // 图片加载失败占位
 img-box($width, $height)
   width: $width;

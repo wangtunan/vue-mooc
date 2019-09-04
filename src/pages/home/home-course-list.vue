@@ -1,11 +1,13 @@
 <template>
   <div class="course-list-container m-center">
+    <!-- 标题 -->
     <h2 class="home-title">
       <i class="title-icon left-icon" :style="getBackgroundPosition(course.leftIcon)"></i>
       {{course.title}}
       <i class="title-icon right-icon" :style="getBackgroundPosition(course.rightIcon)"></i>
     </h2>
 
+    <!-- 课程banner -->
     <div class="split-banner" v-if="course.banner && course.banner.length > 0">
       <div class="split-banner-item" v-for="(item,index) in course.banner" :key="index">
         <img :src="item.url" alt="">
@@ -15,7 +17,14 @@
       </div>
     </div>
 
-    <ul class="course-list">
+    <!-- 课程列表 -->
+    <course-list
+      class="course-list"
+      :list="course.data"
+      v-if="course.data"
+      @courseClick="handleCourseClick"
+    ></course-list>
+    <!-- <ul class="course-list">
       <li class="course-item" v-for="(item,index) in course.data" :key="index" @click="handleCourseClick">
         <div class="img-box">
           <img :src="item.img" alt="">
@@ -42,11 +51,12 @@
           </template>
         </p>
       </li>
-    </ul>
+    </ul> -->
+
   </div>
 </template>
 <script>
-import Star from 'base/star/star.vue'
+import CourseList from 'components/course/course.vue'
 export default {
   props: {
     course: {
@@ -67,7 +77,7 @@ export default {
     }
   },
   components: {
-    Star
+    CourseList
   }
 }
 </script>
@@ -118,99 +128,5 @@ export default {
           background-color: rgba(7,17,27,0.4);
           border-radius: 8px;
     .course-list
-      display: flex;
-      align-items: flex-start;
-      flex-wrap: wrap;
       margin-top: 24px;
-      .course-item
-        position: relative;
-        flex: 0 0 20%;
-        margin-bottom: 32px;
-        cursor: pointer;
-        &:hover
-          .course-name
-            color: #F20D0D;
-        .img-box
-          position: relative;
-          margin: 0 auto 8px;
-          width: 216px;
-          height: 120px;
-          & > img
-            display: block;
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-            background-color: #ccc;
-            transition: all 0.3s;
-            &:hover
-              box-shadow: 0px 12px 24px  $shadow
-          .tags
-            position: absolute;
-            bottom: 12px;
-            left: 8px;
-            .tag-item
-              margin-right: 10px;
-              padding: 4px 8px;
-              border-radius: 4px;
-              color: #fff;
-              font-size: 12px;
-              background-color: rgba(28, 31, 33, 0.6);
-          .badge
-            position: absolute;
-            width: 42px;
-            border: 2px solid #fff;
-            border-radius: 12px;
-            line-height: 20px;
-            color: #fff;
-            font-size: 12px;
-            text-align: center;
-            font-weight: 600;
-          .rate
-            right: -7px;
-            top: 8px;
-            background-image: linear-gradient(-90deg, #65da98 0%, #0cba4d 100%);
-          .script
-            left: -7px;
-            top: 8px;
-            background-image: linear-gradient(90deg, #ffaa00 17%, #f76b1c 100%)
-        & > p
-          padding: 0 8px;
-          box-sizing: border-box;
-        .course-name
-          height: 46px;
-          word-break: break-all;
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 24px;
-          color: #07111B;
-          multline-ellipsis(2);
-        .info
-          margin-top: 5px;
-          font-size: 12px;
-          color: #93999F;
-          line-height: 24px;
-          & > span
-            padding: 0 6px;
-            &:first-child
-              padding-left: 0;
-          .icon-user
-            margin-right: -2px;
-            font-weight: 600;
- 
-        .price
-          span
-            color: #4D555D;
-            font-size: 12px;
-            font-weight: 800;
-            line-height: 24px;
-            letter-spacing: 0.5px;
-          .old-price
-            padding:0 3px 0 10px;
-            text-decoration: line-through;
-          .discount-title
-            padding: 0 4px;
-            border-radius: 4px;
-            font-size: 12px;
-            background-color: rgba(242, 13, 13, 0.6);
-            color: #fff;
 </style>
