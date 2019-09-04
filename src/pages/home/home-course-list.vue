@@ -24,35 +24,6 @@
       v-if="course.data"
       @courseClick="handleCourseClick"
     ></course-list>
-    <!-- <ul class="course-list">
-      <li class="course-item" v-for="(item,index) in course.data" :key="index" @click="handleCourseClick">
-        <div class="img-box">
-          <img :src="item.img" alt="">
-          <div class="tags" v-if="item.tags && item.tags.length > 0">
-            <span class="tag-item" v-for="(tag,index) in item.tags" :key="index">{{tag}}</span>
-          </div>
-          <div class="badge rate" v-if="item.process > 0">{{item.process}}%</div>
-          <div class="badge script" v-if="item.script">{{item.script}}</div>
-        </div>
-        <p class="course-name">{{item.name}}</p>
-        <p class="info">
-          <span>{{item.type}}</span>
-          <span>{{item.rank}}</span>
-          <span><i class="iconfont icon-user">&#xe607;</i>{{item.number}}</span>
-          <span>
-            <star class="star-box" :value="item.star" :disabled="true"></star>
-          </span>
-        </p>
-        <p class="price">
-          <span>¥ {{item.price + '.00'}}</span>
-          <template v-if="item.isDiscount">
-            <span class="old-price">¥{{item.oldPrice + '.00'}}</span>
-            <span class="discount-title">限时优惠</span>
-          </template>
-        </p>
-      </li>
-    </ul> -->
-
   </div>
 </template>
 <script>
