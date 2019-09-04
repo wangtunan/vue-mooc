@@ -9,14 +9,52 @@
     <div class="search-icon">
       <i class="iconfont">&#xe63c;</i>
     </div>
+    <div class="search-suggestion">
+      <dl class="hot-key">
+        <dt>热搜</dt>
+        <dd v-for="(item,index) in hot" :key="index">{{item}}</dd>
+      </dl>
+      <dl class="history">
+        <dt>搜索历史</dt>
+        <dd v-for="(item,index) in history" :key="index">{{item}}</dd>
+      </dl>
+    </div>
   </div>
 </template>
 <script>
+import { getHot, getSearchHistory } from 'api/common.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      history: [], // 搜索历时
+      hot: [], // 热搜
       isFocus: false, // 是否聚焦
       tags: ['Java入门', '前端入门'], // tags
+    }
+  },
+  mounted () {
+    this.getHotData()
+    this.getSearchHistoryData()
+  },
+  methods: {
+    // 获取热搜数据
+    getHotData () {
+      getHot().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.hot = data
+        }
+      })
+    },
+    // 获取搜索历时
+    getSearchHistoryData () {
+      getSearchHistory().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.history = data
+        }
+      })
     }
   }
 }
@@ -44,6 +82,9 @@ export default {
         border-radius: 12px;
         background-color: rgba(240,20,20,0.2)
         color: $red;
+      .search-suggestion
+        display: block;
+        height: 333px;
     .search-tags
       position: absolute;
       right: 40px;
@@ -83,5 +124,49 @@ export default {
       color: #757a7e;
       .iconfont
         font-weight: 700;
+    .search-suggestion
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      right: 0;
+      height: 0;
+      transition: all 0.3s;
+      background-color: #fff;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 8px rgba(7,17,27,0.1);
+      dl
+        font-size: 12px;
+        color: #545c63;
+        dt
+          margin-bottom: 4px;
+          color: #1c1f21;
+          font-weight: 700;
+          line-height: 24px;
+        dd
+          cursor: pointer
+        &.hot-key
+          padding: 8px;
+          border-bottom: 1px solid rgba(7,17,27,0.1);
+          dd
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 4px;
+            margin-bottom: 4px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            line-height: 16px;
+            background-color: rgba(84, 92, 99, 0.1);
+        &.history
+          margin-top: 4px;
+          dt
+            padding-left: 8px;
+          dd
+            padding-left: 8px;
+            line-height: 40px;
+            &:last-child
+              border-radius: 0 0 8px 8px;
+            &:hover
+              background-color: #edf0f2;
 </style>
  
