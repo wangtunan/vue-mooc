@@ -23,9 +23,32 @@
         <span class="sidebar-text">官方微信</span>
         <div class="wechat-code code"></div>
       </li>
+      <li class="sidebar-item" v-show="showBackTop" @click="handleBackTopClick">
+        <i class="iconfont">&#xe612;</i>
+        <span class="sidebar-text">返回顶部</span>
+      </li>
     </ul>
   </div>
 </template>
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  methods: {
+    // 返回顶部
+    handleBackTopClick () {
+      document.body.scrollIntoView({ behavior: 'smooth' })
+    }
+  },
+  computed: {
+    showBackTop () {
+      let clientHeight = document.body.clientHeight
+      return this.scrollTop >= clientHeight
+    },
+    // vuex
+    ...mapGetters(['scrollTop'])
+  }
+}
+</script>
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl'
   .sidebar
@@ -41,6 +64,8 @@
     .sidebar-item
       padding: 16px 0;
       width: 26px;
+      height: 60px;
+      box-sizing: border-box;
       border-bottom: 1px solid #edf1f2;
       text-align: center;
       cursor: pointer;
@@ -60,6 +85,7 @@
       .sidebar-text
         display: none;
         font-size: 12px;
+        line-height: 16px;
         color: #07111b;
       .code
         position: absolute;

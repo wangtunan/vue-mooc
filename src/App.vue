@@ -13,8 +13,10 @@ import MHeader from 'components/header/header.vue'
 import MFooter from 'components/footer/footer.vue'
 import MSidebar from 'components/sidebar/sidebar.vue'
 import { mapGetters, mapMutations } from 'vuex'
+import { scrollMixin } from 'assets/js/mixin.js'
 export default {
   name: 'app',
+  mixins: [scrollMixin],
   computed: {
     getOverflowStyle () {
       return {
