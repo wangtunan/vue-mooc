@@ -83,7 +83,6 @@ export default {
         background-color: rgba(240,20,20,0.2)
         color: $red;
       .search-suggestion
-        display: block;
         height: 333px;
     .search-tags
       position: absolute;
@@ -125,16 +124,16 @@ export default {
       .iconfont
         font-weight: 700;
     .search-suggestion
-      display: none;
       position: absolute;
       left: 0;
       top: 100%;
       right: 0;
       height: 0;
-      transition: all 0.3s;
+      transition: height 0.2s;
       background-color: #fff;
       border-radius: 0 0 8px 8px;
       box-shadow: 0 4px 8px rgba(7,17,27,0.1);
+      overflow: hidden;
       dl
         font-size: 12px;
         color: #545c63;
@@ -162,7 +161,7 @@ export default {
           dt
             padding-left: 8px;
           dd
-            padding-left: 8px;
+            padding-left: 12px;
             line-height: 40px;
             &:last-child
               border-radius: 0 0 8px 8px;
