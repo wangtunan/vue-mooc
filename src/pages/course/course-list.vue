@@ -93,6 +93,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   @import '~assets/stylus/mixin.styl';
   .course-list-wrapper
     .course-filter
@@ -101,16 +102,16 @@ export default {
         display: inline-block;
         margin-right: 12px;
         padding: 4px 12px;
-        color: #1c1f21;
+        color: $font-first-color;
         font-size: 14px;
         cursor: pointer;
         &.active
-          background-color: #9199a1;
+          background-color: $font-four-color;
           color: #fff;
           border-radius: 12px;
       .hide-course-box
         float: right;
-        color: #787d82;
+        color: $font-three-color;
         font-size: 12px;
         .el-switch
           margin-right: 15px;
@@ -124,15 +125,11 @@ export default {
         &:hover
           .course-content
             .title
-              color: #f01414;
+              color: $red;
         .img-box
           position: relative;
-          height: 120px;
+          img-box(216px, 120px);
           & > img
-            display: block;
-            width: 100%;
-            height: 100%;
-            background-color: #ccc;
             border-radius: 8px;
           .tags
             position: absolute;
@@ -165,10 +162,10 @@ export default {
             line-height: 24px;
             font-size: 16px;
             font-weight: 700;
-            color: #07111b;
+            color: $font-first-color;
           & > p
             font-size: 12px;
-            color: #9199a1;
+            color: $font-four-color;
             line-height: 24px;
             .rank
               margin-right: 10px;
@@ -176,16 +173,16 @@ export default {
               .iconfont
                 font-weight: 700;
             .price
-              color: #4d555d;
+              color: $font-second-color;
               font-weight: 700;
             .collect
               float: right;
               cursor: pointer;
               &:hover
-                color: #4d555d;
+                color: $font-second-color;
                 font-weight: 700;
               &.like
-                color: #f01414!important;
+                color: $red!important;
                 font-weight: 700;
             .desc
               multline-ellipsis(2)

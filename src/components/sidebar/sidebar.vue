@@ -81,12 +81,12 @@ export default {
           transform: scale(1);
       .iconfont
         font-size: 24px;
-        color: #d9dde1;
+        color: $font-four-color;
       .sidebar-text
         display: none;
         font-size: 12px;
         line-height: 16px;
-        color: #07111b;
+        color: $font-first-color;
       .code
         position: absolute;
         right: 56px;

@@ -12,3 +12,7 @@ export function getHot () {
 export function getFooter () {
   return axios.get('/common/footer')
 }
+// 获取头部数据接口
+export function getHeader () {
+  return axios.get('/common/header')
+}

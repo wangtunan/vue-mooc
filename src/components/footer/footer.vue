@@ -57,6 +57,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .footer
     width: 100%;
     padding: 36px 0;
@@ -67,16 +68,16 @@ export default {
         .link-item
           display: inline-block;
           padding: 0 10px;
-          color: #99a1a6;
+          color: $font-four-color;
           font-size: 14px;
           cursor: pointer;
           &:hover
-            color: #4D555D;
+            color: $font-second-color;
       .copyright
         margin-top: 8px;
         padding-left: 10px;
         line-height: 24px;
-        color: #93999F;
+        color: $font-four-color;
         font-size: 12px;
       .share
         position: absolute;
@@ -96,7 +97,7 @@ export default {
           & > p
             margin-top: 4px;
             font-size: 12px;
-            color: #4D555D;
+            color: $font-second-color;
             line-height: 24px;
         .weibo
           .share-img

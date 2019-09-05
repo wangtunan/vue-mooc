@@ -42,17 +42,18 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .course-nav
     dl
       position: relative;
       padding: 16px 0 10px 52px;
-      border-bottom: 1px solid #edf1f2;
+      border-bottom: 1px solid $border-three-color;
       font-size: 14px;
       dt
         position: absolute;
         left: 0;
         top: 22px;
-        color: #07111b;
+        color: $font-first-color;
         font-weight: 700;
       dd
         display: inline-block;
@@ -60,13 +61,13 @@ export default {
         margin: 0 5px 10px 0;
         height: 30px;
         line-height: 30px;
-        color: #1c1f21;
+        color: $font-first-color;
         cursor: pointer;
         &.active
           background-color: rgba(242,13,13,.06);
           border-radius: 6px;
-          color: #f01414;
+          color: $theme-red-color;
           font-weight: 700;
         &:hover
-          color: #f01414;
+          color: $theme-red-color;
 </style>

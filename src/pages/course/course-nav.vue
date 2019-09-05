@@ -11,7 +11,7 @@
   </div> 
 </template>
 <script>
-import NavItem from './nav-item.vue'
+import NavItem from './course-nav-item.vue'
 export default {
   props: {
     list: {

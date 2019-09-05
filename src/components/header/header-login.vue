@@ -61,7 +61,7 @@
             <i class="iconfont">&#xe62f;</i>
             <span class="course-name ellipsis">{{userInfo.lastCourse && userInfo.lastCourse.name}}</span>
             <span class="course-chapter ellipsis">{{userInfo.lastCourse && userInfo.lastCourse.chapter}}</span>
-            <span class="course-btn">继续</span>
+            <span class="course-btn" @click="handleHistoryClick">继续</span>
           </div>
           <p class="exit-btn" >
             <span @click="handleUserLogout">安全退出</span>
@@ -139,6 +139,12 @@ export default {
     // 购物车点击
     handleCartClick () {
       this.$router.push('/cart')
+    },
+    // 课程历史点击
+    handleHistoryClick () {
+      let random = new Date().getTime()
+      this.showUserInfo = false
+      this.$router.push(`/lesson/${random}`)
     },
     // 获取购物车数据
     getCartListData () {

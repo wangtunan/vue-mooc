@@ -1,6 +1,6 @@
 <template>
   <ul class="header-nav">
-    <li class="nav-item" v-for="(item,index) in navList" :key="index">
+    <li class="nav-item" v-for="(item,index) in list" :key="index">
       <router-link :to="item.path" class="nav-link">
         {{item.title}}
         <i class="nav-icon" v-if="item.icon" :style="getBackgroundImage(item.icon)"></i>
@@ -10,20 +10,13 @@
 </template>
 <script>
 export default {
-  data () {
-    return {
-      navList: []
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
     }
-  },
-  created () {
-    // 初始化导航栏的数据
-    this.navList = [
-      { title: '免费课程', path: '/course' },
-      { title: '实战课程', path: '/lesson' },
-      { title: '专栏', icon: 'https://www.imooc.com/static/img/common/new.png', path: '/read' },
-      { title: '猿问', path: '/question' },
-      { title: '手记', path: '/article' }
-    ]
   },
   methods: {
     // 获取导航栏的背景图片
@@ -37,22 +30,18 @@ export default {
 </script>
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl';
-
   .header-nav
     float: left;
     overflow: hidden;
     .nav-item
       float: left;
-      @media screen and (max-width: 1479px)
-        .nav-link
-          padding: 0 10px!important;
       .nav-link
         display: block;
         position: relative;
         padding: 0 20px;
-        height: $headerHeight;
-        line-height: $headerHeight
-        color: #4D555D;
+        height: 72px;
+        line-height: 72px
+        color: $font-second-color;
         .nav-icon
           position: absolute;
           top: 14px;

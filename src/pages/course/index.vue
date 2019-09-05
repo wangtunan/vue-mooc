@@ -1,7 +1,14 @@
 <template>
   <div class="course mx-center">
     <!-- 搜索模块 -->
-    <course-search></course-search>
+    <div class="course-search">
+      <div class="search-tag">
+        <img src="https://www.imooc.com/static/img/course/logo-course2.png" width="96" height="60" alt="">
+        <img src="https://www.imooc.com/static/img/course/course-top.png" width="96" height="60" alt="">
+      </div>
+      <course-search></course-search>
+    </div>
+    <!-- <course-search></course-search> -->
 
     <!-- 导航模块 -->
     <course-nav :list="navList" v-if="navList.length" @change="handleNavChange"></course-nav>
@@ -71,6 +78,14 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .course
     padding-top: 20px;
+    .course-search
+      padding: 12px 0;
+      border-bottom: 1px solid $border-second-color;
+      .search-tag
+        display: inline-block;
+        & > img:nth-child(2)
+          margin-left: 16px;
 </style>
