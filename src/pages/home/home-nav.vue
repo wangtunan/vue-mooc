@@ -27,18 +27,22 @@ export default {
     this.getHomeNavList()
   },
   methods: {
+    // 导航鼠标移入
     handleMouseEnter (item) {
       this.showNavContent = true
       this.currentNav = item.data
     },
+    // 导航鼠标移除
     handleMouseLeave () {
       this.timer = setTimeout(() => {
         this.showNavContent = false
       }, 150)
     },
+    // 导航内容鼠标移入
     handleContentEnter () {
       clearTimeout(this.timer)
     },
+    // 导航内容鼠标移除
     handleContentLeave () {
       this.showNavContent = false
       this.currentNav = {}

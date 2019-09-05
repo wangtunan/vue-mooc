@@ -83,6 +83,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   @import '~assets/stylus/mixin.styl';
   .waterfull-container
     width: 100%;
@@ -115,7 +116,7 @@ export default {
               display: inline-block;
               margin-bottom: 8px;
               padding: 5px 12px;
-              background-color: rgba(0, 180, 60, 0.5);
+              background-color: $theme-green-color;
               border-radius: 12px;
               color: #fff;
               font-size: 12px;
@@ -126,11 +127,11 @@ export default {
               .post-header-title
                 margin-right: 12px;
                 font-size: 12px;
-                color: #93999F;
+                color: $font-four-color;
               .post-header-title-line
                 flex: 1;
                 height: 1px;
-                background-color: #D9DDE1;
+                background-color: $border-second-color;
             .topic-header-wrapper
               display: flex;
               align-items: center;
@@ -141,7 +142,7 @@ export default {
                   .topic-title-wrapper
                     color: rgba(0, 180, 60, 0.6);
                 .topic-title-wrapper
-                  color: #4D555D;
+                  color: $font-second-color;
                   font-size: 14px;
               .topic-title-wrapper
                 flex: 1;
@@ -155,7 +156,7 @@ export default {
                 border-radius: 8px;
             .topic-desc
               font-size: 12px;
-              color: #4D555D;
+              color: $font-second-color;
               line-height: 24px;
               multline-ellipsis(6);
             .topic-look-detail
@@ -181,7 +182,7 @@ export default {
             .article-title
               flex: 1;
               font-size: 16px;
-              color: #07111B;
+              color: $font-first-color;
               line-height: 24px;
               transition: all 0.2s;
               &:hover
@@ -189,12 +190,12 @@ export default {
           .article-desc
             margin-bottom: 20px;
             font-size: 12px;
-            color: #4D555D;
+            color: $font-second-color;
             line-height: 24px;
             multline-ellipsis(8);
           .article-number
             font-size: 12px;
-            color: #93999F;
+            color: $font-four-color;
             line-height: 24px;
             .scan
               margin-right: 20px;
@@ -214,16 +215,16 @@ export default {
           .question-title
             margin: 8px 0;
             font-size: 14px;
-            color: #1c1f21;
+            color: $font-first-color;
             line-height: 1.5;
             transition: all 0.2s;
             &:hover
               color: rgba(0, 180, 60, 0.7);
           .status-text
-            color: #07111B;
+            color: $font-first-color;
             line-height: 24px;
           .status-answer
-            color: #4D555D;
+            color: $font-second-color;
             line-height: 20px;
           .total-number
             margin-top: 10px;

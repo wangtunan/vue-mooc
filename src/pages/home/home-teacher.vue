@@ -122,12 +122,12 @@ export default {
       .teacher-name
         line-height: 24px;
         .name
-          color: #07111b;
+          color: $font-first-color;
           font-size: 16px;
           font-weight: 700;
         .label
           font-size: 14px;
-          color: #4D555D;
+          color: $font-second-color;
           line-height: 20px;
       .teacher-intro
         margin-top: 10px;
@@ -136,5 +136,5 @@ export default {
         overflow: hidden;
         font-size: 12px;
         line-height: 24px;
-        color: #4D555D;
+        color: $font-second-color;
 </style>

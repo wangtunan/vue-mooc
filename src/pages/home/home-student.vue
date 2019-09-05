@@ -61,6 +61,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .home-title
     padding: 36px 0 48px;
     .left-icon
@@ -89,11 +90,11 @@ export default {
             margin-top: 8px;
             font-size: 16px;
             line-height: 16px;
-            color: #07111B;
+            color: $font-first-color;
           .star-type
             line-height: 24px;
             font-size: 12px;
-            color: #93999F;
+            color: $font-four-color;
           .star-crown
             position: absolute;
             left: 50%;
@@ -140,29 +141,29 @@ export default {
               font-size: 12px;
           &.purple:hover
             img
-              box-shadow: 0 0 0 2px #663ed8;
+              box-shadow: 0 0 0 2px $theme-purple-color;
             .star-info
               display: block;
-              background: #663ed8;
+              background: $theme-purple-color;
               &::after
                 border: 8px solid transparent
-                border-color: #663ed8 transparent transparent transparent;
+                border-color: $theme-purple-color transparent transparent transparent;
           &.blue:hover
             img
-              box-shadow: 0 0 0 2px #068CC6;
+              box-shadow: 0 0 0 2px $theme-blue-dark-color;
             .star-info
               display: block;
-              background: #068CC6;
+              background: $theme-blue-dark-color;
               &::after
                 border: 8px solid transparent
-                border-color: #068CC6 transparent transparent transparent;
+                border-color: $theme-blue-dark-color transparent transparent transparent;
           &.green:hover
             img
-              box-shadow: 0 0 0 2px #06b571;
+              box-shadow: 0 0 0 2px $theme-green-color;
             .star-info
               display: block;
-              background: #06b571;
+              background: $theme-green-color;
               &::after
                 border: 8px solid transparent
-                border-color: #06b571 transparent transparent transparent;
+                border-color: $theme-green-color transparent transparent transparent;
 </style>

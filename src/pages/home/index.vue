@@ -73,6 +73,7 @@ export default {
     this.getAllStarList()
   },
   methods: {
+    // 滚动轮播滚动完毕事件
     handelSwiper (index) {
       this.currentSwiper = this.swiperList[index].img
     },
@@ -162,7 +163,6 @@ export default {
       position: relative;
       box-shadow: 0 12px 24px 0 $shadow;
       border-radius: 8px;
-      background-color: #93999f;
       .swiper-img
         display: block;
         width: 100%;

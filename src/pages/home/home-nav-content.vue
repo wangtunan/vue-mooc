@@ -43,6 +43,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
+  @import '~assets/stylus/mixin.styl';
   .nav-content
     z-index: 999;
     position: absolute;
@@ -59,7 +61,7 @@ export default {
           display: flex;
           align-items: center;
           margin-bottom: 20px;
-          color: #F20D0D;
+          color: $theme-red-color;
           font-size: 14px;
           line-height: 24px;
           font-weight: 700;
@@ -68,17 +70,17 @@ export default {
           .line
             flex: 1;
             height: 1px;
-            background-color: rgba(77, 85, 93, 0.08);
+            background-color: $border-three-color;
         .list
           .tag
             display: inline-block;
             margin-right: 16px;
             margin-bottom: 24px;
             font-size: 14px;
-            color: #4D555D;
+            color: $font-second-color;
             cursor: pointer;
             &:hover
-              color: #F20D0D;
+              color: $theme-red-color;
     .nav-course
       display: flex;
       align-items: center;
@@ -97,22 +99,19 @@ export default {
         margin-bottom: 36px;
         cursor:pointer;
         .img-box
-          flex: 0 0 62px;
+          flex: 0 0 64px;
           margin-right: 16px;
+          img-box(64px, 42px);
           & > img
-            display: block;
-            width: 64px;
-            height: 42px;
-            background-color: #ccc;
             border-radius: 4px;
         .course-content
           flex: 1;
           .title
             font-size: 12px;
             line-height: 24px;
-            color: #07111B;
+            color: $font-first-color;
           .information
-            color: #4D555D;
+            color: $font-second-color;
             font-size: 12px;
             line-height: 20px;
             letter-spacing: 1px;

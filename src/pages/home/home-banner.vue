@@ -26,6 +26,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .course-banner
     position: absolute;
     left: 216px;
@@ -82,10 +83,10 @@ export default {
         text-align: center;
       .title
         margin-bottom: 2px;
-        color: #07111B;
+        color: $font-first-color;
         font-size: 14px;
       .desc
         line-height: 24px;
         font-size: 12px;
-        color: #93999F;
+        color: $font-four-color;
 </style>
