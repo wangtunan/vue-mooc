@@ -1,52 +1,3 @@
-<style lang="stylus">
-  .container
-    &.font, &.theme
-      margin-top: -20px;
-    .color, .theme, .border
-      margin-right: 10px;
-      margin-bottom: 10px;
-      height: 80px;
-      border-radius: 5px;
-      background-color: #eee;
-      text-align: center;
-      line-height: 80px;
-      color: #fff;
-      &.font-first
-        background-color: #1c1f21;
-      &.font-second
-        background-color: #4d555d;
-      &.font-three
-        background-color: #787d82;
-      &.font-four
-        background-color: #9199a1;
-      &:last-child
-        margin-right: 10px;
-    .theme
-      &.theme-red
-        background-color: #f01414;
-      &.theme-orange
-        background-color: #ff9900;
-      &.theme-orange-dark
-        background-color: #c80;
-      &.theme-blue
-        background-color: #6698ff;
-      &.theme-blue-dark
-        background-color: #0b8cc5;
-      &.theme-purple
-        background-color: #673fd6;
-      &.theme-green
-        background-color: #06b571;
-    .border
-      color: #000;
-      &.border-first
-        background-color: #b7bbbf;
-      &.border-second
-        background-color: #d0d6d9;
-      &.border-three
-        background-color: #eff1f0;
-    .font-desc
-      text-align: center;
-</style>
 # 起步
 
 ## 项目搭建
@@ -194,3 +145,53 @@ img-box($width, $height)
 ## Webpack配置
 
 ## 打包命令
+
+<style lang="stylus">
+  .container
+    &.font, &.theme
+      margin-top: -20px;
+    .color, .theme, .border
+      margin-right: 10px;
+      margin-bottom: 10px;
+      height: 80px;
+      border-radius: 5px;
+      background-color: #eee;
+      text-align: center;
+      line-height: 80px;
+      color: #fff;
+      &.font-first
+        background-color: #1c1f21;
+      &.font-second
+        background-color: #4d555d;
+      &.font-three
+        background-color: #787d82;
+      &.font-four
+        background-color: #9199a1;
+      &:last-child
+        margin-right: 10px;
+    .theme
+      &.theme-red
+        background-color: #f01414;
+      &.theme-orange
+        background-color: #ff9900;
+      &.theme-orange-dark
+        background-color: #c80;
+      &.theme-blue
+        background-color: #6698ff;
+      &.theme-blue-dark
+        background-color: #0b8cc5;
+      &.theme-purple
+        background-color: #673fd6;
+      &.theme-green
+        background-color: #06b571;
+    .border
+      color: #000;
+      &.border-first
+        background-color: #b7bbbf;
+      &.border-second
+        background-color: #d0d6d9;
+      &.border-three
+        background-color: #eff1f0;
+    .font-desc
+      text-align: center;
+</style>
