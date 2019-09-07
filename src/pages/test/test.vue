@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <badge value="99" :max="88" type="success">
+    <badge value="new" :max="88" type="success">
       <el-button type="primary">消息</el-button>
     </badge>
     <br/>

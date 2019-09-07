@@ -61,8 +61,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~base/theme/variables.styl';
-  @import '~base/theme/src/badge-variables.styl';
+  @import '../../stylus/variables.styl';
+  @import '../../stylus/src/badge-variables.styl';
   .badge
     position: relative;
     display: inline-block;

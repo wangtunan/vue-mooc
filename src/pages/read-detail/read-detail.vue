@@ -83,6 +83,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
+  @import '~assets/stylus/mixin.styl';
   .read-detail
     .detail-header-container
       height: 244px;
@@ -93,12 +95,8 @@ export default {
         padding-top: 24px;
         .img-box
           flex: 0 0 144px
-          width: 144px;
-          height: 190px;
+          img-box(144px, 190px);
           & > img
-            display: block;
-            width: 100%;
-            height: 100%;
             border-radius: 12px;
         .header-content
           flex: 1;
@@ -136,11 +134,11 @@ export default {
               padding: 8px 24px;
               border-radius: 24px;
               background-color: #fff;
-              color: #37f;
+              color: $theme-blue-color;
               line-height: 24px;
               cursor: pointer;
               &.read
-                background-color: #37f;
+                background-color: $theme-blue-color;
                 color: #fff;
     .read-list
       display: flex;
@@ -158,12 +156,12 @@ export default {
           padding: 16px 0;
           border-bottom: 1px solid rgba(7,17,27,0.1);
           font-size: 18px;
-          color: #1c1f21;
+          color: $font-first-color;
           font-weight: 700;
           .total
             padding-left: 10px;
             font-size: 12px;
-            color: #9199a1;
+            color: $font-four-color;
         .read-item
           &:last-child
             dd:last-child
@@ -172,7 +170,7 @@ export default {
             padding: 20px 0;
             border-bottom: 1px solid rgba(7,17,27,0.1);
             font-size: 14px;
-            color: #1c1f21;
+            color: $font-first-color;
             font-weight: 700;
           dd
             padding: 16px 0;
@@ -182,7 +180,7 @@ export default {
               line-height: 24px;
               cursor: pointer;
               &:hover
-                color: #37f;
+                color: $theme-blue-color;
               .try-btn
                 float: right;
                 display: inline-block;
@@ -192,7 +190,7 @@ export default {
                 line-height: 36px;
                 background-color: rgba(51,119,255,.1);
                 border-radius: 18px;
-                color: #37f;
+                color: $theme-blue-color;
                 font-size: 14px;
                 font-weight: 700;
                 cursor: pointer;
@@ -202,7 +200,7 @@ export default {
             .time
               display: inline-block;
               padding-top: 8px;
-              color: #9199a1;
+              color: $font-four-color;
       .right
         margin-left: 30px;
         flex: 0 0 280px;

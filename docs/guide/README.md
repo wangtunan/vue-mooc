@@ -24,7 +24,7 @@
 
 **基础公共组件完成情况**：<br/>
 <input type="checkbox" checked/> Star(星级评分) <br/>
-<input type="checkbox"/> Badge(标记)<br/>
+<input type="checkbox" checked/> Badge(标记)<br/>
 <input type="checkbox"/> Empty(空内容)<br/>
 <input type="checkbox"/> Switch(开关)<br/>
 <input type="checkbox"/> Message(消息提示)<br/>

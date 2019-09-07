@@ -104,6 +104,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
+  @import '~assets/stylus/mixin.styl';
   .read
     .read-header
       margin-top: 20px;
@@ -116,7 +118,7 @@ export default {
         float: right;
         line-height: 60px;
         font-size: 14px;
-        color: #9199a1;
+        color: $font-four-color;
     .read-nav
       dl
         position: relative;
@@ -137,7 +139,7 @@ export default {
           line-height: 30px;
           cursor: pointer;
           &.active
-            color: #f01414;
+            color: $theme-red-color;
             background-color: rgba(242,13,13,0.06);
             border-radius: 6px;
             font-weight: 700;
@@ -160,25 +162,22 @@ export default {
               color: #6698ff;
         .img-box
           margin-right: 30px;
-          width: 138px;
-          height: 157px;
+          img-box(138px, 157px)
           & > img
-            display: block;
-            width: 100%;
-            height: 100%;
             transform: scale(1);
             transition: transform 0.2s ease-in-out;
+            background-color: transparent;
             cursor: pointer;
         .read-content
           flex: 1;
           .title
             font-size: 20px;
             font-weight: 700;
-            color: #1c1f21;
+            color: $font-first-color;
             line-height: 36px;
           .read-desc
-            font-size: 14spx;
-            color: #545c63;
+            font-size: 14px;
+            color: $font-second-color;
             line-height: 24px;
             font-weight: 700;
           .author
@@ -202,21 +201,21 @@ export default {
               margin-bottom: 12px;
               width: 33.33%;
               font-size: 12px;
-              color: #545c63;
+              color: $font-second-color;
               line-height: 24px;
               cursor: pointer;
               &:hover
-                color: #6698ff; 
+                color: $theme-blue-color; 
               .icon
                 margin-right: 10px;
                 padding: 4px;
                 background-color: rgba(102,152,255, 0.1);
-                color: #6698ff;
+                color: $theme-blue-color;
                 font-weight: 700;
           .other
             font-size: 12px;
             line-height: 24px;
-            color: #9199a1;
+            color: $font-four-color;
             & > span
               display: inline-block;
               vertical-align: middle;
@@ -224,6 +223,6 @@ export default {
               &.price
                 margin-right: 10px;
                 font-size: 16px;
-                color: #6698ff;
+                color: $theme-blue-color;
                 font-weight: 700;
 </style>
