@@ -145,12 +145,12 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   @import '~assets/stylus/mixin.styl';
-
   .lesson-list-wrapper
     .list-filter
       padding: 20px 12px;
-      border-top: 1px solid #d9dde1;
+      border-top: 1px solid $border-second-color;
       & > ul
         display: inline-block;
       .filter-item
@@ -160,14 +160,14 @@ export default {
         border-radius: 12px;
         line-height: 16px;
         font-size: 12px;
-        color: #4d555d;
+        color: $font-second-color;
         cursor: pointer;
         &.active
-          background-color: #545c63;
+          background-color: $font-second-color;
           color: #fff;
       .hide-course-box
         float: right;
-        color: #787d82;
+        color: $font-three-color;
         font-size: 12px;
         .el-switch
           margin-right: 15px;
@@ -178,7 +178,7 @@ export default {
         line-height: 24px;
         border-radius: 12px;
         background-color: rgba(204,136,0,.1);
-        color: #c80;
+        color: $theme-orange-dark-color;
         font-size: 12px;
         cursor: pointer;
         &:hover, &.active
@@ -197,18 +197,15 @@ export default {
             box-shadow: 0 8px 4px 0 rgba(7,17,27,0.1);
           .lesson-content
             .title
-              color: #f01414;
+              color: $theme-red-color;
         &:nth-child(5n) {
           margin-right: 0;
         }
         .img-box
           position: relative;
-          width: 100%;
-          height: 148px;
+          border-radius: 16px;
+          img-box(270px, 148px);
           & > img
-            width: 100%;
-            height: 100%;
-            background-color: #ccc;
             border-radius: 16px;
           .type
             position: absolute;
@@ -273,12 +270,12 @@ export default {
             font-size: 16px;
             font-weight: 700;
             line-height: 24px;
-            color: #2b333b;
+            color: $font-first-color;
             word-break: break-all;
             multline-ellipsis(2);
           & > p
             line-height: 20px;
-            color: #93999f;
+            color: $font-four-color;
             font-size: 12px;
             span
               line-height: 24px;
@@ -287,7 +284,7 @@ export default {
               margin-top: 4px;
               multline-ellipsis(2);
               &:hover
-                color: #4d555d;
+                color: $font-second-color;
             &.price
               margin-bottom: 4px;
             .number
@@ -295,10 +292,10 @@ export default {
             .comment
               float: right;
             .old
-              color: #4d555d;
+              color: $font-second-color;
             .new
               margin-left: 5px;
-              color: #4d555d;
+              color: $font-second-color;
               text-decoration: line-through;
             .price-right
               float: right;
@@ -306,18 +303,19 @@ export default {
                 margin-right: 10px;
                 cursor: pointer;
                 &:hover
-                  color: #4d555d;
+                  color: $font-second-color;
                 &.active
-                  color: #f01414;
+                  color: $theme-red-color;
               .cart
                 padding-left: 10px;
-                border-left: 2px solid #d9dde1;
+                border-left: 2px solid $border-second-color;
                 &:hover
-                  color: #4d555d;
+                  color: $font-second-color;
             .discount
               padding: 4px;
               border-radius: 4px;
-              background-color: rgba(240,20,20,.6);
+              background-color: $theme-red-color;
+              opacity: 0.6;
               line-height: 20px;
               color: #fff;
 </style>

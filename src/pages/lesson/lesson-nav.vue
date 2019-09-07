@@ -78,6 +78,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .lesson-nav-container
     .lesson-nav
       z-index: 1;
@@ -85,7 +86,7 @@ export default {
       padding: 16px 0;
       height: 72px;
       box-sizing: border-box;
-      box-shadow: 0 8px 16px 0 rgba(28,31,33,0.1)
+      box-shadow: 0 8px 16px 0 rgba(7,17,27,0.1)
       background-color: #fff;
       .nav-item
         position: relative;
@@ -93,14 +94,14 @@ export default {
         margin-right: 46px;
         height: 40px;
         line-height: 40px;
-        color: #07111b;
+        color: $font-first-color;
         font-weight: 700;
         font-size: 16px;
         cursor: pointer;
         &:hover
-          color: #c80;
+          color: $theme-orange-dark-color;
         &.active
-          color: #c80;
+          color: $theme-orange-dark-color;
           &::after
             content: '';
             position: absolute;
@@ -109,7 +110,7 @@ export default {
             margin-left: -8px;
             width: 16px;
             height: 3px;
-            background-color: #c80;
+            background-color: $theme-orange-dark-color;
             border-radius: 2px;
     .category-list
       margin-top: 24px;
@@ -121,11 +122,12 @@ export default {
         line-height: 32px;
         border-radius: 6px;
         font-size: 14px;
-        color: #4d555d;
+        color: $font-second-color;
         cursor: pointer;
         &:hover
-          background-color: #d9dde1;
+          color: $theme-orange-dark-color;
+          background-color: rgba(204,136,0,.1);
         &.active
-          color: #c80;
+          color: $theme-orange-dark-color;
           background-color: rgba(204,136,0,.1);
 </style>

@@ -32,6 +32,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .lesson-search-container
     padding: 17px 19px;
     height: 132px;
@@ -65,7 +66,7 @@ export default {
             width: 48px;
             height: 48px;
             line-height: 48px;
-            background-color: #c80;
+            background-color: $theme-orange-dark-color;
             border-radius: 0 8px 8px 0;
             color: #fff;
             text-align: center;
