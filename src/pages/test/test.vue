@@ -1,24 +1,45 @@
 <template>
   <div class="test">
-    <badge value="new" :max="88" type="success">
-      <el-button type="primary">消息</el-button>
-    </badge>
+    <mooc-switch
+      :value="switch1"
+      :width="60"
+      :active="active"
+      :in-active="inActive"
+      @change="handleSwitchToggle"
+    ></mooc-switch>
     <br/>
-    <el-badge :value="99" :max="88" type="success">
-      <el-button type="primary">消息</el-button>
-    </el-badge>
+    <el-switch
+      v-model="switch1"
+      :width="60"
+      active-color="#67C23A"
+      active-text="按年付"
+      inactive-text="按月付"
+      inactive-color="#F56C6C"
+    ></el-switch>
   </div>
 </template>
 <script>
-import Badge from 'base/badge/badge.vue'
+import MoocSwitch from 'base/switch/switch.vue'
 export default {
   data () {
     return {
-      starValue: 4
+      switch1: false,
+      active: {
+        text: '按年付'
+      },
+      inActive: {
+        text: '按月付'
+      },
+      switch2: true
     }
   },
+  methods: {
+     handleSwitchToggle(val) {
+       this.switch1 = val
+     }
+  },
   components: {
-    Badge
+    MoocSwitch
   }
 }
 </script>
