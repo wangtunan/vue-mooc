@@ -10,7 +10,7 @@
       >{{item}}</span>
 
       <div class="hide-course-box">
-        <el-switch v-model="isHide" active-color="#13ce66" inactive-color="#9199a1"></el-switch>隐藏已参与的课程
+        <mooc-switch :value="isHide" :active="switchActive" :in-active="switchInActive"></mooc-switch>隐藏已参与的课程
       </div>
     </div>
 
@@ -55,6 +55,12 @@ export default {
   },
   data () {
     return {
+      switchActive: {
+        color: '#13ce66'
+      },
+      switchInActive: {
+        color: '#9199a1'
+      },
       isHide: false, // 是否隐藏已参与的课程
       filter: ['最新', '最热'], // 课程筛选列表
       filterIndex: 0, // 课程筛选索引
@@ -113,7 +119,7 @@ export default {
         float: right;
         color: $font-three-color;
         font-size: 12px;
-        .el-switch
+        .switch
           margin-right: 15px;
     .course-list
       padding: 10px 0 20px;

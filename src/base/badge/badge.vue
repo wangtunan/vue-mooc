@@ -17,7 +17,7 @@
 </template>
 <script>
 export default {
-  name: 'Badge',
+  name: 'MoocBadge',
   props: {
     value: {
       type: [String, Number]

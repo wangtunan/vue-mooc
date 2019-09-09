@@ -31,7 +31,7 @@
           <p>
             <span class="name">{{comment.name}}</span>
             <span class="score">
-              <star :value="comment.score/2" :size="16" :disabled="true"></star>
+              <MoocStar :value="comment.score/2" :size="16" :disabled="true"></MoocStar>
               {{comment.score}}分
             </span>
           </p>
@@ -53,7 +53,6 @@
 </template>
 <script>
 import Pagination from 'base/pagination/pagination.vue'
-import Star from 'base/star/star.vue'
 export default {
   props: {
     list: {
@@ -70,8 +69,7 @@ export default {
     }
   },
   components: {
-    Pagination,
-    Star
+    Pagination
   }
 }
 </script>

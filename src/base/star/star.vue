@@ -23,7 +23,7 @@
 </template>
 <script>
 export default {
-  name: 'Star',
+  name: 'MoocStar',
   props: {
     value: {
       type: [Number,String],

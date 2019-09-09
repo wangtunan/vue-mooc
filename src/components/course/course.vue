@@ -15,7 +15,7 @@
         <span>{{item.rank}}</span>
         <span><i class="iconfont icon-user">&#xe607;</i>{{item.number}}</span>
         <span>
-          <star class="star-box" :value="item.star" :disabled="true"></star>
+          <MoocStar class="star-box" :value="item.star" :disabled="true"></MoocStar>
         </span>
       </p>
       <p class="price">
@@ -29,7 +29,6 @@
   </ul>
 </template>
 <script>
-import Star from 'base/star/star.vue'
 export default {
   props: {
     list: {
@@ -44,9 +43,6 @@ export default {
     handleCourseClick () {
       this.$emit('courseClick')
     } 
-  },
-  components: {
-    Star
   }
 }
 </script>
