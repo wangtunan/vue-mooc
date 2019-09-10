@@ -7,11 +7,6 @@ export default {
       default: false
     }
   },
-  provide () {
-    return {
-      timeline: this
-    }
-  },
   render () {
     let reverse = this.reverse
     let slots = this.$slots.default || []

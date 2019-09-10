@@ -36,7 +36,6 @@
 <script>
 export default {
   name: 'TimelineItem',
-  inject: ['timeline'],
   props: {
     timestamp: {
       type: String,
