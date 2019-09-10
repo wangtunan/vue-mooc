@@ -1,45 +1,25 @@
 <template>
   <div class="test">
-    <mooc-switch
-      :value="switch1"
-      :width="60"
-      :active="active"
-      :in-active="inActive"
-      @change="handleSwitchToggle"
-    ></mooc-switch>
-    <br/>
-    <el-switch
-      v-model="switch1"
-      :width="60"
-      active-color="#67C23A"
-      active-text="按年付"
-      inactive-text="按月付"
-      inactive-color="#F56C6C"
-    ></el-switch>
+    <!-- <timeline>
+      <timeline-item></timeline-item>
+    </timeline> -->
+    <el-timeline>
+      <el-timeline-item type="primary" timestamp="2016-09-10">创业</el-timeline-item>
+      <el-timeline-item timestamp="2017-09-11">快速发展</el-timeline-item>
+      <el-timeline-item timestamp="2018-09-10">上市</el-timeline-item>
+      <el-timeline-item timestamp="2019-09-10">至今</el-timeline-item>
+    </el-timeline>
   </div>
 </template>
 <script>
-import MoocSwitch from 'base/switch/switch.vue'
 export default {
   data () {
     return {
-      switch1: false,
-      active: {
-        text: '按年付'
-      },
-      inActive: {
-        text: '按月付'
-      },
-      switch2: true
+
     }
   },
   methods: {
-     handleSwitchToggle(val) {
-       this.switch1 = val
-     }
-  },
-  components: {
-    MoocSwitch
+
   }
 }
 </script>
