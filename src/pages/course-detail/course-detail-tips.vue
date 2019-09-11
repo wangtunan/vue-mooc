@@ -9,7 +9,8 @@
       <mooc-progress
         :percentage="lastest.percent"
         :show-text="false"
-        :heigt="40"
+        :height="20"
+        color="#f01414"
       >
       </mooc-progress>
       <p class="latest">上次学习至：{{lastest.chapter}}</p>
