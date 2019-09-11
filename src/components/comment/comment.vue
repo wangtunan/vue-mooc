@@ -5,7 +5,7 @@
       <div class="star-box">
         <span class="title">综合评分</span>
         <span class="score">{{list.score.total}}</span>
-        <star :score="list.score.total/2" :size="20"></star>
+        <mooc-star :value="list.score.total/2" :size="20"></mooc-star>
       </div>
       <div class="score-box">
         <span>内容实用</span>

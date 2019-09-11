@@ -6,9 +6,15 @@
         <span class="percent">已学习{{lastest.percent}}%</span>
         <span class="duration">学习耗时{{lastest.duration}}分钟</span>
       </p>
-      <my-progress :percent="lastest.percent"></my-progress>
+      <mooc-progress
+        :percentage="lastest.percent"
+        :show-text="false"
+        :heigt="40"
+      >
+      </mooc-progress>
       <p class="latest">上次学习至：{{lastest.chapter}}</p>
     </div>
+    
     <div class="tips-btn">{{lastest.percent > 0 ? '继续学习' : '开始学习'}}</div>
 
     <!-- 课程须知 -->
@@ -32,7 +38,6 @@
   </div>
 </template>
 <script>
-import MyProgress from 'base/progress/progress.vue'
 export default {
   props: {
     lastest: {
@@ -41,9 +46,6 @@ export default {
         return {}
       }
     }
-  },
-  components: {
-    MyProgress
   }
 }
 </script>

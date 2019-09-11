@@ -15,7 +15,7 @@
         <span>{{item.rank}}</span>
         <span><i class="iconfont icon-user">&#xe607;</i>{{item.number}}</span>
         <span>
-          <MoocStar class="star-box" :value="item.star" :disabled="true"></MoocStar>
+          <mooc-star class="star-box" :value="item.star" :disabled="true"></mooc-star>
         </span>
       </p>
       <p class="price">

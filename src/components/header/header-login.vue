@@ -22,7 +22,9 @@
     </li>
     <template v-if="userInfo && userInfo.avatar">
       <li class="item bell" @click="handleBellClick">
-        <i class="iconfont">&#xe6eb;</i>
+        <mooc-badge :value="100" :max="99" >
+          <i class="iconfont">&#xe6eb;</i>
+        </mooc-badge>
       </li>
       <li class="item userinfo" @mouseenter="showUserInfo = true" @mouseleave="showUserInfo = false">
         <div class="img-box">
@@ -237,11 +239,13 @@ export default {
         height: 100%;
         box-sizing: border-box;
         cursor: pointer;
+        .badge
+          line-height: 1;
+          .iconfont
+            font-size: 22px;
         &:hover
           .iconfont
             color: #F01414
-        .iconfont
-          font-size: 22px;
       &.userinfo
         position: relative;
         padding: 0 20px 0 15px;

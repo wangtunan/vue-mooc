@@ -8,7 +8,6 @@
       </div>
       <course-search></course-search>
     </div>
-    <!-- <course-search></course-search> -->
 
     <!-- 导航模块 -->
     <course-nav :list="navList" v-if="navList.length" @change="handleNavChange"></course-nav>
