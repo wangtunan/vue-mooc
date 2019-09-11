@@ -111,6 +111,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
+  $blue = #37f;
   .article
     .article-header
       margin-top: 10px;
@@ -131,7 +133,7 @@ export default {
           height: 36px;
           line-height: 36px;
           border-radius: 8px;
-          background-color: #f3f5f6;
+          background-color: $border-three-color;
           input
             padding: 0 60px 0 20px;
             width: 100%;
@@ -142,23 +144,21 @@ export default {
             background: none;
             line-height: 0;
             font-size: 14px;
-            color: #9199a1;
+            color: $font-four-color;
           .iconfont
             position: absolute;
             top: 0;
             right: 20px;
             font-size: 20px;
             font-weight: 700;
-            color: #9199a1;
+            color: $font-four-color;
             cursor: pointer;
-            &:hover
-              color: #37f;
         .write-btn
           display: inline-block;
           margin-left: 10px;
           padding: 8px 24px;
           border-radius: 18px;
-          background-color: #37f;
+          background-color: $theme-blur-light-color;
           line-height: 18px;
           font-size: 14px;
           color: #fff;
@@ -185,11 +185,11 @@ export default {
           word-break: break-all;
           cursor: pointer;
           &:hover
-            color: #37f;
+            color: $theme-blur-light-color;
           &.active
             background-color: rgba(51,119,255,.1);
             border-radius: 4px;
-            color: #37f;
+            color: $theme-blur-light-color;
             font-weight: 700;
           &:last-child
             margin-bottom: 0;

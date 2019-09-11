@@ -102,6 +102,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .question
     padding: 20px 0 50px;
     .header
@@ -121,7 +122,7 @@ export default {
           height: 36px;
           line-height: 36px;
           border-radius: 8px;
-          background-color: #f3f5f6;
+          background-color: $border-three-color;
           & > input
             padding: 0 60px 0 10px;
             width: 100%;
@@ -129,7 +130,7 @@ export default {
             outline: none;
             background: none;
             box-sizing: border-box;
-            color: #9199a1;
+            color: $font-four-color;
             font-size: 14px;
           .iconfont
             display: inline-block;
@@ -138,7 +139,7 @@ export default {
             right: 20px;
             font-size: 20px;
             font-weight: 700;
-            color: #9199a1;
+            color: $font-four-color;
             cursor: pointer;
         .search-btn
           position: absolute;
@@ -172,7 +173,7 @@ export default {
           margin-bottom: 8px;
           cursor: pointer;
           &:hover
-            color: #17823b;
+            color: $theme-green-color;
     .question-list-container
       display: flex;
       align-items: flex-start;
@@ -212,7 +213,7 @@ export default {
               .title
                 margin-bottom: 4px;
                 font-size: 16px;
-                color: #07111b;
+                color: $font-first-color;
                 font-weight: 700;
                 line-height: 24px;
                 cursor: pointer;
@@ -220,7 +221,7 @@ export default {
                   color: #1fad4e;
               .tag
                 font-size: 12px;
-                color: #9199a1;
+                color: $font-four-color;
                 & > img
                   display: inline-block;
                   vertical-align: middle;

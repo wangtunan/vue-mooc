@@ -62,6 +62,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
+  @import '~assets/stylus/mixin.styl';
   .article-list
     .list-filter
       .filter-item
@@ -69,13 +71,13 @@ export default {
         margin-right: 12px;
         padding: 8px;
         font-size: 14px;
-        color: #9199a1;
+        color: $font-four-color;
         line-height: 16px;
         cursor: pointer;
         &.active
           background-color: #eaf1ff;
           border-radius: 8px;
-          color: #37f;
+          color: $theme-blur-light-color;
           font-weight: 700;
     .list-content
       padding: 20px;
@@ -108,19 +110,19 @@ export default {
         .title
           margin-bottom: 4px;
           line-height: 30px;
-          color: #1c1f21;
+          color: $font-first-color;
           font-size: 16px;
           font-weight: 700;
           cursor: pointer;
           &:hover
-            color: #37f;
+            color: $theme-blur-light-color;
         .information
           & > span
             display: inline-block;
             vertical-align: middle;
             margin-right: 8px;
             font-size: 12px;
-            color: #9199a1;
+            color: $font-four-color;
             &.name
               margin-left: 8px;
               padding-right: 10px;
