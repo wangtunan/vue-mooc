@@ -3,13 +3,15 @@ import Badge from 'base/badge/index.js'
 import Switch from 'base/switch/index.js'
 import Timeline from 'base/timeline/index.js'
 import TimelineItem from 'base/timeline-item/index.js'
+import Progress from 'base/progress/index.js'
 
 const components = [
   Star,
   Badge,
   Switch,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Progress
 ]
 
 const install = function (Vue) {

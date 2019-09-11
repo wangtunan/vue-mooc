@@ -1,48 +1,107 @@
 <template>
   <div class="progress">
-    <div class="inner" ref="inner"></div>
+    <div
+      class="progress-bar"
+      :class="{
+        'progress-bar-no-text': !showText,
+        'progress-bar-inside-text': inside
+      }"
+    >
+      <div class="progress-bar-outer" :style="{ height: `${height}px` }">
+        <div class="progress-bar-inner" :style="innerBarStyle">
+          <div class="progress-bar-inner-text" v-if="inside && showText">{{text}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="progress-text" v-if="!inside && showText">{{text}}</div>
   </div>
 </template>
 <script>
 export default {
+  name: 'MoocProgress',
   props: {
-    percent: {
-      type: [String, Number],
-      default: 0
-    }
-  },
-  mounted () {
-    this.timer = setTimeout(() => {
-      this.setProgressWidth()
-    }, 20)
-  },
-  methods: {
-    // 设置进度条的宽度
-    setProgressWidth () {
-      if (this.percent > 0) {
-        let percent = Math.min(this.percent, 100)
-        this.$refs.inner.style.width = `${percent}%`
-        this.$forceUpdate()
+    percentage: {
+      type: Number,
+      validator (val) {
+        return val >= 0 && val <= 100
       }
+    },
+    color: {
+      type: String,
+      default: ''
+    },
+    height: {
+      type: [Number, String],
+      default: 6
+    },
+    showText: {
+      type: Boolean,
+      default: true
+    },
+    inside: {
+      type: Boolean,
+      default: false
     }
   },
-  beforeDestroy () {
-    clearTimeout(this.timer)
+  computed: {
+    innerBarStyle () {
+      return {
+        'width': `${this._percentage}%`,
+        'background-color': this.color
+      }
+    },
+    text () {
+      return `${this._percentage}%`
+    },
+    _percentage () {
+      return Math.max(0, Math.min(this.percentage, 100))
+    }
   }
 }
 </script>
 <style lang="stylus" scoped>
+  @import '../theme/variables.styl';
+  @import '../theme/src/progress-variables.styl';
   .progress
-    display: inline-block;
-    width: 100%;
-    height: 16px;
-    overflow: hidden;
-    border-radius: 8px;
-    background-color: rgba(28,31,33,.1);
-    .inner
-      width: 0%;
-      height: 100%;
-      transition: 1s width ease-in-out;
-      border-radius: 8px;
-      background-color: #f20d0d;
+    position: relative;
+    line-height: 1;
+    & > div
+      display: inline-block;
+      vertical-align: middle;
+    .progress-bar
+      width: 100%;
+      margin-right: - $progress-bar-right;
+      padding-right: $progress-bar-right;
+      box-sizing: border-box;
+      &.progress-bar-no-text, &.progress-bar-inside-text
+        margin-right: 0;
+        padding-right: 0;
+      .progress-bar-outer
+        position: relative;
+        width: 100%;
+        height: $progress-bar-height;
+        border-radius: $progress-bar-radius;
+        background-color: $base-border-three-color;
+        overflow: hidden;
+        .progress-bar-inner
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          background-color: $base-primary;
+          white-space: nowrap;
+          text-align: right;
+          border-radius: $progress-bar-radius;
+          transition: width $progress-bar-duration ease;
+          .progress-bar-inner-text
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 5px;
+            color: #fff;
+            font-size: $progress-bar-inner-text-size;
+    .progress-text
+      margin-left: $progress-text-left;
+      line-height: 1;
+      font-size: $base-font-size;
+      color: $base-font-second-color;
 </style>

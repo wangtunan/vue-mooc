@@ -1,42 +1,53 @@
 <template>
   <div class="test">
-    <timeline :reverse="true">
-      <timeline-item size="small" placement="top" color="#58a" timestamp="2016-09-10">
-        <div class="content">创业</div>
-        <div class="dot" slot="dot">1</div>
-      </timeline-item>
-      <timeline-item size="small" placement="top" type="success" timestamp="2017-09-11">
-        <div class="content">快速发展</div>
-        <div class="dot" slot="dot">2</div>
-      </timeline-item>
-      <timeline-item size="small" placement="top" type="warning" timestamp="2018-09-10">上市</timeline-item>
-      <timeline-item size="small" placement="top" type="danger" timestamp="2019-09-10">至今</timeline-item>
-    </timeline>
+    <mooc-progress
+      :percentage="percentage"
+      color="#f60"
+      height="20"
+      :show-text="true"
+    >
+    </mooc-progress>
+    <mooc-progress
+      :percentage="percentage"
+      color="#f60"
+      height="20"
+      :show-text="true"
+      :inside="true"
+    >
+    </mooc-progress>
+    <hr/>
+    <el-progress
+      :percentage="percentage"
+      :show-text="true"
+      color="#f60"
+      :stroke-width="20"
+    ></el-progress>
+    <el-progress
+      :percentage="percentage"
+      :show-text="true"
+      color="#f60"
+      :text-inside="true"
+      :stroke-width="20"
+    ></el-progress>
 
-    
-    <el-timeline :reverse="true">
-      <el-timeline-item size="normal" placement="top" color="#58a" timestamp="2016-09-10">
-        <div class="content">创业</div>
-        <div class="dot" slot="dot">1</div>
-      </el-timeline-item>
-      <el-timeline-item size="normal" placement="top" type="success" timestamp="2017-09-11">
-        <div class="content">快速发展</div>
-        <div class="dot" slot="dot">2</div>
-      </el-timeline-item>
-      <el-timeline-item size="normal" placement="top" type="warning" timestamp="2018-09-10">上市</el-timeline-item>
-      <el-timeline-item size="normal" placement="top" type="danger" timestamp="2019-09-10">至今</el-timeline-item>
-    </el-timeline>
+    <el-button @click="handleReduceClick">减少</el-button>
+    <el-button @click="handleIncreaseClick">增加</el-button>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-
+      percentage: 34
     }
   },
   methods: {
-
+    handleReduceClick () {
+      this.percentage -= 10
+    },
+    handleIncreaseClick () {
+      this.percentage += 10
+    }
   }
 }
 </script>
@@ -45,8 +56,9 @@ export default {
     margin-left: 50px;
     margin-top: 50px;
     min-height: 800px;
-    & > ul
+    & > div
       margin: 20px 0;
+      width: 500px;
     .content
       width: 400px;
       height: 100px;

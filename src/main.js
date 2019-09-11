@@ -14,7 +14,7 @@ import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper)
 
 // custom base component
-import Mooc from 'utils/register-base.js'
+import Mooc from 'utils/register.js'
 Vue.use(Mooc)
 
 import 'assets/stylus/index.styl'
