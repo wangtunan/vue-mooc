@@ -60,6 +60,8 @@ module.exports = {
             '/components/base/badge.md',
             '/components/base/switch.md',
             '/components/base/timeline.md',
+            '/components/base/progress.md',
+            '/components/base/steps.md',
             '/components/base/message.md',
             '/components/base/message-box.md',
             '/components/base/pagination.md',
