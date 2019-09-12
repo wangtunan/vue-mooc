@@ -7,6 +7,14 @@
     }"
     @click="handleSwithToggle"
   >
+    <input
+      ref="checkbox"
+      type="checkbox"
+      class="switch-input"
+      :true-value="newActive.value"
+      :false-value="newInActive.value"
+      @change="handleInputChange"
+    >
     <span
       class="switch-label left"
       ref="LeftLabel"
@@ -77,6 +85,7 @@ export default {
   },
   mounted () {
     this.setSwitchColor()
+    this.$refs.checkbox.checked = this.checked
   },
   methods: {
     // 开关切换
@@ -84,8 +93,16 @@ export default {
       if (this.disabled) {
         return false
       }
-      let val = this.checked ? this.newInActive.value : this.newActive.value
+      this.handleInputChange()
+    },
+    // input框值更新
+    handleInputChange () {
+      const val = this.checked ? this.newInActive.value : this.newActive.value
+      this.$emit('input', val)
       this.$emit('change', val)
+      this.$nextTick(() => {
+        this.$refs.checkbox.checked = this.checked
+      })
     },
     // 设置active时的颜色和in-active时的颜色
     setSwitchColor () {
@@ -143,6 +160,10 @@ export default {
     & > span
       display: inline-block;
       vertical-align: middle;
+    .switch-input
+      width: 0;
+      height: 0;
+      opacity: 0
     .switch-radius
       position: relative;
       height: $switch-height;

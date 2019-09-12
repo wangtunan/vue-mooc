@@ -1,53 +1,16 @@
 <template>
   <div class="test">
-    <mooc-progress
-      :percentage="percentage"
-      color="#f60"
-      height="20"
-      :show-text="true"
-    >
-    </mooc-progress>
-    <mooc-progress
-      :percentage="percentage"
-      color="#f60"
-      height="20"
-      :show-text="true"
-      :inside="true"
-    >
-    </mooc-progress>
-    <hr/>
-    <el-progress
-      :percentage="percentage"
-      :show-text="true"
-      color="#f60"
-      :stroke-width="20"
-    ></el-progress>
-    <el-progress
-      :percentage="percentage"
-      :show-text="true"
-      color="#f60"
-      :text-inside="true"
-      :stroke-width="20"
-    ></el-progress>
-
-    <el-button @click="handleReduceClick">减少</el-button>
-    <el-button @click="handleIncreaseClick">增加</el-button>
+    <mooc-switch v-model="switchVal"></mooc-switch>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      percentage: 34
+      switchVal: true
     }
   },
   methods: {
-    handleReduceClick () {
-      this.percentage -= 10
-    },
-    handleIncreaseClick () {
-      this.percentage += 10
-    }
   }
 }
 </script>

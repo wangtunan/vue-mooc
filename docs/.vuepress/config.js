@@ -59,6 +59,7 @@ module.exports = {
             '/components/base/star.md',
             '/components/base/badge.md',
             '/components/base/switch.md',
+            '/components/base/timeline.md',
             '/components/base/message.md',
             '/components/base/message-box.md',
             '/components/base/pagination.md',
