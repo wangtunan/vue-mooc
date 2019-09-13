@@ -1,4 +1,4 @@
-# Switch(开关)
+# Switch 开关
 
 ## 用法
 

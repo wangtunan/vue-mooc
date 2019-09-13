@@ -1,14 +1,30 @@
 <template>
   <div class="test">
-    <mooc-switch v-model="switchVal"></mooc-switch>
+    <mooc-timeline>
+      <mooc-timeline-item
+        v-for="(item,index) in timeline"
+        :key="index"
+        :timestamp="item.timestamp"
+        :status="item.status">
+        {{item.content}}
+      </mooc-timeline-item>
+    </mooc-timeline>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      switchVal: true
+      timeline: []
     }
+  },
+  created () {
+    this.timeline = [
+      { timestamp: '2015-09-01', status: 'primary', content: '成立' },
+      { timestamp: '2016-09-01', status: 'primary', content: '高速发展' },
+      { timestamp: '2018-09-01', status: 'primary', content: '上市' },
+      { timestamp: '2019-09-13', status: 'primary', content: '至今' }
+    ]
   },
   methods: {
   }

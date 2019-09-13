@@ -17,12 +17,12 @@ module.exports = {
         link: '/guide/'
       },
       {
-        text: '储备知识',
-        link: '/base/'
+        text: '公共组件',
+        link: '/components/'
       },
       {
-        text: '基础组件',
-        link: '/components/'
+        text: '储备知识',
+        link: '/base/'
       }
     ],
     sidebar: {

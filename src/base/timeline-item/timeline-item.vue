@@ -35,7 +35,7 @@
 </template>
 <script>
 export default {
-  name: 'TimelineItem',
+  name: 'MoocTimelineItem',
   props: {
     timestamp: {
       type: String,
@@ -131,6 +131,7 @@ export default {
       top: 0;
       padding-left: $timeline-item-wrapper-padding-left;
       .timeline-item-content
+        line-height: 1;
         color: $timeline-item-title-color;
       .timeline-item-timestamp
         color: $base-info;

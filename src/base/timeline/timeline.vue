@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'Timeline',
+  name: 'MoocTimeline',
   props: {
     reverse: {
       type: Boolean,
