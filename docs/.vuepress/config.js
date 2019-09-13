@@ -62,12 +62,14 @@ module.exports = {
             '/components/base/timeline.md',
             '/components/base/progress.md',
             '/components/base/steps.md',
+            '/components/base/breadcrumb.md',
+            '/components/base/empty.md',
+            '/components/base/backtop.md',
             '/components/base/message.md',
             '/components/base/message-box.md',
             '/components/base/pagination.md',
             '/components/base/swiper.md',
-            '/components/base/breadcrumb.md',
-            '/components/base/backtop.md'
+            '/components/base/dialog.md'
           ]
         },
         {
@@ -78,7 +80,6 @@ module.exports = {
             '/components/business/footer.md',
             '/components/business/sidebar.md',
             '/components/business/canvas-blur.md',
-            '/components/business/empty.md',
             '/components/business/rem-lesson.md',
             '/components/business/chapter.md',
             '/components/business/comment.md'
