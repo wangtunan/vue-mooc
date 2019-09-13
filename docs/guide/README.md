@@ -29,7 +29,7 @@
 <input type="checkbox" checked/> Switch(开关)<br/>
 <input type="checkbox"/> Message(消息提示)<br/>
 <input type="checkbox"/> MessageBox(消息确认)<br/>
-<input type="checkbox"/> Progress(进度条)<br/>
+<input type="checkbox" checked /> Progress(进度条)<br/>
 <input type="checkbox"/> Breadcrumb(面包屑导航)<br/>
 <input type="checkbox" checked/> Timeline(时间线)<br/>
 <input type="checkbox"/> Step(步骤条)<br/>
