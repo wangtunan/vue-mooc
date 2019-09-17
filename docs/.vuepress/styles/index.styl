@@ -13,20 +13,23 @@
     width: 100%;
     th
       text-align: left;
+  .theme-default-content
+    &:not(.custom)
+      margin: 0 50px 0 80px;
+      max-width: unset;
+    code
+      background-color: #fff5f5;
+      color: #ff502c;
+  .page-edit, .page-nav
+    margin: 0 50px 0 80px;
+    max-width: unset;
 .iconfont 
   font-family: "iconfont" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-.theme-default-content
-  &:not(.custom)
-    margin: 0 20px 0 30px;
-    // margin-left: 50px;
-    max-width: unset;
-  code
-    background-color: #fff5f5;
-    color: #ff502c;
+
 .customer-page-class
   color: #fb3;
   background-color: #333;

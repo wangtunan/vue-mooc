@@ -22,6 +22,7 @@ export default {
   props: {
     percentage: {
       type: Number,
+      default: 0,
       validator (val) {
         return val >= 0 && val <= 100
       }
@@ -92,8 +93,14 @@ export default {
           background-color: $base-primary;
           white-space: nowrap;
           text-align: right;
+          line-height: 1;
           border-radius: $progress-bar-radius;
           transition: width $progress-bar-duration ease;
+          &::after
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
           .progress-bar-inner-text
             display: inline-block;
             vertical-align: middle;

@@ -1,14 +1,6 @@
 <template>
   <div class="test">
-    <mooc-timeline>
-      <mooc-timeline-item
-        v-for="(item,index) in timeline"
-        :key="index"
-        :timestamp="item.timestamp"
-        :status="item.status">
-        {{item.content}}
-      </mooc-timeline-item>
-    </mooc-timeline>
+    <el-progress :percentage="67" text-inside :stroke-width="30"></el-progress>
   </div>
 </template>
 <script>
