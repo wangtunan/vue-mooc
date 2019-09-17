@@ -101,7 +101,10 @@
 | 属性名称 | 类型 | 默认值 |  说明 |
 |-----|--------|------------|------------------------------|
 | percentage | Number | `0` |  进度条百分比  |
-| color | String | - |  进度条颜色  |
+| color | String | `#409EFF` |  进度条颜色  |
+| height | [Number,String] | `6` |  进度条的大小，单位`px`  |
+| showText | Boolean |  `true` |  是否显示进度条文字  |
+| inside | Boolean |  `false` |  进度条文字是否内置  |
 
 <style lang="stylus">
   .progress-container
