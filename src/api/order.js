@@ -1,22 +1,28 @@
 import axios from 'utils/axios.js'
+import { IS_MOCK_LOCAL } from 'api/config.js'
 
 // 用户订单列表接口
 export function orderList () {
-  return axios.get('/user/order/list')
+  let url = IS_MOCK_LOCAL ? '/mock/user/order.json' : '/user/order/list'
+  return axios.get(url)
 }
 // 用户充值记录接口
 export function rechargeList () {
-  return axios.get('/user/recharge')
+  let url = IS_MOCK_LOCAL ? '/mock/user/recharge.json' : '/user/recharge'
+  return axios.get(url)
 }
 // 用户优惠券接口
 export function curponList () {
-  return axios.get('/user/curpon')
+  let url = IS_MOCK_LOCAL ? '/mock/user/curpon.json' : '/user/curpon'
+  return axios.get(url)
 }
 // 用户咨询接口
 export function consultList () {
-  return axios.get('/user/consult')
+  let url = IS_MOCK_LOCAL ? '/mock/user/consult.json' : '/user/consult'
+  return axios.get(url)
 }
 // 用户消费记录接口
 export function billList () {
-  return axios.get('/user/bill')
+  let url = IS_MOCK_LOCAL ? '/mock/user/bill.json' : '/user/bill'
+  return axios.get(url)
 }

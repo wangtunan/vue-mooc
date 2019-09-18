@@ -1,10 +1,13 @@
 import axios from 'utils/axios.js'
+import { IS_MOCK_LOCAL } from 'api/config.js'
 
 // 获取专栏列表数据
 export function getReadList () {
-  return axios.get('/read/list')
+  let url = IS_MOCK_LOCAL ? '/mock/read/read.json' : '/read/list'
+  return axios.get(url)
 }
 // 获取专栏详情数据
 export function getReadDetail (id) {
-  return axios.get(`/read/detail/${id}`)
+  let url = IS_MOCK_LOCAL ? '/mock/read/detail.json' : `/read/detail/${id}`
+  return axios.get(url)
 }

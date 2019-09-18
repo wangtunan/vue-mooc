@@ -1,26 +1,33 @@
 import axios from 'utils/axios.js'
+import { IS_MOCK_LOCAL } from 'api/config.js'
 
 // 获取主页导航信息
 export function getHomeNav() {
-  return axios.get('/home/nav')
+  let url = IS_MOCK_LOCAL ? '/mock/home/nav.json' : '/home/nav'
+  return axios.get(url)
 }
 // 获取主页滚动轮播数据
 export function getSliderList () {
-  return axios.get('/home/slider')
+  let url = IS_MOCK_LOCAL ? '/mock/home/slider.json' : '/home/slider'
+  return axios.get(url)
 }
 // 获取主页课程信息
 export function getHomeCourse() {
-  return axios.get('/home/course')
+  let url = IS_MOCK_LOCAL ? '/mock/home/course.json' : '/home/course'
+  return axios.get(url)
 }
 // 获取主页猿问和手记信息
 export function getArticle () {
-  return axios.get('/home/article')
+  let url = IS_MOCK_LOCAL ? '/mock/home/article.json' : '/home/article'
+  return axios.get(url)
 }
 // 获取精英讲师信息
 export function getTeacher () {
-  return axios.get('/home/teacher')
+  let url = IS_MOCK_LOCAL ? '/mock/home/teacher.json' : '/home/teacher'
+  return axios.get(url)
 }
 // 获取全明星信息
 export function getAllStar() {
-  return axios.get('/home/allstar')
+  let url = IS_MOCK_LOCAL ? '/mock/home/allstar.json' : '/home/allstar'
+  return axios.get(url)
 }

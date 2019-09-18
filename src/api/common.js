@@ -1,18 +1,23 @@
 import axios from 'utils/axios.js'
+import { IS_MOCK_LOCAL } from 'api/config.js'
 
 // 获取用户搜索历史
 export function getSearchHistory () {
-  return axios.get('/common/search/history')
+  let url = IS_MOCK_LOCAL ? '/mock/common/search-history.json' : '/common/search/history'
+  return axios.get(url)
 }
 // 获取热搜词接口
 export function getHot () {
-  return axios.get('/common/hot')
+  let url = IS_MOCK_LOCAL ? '/mock/common/hot.json' : '/common/hot'
+  return axios.get(url)
 }
 // 获取底部版权footer数据
 export function getFooter () {
-  return axios.get('/common/footer')
+  let url = IS_MOCK_LOCAL ? '/mock/common/footer.json' : '/common/footer'
+  return axios.get(url)
 }
 // 获取头部数据接口
 export function getHeader () {
-  return axios.get('/common/header')
+  let url = IS_MOCK_LOCAL ? '/mock/common/header.json' : '/common/header'
+  return axios.get(url)
 }

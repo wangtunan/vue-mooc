@@ -1,14 +1,18 @@
 import axios from 'utils/axios.js'
+import { IS_MOCK_LOCAL } from 'api/config.js'
 
 // 实战课程导航
 export function getLessonNav () {
-  return axios.get('/lesson/nav')
+  let url = IS_MOCK_LOCAL ? '/mock/lesson/nav.json' : '/lesson/nav'
+  return axios.get(url)
 }
 // 实战课程列表
-export function getLessonList (params) {
-  return axios.post('/lesson/list', params)
+export function getLessonList () {
+  let url = IS_MOCK_LOCAL ? '/mock/lesson/list.json' : '/lesson/list'
+  return axios.get(url)
 }
 // 实战课程详情
 export function getLessonDetail (id) {
-  return axios.get(`/lesson/detail/${id}`)
+  let url = IS_MOCK_LOCAL ? '/mock/lesson/detail.json' : `/lesson/detail/${id}`
+  return axios.get(url)
 }
