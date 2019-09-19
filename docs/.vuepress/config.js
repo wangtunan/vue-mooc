@@ -4,6 +4,7 @@ module.exports = {
   head: [
     ['link', { rel: 'icon', href: '/icon.png' }]
   ],
+  base: '/vue-mooc-site/',
   cache: false,
   port: 3480,
   themeConfig: {
