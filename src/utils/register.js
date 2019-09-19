@@ -4,7 +4,7 @@ import Switch from 'base/switch/index.js'
 import Timeline from 'base/timeline/index.js'
 import TimelineItem from 'base/timeline-item/index.js'
 import Progress from 'base/progress/index.js'
-import Steps from 'base/steps/index.js'
+import Step from 'base/step/index.js'
 import StepItem from 'base/step-item/index.js'
 
 const components = [
@@ -14,7 +14,7 @@ const components = [
   Timeline,
   TimelineItem,
   Progress,
-  Steps,
+  Step,
   StepItem
 ]
 
@@ -36,6 +36,6 @@ export default {
   Timeline,
   TimelineItem,
   Progress,
-  Steps,
+  Step,
   StepItem
 }
