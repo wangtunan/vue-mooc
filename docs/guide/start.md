@@ -1,8 +1,27 @@
 # 起步
 
-## 项目搭建
+## 初始化项目
+
+本项目在搭建时选择了通过官方提供的`Vue-cli(3.10.1)`脚手架进行项目的搭建，其中一些自定义`feature`选项如下：
+* `Babel`：`Babel`转译
+* `Router`：路由
+* `Vuex`：数据状态管理
+* `CSS Pre-processors`：`CSS`预编译器
+* `Linter / Formatter`：格式化工具
+
+其中`CSS`预编译器选择：
+* `Stylus`
+
+其中格式化工具选择了：
+* `Eslint + Standard`
 
 ## 图标字体
+图标字体选择了阿里的[iconfont](https://www.iconfont.cn/)，在线选择自己想要的图标并保存到指定项目中，再进行下载或者直接使用在线链接都是十分方便的，以下截图为部分图标的示例：
+<br/>
+<br/>
+![iconfont](../images/iconfont.png)
+
+如果你对以上图标很满意，那么你可以在`src/assets/fonts`目录下找到找到他们。
 
 
 ## 公共变量
@@ -89,7 +108,7 @@ $border-three-color = #eff1f0;
 * 业务`minix`：根据实际业务需求，提取出来的`mixin`方案。
 
 
-### 基础mixin
+### 基础mixin案例
 ```css
 // 单行折叠省略
 ellipsis()
@@ -113,20 +132,8 @@ no-scrollbar()
     width: 0!important;
 ```
 
-### 业务mixin
+### 业务mixin案例
 ```css
-// 全局遮罩
-mask($bg, $index)
-  &::after
-    content: ''
-    z-index: $index ? $index : 1000;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0
-    background-color: $bg ? $bg : rgba(0,0,0,0.6);
-
 // 图片加载失败占位
 img-box($width, $height)
   width: $width;

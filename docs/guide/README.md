@@ -44,20 +44,30 @@
 如果你需要看一看此项目的源码，请移步:point_right: [源码仓库](https://github.com/wangtunan/vue-mooc)
 
 ## 静态站点介绍
-本静态站点采用[VuePress1.x](https://v1.vuepress.vuejs.org/)撰写而来，你可以在其官网很方便的找到该如何配置以及搭建属于自己的静态站点，如果你对于官网中的文档不太那么理解，那么请移步:point_right: [从今天开始拿起VuePress打造属于自己的专属博客](https://wangtunan.github.io/blog/vuepress/)，这篇博客也同时提供了一个简单的[VuePress配置Demo](https://github.com/wangtunan/vuepress-blog-demo)，如果你想要一个更贴近于实际的配置，那么请移步:point_right:[本站点的VuePress站点]()
+本静态站点采用[VuePress1.x](https://v1.vuepress.vuejs.org/)撰写而来，你可以在其官网很方便的找到该如何配置以及搭建属于自己的静态站点。<br/>
+如果你对于官网中的文档不太那么理解，那么请移步:point_right: [从今天开始拿起VuePress打造属于自己的专属博客](https://wangtunan.github.io/blog/vuepress/)<br/>
+这篇博客也同时提供了一个简单的[VuePress配置Demo](https://github.com/wangtunan/vuepress-blog-demo)<br/>
+如果你想要一个更贴近于实际的配置，那么请移步:point_right:[本站点的VuePress站点](https://github.com/wangtunan/vue-mooc-site)
 
 ## 部分页面功能演示
 
 ### 首页
+![首页](../images/1.gif)
 
 ### 课程页面
+![课程页面](../images/2.gif)
 
-### 课程详情页
-
-### 消息中心
-
-### 登陆&注册
+### 专栏
+![专栏](../images/3.gif)
 
 ### 手记
+![手记](../images/4.gif)
 
-### 视频播放器
+### 购物车
+![购物车](../images/5.gif)
+
+### 消息中心
+![消息中心](../images/6.gif)
+
+### 订单中心
+![订单中心](../images/7.gif)
