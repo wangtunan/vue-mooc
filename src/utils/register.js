@@ -4,6 +4,8 @@ import Switch from 'base/switch/index.js'
 import Timeline from 'base/timeline/index.js'
 import TimelineItem from 'base/timeline-item/index.js'
 import Progress from 'base/progress/index.js'
+import Steps from 'base/steps/index.js'
+import StepItem from 'base/step-item/index.js'
 
 const components = [
   Star,
@@ -11,7 +13,9 @@ const components = [
   Switch,
   Timeline,
   TimelineItem,
-  Progress
+  Progress,
+  Steps,
+  StepItem
 ]
 
 const install = function (Vue) {
@@ -28,5 +32,10 @@ export default {
   install,
   Star,
   Badge,
-  Switch
+  Switch,
+  Timeline,
+  TimelineItem,
+  Progress,
+  Steps,
+  StepItem
 }
