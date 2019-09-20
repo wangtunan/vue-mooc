@@ -1,12 +1,19 @@
 <template>
   <div class="test">
-    <el-progress :percentage="67" text-inside :stroke-width="30"></el-progress>
+    <el-steps :space="200" :active="active" finish-status="success">
+      <el-step title="已完成"></el-step>
+      <el-step title="进行中"></el-step>
+      <el-step title="步骤 3"></el-step>
+    </el-steps>
+
+    <el-button @click="handleStepClick">下一步</el-button>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
+      active: 0,
       timeline: []
     }
   },
@@ -19,6 +26,9 @@ export default {
     ]
   },
   methods: {
+    handleStepClick () {
+      this.active = this.active + 1
+    }
   }
 }
 </script>
