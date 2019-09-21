@@ -8,6 +8,7 @@
     "parser": "babel-eslint"
   },
   "extends": [
+    // 使用下面这些检验规则进行代码格式检验
     "plugin:vue/recommended",
     "eslint:recommended"
   ],

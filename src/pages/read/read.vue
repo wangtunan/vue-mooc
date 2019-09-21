@@ -25,7 +25,7 @@
     <!-- 列表 -->
     <div class="read-list">
       <ul>
-        <li v-for="(item,index) in filterReadList" :key="index" class="read-item" @click="handleReadClick">
+        <li v-for="(item, index) in filterReadList" :key="index" class="read-item" @click="handleReadClick">
           <div class="img-box">
             <img :src="item.img" alt="">
           </div>
