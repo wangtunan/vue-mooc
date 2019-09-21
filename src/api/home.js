@@ -3,8 +3,9 @@ import { IS_MOCK_LOCAL } from 'api/config.js'
 
 // 获取主页导航信息
 export function getHomeNav() {
-  let url = IS_MOCK_LOCAL ? '/mock/home/nav.json' : '/home/nav'
-  return axios.get(url)
+  console.log(IS_MOCK_LOCAL)
+  // let url = IS_MOCK_LOCAL ? '/mock/home/nav.json' : '/home/nav.json'
+  return axios.get('/mock/home/nav.json')
 }
 // 获取主页滚动轮播数据
 export function getSliderList () {
