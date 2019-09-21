@@ -1,10 +1,10 @@
 <template>
   <div class="course-detail">
     <!-- 头部 -->
-    <course-header v-if="Object.keys(courseDetail.base).length > 0" :base="courseDetail.base"></course-header>
+    <course-header v-if="Object.keys(courseDetail.base).length > 0" :base="courseDetail.base" />
 
     <!-- 内容部分 -->
-    <course-content v-if="Object.keys(courseDetail).length > 0" :data="courseDetail"></course-content>
+    <course-content v-if="Object.keys(courseDetail).length > 0" :data="courseDetail" />
   </div>
 </template>
 <script>

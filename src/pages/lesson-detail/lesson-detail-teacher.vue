@@ -1,9 +1,15 @@
 <template>
   <div class="lesson-detail-teacher">
     <img class="avatar" :src="teacher.avatar" alt="">
-    <p class="name">{{teacher.name}}</p>
-    <p class="job">{{teacher.job}}</p>
-    <p class="introduce">{{teacher.introduce}}</p>
+    <p class="name">
+      {{ teacher.name }}
+    </p>
+    <p class="job">
+      {{ teacher.job }}
+    </p>
+    <p class="introduce">
+      {{ teacher.introduce }}
+    </p>
   </div>
 </template>
 <script>

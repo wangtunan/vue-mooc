@@ -7,24 +7,28 @@
           :key="index"
           :class="{active: currentTabIndex==index}"
           @click="handleTabClick(tab,index)"
-        >{{tab.title}}</span>
+        >{{ tab.title }}</span>
       </dt>
-      <dd class="article-item" v-for="(item,index) in filterList" :key="index">
-        <h3 class="title">{{item.title}}</h3>
+      <dd v-for="(item,index) in filterList" :key="index" class="article-item">
+        <h3 class="title">
+          {{ item.title }}
+        </h3>
         <div class="content-container">
-          <div class="img-box" v-if="item.img">
+          <div v-if="item.img" class="img-box">
             <img :src="item.img" alt="">
           </div>
           <div class="course-content">
-            <p class="desc">{{item.desc}}</p>
+            <p class="desc">
+              {{ item.desc }}
+            </p>
           </div>
         </div>
         <div class="other">
-          <span>{{item.author}}</span>
+          <span>{{ item.author }}</span>
           <p class="fr">
-            <span>{{item.view}}浏览</span>
-            <span>{{item.like}}推荐</span>
-            <span>{{item.comment}}评论</span>
+            <span>{{ item.view }}浏览</span>
+            <span>{{ item.like }}推荐</span>
+            <span>{{ item.comment }}评论</span>
           </p>
         </div>
       </dd>

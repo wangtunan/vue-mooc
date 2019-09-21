@@ -4,51 +4,53 @@
     <div class="score-overview">
       <div class="star-box">
         <span class="title">综合评分</span>
-        <span class="score">{{list.score.total}}</span>
-        <mooc-star :value="list.score.total/2" :size="20"></mooc-star>
+        <span class="score">{{ list.score.total }}</span>
+        <mooc-star :value="list.score.total/2" :size="20" />
       </div>
       <div class="score-box">
         <span>内容实用</span>
-        <span class="score">{{list.score.content}}</span>
+        <span class="score">{{ list.score.content }}</span>
       </div>
       <div class="score-box">
         <span>简洁易懂</span>
-        <span class="score">{{list.score.difficult}}</span>
+        <span class="score">{{ list.score.difficult }}</span>
       </div>
       <div class="score-box">
         <span>逻辑清晰</span>
-        <span class="score">{{list.score.logic}}</span>
+        <span class="score">{{ list.score.logic }}</span>
       </div>
     </div>
 
     <!-- 评价列表 -->
     <ul class="comment-list">
-      <li class="comment-item" v-for="(comment,index) in list.data" :key="index">
+      <li v-for="(comment,index) in list.data" :key="index" class="comment-item">
         <div class="img-box">
           <img :src="comment.avatar" alt="">
         </div>
         <div class="comment-content-wrapper">
           <p>
-            <span class="name">{{comment.name}}</span>
+            <span class="name">{{ comment.name }}</span>
             <span class="score">
-              <MoocStar :value="comment.score/2" :size="16" :disabled="true"></MoocStar>
-              {{comment.score}}分
+              <MoocStar :value="comment.score/2" :size="16" :disabled="true" />
+              {{ comment.score }}分
             </span>
           </p>
-          <p class="content">{{comment.comment}}</p>
+          <p class="content">
+            {{ comment.comment }}
+          </p>
           <p>
             <span class="like">
               <i class="iconfont">&#xe60c;</i>
-              {{comment.like}}
+              {{ comment.like }}
             </span>
-            <span class="time">时间：{{comment.time}}</span>
+            <span class="time">时间：{{ comment.time }}</span>
           </p>
         </div>
       </li>
     </ul>
 
     <!-- 分页 -->
-    <pagination :total="total" :page.sync="page"></pagination>
+    <pagination :total="total" :page.sync="page" />
   </div>
 </template>
 <script>

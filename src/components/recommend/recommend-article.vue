@@ -1,13 +1,17 @@
 <template>
   <div class="recommend">
-    <h3 class="recommend-title">{{title}}</h3>
+    <h3 class="recommend-title">
+      {{ title }}
+    </h3>
     <ul>
       <li v-for="(item,index) in list" :key="index" class="recommend-item">
         <div class="img-box">
           <img :src="item.img" alt="">
         </div>
         <div class="recommend-content">
-          <p class="title">{{item.title}}</p>
+          <p class="title">
+            {{ item.title }}
+          </p>
         </div>
       </li>
     </ul>

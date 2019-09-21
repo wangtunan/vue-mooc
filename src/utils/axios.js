@@ -10,7 +10,7 @@ const service = axios.create({
 
 // 请求拦截
 service.interceptors.request.use(
-  config =>{
+  config => {
     config.headers['token'] = 'WHYXXXXXABC123'
     return config
   },
@@ -27,7 +27,7 @@ service.interceptors.response.use(
       Message.error('网络异常，请刷新或者重试!')
       return Promise.reject('网络异常!')
     }
-    if (data.code != ERR_OK) {
+    if (data.code !== ERR_OK) {
       Message.error(data.msg || '接口请求异常，请重试!')
       return Promise.reject(data.msg || '接口异常!')
     }

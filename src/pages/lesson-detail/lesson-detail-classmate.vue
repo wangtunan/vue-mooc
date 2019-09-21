@@ -1,16 +1,22 @@
 <template>
   <div class="lesson-detail-classmate">
     <dl v-for="(value,key) in normalizeList" :key="key">
-      <dt v-if="key=='exp'" class="exp">经验</dt>
-      <dt v-if="key=='duration'" class="duration">时长</dt>
-      <dt v-if="key=='last'" class="last">最近</dt>
+      <dt v-if="key=='exp'" class="exp">
+        经验
+      </dt>
+      <dt v-if="key=='duration'" class="duration">
+        时长
+      </dt>
+      <dt v-if="key=='last'" class="last">
+        最近
+      </dt>
       <dd v-for="(item,index) in value" :key="index">
         <div class="img-box">
           <img :src="item.avatar" alt="">
         </div>
         <div class="content-box">
-          <span class="name">{{item.name}}</span>
-          <span class="value">{{item.value}}</span> 
+          <span class="name">{{ item.name }}</span>
+          <span class="value">{{ item.value }}</span> 
         </div>
       </dd>
     </dl>

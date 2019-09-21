@@ -1,7 +1,7 @@
 <template>
   <div class="account-bind">
-    <p class="last-login-record" ref="loginRecord">
-      上次登录时间：{{userinfo.lastLoginTime}}  地点：<span @click="handleRecordClick">查看最近操作记录</span>
+    <p ref="loginRecord" class="last-login-record">
+      上次登录时间：{{ userinfo.lastLoginTime }}  地点：<span @click="handleRecordClick">查看最近操作记录</span>
       <i class="iconfont" @click="handleCloseRecord">&#xe619;</i>
     </p>
     <dl>
@@ -9,26 +9,32 @@
         账号绑定
         <span class="bind-rate">完成 <strong>4/4</strong></span>
       </dt>
-      <dd class="bind-item" v-for="(item,index) in userinfo.binds" :key="index">
-        <i class="iconfont" v-if="item.icon=='email'">&#xe75d;</i>
-        <i class="iconfont" v-if="item.icon=='phone'">&#xe61a;</i>
-        <i class="iconfont" v-if="item.icon=='password'">&#xe61e;</i>
-        <i class="iconfont" v-if="item.icon=='social'">&#xe671;</i>
+      <dd v-for="(item,index) in userinfo.binds" :key="index" class="bind-item">
+        <i v-if="item.icon=='email'" class="iconfont">&#xe75d;</i>
+        <i v-if="item.icon=='phone'" class="iconfont">&#xe61a;</i>
+        <i v-if="item.icon=='password'" class="iconfont">&#xe61e;</i>
+        <i v-if="item.icon=='social'" class="iconfont">&#xe671;</i>
         <div class="bind-introduction">
           <p class="bind-title">
-            <span class="bind-type">{{item.type}}</span>
-            {{getBindValue(item)}}
+            <span class="bind-type">{{ item.type }}</span>
+            {{ getBindValue(item) }}
           </p>
-          <p class="bind-subtitle">{{item.desc}}</p>
-          <ul class="social-list" v-if="item.icon=='social'">
-            <li class="social-item" v-for="(social,index) in item.account" :key="index">
-              <i class="iconfont" :class="{yellow: social.value}" v-if="social.type=='weibo'">&#xe699;</i>
-              <i class="iconfont" :class="{blue: social.value}" v-if="social.type=='qq'">&#xe646;</i>
-              <i class="iconfont" :class="{green: social.value}" v-if="social.type=='wechat'">&#xe6a0;</i>
+          <p class="bind-subtitle">
+            {{ item.desc }}
+          </p>
+          <ul v-if="item.icon=='social'" class="social-list">
+            <li v-for="(social, index) in item.account" :key="index" class="social-item">
+              <i v-if="social.type=='weibo'" class="iconfont" :class="{yellow: social.value}">&#xe699;</i>
+              <i v-if="social.type=='qq'" class="iconfont" :class="{blue: social.value}">&#xe646;</i>
+              <i v-if="social.type=='wechat'" class="iconfont" :class="{green: social.value}">&#xe6a0;</i>
               <div class="social-content">
-                <p class="social-type">{{social.title}}</p>
-                <p class="social-bind-type" :class="{green: social.value}">{{social.value ? '已绑定' : '未绑定'}}</p>
-                <span class="social-bind-btn">{{social.value ? '添加绑定' : '解除绑定'}}</span>
+                <p class="social-type">
+                  {{ social.title }}
+                </p>
+                <p class="social-bind-type" :class="{green: social.value}">
+                  {{ social.value ? '已绑定' : '未绑定' }}
+                </p>
+                <span class="social-bind-btn">{{ social.value ? '添加绑定' : '解除绑定' }}</span>
               </div>
             </li>
           </ul>

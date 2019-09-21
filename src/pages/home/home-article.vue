@@ -2,71 +2,96 @@
   <div class="waterfull-container">
     <div class="waterfull m-center">
       <h2 class="home-title">
-        <i class="title-icon left-icon"></i>
+        <i class="title-icon left-icon" />
         精／彩／手／记／及／猿／问
-        <i class="title-icon right-icon"></i>
+        <i class="title-icon right-icon" />
       </h2>
 
       <div class="article-container">
-        <div class="article-item" v-for="(item,index) in article" :key="index">
-          <div class="topic-wrapper" v-if="item.type == 'topic'">
-            <div class="topic-item" v-for="(topic,index) in item.data" :key="index">
-              <p class="topic-flag" v-if="index==0">热门话题</p>
+        <div v-for="(item,index) in article" :key="index" class="article-item">
+          <div v-if="item.type == 'topic'" class="topic-wrapper">
+            <div v-for="(topic, index) in item.data" :key="index" class="topic-item">
+              <p v-if="index==0" class="topic-flag">
+                热门话题
+              </p>
               <template v-if="index==0">
                 <div class="topic-header-wrapper">
                   <div class="topic-title-wrapper">
-                    <p class="topic-name">#{{topic.topic}}#</p>
-                    <p class="topic-title">{{topic.title}}</p>
+                    <p class="topic-name">
+                      #{{ topic.topic }}#
+                    </p>
+                    <p class="topic-title">
+                      {{ topic.title }}
+                    </p>
                   </div>
                   <img :src="topic.img" class="topic-img" width="72" height="72" alt="">
                 </div>
-                <p class="topic-desc">{{topic.desc}}</p>
-                <p class="topic-look-detail">了解详情-></p>
+                <p class="topic-desc">
+                  {{ topic.desc }}
+                </p>
+                <p class="topic-look-detail">
+                  了解详情->
+                </p>
                 <h2 class="post-header">
                   <span class="post-header-title">往期回顾</span>
-                  <span class="post-header-title-line"></span>
+                  <span class="post-header-title-line" />
                 </h2>
               </template>
 
               <template v-else>
                 <div class="topic-header-wrapper post-topic">
                   <div class="topic-title-wrapper">
-                    <p class="topic-name">#{{topic.topic}}#</p>
-                    <p class="topic-title">{{topic.title}}</p>
+                    <p class="topic-name">
+                      #{{ topic.topic }}#
+                    </p>
+                    <p class="topic-title">
+                      {{ topic.title }}
+                    </p>
                   </div>
                   <img :src="topic.img" class="topic-img" width="72" height="72" alt="">
                 </div>
               </template>
-
             </div>
           </div>
 
-          <div class="article-wrapper" v-if="item.type == 'article'">
+          <div v-if="item.type == 'article'" class="article-wrapper">
             <p class="article-flag">
               <i class="iconfont">&#xe763;</i>
               <span>手记文章</span>
             </p>
             <div class="article-title-box">
-              <p class="article-title">{{item.title}}</p>
+              <p class="article-title">
+                {{ item.title }}
+              </p>
               <img :src="item.img" class="article-img" width="72" height="48" alt="">
             </div>
-            <p class="article-desc">{{item.desc}}</p>
+            <p class="article-desc">
+              {{ item.desc }}
+            </p>
             <p class="article-number">
-              <span class="scan">浏览 {{item.scan}}</span>
-              <span class="recommend">推荐 {{item.recommend}}</span>
+              <span class="scan">浏览 {{ item.scan }}</span>
+              <span class="recommend">推荐 {{ item.recommend }}</span>
               <span class="read-all">阅读全文-></span>
             </p>
           </div>
 
-          <div class="question-wrapper" v-if="item.type == 'question'">
+          <div v-if="item.type == 'question'" class="question-wrapper">
             <p class="question-flag">
               <i class="iconfont">&#xe606;</i>
               <span>相关猿问</span>  
             </p>
-            <p class="question-title">{{item.title}}</p>
-            <p class="status-text">{{item.status.text}}</p>
-            <p class="status-answer">{{item.status.answer}}</p>
-            <p class="total-number">共有{{item.total}}个回答</p>
+            <p class="question-title">
+              {{ item.title }}
+            </p>
+            <p class="status-text">
+              {{ item.status.text }}
+            </p>
+            <p class="status-answer">
+              {{ item.status.answer }}
+            </p>
+            <p class="total-number">
+              共有{{ item.total }}个回答
+            </p>
           </div>
         </div>
       </div>
@@ -77,6 +102,7 @@
 export default {
   props: {
     article: {
+      type: Array,
       required: true
     }
   }

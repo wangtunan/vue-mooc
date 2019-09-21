@@ -3,22 +3,26 @@
     <div class="lesson-nav">
       <ul class="ml-center">
         <li
-          class="nav-item"
           v-for="(item,index) in directionList"
           :key="index"
+          class="nav-item"
           :class="{active: index == currentDirectionIndex}"
           @click="handleNavClick(item,index)"
-        >{{item}}</li>
+        >
+          {{ item }}
+        </li>
       </ul>
     </div>
     <dl class="category-list ml-center">
       <dd
-        class="category-item"
         v-for="(category,index) in computeCategoryList"
         :key="index"
+        class="category-item"
         :class="{active: index == currentCategoryIndex}"
         @click="handleCategoryClick(category,index)"
-      >{{category}}</dd>
+      >
+        {{ category }}
+      </dd>
     </dl>
   </div>
 </template>
@@ -64,7 +68,7 @@ export default {
     computeCategoryList () {
       let result = []
       let categoryList = this.categoryList.slice()
-      if (this.currentDirectionIndex !==0) {
+      if (this.currentDirectionIndex !== 0) {
         let direction = this.directionList[this.currentDirectionIndex]
         categoryList = categoryList.filter(item => item.direction === '全部' || item.direction === direction)
       }

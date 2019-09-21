@@ -1,7 +1,7 @@
 <template>
   <div class="recommend">
     <h3 class="recommend-title">
-      {{title}}
+      {{ title }}
     </h3>
     <ul>
       <li v-for="(item,index) in list" :key="index" class="recommend-item">
@@ -9,14 +9,16 @@
           <img :src="item.avatar" alt="">
         </div>
         <div class="recommend-content">
-          <p class="name ellipsis">{{item.name}}</p>
-          <p class="other-info" v-if="author">
-            <span class="answer">{{item.article}}篇文章</span>
-            <span class="like">共{{item.fans}}个粉丝</span>
+          <p class="name ellipsis">
+            {{ item.name }}
           </p>
-          <p class="other-info" v-else>
-            <span class="answer">{{item.answer}}个回答</span>
-            <span class="like">共{{item.like}}个支持</span>
+          <p v-if="author" class="other-info">
+            <span class="answer">{{ item.article }}篇文章</span>
+            <span class="like">共{{ item.fans }}个粉丝</span>
+          </p>
+          <p v-else class="other-info">
+            <span class="answer">{{ item.answer }}个回答</span>
+            <span class="like">共{{ item.like }}个支持</span>
           </p>
           <span class="attention">+ 关注</span>
         </div>

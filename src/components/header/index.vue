@@ -8,13 +8,13 @@
     </div>
 
     <!-- 导航栏模块 -->
-    <m-nav :list="header.nav" v-if="header.nav"></m-nav>
+    <m-nav v-if="header.nav" :list="header.nav" />
 
     <!-- 搜索框模块 -->
-    <search></search>
+    <search />
 
     <!-- 登录模块 -->
-    <login-area></login-area>
+    <login-area />
   </div>
 </template>
 <script>

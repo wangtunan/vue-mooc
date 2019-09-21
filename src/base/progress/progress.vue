@@ -9,11 +9,15 @@
     >
       <div class="progress-bar-outer" :style="{ height: `${height}px` }">
         <div class="progress-bar-inner" :style="innerBarStyle">
-          <div class="progress-bar-inner-text" v-if="inside && showText">{{text}}</div>
+          <div v-if="inside && showText" class="progress-bar-inner-text">
+            {{ text }}
+          </div>
         </div>
       </div>
     </div>
-    <div class="progress-text" v-if="!inside && showText">{{text}}</div>
+    <div v-if="!inside && showText" class="progress-text">
+      {{ text }}
+    </div>
   </div>
 </template>
 <script>

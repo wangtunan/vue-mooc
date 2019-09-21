@@ -1,30 +1,34 @@
 <template>
   <div class="nav-content">
     <div class="tags">
-      <div class="tags-item" v-for="(tags,index) in content.tags" :key="index">
+      <div v-for="(tags,index) in content.tags" :key="index" class="tags-item">
         <h2 class="title-box">
-          <span class="title">{{tags.subtitle}}</span>
-          <span class="line"></span>
+          <span class="title">{{ tags.subtitle }}</span>
+          <span class="line" />
         </h2>
         <ul class="list">
-          <li class="tag" v-for="(tag,index) in tags.list" :key="index">{{tag}}</li>
+          <li v-for="(tag, index) in tags.list" :key="index" class="tag">
+            {{ tag }}
+          </li>
         </ul>
       </div>
     </div>
 
     <div class="nav-course">
-      <div class="course-item" v-for="(course,index) in content.course" :key="index">
+      <div v-for="(course,index) in content.course" :key="index" class="course-item">
         <div class="img-box">
           <img :src="course.img" width="64" height="42" alt="">
         </div>
         <div class="course-content">
-          <h2 class="title ellipsis">{{course.title}}</h2>
+          <h2 class="title ellipsis">
+            {{ course.title }}
+          </h2>
           <p class="information">
-            <span class="money" v-if="course.money >0">¥{{course.money}} / </span>
-            <span>{{course.rank}} / </span>
+            <span v-if="course.money >0" class="money">¥{{ course.money }} / </span>
+            <span>{{ course.rank }} / </span>
             <span>
               <i class="iconfont user-icon">&#xe607;</i>
-              {{course.number}}
+              {{ course.number }}
             </span>
           </p>
         </div>

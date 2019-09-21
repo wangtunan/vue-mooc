@@ -1,24 +1,32 @@
 <template>
   <div class="balance">
-    <h2 class="balance-title">我的余额</h2>
+    <h2 class="balance-title">
+      我的余额
+    </h2>
     <div class="balance-container">
       <div class="balance-message">
         <div class="balance-left">
           <p>当前余额</p>
-          <p class="balance">¥ {{recharge.total}}</p>
+          <p class="balance">
+            ¥ {{ recharge.total }}
+          </p>
         </div>
         <div class="balance-right">
-          <div class="recharge-btn" @click="handleRechargeClick">立即充值</div>
-          <p class="recharge-text">充值余额不可提现，仅限用于本平台课程消费</p>
+          <div class="recharge-btn" @click="handleRechargeClick">
+            立即充值
+          </div>
+          <p class="recharge-text">
+            充值余额不可提现，仅限用于本平台课程消费
+          </p>
         </div>
       </div>
       <div class="balancel-list">
         <el-table :data="recharge.data">
-          <el-table-column label="时间" prop="time"></el-table-column>
-          <el-table-column label="金额" prop="balance"></el-table-column>
-          <el-table-column label="操作" prop="action"></el-table-column>
-          <el-table-column label="结余" prop="total"></el-table-column>
-          <el-table-column label="备注" prop="remark"></el-table-column>        
+          <el-table-column label="时间" prop="time" />
+          <el-table-column label="金额" prop="balance" />
+          <el-table-column label="操作" prop="action" />
+          <el-table-column label="结余" prop="total" />
+          <el-table-column label="备注" prop="remark" />        
         </el-table>
       </div>
     </div>
@@ -28,13 +36,13 @@
         <el-form-item label="充值金额">
           <div class="recharge-amount">
             <span
-              class="recharge-item"
               v-for="(item,index) in amountList"
               :key="index"
+              class="recharge-item"
               :class="{active: index == amountIndex}"
               @click="handleAmountItemClick(index)"
             >
-              ¥ {{item}}
+              ¥ {{ item }}
               <div class="amount-active">
                 <i class="iconfont">&#xe786;</i>
               </div>
@@ -47,9 +55,9 @@
         <el-form-item label="充值方式">
           <div class="recharge-amount">
             <div
-              class="recharge-item way"
               v-for="(item,index) in rechargeWay"
               :key="index"
+              class="recharge-item way"
               :class="{active: index==rechargeWayIndex}"
               @click="rechargeWayIndex=index"
             >
@@ -61,8 +69,12 @@
           </div>
         </el-form-item>
       </el-form>
-      <div class="form-recharge-btn" @click="handleFormRechargeClick">立即充值</div>
-      <p class="recharge-argement">点击立即充值则视为您已同意 <span>《慕课网用户协议》</span></p>
+      <div class="form-recharge-btn" @click="handleFormRechargeClick">
+        立即充值
+      </div>
+      <p class="recharge-argement">
+        点击立即充值则视为您已同意 <span>《慕课网用户协议》</span>
+      </p>
     </el-dialog>
   </div>
 </template>
@@ -75,7 +87,7 @@ export default {
     return {
       dialogVisible: false, // 充值弹窗是否可见
       recharge: [], // 用户充值记录
-      amountList: [300,500,1000], // 充值金额列表
+      amountList: [300, 500, 1000], // 充值金额列表
       amountIndex: 0, // 当前选择的充值金额的索引
       rechargeWay: [], // 支付方式
       rechargeWayIndex: 0, // 当前支付方式的索引

@@ -1,7 +1,7 @@
 <template>
-  <swiper :options="swiperOption" ref="mySwiper" class="swiper-container">
-    <slot></slot>
-    <div class="swiper-pagination"  slot="pagination"></div>
+  <swiper ref="mySwiper" :options="swiperOption" class="swiper-container">
+    <slot />
+    <div slot="pagination" class="swiper-pagination" />
   </swiper>
 </template>
 <script>

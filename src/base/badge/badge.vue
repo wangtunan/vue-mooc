@@ -1,10 +1,9 @@
 <template>
   <div class="badge">
-    <slot></slot>
+    <slot />
     <span
-      class="badge-content"
-      v-text="content"
       v-if="isShow"
+      class="badge-content"
       :class="[
         'badge-content-'+ type,
         {
@@ -12,7 +11,8 @@
           'is-dot': isDot
         }
       ]"
-    ></span>
+      v-text="content"
+    />
   </div>
 </template>
 <script>

@@ -1,7 +1,7 @@
 <template>
   <div class="article-list">
     <!-- 筛选部分 -->
-    <dl class="list-filter" v-if="filterList">
+    <dl v-if="filterList" class="list-filter">
       <dd
         v-for="(filter,index) in filterList"
         :key="index"
@@ -9,24 +9,26 @@
         :class="{active: currentIndex==index}"
         @click="currentIndex=index"
       >
-        {{filter}}
+        {{ filter }}
       </dd>
     </dl>
 
     <!-- 列表部分 -->
     <ul class="list-content">
-      <li class="list-item" v-for="(item,index) in list" :key="index">
+      <li v-for="(item,index) in list" :key="index" class="list-item">
         <div class="img-box">
           <img :src="item.img" alt="">
         </div>
         <div class="content">
-          <p class="title">{{item.title}}</p>
+          <p class="title">
+            {{ item.title }}
+          </p>
           <p class="information">
             <span class="iconfont">&#xe681;</span>
-            <span class="number">{{item.view}}</span>
-            <span class="name">{{item.name}}</span>
-            <span class="tag">{{item.tag}}</span>
-            <span class="time">{{item.time}}</span>
+            <span class="number">{{ item.view }}</span>
+            <span class="name">{{ item.name }}</span>
+            <span class="tag">{{ item.tag }}</span>
+            <span class="time">{{ item.time }}</span>
           </p>
         </div>
       </li>

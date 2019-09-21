@@ -2,9 +2,9 @@
   <div class="elite-teacher-container">
     <div class="m-center">
       <h2 class="home-title">
-        <i class="title-icon left-icon"></i>
+        <i class="title-icon left-icon" />
         慕／课／精／英／名／师
-        <i class="title-icon right-icon"></i>
+        <i class="title-icon right-icon" />
       </h2>
     </div>
 
@@ -12,16 +12,20 @@
       <el-carousel :interval="interval" arrow="always" height="280px">
         <el-carousel-item v-for="(page,index) in pages" :key="index">
           <div class="elite-teacher-slider">
-            <div class="teacher-item" v-for="(item,index) in page" :key="index">
+            <div v-for="(item, index) in page" :key="index" class="teacher-item">
               <div class="img-box">
                 <img :src="item.avatar" alt="">
               </div>
               <div class="teacher-name">
-                <p class="name">{{item.name}}</p>
-                <p class="label">{{item.label}}</p>
+                <p class="name">
+                  {{ item.name }}
+                </p>
+                <p class="label">
+                  {{ item.label }}
+                </p>
               </div>
               <p class="teacher-intro">
-                {{item.introduction}}
+                {{ item.introduction }}
               </p>
             </div>
           </div>

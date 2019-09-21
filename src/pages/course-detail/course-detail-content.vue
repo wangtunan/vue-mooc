@@ -4,14 +4,14 @@
     <div class="detail-nav">
       <ul class="m-center">
         <li
-          class="nav-item"
           v-for="(nav,index) in navList"
           :key="index"
+          class="nav-item"
           :class="{active: index==currentNavIndex}"
           @click="currentNavIndex = index"
         >
-          {{nav.title}}
-          <span class="nav-number" v-if="nav.number">{{nav.number}}</span>  
+          {{ nav.title }}
+          <span v-if="nav.number" class="nav-number">{{ nav.number }}</span>  
         </li>
       </ul>
     </div>
@@ -19,13 +19,13 @@
     <!-- 内容部分 -->
     <div class="detail-information m-center">
       <div class="information-left">
-        <component :is="componentName" :list="content"></component>
+        <component :is="componentName" :list="content" />
       </div>
       <div class="information-right">
-        <detail-tips :lastest="lastest"></detail-tips>
-        <recommend :list="recommend.data" :title="recommend.title"></recommend>
-        <detail-tags :list="tags" v-if="tags.length"></detail-tags>
-        <recommend :list="related.data" :title="related.title"></recommend>
+        <detail-tips :lastest="lastest" />
+        <recommend :list="recommend.data" :title="recommend.title" />
+        <detail-tags v-if="tags.length" :list="tags" />
+        <recommend :list="related.data" :title="related.title" />
       </div>
     </div>
   </div>

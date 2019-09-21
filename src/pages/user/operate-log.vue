@@ -7,15 +7,15 @@
     <div class="log-list">
       <!-- 表格 -->
       <el-table :data="userinfo.logs">
-        <el-table-column label="类型" prop="type" align="center" width="120"></el-table-column>
-        <el-table-column label="登陆时间" prop="time" align="center" width="180"></el-table-column>
-        <el-table-column label="城市" prop="city" align="center" width="390"></el-table-column>
-        <el-table-column label="IP" prop="IP" align="center" width="120"></el-table-column>
-        <el-table-column label="设备" prop="device" align="center" width="90"></el-table-column>
+        <el-table-column label="类型" prop="type" align="center" width="120" />
+        <el-table-column label="登陆时间" prop="time" align="center" width="180" />
+        <el-table-column label="城市" prop="city" align="center" width="390" />
+        <el-table-column label="IP" prop="IP" align="center" width="120" />
+        <el-table-column label="设备" prop="device" align="center" width="90" />
       </el-table>
 
       <!-- 分页 -->
-      <pagination :total="total" :page.sync="page"></pagination>
+      <pagination :total="total" :page.sync="page" />
     </div>
   </div>
 </template>

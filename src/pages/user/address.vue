@@ -1,50 +1,62 @@
 <template>
   <div class="address-container">
-    <h2 class="address-title">收货地址</h2>
+    <h2 class="address-title">
+      收货地址
+    </h2>
     <dl class="address-list">
       <dd class="address-item">
         <div class="add-address" @click="handleAddClick">
           <i class="iconfont">&#xeaf3;</i>
-          <p class="add-text">添加新地址</p>
+          <p class="add-text">
+            添加新地址
+          </p>
         </div>
       </dd>
-      <dd class="address-item" v-for="(item,index) in addressList" :key="index">
-        <p class="name">{{item.name}}</p>
-        <p>电话：{{item.phhone}}</p>
-        <p>地区：{{item.area}}</p>
-        <p>地址：{{item.address}}</p>
-        <p>邮编：{{item.postcode}}</p>
+      <dd v-for="(item,index) in addressList" :key="index" class="address-item">
+        <p class="name">
+          {{ item.name }}
+        </p>
+        <p>电话：{{ item.phhone }}</p>
+        <p>地区：{{ item.area }}</p>
+        <p>地址：{{ item.address }}</p>
+        <p>邮编：{{ item.postcode }}</p>
         <div class="address-btn">
-          <span class="default" v-if="!item.isDefault" @click="handleSetDefault(item)">设为默认地址</span>
+          <span v-if="!item.isDefault" class="default" @click="handleSetDefault(item)">设为默认地址</span>
           <span @click="handleEditClick(item)">修改</span>
           <span @click="handleDeleteClick(index)">删除</span>
         </div>
-        <div class="default-icon" v-if="item.isDefault">默认</div>
+        <div v-if="item.isDefault" class="default-icon">
+          默认
+        </div>
       </dd>
     </dl>
 
     <el-dialog :title="title" :visible.sync="dialogVisible" width="500px">
       <el-form :model="editForm" label-width="80px" label-position="right">
         <el-form-item label="姓名">
-          <el-input v-model="editForm.name" placeholder="请输入收件名称" clearable></el-input>
+          <el-input v-model="editForm.name" placeholder="请输入收件名称" clearable />
         </el-form-item>
         <el-form-item label="电话">
-          <el-input v-model="editForm.phone" placeholder="请输入手机号" clearable></el-input>
+          <el-input v-model="editForm.phone" placeholder="请输入手机号" clearable />
         </el-form-item>
         <el-form-item label="区域">
-          <el-input v-model="editForm.area" placeholder="请输入区域" clearable></el-input>
+          <el-input v-model="editForm.area" placeholder="请输入区域" clearable />
         </el-form-item>
         <el-form-item label="详细地址">
-          <el-input v-model="editForm.address" placeholder="请输入详细收货地址" clearable></el-input>
+          <el-input v-model="editForm.address" placeholder="请输入详细收货地址" clearable />
         </el-form-item>
         <el-form-item label="邮政编码">
-          <el-input v-model="editForm.postcode" placeholder="请输入邮政编码" clearable></el-input>
+          <el-input v-model="editForm.postcode" placeholder="请输入邮政编码" clearable />
         </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button  size="small" @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" size="small" @click="handleSubmitClick">确定</el-button>
+        <el-button size="small" @click="dialogVisible = false">
+          取消
+        </el-button>
+        <el-button type="primary" size="small" @click="handleSubmitClick">
+          确定
+        </el-button>
       </div>
     </el-dialog>
   </div>
@@ -52,7 +64,7 @@
 <script>
 import { setUserAddress, getUserAddress } from 'utils/cache.js'
 export default {
-  data() {
+  data () {
     return {
       isAdd: false, // 是否为新增
       dialogVisible: false, // 编辑弹窗是否课件
@@ -67,12 +79,12 @@ export default {
       }
     };
   },
-  created() {
+  created () {
     this.getAddress()
   },
   methods: {
     // 新增收货地址
-    handleAddClick() {
+    handleAddClick () {
       this.isAdd = true
       this.dialogVisible = true
       this.editForm = {
@@ -98,7 +110,7 @@ export default {
         type: 'warning'
       }).then(() => {
         let address = this.addressList.slice()
-        address.splice(index,1)
+        address.splice(index, 1)
         this.addressList = address
         setUserAddress(address)
       })
@@ -109,7 +121,7 @@ export default {
       if (this.isAdd) {
         address.push(this.editForm)
       } else {
-        address.forEach((item,index) => {
+        address.forEach((item, index) => {
           if (item.name === this.editForm.name) {
             address[index] = this.editForm
           }
@@ -133,7 +145,7 @@ export default {
     },
     // 设为默认收货地址
     handleSetDefault (address) {
-      this.addressList.forEach((item,index) => {
+      this.addressList.forEach((item, index) => {
         this.addressList[index].isDefault = item.name === address.name
       })
       setUserAddress(this.addressList)
@@ -144,7 +156,7 @@ export default {
     }
   },
   computed: {
-    title() {
+    title () {
       return this.isAdd ? "新增收件地址" : "编辑收件地址";
     }
   }

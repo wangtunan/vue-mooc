@@ -7,35 +7,41 @@
         :key="index"
         :class="{active: index == filterIndex}"
         @click="filterIndex=index"
-      >{{item}}</span>
+      >{{ item }}</span>
 
       <div class="hide-course-box">
-        <mooc-switch :value="isHide" :active="switchActive" :in-active="switchInActive"></mooc-switch>隐藏已参与的课程
+        <mooc-switch :value="isHide" :active="switchActive" :in-active="switchInActive" />隐藏已参与的课程
       </div>
     </div>
 
     <!-- 课程列表 -->
-    <ul class="course-list" v-if="computeList.length">
-      <li class="list-item" v-for="(item,index) in computeList" :key="index" @click="handleCourseClick(item)">
+    <ul v-if="computeList.length" class="course-list">
+      <li v-for="(item,index) in computeList" :key="index" class="list-item" @click="handleCourseClick(item)">
         <div class="img-box">
           <img :src="item.img" alt="">
           <div class="tags">
-            <span class="tag-item" v-for="(tag,index) in item.tags" :key="index">{{tag}}</span>
+            <span v-for="(tag, index) in item.tags" :key="index" class="tag-item">{{ tag }}</span>
           </div>
-          <div class="rate" v-if="item.rate">{{item.rate}}%</div>
+          <div v-if="item.rate" class="rate">
+            {{ item.rate }}%
+          </div>
         </div>
         <div class="course-content">
-          <h2 class="title ellipsis">{{item.title}}</h2>
+          <h2 class="title ellipsis">
+            {{ item.title }}
+          </h2>
           <p>
-            <span class="rank">{{item.rank}}</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>{{item.number}}</span>
+            <span class="rank">{{ item.rank }}</span>
+            <span class="number"><i class="iconfont">&#xe607;</i>{{ item.number }}</span>
           </p>
-          <p class="desc">{{item.desc}}</p>
+          <p class="desc">
+            {{ item.desc }}
+          </p>
           <p>
-            <span class="price">{{item.price}}</span>
+            <span class="price">{{ item.price }}</span>
             <span class="collect" :class="{like: item.isLike}" @click="handleCollectClick(item,index)">
               <i class="iconfont">&#xe610;</i>
-              {{item.isLike ? '已收藏' : '收藏'}}
+              {{ item.isLike ? '已收藏' : '收藏' }}
             </span>
           </p>
         </div>

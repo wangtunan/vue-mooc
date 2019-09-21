@@ -16,14 +16,14 @@
       <li class="sidebar-item">
         <i class="iconfont">&#xe61a;</i>
         <span class="sidebar-text">APP下载</span>
-        <div class="app-code code"></div>
+        <div class="app-code code" />
       </li>
       <li class="sidebar-item">
         <i class="iconfont">&#xe628;</i>
         <span class="sidebar-text">官方微信</span>
-        <div class="wechat-code code"></div>
+        <div class="wechat-code code" />
       </li>
-      <li class="sidebar-item" v-show="showBackTop" @click="handleBackTopClick">
+      <li v-show="showBackTop" class="sidebar-item" @click="handleBackTopClick">
         <i class="iconfont">&#xe612;</i>
         <span class="sidebar-text">返回顶部</span>
       </li>

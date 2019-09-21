@@ -8,14 +8,20 @@
             <img :src="readDetail.img" alt="">
           </div>
           <div class="header-content">
-            <h3 class="title">{{readDetail.title}}</h3>
-            <p class="desc">{{readDetail.desc}}</p>
-            <p class="other-info">
-              <span class="teacher-info" v-if="readDetail.teacher">{{readDetail.teacher.name}} / {{readDetail.teacher.job}}</span>
-              <span class="term">共{{readDetail.term}}小节</span>
-              <span class="number">共{{readDetail.number}}人购买</span>
+            <h3 class="title">
+              {{ readDetail.title }}
+            </h3>
+            <p class="desc">
+              {{ readDetail.desc }}
             </p>
-            <p class="price">¥ {{readDetail.price}}</p>
+            <p class="other-info">
+              <span v-if="readDetail.teacher" class="teacher-info">{{ readDetail.teacher.name }} / {{ readDetail.teacher.job }}</span>
+              <span class="term">共{{ readDetail.term }}小节</span>
+              <span class="number">共{{ readDetail.number }}人购买</span>
+            </p>
+            <p class="price">
+              ¥ {{ readDetail.price }}
+            </p>
             <p class="read-btn">
               <span class="read">立即订阅</span>
               <span class="try">试读</span>
@@ -33,21 +39,23 @@
             课程目录
             <span class="total">已更新14个小节</span>
           </dt>
-          <dd v-for="(chapter,index) in readDetail.chapter" class="read-item" :key="index">
+          <dd v-for="(chapter,index) in readDetail.chapter" :key="index" class="read-item">
             <dl>
-              <dt class="chapter-title">{{chapter.title}}</dt>
-              <dd v-for="(term,index) in chapter.data" :key="index">
+              <dt class="chapter-title">
+                {{ chapter.title }}
+              </dt>
+              <dd v-for="(term, index) in chapter.data" :key="index">
                 <p>
-                  <span class="term-title">{{term.title}}</span>
-                  <span class="try-btn" v-if="term.isTry">试读</span>
+                  <span class="term-title">{{ term.title }}</span>
+                  <span v-if="term.isTry" class="try-btn">试读</span>
                 </p>
-                <span class="time">{{term.time}}</span>
+                <span class="time">{{ term.time }}</span>
               </dd>
             </dl>
           </dd>
         </dl>
         <div class="right">
-          <recommend-read title="慕课专栏" :list="readDetail.recommend"></recommend-read>
+          <recommend-read title="慕课专栏" :list="readDetail.recommend" />
         </div>
       </div>
     </div>

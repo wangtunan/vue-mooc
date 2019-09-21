@@ -2,7 +2,7 @@
   <div class="cart-header">
     <div class="m-center">
       <p class="info">
-        <slot></slot>
+        <slot />
       </p>
     </div>
   </div>

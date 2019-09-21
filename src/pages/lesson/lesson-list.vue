@@ -4,55 +4,61 @@
     <div class="list-filter">
       <ul>
         <li
-          class="filter-item"
-          v-for="(filter,index) in filter"
+          v-for="(filter, index) in filter"
           :key="index"
+          class="filter-item"
           :class="{active: currentFilterIndex == index}"
           @click="handleFilterClick(filter,index)"
-        >{{filter}}</li>
+        >
+          {{ filter }}
+        </li>
       </ul>
       <div class="hide-course-box">
-        <mooc-switch :value="isHide" :active="switchActive" :in-active="switchInActive"></mooc-switch>隐藏已参与的课程
+        <mooc-switch :value="isHide" :active="switchActive" :in-active="switchInActive" />隐藏已参与的课程
         <span class="like-number" :class="{active: isShowLike}" @click="handleShowLikeClick">
           <i class="iconfont">&#xe610;</i>
-          我的收藏{{computeLikeLesson}}
+          我的收藏{{ computeLikeLesson }}
         </span>
       </div>
     </div>
 
     <!-- 课程列表 -->
     <ul class="lesson-list">
-      <li class="list-item" v-for="(item, index) in computeList" :key="index" @click="handleLessonClick(item)">
+      <li v-for="(item, index) in computeList" :key="index" class="list-item" @click="handleLessonClick(item)">
         <div class="img-box">
           <img :src="item.img" alt="">
-          <span class="type" v-if="item.type">{{item.type}}</span>
-          <span class="rate" v-if="item.rate">{{item.rate}}%</span>
+          <span v-if="item.type" class="type">{{ item.type }}</span>
+          <span v-if="item.rate" class="rate">{{ item.rate }}%</span>
           <div class="lesson-mask">
-            <div class="teacher-info" v-if="item.teacher">
+            <div v-if="item.teacher" class="teacher-info">
               <img :src="item.teacher.avatar" alt="">
-              <span class="name">{{item.teacher.name}}</span>
+              <span class="name">{{ item.teacher.name }}</span>
             </div>
-            <div class="update-info" v-if="item.lastUpdate">
+            <div v-if="item.lastUpdate" class="update-info">
               <span>更新于</span>
-              <span>{{item.lastUpdate}}</span>
+              <span>{{ item.lastUpdate }}</span>
             </div>
           </div>
         </div>
         <div class="lesson-content">
-          <h2 class="title">{{item.title}}</h2>
+          <h2 class="title">
+            {{ item.title }}
+          </h2>
           <p>
-            <span>{{item.rank}}</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>{{item.number}}</span>
-            <span class="comment">{{item.comment}}人评价</span>
+            <span>{{ item.rank }}</span>
+            <span class="number"><i class="iconfont">&#xe607;</i>{{ item.number }}</span>
+            <span class="comment">{{ item.comment }}人评价</span>
           </p>
-          <p class="desc">{{item.desc}}</p>
+          <p class="desc">
+            {{ item.desc }}
+          </p>
           <p class="price">
-            <span class="old">¥{{item.oldPrice}}</span>
-            <span class="new" v-if="item.newPrice">¥{{item.newPrice}}</span>
+            <span class="old">¥{{ item.oldPrice }}</span>
+            <span v-if="item.newPrice" class="new">¥{{ item.newPrice }}</span>
             <span class="price-right">
               <span class="like" :class="{active: item.isLike}" @click="handleLikeClick(item,index)">
                 <i class="iconfont">&#xe610;</i>
-                {{item.isLike ? '已收藏' : '收藏'}}
+                {{ item.isLike ? '已收藏' : '收藏' }}
               </span>
               <span class="cart">加入购物车</span>
             </span>

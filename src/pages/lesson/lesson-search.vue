@@ -10,9 +10,11 @@
             <i class="iconfont">&#xe63c;</i>
           </div>
         </div>
-        <dl class="hot-box" v-if="hot.length">
+        <dl v-if="hot.length" class="hot-box">
           <dt>热搜：</dt>
-          <dd class="hot-item" v-for="(item,index) in hot" :key="index">{{item}}</dd>
+          <dd v-for="(item,index) in hot" :key="index" class="hot-item">
+            {{ item }}
+          </dd>
         </dl>
       </div>
     </div>

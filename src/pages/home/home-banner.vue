@@ -1,9 +1,13 @@
 <template>
   <ul class="course-banner">
-    <li class="banner-item" v-for="(item,index) in banner" :key="index">
-      <span class="icon"></span>
-      <p class="title">{{item.title}}</p>
-      <p class="desc">{{item.desc}}</p>
+    <li v-for="(item,index) in banner" :key="index" class="banner-item">
+      <span class="icon" />
+      <p class="title">
+        {{ item.title }}
+      </p>
+      <p class="desc">
+        {{ item.desc }}
+      </p>
     </li>
   </ul>
 </template>

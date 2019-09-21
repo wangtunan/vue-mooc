@@ -7,23 +7,25 @@
           :key="index"
           :class="{active: currentTabIndex==index}"
           @click="handleTabClick(tab,index)"
-        >{{tab.title}}</span>
+        >{{ tab.title }}</span>
       </dt>
-      <dd class="course-item" v-for="(item,index) in filterList" :key="index">
+      <dd v-for="(item,index) in filterList" :key="index" class="course-item">
         <div class="img-box">
           <img :src="item.img" alt="">
         </div>
         <div class="course-content">
-          <p class="title">{{item.title}} <span class="status">{{item.status}}</span></p>
+          <p class="title">
+            {{ item.title }} <span class="status">{{ item.status }}</span>
+          </p>
           <p class="learn">
-            <span class="rate">已学{{item.learn.rate}}%</span>
-            <span class="duration">用时{{item.learn.duration}}</span>
-            <span class="chapter">学习至{{item.learn.chapter}}</span>
+            <span class="rate">已学{{ item.learn.rate }}%</span>
+            <span class="duration">用时{{ item.learn.duration }}</span>
+            <span class="chapter">学习至{{ item.learn.chapter }}</span>
           </p>
           <p class="other">
-            <span>笔记{{item.note}}</span>
-            <span>代码{{item.code}}</span>
-            <span>问答{{item.question}}</span>
+            <span>笔记{{ item.note }}</span>
+            <span>代码{{ item.code }}</span>
+            <span>问答{{ item.question }}</span>
             <span class="learn-btn">继续学习</span>
           </p>
         </div>

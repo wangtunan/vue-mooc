@@ -2,19 +2,19 @@
   <div class="bill">
     <h2 class="bill-title">
       消费记录
-      <span class="number">目前共 <b>{{bill.number}}</b>条记录 </span>
-      <span class="total">消费金额 <b>¥{{bill.total}}</b> </span>
+      <span class="number">目前共 <b>{{ bill.number }}</b>条记录 </span>
+      <span class="total">消费金额 <b>¥{{ bill.total }}</b> </span>
       <span class="info">一份付出将有十分回报</span>
     </h2>
   
     <div class="bill-list">
       <el-table :data="bill.data">
-        <el-table-column label="订单编号" prop="order"></el-table-column>
-        <el-table-column label="课程" prop="name" show-overflow-tooltip></el-table-column>
-        <el-table-column label="时间" prop="time" width="180"></el-table-column>
-        <el-table-column label="消费金额" prop="price" width="100"></el-table-column>
-        <el-table-column label="支付方式" prop="pay.way" width="100"></el-table-column>
-        <el-table-column label="支付结果" prop="pay.result" width="100"></el-table-column>
+        <el-table-column label="订单编号" prop="order" />
+        <el-table-column label="课程" prop="name" show-overflow-tooltip />
+        <el-table-column label="时间" prop="time" width="180" />
+        <el-table-column label="消费金额" prop="price" width="100" />
+        <el-table-column label="支付方式" prop="pay.way" width="100" />
+        <el-table-column label="支付结果" prop="pay.result" width="100" />
       </el-table>
     </div>
   </div>

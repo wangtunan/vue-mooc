@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <el-progress :percentage="67" text-inside :stroke-width="30"></el-progress>
+    <el-progress :percentage="67" text-inside :stroke-width="30" />
   </div>
 </template>
 <script>

@@ -17,23 +17,25 @@
       <div class="nav">
         <ul>
           <li
-            class="nav-item"
             v-for="(item,index) in navList"
             :key="index"
+            class="nav-item"
             :class="{active: currentNavIndex==index}"
             @click="currentNavIndex=index"
-          >{{item.title}}</li>
+          >
+            {{ item.title }}
+          </li>
         </ul>
       </div>
       
       <div class="list">
-        <article-list :filter-list="filterList" :list="list" v-if="list && list.length"></article-list>
+        <article-list v-if="list && list.length" :filter-list="filterList" :list="list" />
       </div>
 
       <div class="recommend">
-        <recommend-read title="慕课专栏" :list="recommendReadList"></recommend-read>
-        <recommend-article title="推荐文章" :list="recommendArticleList"></recommend-article>
-        <recommend-author title="推荐作者" :list="recommendAuthorList" :author="true"></recommend-author>
+        <recommend-read title="慕课专栏" :list="recommendReadList" />
+        <recommend-article title="推荐文章" :list="recommendArticleList" />
+        <recommend-author title="推荐作者" :list="recommendAuthorList" :author="true" />
       </div>
     </div>
   </div>

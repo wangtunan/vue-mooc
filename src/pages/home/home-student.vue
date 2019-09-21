@@ -2,30 +2,44 @@
   <div class="all-star-container">
     <div class="m-center">
       <h2 class="home-title">
-        <i class="title-icon left-icon"></i>
+        <i class="title-icon left-icon" />
         吊／炸／天／全／明／星
-        <i class="title-icon right-icon"></i>
+        <i class="title-icon right-icon" />
       </h2>
     </div>
 
     <div class="all-star m-center">
       <ul class="best-star star">
-        <li class="star-item" v-for="(item,index) in allstar.best" :key="index">
+        <li v-for="(item,index) in allstar.best" :key="index" class="star-item">
           <img :src="item.avatar" width="56" height="56" alt="">
-          <p class="star-name">{{item.name}}</p>
-          <p class="star-type">{{item.type.text}}</p>
-          <span class="star-crown" :style="getPositionStyle(index)"></span>
+          <p class="star-name">
+            {{ item.name }}
+          </p>
+          <p class="star-type">
+            {{ item.type.text }}
+          </p>
+          <span class="star-crown" :style="getPositionStyle(index)" />
         </li>
       </ul>
       <ul class="all-star-list star">
-        <li class="all-item star-item" v-for="(item,index) in allstar.data" :key="index" :class="getItemclass(item.type.code)">
+        <li v-for="(item,index) in allstar.data" :key="index" class="all-item star-item" :class="getItemclass(item.type.code)">
           <img :src="item.avatar" width="48" height="48" alt="">
           <div class="star-info">
-            <p class="star-type">="{{item.type.text}}"=</p>
-            <p class="star-name ellipsis">{{item.name}}</p>
-            <p class="star-number" v-if="item.type.code==1">一周获得{{item.number}}积分</p>
-            <p class="star-number" v-if="item.type.code==2">一周发布{{item.number}}篇手记</p>
-            <p class="star-number" v-if="item.type.code==3">一周解题{{item.number}}个</p>
+            <p class="star-type">
+              ="{{ item.type.text }}"=
+            </p>
+            <p class="star-name ellipsis">
+              {{ item.name }}
+            </p>
+            <p v-if="item.type.code==1" class="star-number">
+              一周获得{{ item.number }}积分
+            </p>
+            <p v-if="item.type.code==2" class="star-number">
+              一周发布{{ item.number }}篇手记
+            </p>
+            <p v-if="item.type.code==3" class="star-number">
+              一周解题{{ item.number }}个
+            </p>
           </div>
         </li>
       </ul>
@@ -37,18 +51,19 @@ const BASE_WIDTH = 18
 export default {
   props: {
     allstar: {
+      type: Object,
       required: true
     }
   },
   methods: {
     // 获取背景图片的位置
-    getPositionStyle(index) {
+    getPositionStyle (index) {
       return {
         'background-position': `center -${index * BASE_WIDTH}px`
       }
     },
     // 获取样式
-    getItemclass(code) {
+    getItemclass (code) {
       const classMap = {
         "1": "purple",
         "2": "blue",

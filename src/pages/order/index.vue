@@ -4,17 +4,17 @@
       <dl class="order-left-nav">
         <dt>订单中心</dt>
         <dd
-          class="order-nav-item"
-          :class="{active: currentIndex == index}"
           v-for="(item,index) in navList"
           :key="item.id"
+          class="order-nav-item"
+          :class="{active: currentIndex == index}"
           @click="handleNavClick(index)"
         >
-          {{item.title}}
-          <span class="arrow"></span>
+          {{ item.title }}
+          <span class="arrow" />
         </dd>
       </dl>
-      <component class="order-right-content" :is="componentName"></component>
+      <component :is="componentName" class="order-right-content" />
     </div>
   </div>
 </template>

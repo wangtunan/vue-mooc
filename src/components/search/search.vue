@@ -1,7 +1,7 @@
 <template>
   <div class="header-search" :class="{focus: isFocus}">
     <div class="search-tags">
-      <span class="tag-item" v-for="(item,index) in tags" :key="index">{{item}}</span>
+      <span v-for="(item,index) in tags" :key="index" class="tag-item">{{ item }}</span>
     </div>
     <div class="search-input-box">
       <input type="text" class="search-input" @focus="isFocus = !isFocus" @blur="isFocus = false">
@@ -12,11 +12,15 @@
     <div class="search-suggestion">
       <dl class="hot-key">
         <dt>热搜</dt>
-        <dd v-for="(item,index) in hot" :key="index">{{item}}</dd>
+        <dd v-for="(item,index) in hot" :key="index">
+          {{ item }}
+        </dd>
       </dl>
       <dl class="history">
         <dt>搜索历史</dt>
-        <dd v-for="(item,index) in history" :key="index">{{item}}</dd>
+        <dd v-for="(item,index) in history" :key="index">
+          {{ item }}
+        </dd>
       </dl>
     </div>
   </div>

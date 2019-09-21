@@ -1,23 +1,33 @@
 <template>
   <div class="lesson-detail-score">
-    <h2 class="title">课程摘要</h2>
+    <h2 class="title">
+      课程摘要
+    </h2>
     <div class="score-content">
-      <p class="rate-name">好评率</p>
-      <p class="rate">{{score.praise}}%</p>
-      <p class="comment-btn">立即评价</p>
-      <p class="desc">给老师来点鼓励，可获得10积分奖励，前10评价100%可获实战专享优惠券！</p>
+      <p class="rate-name">
+        好评率
+      </p>
+      <p class="rate">
+        {{ score.praise }}%
+      </p>
+      <p class="comment-btn">
+        立即评价
+      </p>
+      <p class="desc">
+        给老师来点鼓励，可获得10积分奖励，前10评价100%可获实战专享优惠券！
+      </p>
       <div class="bottom">
         <dl>
           <dt>难度</dt>
-          <dd>{{score.rank}}</dd>
+          <dd>{{ score.rank }}</dd>
         </dl>
         <dl>
           <dt>时长</dt>
-          <dd>{{score.duration}}</dd>
+          <dd>{{ score.duration }}</dd>
         </dl>
         <dl>
           <dt>人数</dt>
-          <dd>{{score.number}}</dd>
+          <dd>{{ score.number }}</dd>
         </dl>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="user-course">
     <!-- 头部 -->
-    <course-header :base="base"></course-header>
+    <course-header :base="base" />
 
     <!-- 内容部分 -->
     <div class="m-center">
@@ -9,23 +9,23 @@
         <div class="nav-container">
           <ul>
             <li
-              class="nav-item"
               v-for="(nav,index) in navList"
               :key="index"
+              class="nav-item"
               :class="{active: currentNavIndex == index}"
               @click="handleNavClick(nav,index)"
             >
-              <i class="iconfont" v-if="nav.code == 0">&#xe981;</i>
-              <i class="iconfont" v-if="nav.code == 1">&#xe668;</i>
-              <i class="iconfont" v-if="nav.code == 2">&#xe685;</i>
-              <i class="iconfont" v-if="nav.code == 3">&#xe602;</i>
-              <i class="iconfont" v-if="nav.code == 4">&#xe635;</i>
-              {{nav.title}}
+              <i v-if="nav.code == 0" class="iconfont">&#xe981;</i>
+              <i v-if="nav.code == 1" class="iconfont">&#xe668;</i>
+              <i v-if="nav.code == 2" class="iconfont">&#xe685;</i>
+              <i v-if="nav.code == 3" class="iconfont">&#xe602;</i>
+              <i v-if="nav.code == 4" class="iconfont">&#xe635;</i>
+              {{ nav.title }}
             </li>
           </ul>
         </div>
         <div class="content-container">
-          <component :is="componentName" :list="currentList"></component>
+          <component :is="componentName" :list="currentList" />
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     // 导航点击
-    handleNavClick (item,index) {
+    handleNavClick (item, index) {
       this.currentNavIndex = index
     },
     // 获取用户课程信息

@@ -2,8 +2,10 @@
   <div class="search-wrapper">
     <input type="text" placeholder="搜索感兴趣的内容" @focus="isFocus=true" @blur="isFocus=false">
     <i class="iconfont">&#xe63c;</i>
-    <ul class="search-result" v-if="isFocus">
-      <li class="result-item" v-for="(item,index) in result" :key="index">{{item}}</li>
+    <ul v-if="isFocus" class="search-result">
+      <li v-for="(item,index) in result" :key="index" class="result-item">
+        {{ item }}
+      </li>
     </ul>
   </div>
 </template>

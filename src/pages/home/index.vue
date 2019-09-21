@@ -1,42 +1,42 @@
 <template>
   <div class="home">
     <!-- 背景阴影 -->
-    <div class="bg-mask" :style="getBackgroundImage"></div>
+    <div class="bg-mask" :style="getBackgroundImage" />
 
     <!-- 导航和轮播 -->
     <div class="home-container m-center">
-      <home-nav></home-nav>
+      <home-nav />
       <home-swiper @swiper="handelSwiper">
         <swiper-slide v-for="(item,index) in swiperList" :key="index">
-          <img :src="item.img" :key="item.img" alt="" class="swiper-img">
+          <img :key="item.img" :src="item.img" alt="" class="swiper-img">
         </swiper-slide>
       </home-swiper>
-      <home-banner></home-banner>
+      <home-banner />
     </div>
 
     <!--  实战导航 -->
-    <course-list :course="practiceList"></course-list>
+    <course-list :course="practiceList" />
 
     <!-- 新上好课 -->
-    <course-list :course="newList"></course-list>
+    <course-list :course="newList" />
 
     <!-- 新手入门 -->
-    <course-list :course="guideList"></course-list>
+    <course-list :course="guideList" />
 
     <!-- 技能提升 -->
-    <course-list :course="improveList"></course-list>
+    <course-list :course="improveList" />
 
     <!-- 前言技术 -->
-    <course-list :course="technologyList"></course-list>
+    <course-list :course="technologyList" />
 
     <!-- 猿问和手记 -->
-    <home-article :article="articleList"></home-article>
+    <home-article :article="articleList" />
 
     <!-- 精英讲师 -->
-    <home-teacher :teacher-list="teacherList"></home-teacher>
+    <home-teacher :teacher-list="teacherList" />
 
     <!-- 全明星 -->
-    <home-student :allstar="allstar"></home-student>
+    <home-student :allstar="allstar" />
   </div>
 </template>
 <script>

@@ -16,31 +16,31 @@
       @change="handleInputChange"
     >
     <span
-      class="switch-label left"
-      ref="LeftLabel"
       v-if="newInActive.text"
+      ref="LeftLabel"
+      class="switch-label left"
       :class="{
         'active': !checked
       }"
     >
-      {{newInActive.text}}
+      {{ newInActive.text }}
     </span>
     <span
-      class="switch-radius"
       ref="SwitchRadius"
+      class="switch-radius"
       :style="{
         'width': width + 'px'
       }"
-    ></span>
+    />
     <span
-      class="switch-label right"
-      ref="RightLabel"
       v-if="newActive.text"
+      ref="RightLabel"
+      class="switch-label right"
       :class="{
         'active': checked
       }"
     >
-      {{newActive.text}}
+      {{ newActive.text }}
     </span>
   </div>
 </template>

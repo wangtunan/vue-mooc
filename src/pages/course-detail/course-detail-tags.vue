@@ -1,14 +1,18 @@
 <template>
   <div class="course-detail-tags">
-    <h3 class="title">热门专题标签</h3>
+    <h3 class="title">
+      热门专题标签
+    </h3>
     <ul>
       <li
-        class="tags-item" v-for="(tag, index) in list"
-        :key="index"
+        v-for="(tag, index) in list" :key="index"
+        class="tags-item"
         :style="{
           'background-color': getBackgroundColor(index)
         }"
-      >{{tag}}</li>
+      >
+        {{ tag }}
+      </li>
     </ul>
   </div>
 </template>

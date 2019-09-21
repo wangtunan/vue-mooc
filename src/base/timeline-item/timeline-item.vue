@@ -1,21 +1,21 @@
 <template>
   <li class="timeline-item">
-    <div class="timeline-item-line"></div>
+    <div class="timeline-item-line" />
 
     <div
-      class="timeline-item-dot"
       v-if="!$slots.dot"
+      class="timeline-item-dot"
       :style="{
         'background-color': color
       }"
       :class="[
         `timeline-item-dot-${size || ''}`,
         `timeline-item-dot-${type || ''}`
-      ]">
-    </div>
+      ]"
+    />
 
-    <div class="timeline-item-dot-customer" v-if="$slots.dot">
-      <slot name="dot"></slot>
+    <div v-if="$slots.dot" class="timeline-item-dot-customer">
+      <slot name="dot" />
     </div> 
 
     <div class="timeline-item-wrapper">
@@ -24,7 +24,7 @@
       </div>
       
       <div class="timeline-item-content">
-        <slot></slot>
+        <slot />
       </div>
 
       <div v-if="!hideTimestamp && placement==='bottom'" class="timeline-item-timestamp bottom">

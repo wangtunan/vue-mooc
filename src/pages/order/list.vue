@@ -8,50 +8,70 @@
         :class="{active: currentIndex == index}"
         @click="handleNavClick(index)"
       >
-        <i class="iconfont" v-if="item.type==4">&#xe622;</i>{{item.title}}
+        <i v-if="item.type==4" class="iconfont">&#xe622;</i>{{ item.title }}
       </dd>
     </dl>
 
     <ul class="order-list">
       <li
-        class="order-item"
         v-for="item in filterOrderList"
         :key="item.id"
+        class="order-item"
       >
         <h2 class="order-title">
           <i class="iconfont">&#xe70b;</i>
-          订单编号：{{item.id}}
-          <span class="order-time">{{item.time}}</span>
+          订单编号：{{ item.id }}
+          <span class="order-time">{{ item.time }}</span>
           <i class="iconfont delete" title="删除订单">&#xe622;</i>
         </h2>
         <div class="order-list-box">
           <dl>
-            <dd class="order-content" v-for="(course,index) in item.course" :key="index">
+            <dd v-for="(course,index) in item.course" :key="index" class="order-content">
               <div class="img-box">
                 <img :src="course.img" width="160" height="90" alt="">
               </div>
               <div class="order-name-box">
-                <p class="order-name">{{course.name}}</p>
-                <p class="order-real-price"><span v-if="item.status==2">实付</span> ¥{{course.realPrice}}</p>
+                <p class="order-name">
+                  {{ course.name }}
+                </p>
+                <p class="order-real-price">
+                  <span v-if="item.status==2">实付</span> ¥{{ course.realPrice }}
+                </p>
               </div>
             </dd>
           </dl>
           <div class="order-price-box">
             <template v-if="item.status==2">
-              <p class="price-item old">原价 ¥{{item.oldPrice}}</p>
-              <p class="price-item">折扣 -¥{{item.discount}}</p>
-              <p class="price-item real"> 实付 ¥<span>{{item.oldPrice}}</span></p>
+              <p class="price-item old">
+                原价 ¥{{ item.oldPrice }}
+              </p>
+              <p class="price-item">
+                折扣 -¥{{ item.discount }}
+              </p>
+              <p class="price-item real">
+                实付 ¥<span>{{ item.oldPrice }}</span>
+              </p>
             </template>
-              <p class="price-item real" v-else> ¥<span>{{item.oldPrice}}</span></p>            
+            <p v-else class="price-item real">
+              ¥<span>{{ item.oldPrice }}</span>
+            </p>            
           </div>
           <div class="order-status-box">
             <template v-if="item.status==1">
-              <p class="order-pay-btn">立即支付</p>
-              <p class="order-cancel">取消订单</p>
+              <p class="order-pay-btn">
+                立即支付
+              </p>
+              <p class="order-cancel">
+                取消订单
+              </p>
             </template>
             <template v-else>
-              <p class="order-status">{{item.statusText}}</p>
-              <p class="order-pay">{{item.payType}}</p>
+              <p class="order-status">
+                {{ item.statusText }}
+              </p>
+              <p class="order-pay">
+                {{ item.payType }}
+              </p>
             </template>
           </div>
         </div>

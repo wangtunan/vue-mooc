@@ -2,7 +2,7 @@ import axios from 'utils/axios.js'
 import { IS_MOCK_LOCAL } from 'api/config.js'
 
 // 获取主页导航信息
-export function getHomeNav() {
+export function getHomeNav () {
   let url = IS_MOCK_LOCAL ? '/mock/home/nav.json' : '/home/nav'
   return axios.get(url)
 }
@@ -12,7 +12,7 @@ export function getSliderList () {
   return axios.get(url)
 }
 // 获取主页课程信息
-export function getHomeCourse() {
+export function getHomeCourse () {
   let url = IS_MOCK_LOCAL ? '/mock/home/course.json' : '/home/course'
   return axios.get(url)
 }
@@ -27,7 +27,7 @@ export function getTeacher () {
   return axios.get(url)
 }
 // 获取全明星信息
-export function getAllStar() {
+export function getAllStar () {
   let url = IS_MOCK_LOCAL ? '/mock/home/allstar.json' : '/home/allstar'
   return axios.get(url)
 }

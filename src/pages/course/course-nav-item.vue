@@ -1,13 +1,15 @@
 <template>
   <div class="course-nav">
     <dl>
-      <dt>{{type}}：</dt>
+      <dt>{{ type }}：</dt>
       <dd
         v-for="(nav,index) in list"
         :key="index"
         :class="{active: index===currentIndex}"
         @click="handleNavClick(nav,index)"
-      >{{nav}}</dd>
+      >
+        {{ nav }}
+      </dd>
     </dl>
   </div> 
 </template>
@@ -31,7 +33,7 @@ export default {
   },
   methods: {
     // 导航点击事件
-    handleNavClick (nav,index) {
+    handleNavClick (nav, index) {
       const params = {
         index: index,
         data: nav

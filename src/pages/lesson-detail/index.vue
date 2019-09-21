@@ -1,10 +1,10 @@
 <template>
   <div class="lesson-detail">
     <!-- 头部 -->
-    <lesson-detail-header :base="detail.base" v-if="detail.base"></lesson-detail-header>
+    <lesson-detail-header v-if="detail.base" :base="detail.base" />
 
     <!-- 内容部分 -->
-    <lesson-detail-content :data="detail" v-if="Object.keys(detail).length"></lesson-detail-content>
+    <lesson-detail-content v-if="Object.keys(detail).length" :data="detail" />
   </div>
 </template>
 <script>

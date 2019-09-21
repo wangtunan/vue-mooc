@@ -1,3 +1,5 @@
 <template>
-  <div class="dialog">dialog</div>
+  <div class="dialog">
+    dialog
+  </div>
 </template>

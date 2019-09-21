@@ -1,8 +1,12 @@
 <template>
   <div class="lesson-detail-header">
     <div class="m-center">
-      <p class="bread-crumb">实战 \ {{base.title}}</p>
-      <p class="name">{{base.title}}</p>
+      <p class="bread-crumb">
+        实战 \ {{ base.title }}
+      </p>
+      <p class="name">
+        {{ base.title }}
+      </p>
     </div>
   </div>
 </template>

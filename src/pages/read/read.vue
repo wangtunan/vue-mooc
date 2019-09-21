@@ -3,7 +3,9 @@
     <!-- 头部 -->
     <div class="read-header">
       <img src="https://www.imooc.com/static/img/column/sub-logo2.png" alt="">
-      <p class="total-course">共20个专栏</p>
+      <p class="total-course">
+        共20个专栏
+      </p>
     </div>
 
     <!-- 导航 -->
@@ -11,39 +13,45 @@
       <dl>
         <dt>分类：</dt>
         <dd
-          :class="{active: index == currentIndex}"
-          v-for="(type,index) in typeList" :key="index"
+          v-for="(type,index) in typeList"
+          :key="index" :class="{active: index == currentIndex}"
           @click="currentIndex = index"
-        >{{type}}</dd>
+        >
+          {{ type }}
+        </dd>
       </dl>
     </div>
 
     <!-- 列表 -->
     <div class="read-list">
       <ul>
-        <li class="read-item" v-for="(item,index) in filterReadList" :key="index" @click="handleReadClick">
+        <li v-for="(item,index) in filterReadList" :key="index" class="read-item" @click="handleReadClick">
           <div class="img-box">
             <img :src="item.img" alt="">
           </div>
           <div class="read-content">
-            <p class="title">{{item.title}}</p>
-            <p class="read-desc">{{item.desc}}</p>
+            <p class="title">
+              {{ item.title }}
+            </p>
+            <p class="read-desc">
+              {{ item.desc }}
+            </p>
             <p class="author">
               <img :src="item.author.avatar" class="avatar" alt="">
-              <span class="name">{{item.author.name}}</span>
+              <span class="name">{{ item.author.name }}</span>
               <span class="split">/</span>
-              <span class="job">{{item.author.job}}</span>
+              <span class="job">{{ item.author.job }}</span>
             </p>
             <dl class="try-read">
-              <dd class="try-item" v-for="(read,index) in item.tryRead" :key="index">
+              <dd v-for="(read, index) in item.tryRead" :key="index" class="try-item">
                 <span class="icon">试读</span>
-                <span class="name">{{read}}</span>
+                <span class="name">{{ read }}</span>
               </dd>
             </dl>
             <p class="other">
-              <span class="price">¥ {{item.price}}</span>
-              <span class="trem">共{{item.term}}小节</span>
-              <span class="number">共{{item.number}}人购买</span>
+              <span class="price">¥ {{ item.price }}</span>
+              <span class="trem">共{{ item.term }}小节</span>
+              <span class="number">共{{ item.number }}人购买</span>
             </p>
           </div>
         </li>

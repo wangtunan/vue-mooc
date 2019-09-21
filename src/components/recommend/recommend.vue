@@ -1,19 +1,23 @@
 <template>
   <div class="recommend">
-    <h3 class="recommend-title" v-if="title">{{title}}</h3>
+    <h3 v-if="title" class="recommend-title">
+      {{ title }}
+    </h3>
     <ul>
       <li v-for="(item,index) in list" :key="index" class="recommend-item">
         <div class="img-box">
           <img :src="item.url" alt="">
         </div>
         <div class="recommend-content">
-          <p class="name ellipsis">{{item.title}}</p>
+          <p class="name ellipsis">
+            {{ item.title }}
+          </p>
           <p class="desc">
-            <span class="price" v-if="item.price">¥{{item.price}}</span>
-            <span class="rank">{{item.rank}}</span>
+            <span v-if="item.price" class="price">¥{{ item.price }}</span>
+            <span class="rank">{{ item.rank }}</span>
             <span class="number">
               <i class="iconfont">&#xe607;</i>
-              {{item.number}}
+              {{ item.number }}
             </span>
           </p>
         </div>

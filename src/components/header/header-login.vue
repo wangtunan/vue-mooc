@@ -16,13 +16,13 @@
         <i class="iconfont">&#xe63b;</i>
         <span class="login-text">购物车</span>
         <div class="mini-chart-container" @mouseenter="handleCartMouseEnter" @mouseleave="showMiniCart = false">
-          <mini-cart  v-if="showMiniCart" :list="cartList" @close="showMiniCart=false" @delete="handleDeleteClick"></mini-cart>
+          <mini-cart v-if="showMiniCart" :list="cartList" @close="showMiniCart=false" @delete="handleDeleteClick" />
         </div>
       </a>
     </li>
     <template v-if="userInfo && userInfo.avatar">
       <li class="item bell" @click="handleBellClick">
-        <mooc-badge :value="100" :max="99" >
+        <mooc-badge :value="100" :max="99">
           <i class="iconfont">&#xe6eb;</i>
         </mooc-badge>
       </li>
@@ -30,14 +30,16 @@
         <div class="img-box">
           <img :src="userInfo.avatar" alt="">
         </div>
-        <div class="userinfo-wrapper" v-show="showUserInfo">
+        <div v-show="showUserInfo" class="userinfo-wrapper">
           <div class="userinfo-message-wrapper">
             <img :src="userInfo.avatar" alt="">
             <div class="userinfo-message">
-              <p class="name ellipsis">{{userInfo.name}}</p>
+              <p class="name ellipsis">
+                {{ userInfo.name }}
+              </p>
               <p class="number">
-                <span class="number-item">经验 <b>{{userInfo.experience}}</b></span>
-                <span class="number-item">积分 <b>{{userInfo.integral}}</b></span>
+                <span class="number-item">经验 <b>{{ userInfo.experience }}</b></span>
+                <span class="number-item">积分 <b>{{ userInfo.integral }}</b></span>
               </p>
             </div>
           </div>
@@ -61,17 +63,17 @@
           </div>
           <div class="course-history">
             <i class="iconfont">&#xe62f;</i>
-            <span class="course-name ellipsis">{{userInfo.lastCourse && userInfo.lastCourse.name}}</span>
-            <span class="course-chapter ellipsis">{{userInfo.lastCourse && userInfo.lastCourse.chapter}}</span>
+            <span class="course-name ellipsis">{{ userInfo.lastCourse && userInfo.lastCourse.name }}</span>
+            <span class="course-chapter ellipsis">{{ userInfo.lastCourse && userInfo.lastCourse.chapter }}</span>
             <span class="course-btn" @click="handleHistoryClick">继续</span>
           </div>
-          <p class="exit-btn" >
+          <p class="exit-btn">
             <span @click="handleUserLogout">安全退出</span>
           </p>
         </div>
       </li>
     </template>
-    <li class="item sign" v-else>
+    <li v-else class="item sign">
       <span class="sign-btn" @click="handleLoginClick">登录</span>/
       <span class="sign-btn" @click="handleRegisterClick">注册</span>
     </li>
