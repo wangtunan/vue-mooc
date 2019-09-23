@@ -40,8 +40,11 @@ module.exports = {
           title: "基础",
           collapsable: false,
           children: [
-            '/guide/start.md',
-            '/guide/mock.md'
+            '/guide/basic/start.md',
+            '/guide/basic/mock.md',
+            '/guide/basic/layout.md',
+            '/guide/basic/router.md',
+            '/guide/basic/vuex.md'
           ]
         }
       ],
