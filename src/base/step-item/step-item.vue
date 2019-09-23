@@ -4,7 +4,7 @@
     :class="[`
       is-${$parent-direction}`
     ]"
->
+  >
     <!-- icon & line -->
     <div class="step-item-head">
       <div class="step-item-line">

@@ -21,6 +21,8 @@
     "vue/max-attributes-per-line": 0,
     // 不允许在template组件上绑定某些属性，例如key
     "vue/no-template-shadow": 0,
+    // vue组件自闭和标签
+    'vue/html-self-closing': 0,
     // 生产环境下不允许debugger调试
     "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
     // 函数后必须跟一个空格

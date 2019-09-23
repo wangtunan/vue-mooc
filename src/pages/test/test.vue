@@ -6,7 +6,9 @@
       <el-step title="步骤 3"></el-step>
     </el-steps>
 
-    <el-button @click="handleStepClick">下一步</el-button>
+    <el-button @click="handleStepClick">
+      下一步
+    </el-button>
   </div>
 </template>
 <script>
