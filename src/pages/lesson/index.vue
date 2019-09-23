@@ -1,16 +1,16 @@
 <template>
   <div class="lesson">
     <!-- 搜索 -->
-    <lesson-search :hot="hotList"></lesson-search>
+    <lesson-search :hot="hotList" />
 
     <!-- 导航 -->
-    <lesson-nav :nav="navList" v-if="navList.length" @change="handleNavChange"></lesson-nav>
+    <lesson-nav v-if="navList.length" :nav="navList" @change="handleNavChange" />
 
     <!-- 列表 -->
-    <lesson-list :list.sync="lessonList"></lesson-list>
+    <lesson-list :list.sync="lessonList" />
     
     <!-- 分页 -->
-    <pagination :total.sync="total"></pagination>
+    <pagination :total.sync="total" />
   </div>
 </template>
 <script>

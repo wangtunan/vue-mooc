@@ -6,15 +6,17 @@
         我的购物车
         <span class="total">共加入0门课程</span>
       </dt>
-      <div class="cart-item-wrapper" v-if="list.length > 0">
-        <dd class="cart-item" v-for="(item,index) in list" :key="index" @click="handleCartItemClick">
+      <div v-if="list.length > 0" class="cart-item-wrapper">
+        <dd v-for="(item,index) in list" :key="index" class="cart-item" @click="handleCartItemClick">
           <div class="img-box">
             <img :src="item.img" alt="">
           </div>
           <div class="cart-content">
-            <p class="name">{{item.name}}</p>
+            <p class="name">
+              {{ item.name }}
+            </p>
             <p class="price-box">
-              <span class="price">¥ {{item.price}}</span>
+              <span class="price">¥ {{ item.price }}</span>
               <span class="delete" @click.stop="handleDeleteClick(index)">删除</span>
             </p>
           </div>
@@ -22,9 +24,15 @@
       </div>
       <div v-else class="empty-box">
         <span class="iconfont">&#xe63b;</span>
-        <h2 class="empty-title">购物车里空空如也</h2>
-        <p class="empty-desc">快去选购你中意的课程</p>
-        <p class="empty-link" @click="handleLessonClick">实战课程</p>
+        <h2 class="empty-title">
+          购物车里空空如也
+        </h2>
+        <p class="empty-desc">
+          快去选购你中意的课程
+        </p>
+        <p class="empty-link" @click="handleLessonClick">
+          实战课程
+        </p>
       </div>
     </dl>
 

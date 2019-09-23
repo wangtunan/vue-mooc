@@ -1,27 +1,33 @@
 <template>
   <div class="certificate">
-    <h2 class="certificate-title">学籍认证</h2>
+    <h2 class="certificate-title">
+      学籍认证
+    </h2>
     <div class="certificate-wrapper">
       <div class="status">
         <i class="iconfont">&#xe819;</i>
-        <p class="status-text">学籍认证成功</p>
-        <p class="cert-time">学籍时间({{userinfo.certificate.stime}}-{{userinfo.certificate.etime}})</p>
+        <p class="status-text">
+          学籍认证成功
+        </p>
+        <p class="cert-time">
+          学籍时间({{ userinfo.certificate.stime }}-{{ userinfo.certificate.etime }})
+        </p>
         <dl class="cert-list">
           <dd class="cert-item">
             <span class="item-title">姓名：</span>
-            <span>{{userinfo.certificate.name}}</span>
+            <span>{{ userinfo.certificate.name }}</span>
           </dd>
           <dd class="cert-item">
             <span class="item-title">院校名称：</span>
-            <span>{{userinfo.certificate.school}}</span>
+            <span>{{ userinfo.certificate.school }}</span>
           </dd>
           <dd class="cert-item">
             <span class="item-title">入学时间：</span>
-            <span>{{userinfo.certificate.stime}}</span>
+            <span>{{ userinfo.certificate.stime }}</span>
           </dd>
           <dd class="cert-item">
             <span class="item-title">学历层次：</span>
-            <span>{{userinfo.certificate.grade}}</span>
+            <span>{{ userinfo.certificate.grade }}</span>
           </dd>
         </dl>
       </div>

@@ -1,14 +1,15 @@
 <template>
   <div class="star">
     <span
-      class="star-item iconfont"
       v-for="(item, index) in max"
+      :key="index"
+      class="star-item iconfont"
+      :style="getStyle(item)"
+      :class="{'disabled': disabled}"
       @mouseenter="handleMouseEnter(item)"
       @mouseleave="handleMouseLeave"
       @click="handleStarClick(item)"
-      :style="getStyle(item)"
-      :class="{'disabled': disabled}"
-      :key="index">
+    >
       &#xe610;
     </span>
     <span
@@ -26,11 +27,11 @@ export default {
   name: 'MoocStar',
   props: {
     value: {
-      type: [Number,String],
+      type: [Number, String],
       default: 0
     },
     size: {
-      type: [Number,String],
+      type: [Number, String],
       default: 14
     },
     max: {

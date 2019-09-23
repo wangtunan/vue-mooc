@@ -1,13 +1,13 @@
 <template>
   <div class="home-nav-container">
     <ul class="home-nav" @mouseleave="handleMouseLeave">
-      <li class="nav-item" v-for="(item,index) in navList" :key="index" @mouseenter="handleMouseEnter(item)">
-        <span class="nav-title">{{item.title}}</span>
-        <span class="arr-right"></span>
+      <li v-for="(item,index) in navList" :key="index" class="nav-item" @mouseenter="handleMouseEnter(item)">
+        <span class="nav-title">{{ item.title }}</span>
+        <span class="arr-right" />
       </li>
     </ul>
     <div @mouseenter="handleContentEnter" @mouseleave="handleContentLeave">
-      <nav-content v-show="showNavContent" :content="currentNav"></nav-content>
+      <nav-content v-show="showNavContent" :content="currentNav" />
     </div>
   </div>
 </template>

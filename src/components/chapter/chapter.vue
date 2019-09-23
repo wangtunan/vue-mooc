@@ -1,21 +1,27 @@
 <template>
   <div class="chapter">
-    <div class="chapter-introduce" v-if="list.introduce">{{list.introduce}}</div>
-    <div class="chapter-item" v-for="(chapter,index) in list.data" :key="index">
-      <h2 class="chapter-title">{{chapter.title}}</h2>
-      <p class="chapter-desc">{{chapter.desc}}</p>
+    <div v-if="list.introduce" class="chapter-introduce">
+      {{ list.introduce }}
+    </div>
+    <div v-for="(chapter,index) in list.data" :key="index" class="chapter-item">
+      <h2 class="chapter-title">
+        {{ chapter.title }}
+      </h2>
+      <p class="chapter-desc">
+        {{ chapter.desc }}
+      </p>
       <ul>
-        <li class="term-item" v-for="(term,index) in chapter.term" :key="index">
+        <li v-for="(term, index) in chapter.term" :key="index" class="term-item">
           <p>
             <span class="iconfont play">&#xe615;</span>
-            <span>{{term.title}}({{term.duration}})</span>
+            <span>{{ term.title }}({{ term.duration }})</span>
             <span class="right">
-              <i class="iconfont complete" v-if="term.rate == 100">&#xe60f;</i>
-              <span class="doning" v-else-if="term.rate > 0 && term.rate < 100">
+              <i v-if="term.rate == 100" class="iconfont complete">&#xe60f;</i>
+              <span v-else-if="term.rate > 0 && term.rate < 100" class="doning">
                 最近学习
-                <i class="iconfont" >&#xe601;</i>
+                <i class="iconfont">&#xe601;</i>
               </span>
-              <i class="iconfont ready" v-else>&#xe6e8;</i>
+              <i v-else class="iconfont ready">&#xe6e8;</i>
             </span>
           </p>
         </li>

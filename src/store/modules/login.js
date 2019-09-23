@@ -1,5 +1,5 @@
 import * as types from '../mutation-types.js'
-import { getUserInfo,setUserInfo } from 'utils/cache.js'
+import { getUserInfo, setUserInfo } from 'utils/cache.js'
 const state = {
   showLogin: false,
   action: '',

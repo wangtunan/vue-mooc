@@ -7,7 +7,7 @@
       :current-page.sync="currentPage"
       :page-size="pageSize"
       @current-change="handleCurrentChange"
-    ></el-pagination>
+    />
   </div>
 </template>
 <script>

@@ -1,27 +1,27 @@
 <template>
   <div class="login-container">
-    <div class="login-mask" @click="handleMaskClick"></div>
+    <div class="login-mask" @click="handleMaskClick" />
     <div class="login-main">
       <div class="login-tab">
         <span
-          class="login-tab-item"
           v-for="(item,index) in loginTabs"
           :key="index"
+          class="login-tab-item"
           :class="{active: index==currentTabIndex}"
           @click="handleLoginTabClick(index)"
-          >{{item}}</span>
+        >{{ item }}</span>
         <span class="login-close iconfont" @click="setShowLogin(false)">&#xe619;</span>
       </div>
-      <component :is="componentName"></component>
-      <div class="three-login-way" v-show="componentName!='qrcode-way'">
-        <span class="phone-login">{{threeTitle}}</span>
+      <component :is="componentName" />
+      <div v-show="componentName!='qrcode-way'" class="three-login-way">
+        <span class="phone-login">{{ threeTitle }}</span>
         <span class="three-way-item">
           <i class="iconfont weibo">&#xe653;</i>
           <i class="iconfont wechart">&#xe646;</i>
           <i class="iconfont qq">&#xe6a0;</i>
         </span>
       </div>
-      <div class="qrcode-way" @click="handleQrcodeClick" :style="getQrcodeBackground"></div>
+      <div class="qrcode-way" :style="getQrcodeBackground" @click="handleQrcodeClick" />
     </div>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
       this.$emit('maskClick')
     },
     // 登陆tab点击
-    handleLoginTabClick(index) {
+    handleLoginTabClick (index) {
       this.currentTabIndex = index
     },
     // 二维码点击事件
@@ -73,7 +73,7 @@ export default {
     ...mapGetters(['loginAction'])
   },
   watch: {
-    currentTabIndex(newVal) {
+    currentTabIndex (newVal) {
       this.componentName = newVal === 0 ? 'login-way' : 'register-way'      
     }
   },

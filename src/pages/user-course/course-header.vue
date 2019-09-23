@@ -6,33 +6,35 @@
           <img :src="base.avatar" alt="">
         </div>
         <div class="user-info">
-          <p class="name">{{base.name}}</p>
+          <p class="name">
+            {{ base.name }}
+          </p>
           <p class="other">
-            <span>{{base.sex}}</span>
-            <span>{{base.job}}</span>
+            <span>{{ base.sex }}</span>
+            <span>{{ base.job }}</span>
           </p>
         </div>
       </div>
       <div class="right">
         <dl>
           <dd>
-            <span>{{base.duration}}h</span>
+            <span>{{ base.duration }}h</span>
             <span>学习时长</span>
           </dd>
           <dd>
-            <span>{{base.exp}}</span>
+            <span>{{ base.exp }}</span>
             <span>经验</span>
           </dd>
           <dd>
-            <span>{{base.integral}}</span>
+            <span>{{ base.integral }}</span>
             <span>积分</span>
           </dd>
           <dd>
-            <span>{{base.like}}</span>
+            <span>{{ base.like }}</span>
             <span>关注</span>
           </dd>
           <dd>
-            <span>{{base.fans}}</span>
+            <span>{{ base.fans }}</span>
             <span>粉丝</span>
           </dd>
           <dt @click="handleSettingClick">

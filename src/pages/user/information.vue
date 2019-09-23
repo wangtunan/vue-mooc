@@ -1,10 +1,16 @@
 <template>
   <div class="user-information">
     <dl>
-      <dt class="info-title">个人信息</dt>
-      <dd class="info-item" v-for="(item,index) in information" :key="index">
-        <div class="info-type">{{item.type}}</div>
-        <div class="info-content">{{item.value?item.value:'未设置'}}</div>
+      <dt class="info-title">
+        个人信息
+      </dt>
+      <dd v-for="(item,index) in information" :key="index" class="info-item">
+        <div class="info-type">
+          {{ item.type }}
+        </div>
+        <div class="info-content">
+          {{ item.value?item.value:'未设置' }}
+        </div>
       </dd>
     </dl>
   </div>

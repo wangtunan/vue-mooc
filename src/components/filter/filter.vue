@@ -1,3 +1,5 @@
 <template>
-  <div class="filter">filter</div>
+  <div class="filter">
+    filter
+  </div>
 </template>

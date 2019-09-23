@@ -11,19 +11,25 @@
           <span class="iconfont">&#xe6a0;</span>
           <span class="iconfont">&#xe699;</span>
         </p>
-        <h2 class="title">{{base.title}}</h2>
+        <h2 class="title">
+          {{ base.title }}
+        </h2>
         <div class="information">
           <div class="teacher">
-            <img  :src="base.teacher.avatar" class="avatar" alt="">
+            <img :src="base.teacher.avatar" class="avatar" alt="">
             <div class="teacher-introduce">
-              <p class="name">{{base.teacher.name}}</p>
-              <p class="job">{{base.teacher.job}}</p>
+              <p class="name">
+                {{ base.teacher.name }}
+              </p>
+              <p class="job">
+                {{ base.teacher.job }}
+              </p>
             </div>
             <dl>
-              <dd>难度：{{base.rank}}</dd>
-              <dd>时长：{{base.duration}}</dd>
-              <dd>学习人数：{{base.number}}</dd>
-              <dd>综合评分：{{base.score}}</dd>
+              <dd>难度：{{ base.rank }}</dd>
+              <dd>时长：{{ base.duration }}</dd>
+              <dd>学习人数：{{ base.number }}</dd>
+              <dd>综合评分：{{ base.score }}</dd>
             </dl>
           </div>
         </div>

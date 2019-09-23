@@ -17,7 +17,7 @@ export function throttle (fn, interval) {
       return false
     }
     // 甚至定时器
-    timer = setTimeout(function() {
+    timer = setTimeout(function () {
       clearTimeout(timer)
       timer = null
       _self.apply(that, args)

@@ -1,5 +1,5 @@
 <template>
-  <div class="mask-container" @click="handleMaskClick"></div>
+  <div class="mask-container" @click="handleMaskClick" />
 </template>
 <script>
 export default {

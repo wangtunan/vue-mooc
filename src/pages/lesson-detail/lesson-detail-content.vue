@@ -3,28 +3,28 @@
     <!-- 导航数据 -->
     <ul class="nav-list">
       <li
-        class="nav-item"
         v-for="(nav,index) in navList"
         :key="index"
+        class="nav-item"
         :class="{active: currentNavIndex == index}"
         @click="currentNavIndex=index"
       >
-        <span class="iconfont" v-if="nav.code==0">&#xe602;</span>
-        <span class="iconfont" v-if="nav.code==1">&#xe7c8;</span>
-        <span class="iconfont" v-if="nav.code==2">&#xe981;</span>
-        <span>{{nav.title}}</span>
+        <span v-if="nav.code==0" class="iconfont">&#xe602;</span>
+        <span v-if="nav.code==1" class="iconfont">&#xe7c8;</span>
+        <span v-if="nav.code==2" class="iconfont">&#xe981;</span>
+        <span>{{ nav.title }}</span>
       </li>
     </ul>
 
     <!-- 内容部分 -->
     <div class="lesson-information">
       <div class="info-left">
-        <component :is="componentName" :list="componentList"></component>
+        <component :is="componentName" :list="componentList" />
       </div>
-      <div class="info-right" v-if="showSideBar">
-        <detail-score :score="data.base"></detail-score>
-        <detail-teacher :teacher="data.teacher"></detail-teacher>
-        <recommend :list="data.recommend.data" :title="data.recommend.title"></recommend>
+      <div v-if="showSideBar" class="info-right">
+        <detail-score :score="data.base" />
+        <detail-teacher :teacher="data.teacher" />
+        <recommend :list="data.recommend.data" :title="data.recommend.title" />
       </div>
     </div>
   </div>

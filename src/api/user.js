@@ -7,12 +7,12 @@ export function userLogin () {
   return axios.get(url)
 }
 // 用户注册接口
-export function userRegister() {
+export function userRegister () {
   let url = IS_MOCK_LOCAL ? '/mock/user/register.json' : '/user/register'
   return axios.get(url)
 }
 // 获取用户详细信息接口
-export function getUserInfo() {
+export function getUserInfo () {
   let url = IS_MOCK_LOCAL ? '/mock/user/userinfo.json' : '/user/info'
   return axios.get(url)
 }

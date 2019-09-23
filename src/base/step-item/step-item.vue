@@ -3,24 +3,25 @@
     class="step-item" 
     :class="[`
       is-${$parent-direction}`
-    ]">
+    ]"
+>
     <!-- icon & line -->
     <div class="step-item-head">
       <div class="step-item-line">
-        <i class="step-item-line-inner"></i>
+        <i class="step-item-line-inner" />
       </div>
       <div class="step-item-icon">
-        <i class="step-item-icon-inner"></i>
+        <i class="step-item-icon-inner" />
       </div>
     </div>
 
     <!-- title & description -->
     <div class="step-item-main">
       <div class="step-item-title">
-        <slot name="title"></slot>
+        <slot name="title" />
       </div>
       <div class="step-item-description">
-        <slot name="description"></slot>
+        <slot name="description" />
       </div>
     </div>
   </div>

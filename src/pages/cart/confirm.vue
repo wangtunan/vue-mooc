@@ -8,15 +8,21 @@
     <!-- 列表部分 -->
     <div class="confirm-list m-center">
       <dl>
-        <dt class="confirm-title">商品信息</dt>
-        <dd class="confirm-item" v-for="(item,index) in cartList" :key="index">
+        <dt class="confirm-title">
+          商品信息
+        </dt>
+        <dd v-for="(item,index) in cartList" :key="index" class="confirm-item">
           <div class="img-box">
             <img :src="item.img" alt="">
           </div>
           <div class="confirm-content">
-            <p class="course-name">{{item.name}}</p>
+            <p class="course-name">
+              {{ item.name }}
+            </p>
           </div>
-          <div class="confirm-price">¥ {{item.price}}</div>
+          <div class="confirm-price">
+            ¥ {{ item.price }}
+          </div>
         </dd>
       </dl>
       <div class="confirm-bottom">
@@ -24,16 +30,18 @@
           <dl>
             <dt>
               <span class="total">商品总金额：</span>
-              <span>¥ {{getTotal}}</span>
+              <span>¥ {{ getTotal }}</span>
               <span class="real">应付：</span>
-              <span class="real-price">¥ {{getTotal}}</span>
+              <span class="real-price">¥ {{ getTotal }}</span>
             </dt>
             <dd>支持花呗</dd>
             <dd>可开发票</dd>
             <dd>7天可退款</dd>
           </dl>
         </div>
-        <div class="right" @click="handleSubmitOrder">提交订单</div>
+        <div class="right" @click="handleSubmitOrder">
+          提交订单
+        </div>
       </div>
     </div>
   </div>

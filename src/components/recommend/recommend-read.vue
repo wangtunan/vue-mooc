@@ -1,7 +1,7 @@
 <template>
   <div class="recommend">
     <h3 class="recommend-title">
-      {{title}}
+      {{ title }}
       <span class="more" @click="handleMoreClick">更多></span>
     </h3>
     <ul>
@@ -10,13 +10,15 @@
           <img :src="item.img" alt="">
         </div>
         <div class="recommend-content">
-          <p class="name ellipsis">{{item.title}}</p>
+          <p class="name ellipsis">
+            {{ item.title }}
+          </p>
           <p class="other-info">
-            <span class="trem">共{{item.term}}小节</span>
-            <span class="number">共{{item.term}}人购买</span>
+            <span class="trem">共{{ item.term }}小节</span>
+            <span class="number">共{{ item.term }}人购买</span>
           </p>
           <p class="price">
-            <span class="price">¥{{item.price}}</span>
+            <span class="price">¥{{ item.price }}</span>
             <span class="subscribe">立即订阅</span>
           </p>
         </div>

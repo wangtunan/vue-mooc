@@ -1,27 +1,33 @@
 <template>
   <ul class="course-list">
-    <li class="course-item" v-for="(item,index) in list" :key="index" @click="handleCourseClick">
+    <li v-for="(item,index) in list" :key="index" class="course-item" @click="handleCourseClick">
       <div class="img-box">
         <img :src="item.img" alt="">
-        <div class="tags" v-if="item.tags && item.tags.length > 0">
-          <span class="tag-item" v-for="(tag,index) in item.tags" :key="index">{{tag}}</span>
+        <div v-if="item.tags && item.tags.length > 0" class="tags">
+          <span v-for="(tag, index) in item.tags" :key="index" class="tag-item">{{ tag }}</span>
         </div>
-        <div class="badge rate" v-if="item.process > 0">{{item.process}}%</div>
-        <div class="badge script" v-if="item.script">{{item.script}}</div>
+        <div v-if="item.process > 0" class="badge rate">
+          {{ item.process }}%
+        </div>
+        <div v-if="item.script" class="badge script">
+          {{ item.script }}
+        </div>
       </div>
-      <p class="course-name">{{item.name}}</p>
+      <p class="course-name">
+        {{ item.name }}
+      </p>
       <p class="info">
-        <span>{{item.type}}</span>
-        <span>{{item.rank}}</span>
-        <span><i class="iconfont icon-user">&#xe607;</i>{{item.number}}</span>
+        <span>{{ item.type }}</span>
+        <span>{{ item.rank }}</span>
+        <span><i class="iconfont icon-user">&#xe607;</i>{{ item.number }}</span>
         <span>
-          <mooc-star class="star-box" :value="item.star" :disabled="true"></mooc-star>
+          <mooc-star class="star-box" :value="item.star" :disabled="true" />
         </span>
       </p>
       <p class="price">
-        <span>¥ {{item.price + '.00'}}</span>
+        <span>¥ {{ item.price + '.00' }}</span>
         <template v-if="item.isDiscount">
-          <span class="old-price">¥{{item.oldPrice + '.00'}}</span>
+          <span class="old-price">¥{{ item.oldPrice + '.00' }}</span>
           <span class="discount-title">限时优惠</span>
         </template>
       </p>

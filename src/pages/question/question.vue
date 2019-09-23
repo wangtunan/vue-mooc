@@ -8,7 +8,9 @@
           <input type="text" placeholder="请输入你的问题">
           <i class="iconfont">&#xe63c;</i>
         </div>
-        <div class="search-btn">提问</div>
+        <div class="search-btn">
+          提问
+        </div>
       </div>
       <div class="question-nav">
         <dl>
@@ -30,29 +32,31 @@
         <div class="left">
           <div class="question-list">
             <ul>
-              <li class="question-item" v-for="(item,index) in questionList" :key="index">
+              <li v-for="(item,index) in questionList" :key="index" class="question-item">
                 <div class="finish">
                   <span class="iconfont">&#xe786;</span>
-                  <span>{{item.answer}}</span>
+                  <span>{{ item.answer }}</span>
                 </div>
                 <div class="content-box">
-                  <h3 class="title">{{item.title}}</h3>
+                  <h3 class="title">
+                    {{ item.title }}
+                  </h3>
                   <p class="tag">
                     <img :src="item.icon" alt="">
                     <span class="name">JavaScript</span>
                     <span class="view-box">
                       <i class="iconfont">&#xe681;</i>
-                      <span class="view-number">{{item.view}}</span>
+                      <span class="view-number">{{ item.view }}</span>
                     </span>
                   </p>
                 </div>
               </li>
             </ul>
           </div>
-          <pagination :total="total" :page.sync="page"></pagination>
+          <pagination :total="total" :page.sync="page" />
         </div>
         <div class="right">
-          <recommend-author :title="recommend.title" :list="recommend.data"></recommend-author>
+          <recommend-author :title="recommend.title" :list="recommend.data" />
         </div>
       </div>
     </div>

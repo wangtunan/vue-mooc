@@ -1,11 +1,11 @@
 <template>
   <div id="app" :style="getOverflowStyle">
-    <m-header></m-header>
-    <m-sidebar></m-sidebar>
-    <router-view></router-view>
-    <m-footer></m-footer>
+    <m-header />
+    <m-sidebar />
+    <router-view />
+    <m-footer />
 
-    <login v-if="showLogin" @maskClick="handleMaskClick"></login>
+    <login v-if="showLogin" @maskClick="handleMaskClick" />
   </div>
 </template>
 <script>
@@ -15,12 +15,12 @@ import MSidebar from 'components/sidebar/sidebar.vue'
 import { mapGetters, mapMutations } from 'vuex'
 import { scrollMixin } from 'assets/js/mixin.js'
 export default {
-  name: 'app',
+  name: 'App',
   mixins: [scrollMixin],
   computed: {
     getOverflowStyle () {
       return {
-        'overflow': this.showLogin ? 'hidden': ''
+        'overflow': this.showLogin ? 'hidden' : ''
       }
     },
     // vuex

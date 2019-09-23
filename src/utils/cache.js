@@ -6,7 +6,7 @@ const user_address_prefix = 'vue_mooc_user_address'
 export function setUserInfo (userinfo) {
   storage.set(user_info_prefix, userinfo)
 }
-export function getUserInfo() {
+export function getUserInfo () {
   return storage.get(user_info_prefix, {})
 }
 export function setUserAddress (address) {

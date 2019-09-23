@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepess build docs"
+    "docs:build": "vuepess build docs",
+    "depoly": "depoly.sh"
   },
   "dependencies": {
     "axios": "^0.19.0",

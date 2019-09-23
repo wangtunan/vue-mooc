@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <cart-header>
       <span class="cart-name">我的购物车</span>
-      <span class="number">共{{cartList.length}}门，已选{{checkNumber}}门</span>
+      <span class="number">共{{ cartList.length }}门，已选{{ checkNumber }}门</span>
       <span class="history-order" @click="handleHistoryClick">我的订单历史</span>
     </cart-header>
 
@@ -12,19 +12,19 @@
       <dl>
         <dt class="cart-list-header">
           <span class="checkbox-all">
-            <i class="iconfont" v-if="isCheckAll">&#xe617;</i>
-            <i class="iconfont no-check" v-else>&#xe630;</i>
+            <i v-if="isCheckAll" class="iconfont">&#xe617;</i>
+            <i v-else class="iconfont no-check">&#xe630;</i>
             全选
           </span>
           <span class="course-name">课程</span>
           <span class="price">金额</span>
           <span>操作</span>
         </dt>
-        <dd class="cart-item" v-for="(course,index) in cartList" :key="index">
+        <dd v-for="(course,index) in cartList" :key="index" class="cart-item">
           <div class="checkbox">
             <span @click="handleCheckClick(course,index)">
-              <i class="iconfont" v-if="course.isCheck">&#xe617;</i>
-              <i class="iconfont no-check" v-else>&#xe630;</i>
+              <i v-if="course.isCheck" class="iconfont">&#xe617;</i>
+              <i v-else class="iconfont no-check">&#xe630;</i>
             </span>
           </div>
           <div class="course-box">
@@ -32,21 +32,33 @@
               <img :src="course.img" alt="">
             </div>
             <div class="course-content">
-              <p class="name">{{course.name}}</p>
-              <span class="package">{{course.package.length}}个组合套餐可选择</span>
+              <p class="name">
+                {{ course.name }}
+              </p>
+              <span class="package">{{ course.package.length }}个组合套餐可选择</span>
             </div>
           </div>
-          <div class="price">¥ {{course.price}}</div>
-          <div class="close" @click="handleDeleteClick(index)"><i class="iconfont">&#xe619;</i></div>
+          <div class="price">
+            ¥ {{ course.price }}
+          </div>
+          <div class="close" @click="handleDeleteClick(index)">
+            <i class="iconfont">&#xe619;</i>
+          </div>
         </dd>
       </dl>
       <div class="account-box">
         <div class="right">
           <div class="price-box">
-            <p class="title">总计金额：</p>
-            <p class="price">¥ {{getTotal()}}</p>
+            <p class="title">
+              总计金额：
+            </p>
+            <p class="price">
+              ¥ {{ getTotal() }}
+            </p>
           </div>
-          <div class="account-btn" @click="handleAccountClick">去结算</div>
+          <div class="account-btn" @click="handleAccountClick">
+            去结算
+          </div>
         </div>
       </div>
     </div>

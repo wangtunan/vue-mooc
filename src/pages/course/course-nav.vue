@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- 方向 -->
-    <nav-item v-if="directionList.length" :list="directionList" :currentIndex="directionIndex" type="方向"  @navClick="handleDirectionClick"></nav-item>
+    <nav-item v-if="directionList.length" :list="directionList" :current-index="directionIndex" type="方向" @navClick="handleDirectionClick" />
 
     <!-- 分类 -->
-    <nav-item v-if="computeCategoryList.length" :list="computeCategoryList" :currentIndex="categortIndex" type="分类" @navClick="handleCategoryClick"></nav-item>
+    <nav-item v-if="computeCategoryList.length" :list="computeCategoryList" :current-index="categortIndex" type="分类" @navClick="handleCategoryClick" />
 
     <!-- 难度 -->
-    <nav-item v-if="difficultList.length" :list="difficultList" :currentIndex="difficultIndex" type="难度" @navClick="handleDifficultClick"></nav-item>
+    <nav-item v-if="difficultList.length" :list="difficultList" :current-index="difficultIndex" type="难度" @navClick="handleDifficultClick" />
   </div> 
 </template>
 <script>
@@ -81,7 +81,7 @@ export default {
     computeCategoryList () {
       let result = []
       let categortList = this.categortList.slice()
-      if (this.directionIndex !==0) {
+      if (this.directionIndex !== 0) {
         let direction = this.directionList[this.directionIndex]
         categortList = categortList.filter(item => item.direction === direction || item.direction === '全部')
       }

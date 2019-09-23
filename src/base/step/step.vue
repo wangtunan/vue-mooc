@@ -1,6 +1,6 @@
 <template>
   <div class="step" :class="`step-${direction}`">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

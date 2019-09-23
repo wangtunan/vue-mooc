@@ -1,8 +1,12 @@
 <template>
   <div class="qrcode-container">
     <img class="qrcode-img" src="./qrcode.png" width="160" height="160" alt="">
-    <p class="qrcode-title">扫描二维码登录慕课网</p>
-    <p class="qrcode-subtitle">请使用新版 <span class="qrcode-app">慕课网手机APP</span> 扫码完成登录</p>
+    <p class="qrcode-title">
+      扫描二维码登录慕课网
+    </p>
+    <p class="qrcode-subtitle">
+      请使用新版 <span class="qrcode-app">慕课网手机APP</span> 扫码完成登录
+    </p>
   </div>
 </template>
 <style lang="stylus" scoped>

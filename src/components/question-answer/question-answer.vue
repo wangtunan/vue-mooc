@@ -4,56 +4,64 @@
     <div class="qa-search-container">
       <div class="search-box">
         <i class="iconfont">&#xe63c;</i>
-        <input type="text" class="search-input" placeholder="请输入问题" >
+        <input type="text" class="search-input" placeholder="请输入问题">
       </div>
-      <div class="search-btn">我要提问</div>
+      <div class="search-btn">
+        我要提问
+      </div>
     </div>
 
     <!-- 筛选模块 -->
     <div class="qa-filter-container">
       <ul>
         <li
-          class="filter-item"
           v-for="(filter, index) in filterList"
           :key="index"
+          class="filter-item"
           :class="{active: index == currentIndex}"
           @click="currentIndex = index"
         >
-          {{filter.title}}
+          {{ filter.title }}
         </li>
       </ul>
-      <span class="desc">共有{{list.total}}个问题，已解决{{list.resolve}}个</span>
+      <span class="desc">共有{{ list.total }}个问题，已解决{{ list.resolve }}个</span>
     </div>
 
     <!-- 问答列表 -->
     <ul class="qa-list">
-      <li class="qa-item" v-for="(item,index) in answerList" :key="index">
+      <li v-for="(item,index) in answerList" :key="index" class="qa-item">
         <div class="avatar-box">
           <img :src="item.avatar" alt="">
         </div>
         <div class="qa-content">
-          <h3 class="title">{{item.title}}</h3>
+          <h3 class="title">
+            {{ item.title }}
+          </h3>
           <template v-if="item.status">
             <p class="answer-status">
-              <span class="status">{{item.status.type}}</span>
+              <span class="status">{{ item.status.type }}</span>
               <span class="split">/</span>
-              <span class="name">{{item.status.name}}</span>
+              <span class="name">{{ item.status.name }}</span>
             </p>
-            <p class="answer">{{item.answer.content}}</p>
+            <p class="answer">
+              {{ item.answer.content }}
+            </p>
           </template>
           <p class="qa-bottom">
-            <span>{{item.answer ? item.answer.number : 0}}回答</span>
-            <span>{{item.view}}浏览</span>
-            <span>{{item.chapter}}</span>
-            <span class="time">{{item.time}}天前</span>
+            <span>{{ item.answer ? item.answer.number : 0 }}回答</span>
+            <span>{{ item.view }}浏览</span>
+            <span>{{ item.chapter }}</span>
+            <span class="time">{{ item.time }}天前</span>
           </p>
         </div>
-        <div class="icon" v-if="item.status && item.status.resolve">已采纳</div>
+        <div v-if="item.status && item.status.resolve" class="icon">
+          已采纳
+        </div>
       </li>
     </ul>
 
     <!-- 分页 -->
-    <pagination :total="total" :page.sync="page"></pagination>
+    <pagination :total="total" :page.sync="page" />
   </div>
 </template>
 <script>

@@ -1,19 +1,27 @@
 <template>
   <div class="consult">
-    <h2 class="title">课程咨询</h2>
+    <h2 class="title">
+      课程咨询
+    </h2>
     <ul class="consult-list">
-      <li class="consult-item" v-for="(item,index) in consultList" :key="index">
+      <li v-for="(item,index) in consultList" :key="index" class="consult-item">
         <div class="like-box">
           <i class="iconfont" :class="{like: item.like}">&#xe60c;</i>
-          <p class="number">{{item.number}}</p>
+          <p class="number">
+            {{ item.number }}
+          </p>
         </div>
         <div class="content">
           <h3 class="title-box">
-            <span class="title ellipsis">{{item.title}}</span>
-            <span class="time">{{item.time}}</span>
+            <span class="title ellipsis">{{ item.title }}</span>
+            <span class="time">{{ item.time }}</span>
           </h3>
-          <p class="answer">{{item.answer}}</p>
-          <p class="from">来自：{{item.from}}</p>
+          <p class="answer">
+            {{ item.answer }}
+          </p>
+          <p class="from">
+            来自：{{ item.from }}
+          </p>
         </div>
       </li>
     </ul>

@@ -148,6 +148,91 @@ img-box($width, $height)
 ## 项目结构设计
 
 ## Eslint配置
+良好的代码风格，无论是对于个人还是一个团队，都是十分重要的，统一的代码规范能让团队项目变得更加具有可维护性，而对于个人而言，这也是一条很基础和非常重要的一项技能。
+
+### 安装Eslint插件
+以`Vscode`为例，在扩展菜单中搜索`Eslint`并按照它，如下：
+![安装Eslint](../images/eslint.png)
+
+### 配置Eslint
+安装完以上插件后，我们首先需要在根目录下新建`.eslintrc.js`(或者`.eslintrc`和`.eslintrc.json`，这取决于你的爱好)文件，并填写如下配置：
+::: tip
+`rules`部分，完全是个人的爱好配置，你可以去[Eslint官网](https://eslint.org/docs/user-guide/configuring#specifying-parser-options)和[Eslint-plugin-vue官网](https://eslint.vuejs.org/rules/)查看更多配置项的含义，进而配置出属于自己或者团队的统一规范。
+:::
+
+::: warning
+注意，如果你的命名文件为`.eslintrc`或者`.eslintrc.json`，则不需要`module.exports`导出模块，直接撰写`json`文件即可。
+:::
+```js
+// .eslintrc.js
+module.exports =  {
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "extends": [
+    // 使用下面这些检验规则进行代码格式检验
+    "plugin:vue/recommended",
+    "eslint:recommended"
+  ],
+  "rules": {
+    // vue组件 props必须默认值
+    "vue/require-default-prop": 0,
+    // vue组件中属性的定义顺序
+    "vue/order-in-components": 0,
+    // vue组件多个属性必须换行
+    "vue/max-attributes-per-line": 0,
+    // 不允许在template组件上绑定某些属性，例如key
+    "vue/no-template-shadow": 0,
+    // 生产环境下不允许debugger调试
+    "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
+    // 函数后必须跟一个空格
+    "space-before-function-paren": 1,
+    // 分号后必须跟一个空格
+    "comma-spacing": 1,
+    // 箭头函数两侧必须有空格
+    "arrow-spacing": 1,
+    // 操作符两侧必须有空格
+    "space-infix-ops": 1,
+    // 始终使用严格相等，即xxx === xxx
+    "eqeqeq": 1
+  }
+}
+```
+
+### 编辑器自动修复
+工欲善其事必先利其器，使用`eslint`校验规则+`Vscode`提示错误和自动修复，能让你体验到一种特殊的舒适感，想要在每次保存代码的时候自动修复代码格式问题，需要我们对`Vscode`编辑器做如下改动：
+```json
+// 依次点击文件 => 首选项 => 设置 => settings.json中编辑
+"eslint.validate": [
+  "javascript",
+  "javascriptreact",
+  "vue-html",
+  {
+    "language": "vue",
+    "autoFix": true
+  }
+],
+"eslint.autoFixOnSave": true,
+"eslint.run": "onSave"
+```
+
+### 自动修复命令
+`Vue-cli3.0+`提供给我们一个`lint`命令，如下：
+```json
+"scripts": {
+  // 其它命令
+  "lint": "vue-cli-service lint",
+}
+```
+如果我们运行`npm run lint`以上命令，它会在我们的终端输出一下错误信息，例如：
+![Eslint校验结果](../images/eslint-result.png)
+
+同时，如果我们想简单修复的话，可以运行`npm run lint -- --fix`命令。
 
 ## Webpack配置
 

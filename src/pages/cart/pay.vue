@@ -9,8 +9,8 @@
     <div class="pay-container m-center">
       <dl>
         <dt class="pay-title">
-          <span>订单号：{{$route.params.order}}</span>
-          <span class="detail" @click="showList=!showList">{{showList ? '收起' : '详情'}}</span>
+          <span>订单号：{{ $route.params.order }}</span>
+          <span class="detail" @click="showList=!showList">{{ showList ? '收起' : '详情' }}</span>
         </dt>
         <template v-if="showList">
           <dd v-for="(item,index) in cartList" :key="index" class="pay-item">
@@ -18,9 +18,13 @@
               <img :src="item.img" alt="">
             </div>
             <div class="content">
-              <p class="name">{{item.name}}</p>
+              <p class="name">
+                {{ item.name }}
+              </p>
             </div>
-            <div class="price">实际支付金额：<span>¥{{item.price}}</span></div>
+            <div class="price">
+              实际支付金额：<span>¥{{ item.price }}</span>
+            </div>
           </dd>
         </template>
       </dl>
@@ -28,43 +32,55 @@
       <div class="pay-way-container">
         <!-- 支付方式 -->
         <div class="way-list">
-          <p class="way-title">支付方式</p>
+          <p class="way-title">
+            支付方式
+          </p>
           <div
-            class="way-item"
             v-for="(item, index) in payWayList"
             :key="index"
+            class="way-item"
             :class="[ {active: currentWayIndex==index}, getClassName(item)]"
             :style="getBackground(item)"
             @click="currentWayIndex=index"
           >
             <!-- 我的余额 -->
-            <div class="account-info" v-if="item.type==4">
-              <p class="title">我的余额</p>
-              <span class="balance">¥ {{item.balance}}</span>
+            <div v-if="item.type==4" class="account-info">
+              <p class="title">
+                我的余额
+              </p>
+              <span class="balance">¥ {{ item.balance }}</span>
             </div>
             <!-- 可分期 -->
-            <div class="way-tag" v-if="item.way && item.way.length > 0">可分期</div>
+            <div v-if="item.way && item.way.length > 0" class="way-tag">
+              可分期
+            </div>
             <!-- 勾选样式 -->
-            <div class="way-check" v-if="currentWayIndex == index">
+            <div v-if="currentWayIndex == index" class="way-check">
               <i class="iconfont">&#xe786;</i>
             </div>
           </div>
         </div>
 
         <!-- 具体支付分期 -->
-        <div class="way-detial" v-if="payDetailList && payDetailList.length">
+        <div v-if="payDetailList && payDetailList.length" class="way-detial">
           <dl>
             <dt>
-              <p class="number">¥ {{total}}</p>
-              <p class="desc">不分期</p>
+              <p class="number">
+                ¥ {{ total }}
+              </p>
+              <p class="desc">
+                不分期
+              </p>
               <span class="pay-btn">选择该支付方式</span>
             </dt>
             <dd v-for="(item,index) in payDetailList" :key="index">
               <p class="number">
-                <span class="tag-title">{{getTagTitle(item)}}</span>
-                <span class="price-desc">{{getPriceDesc(item)}}</span>
+                <span class="tag-title">{{ getTagTitle(item) }}</span>
+                <span class="price-desc">{{ getPriceDesc(item) }}</span>
               </p>
-              <p class="desc">手续费¥ {{rate}}/期</p>
+              <p class="desc">
+                手续费¥ {{ rate }}/期
+              </p>
               <span class="pay-btn">选择该分期方式</span>
             </dd>
           </dl>
@@ -73,9 +89,15 @@
         <!-- 支付按钮 -->
         <div class="pay-bottom">
           <div class="right">
-            <p class="pay-total">应付金额：<span>¥ {{total}}</span></p>
-            <div class="pay-btn">立即支付</div>
-            <p class="tips">付款有问题？点我</p>
+            <p class="pay-total">
+              应付金额：<span>¥ {{ total }}</span>
+            </p>
+            <div class="pay-btn">
+              立即支付
+            </div>
+            <p class="tips">
+              付款有问题？点我
+            </p>
           </div>
         </div>
       </div>

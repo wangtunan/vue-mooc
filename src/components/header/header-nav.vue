@@ -1,9 +1,9 @@
 <template>
   <ul class="header-nav">
-    <li class="nav-item" v-for="(item,index) in list" :key="index">
+    <li v-for="(item,index) in list" :key="index" class="nav-item">
       <router-link :to="item.path" class="nav-link">
-        {{item.title}}
-        <i class="nav-icon" v-if="item.icon" :style="getBackgroundImage(item.icon)"></i>
+        {{ item.title }}
+        <i v-if="item.icon" class="nav-icon" :style="getBackgroundImage(item.icon)" />
       </router-link>
     </li>
   </ul>

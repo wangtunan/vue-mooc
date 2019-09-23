@@ -2,28 +2,32 @@
   <div class="course-list-container m-center">
     <!-- 标题 -->
     <h2 class="home-title">
-      <i class="title-icon left-icon" :style="getBackgroundPosition(course.leftIcon)"></i>
-      {{course.title}}
-      <i class="title-icon right-icon" :style="getBackgroundPosition(course.rightIcon)"></i>
+      <i class="title-icon left-icon" :style="getBackgroundPosition(course.leftIcon)" />
+      {{ course.title }}
+      <i class="title-icon right-icon" :style="getBackgroundPosition(course.rightIcon)" />
     </h2>
 
     <!-- 课程banner -->
-    <div class="split-banner" v-if="course.banner && course.banner.length > 0">
-      <div class="split-banner-item" v-for="(item,index) in course.banner" :key="index">
+    <div v-if="course.banner && course.banner.length > 0" class="split-banner">
+      <div v-for="(item,index) in course.banner" :key="index" class="split-banner-item">
         <img :src="item.url" alt="">
-        <h2 class="title main">{{item.title}}</h2>
-        <p class="title sub">{{item.subtitle}}</p>
-        <div class="mask"></div>
+        <h2 class="title main">
+          {{ item.title }}
+        </h2>
+        <p class="title sub">
+          {{ item.subtitle }}
+        </p>
+        <div class="mask" />
       </div>
     </div>
 
     <!-- 课程列表 -->
     <course-list
+      v-if="course.data"
       class="course-list"
       :list="course.data"
-      v-if="course.data"
       @courseClick="handleCourseClick"
-    ></course-list>
+    />
   </div>
 </template>
 <script>

@@ -1,22 +1,25 @@
 <template>
   <div class="course-detail-tips">
     <!-- 学习情况 -->
-    <div class="learn-info" v-if="lastest && lastest.percent > 0">
+    <div v-if="lastest && lastest.percent > 0" class="learn-info">
       <p>
-        <span class="percent">已学习{{lastest.percent}}%</span>
-        <span class="duration">学习耗时{{lastest.duration}}分钟</span>
+        <span class="percent">已学习{{ lastest.percent }}%</span>
+        <span class="duration">学习耗时{{ lastest.duration }}分钟</span>
       </p>
       <mooc-progress
         :percentage="lastest.percent"
         :show-text="false"
         :height="20"
         color="#f01414"
-      >
-      </mooc-progress>
-      <p class="latest">上次学习至：{{lastest.chapter}}</p>
+      />
+      <p class="latest">
+        上次学习至：{{ lastest.chapter }}
+      </p>
     </div>
     
-    <div class="tips-btn">{{lastest.percent > 0 ? '继续学习' : '开始学习'}}</div>
+    <div class="tips-btn">
+      {{ lastest.percent > 0 ? '继续学习' : '开始学习' }}
+    </div>
 
     <!-- 课程须知 -->
     <div class="tips-content">

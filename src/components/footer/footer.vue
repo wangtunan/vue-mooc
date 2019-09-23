@@ -4,23 +4,25 @@
       <div class="footer-links">
         <ul>
           <li
-            class="link-item"
             v-for="(item,index) in footer.links"
             :key="index"
-          >{{item.title}}</li>
+            class="link-item"
+          >
+            {{ item.title }}
+          </li>
         </ul>
       </div>
       <div class="copyright">
-        <p>© {{year}} {{footer.website}}  {{footer.caseCode}}  {{footer.company}}</p>
+        <p>© {{ year }} {{ footer.website }}  {{ footer.caseCode }}  {{ footer.company }}</p>
       </div>
       <div class="share">
         <div class="share-item wechart">
-          <span class="share-img"></span>
+          <span class="share-img" />
           <p>官方微信</p>
-          <div class="wechart-code"></div>
+          <div class="wechart-code" />
         </div>
         <div class="share-item weibo">
-          <span class="share-img"></span>
+          <span class="share-img" />
           <p>官方微博</p>
         </div>
       </div>

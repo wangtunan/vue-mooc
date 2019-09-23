@@ -8,20 +8,28 @@
         :class="{active: currentIndex == index}"
         @click="currentIndex=index"
       >
-        <i class="iconfont" v-if="item.type==4">&#xe622;</i>{{item.title}}
+        <i v-if="item.type==4" class="iconfont">&#xe622;</i>{{ item.title }}
       </dd>
     </dl>
     <ul class="curpon-list">
-      <li class="curpon-item" v-for="(item,index) in filterCurponList" :key="index" :style="getBackgroundImage(item.status)">
+      <li v-for="(item,index) in filterCurponList" :key="index" class="curpon-item" :style="getBackgroundImage(item.status)">
         <p class="curpon-price-box">
-          <span class="price">¥ {{item.price}}</span>
-          <span class="condition">{{item.condition}}</span>
+          <span class="price">¥ {{ item.price }}</span>
+          <span class="condition">{{ item.condition }}</span>
         </p>
-        <p class="range">适用于：{{item.range}}</p>
-        <p class="effective">有效期：{{item.effectStartTime}}-{{item.effectEndTime}}</p>
+        <p class="range">
+          适用于：{{ item.range }}
+        </p>
+        <p class="effective">
+          有效期：{{ item.effectStartTime }}-{{ item.effectEndTime }}
+        </p>
         <template v-if="item.status==1">
-          <p class="order">订单号：{{item.order}}</p>
-          <p class="use-time">使用日期：{{item.useTime}}</p>
+          <p class="order">
+            订单号：{{ item.order }}
+          </p>
+          <p class="use-time">
+            使用日期：{{ item.useTime }}
+          </p>
         </template>
       </li>
     </ul>

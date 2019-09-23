@@ -3,12 +3,14 @@
     <!-- 消息导航 -->
     <ul class="nav-list">
       <li
-        class="nav-item"
         v-for="(nav,index) in navList"
         :key="nav.code"
+        class="nav-item"
         :class="{active: currentNavIndex == index}"
         @click="currentNavIndex = index"
-      >{{nav.title}}</li>
+      >
+        {{ nav.title }}
+      </li>
     </ul>
 
     <!-- 消息列表 -->
@@ -21,11 +23,17 @@
         </span>
       </div>
       <ul>
-        <li class="list-item" v-for="(item,index) in filterList" :key="index" :class="{ready: item.isReady}">
-          <div class="item-icon">{{item.type}}</div>
+        <li v-for="(item,index) in filterList" :key="index" class="list-item" :class="{ready: item.isReady}">
+          <div class="item-icon">
+            {{ item.type }}
+          </div>
           <div class="item-content">
-            <p class="title">{{item.title}}</p>
-            <p class="time">{{item.time}}</p>
+            <p class="title">
+              {{ item.title }}
+            </p>
+            <p class="time">
+              {{ item.time }}
+            </p>
             <span class="iconfont delete">&#xe622;</span>
           </div>
         </li>
@@ -33,22 +41,26 @@
     </div>
 
     <!-- 分页 -->
-    <pagination :total="total" :page.sync="page"></pagination>
+    <pagination :total="total" :page.sync="page" />
 
     <!-- 消息中心设置dialog -->
     <el-dialog title="消息中心设置" :visible.sync="dialogVisible" width="45%" top="20vh">
-      <dl class="switch-group" v-for="(item,index) in settingList" :key="index">
+      <dl v-for="(item,index) in settingList" :key="index" class="switch-group">
         <dt class="switch-title-box">
-          <span class="switch-title">{{item.type}}</span>
-          <span class="switch-title-line"></span>
+          <span class="switch-title">{{ item.type }}</span>
+          <span class="switch-title-line" />
         </dt>
-        <dd v-for="(subItem,index) in item.data" :key="index">
-         <el-switch v-model="subItem.value" active-color="#f01414" inactive-color="#9199a1"></el-switch>{{subItem.label}}
+        <dd v-for="(subItem, index) in item.data" :key="index">
+          <el-switch v-model="subItem.value" active-color="#f01414" inactive-color="#9199a1" />{{ subItem.label }}
         </dd>
       </dl>
-      <div class="dialog-footer" slot="footer">
-        <el-button @click="dialogVisible=false">关闭</el-button>
-        <el-button @click="dialogVisible=false" type="primary">保存</el-button>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible=false">
+          关闭
+        </el-button>
+        <el-button type="primary" @click="dialogVisible=false">
+          保存
+        </el-button>
       </div>
     </el-dialog>
   </div>
@@ -85,7 +97,7 @@ export default {
     // 全部标记为已读
     handleAllReadyClick () {
       let code = this.navList[this.currentNavIndex].code
-      this.noticeList.forEach((item,index) => {
+      this.noticeList.forEach((item, index) => {
         if (item.code === code) {
           this.noticeList[index].isReady = true
         }
