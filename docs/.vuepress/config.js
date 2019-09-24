@@ -5,7 +5,6 @@ module.exports = {
     ['link', { rel: 'icon', href: '/icon.png' }]
   ],
   base: '/vue-mooc-site/',
-  cache: false,
   port: 3480,
   themeConfig: {
     lastUpdated: '最后更新时间',
@@ -42,11 +41,40 @@ module.exports = {
           children: [
             '/guide/basic/start.md',
             '/guide/basic/mock.md',
-            '/guide/basic/layout.md',
             '/guide/basic/router.md',
             '/guide/basic/vuex.md'
           ]
-        }
+        },
+        {
+          title: "组件封装",
+          collapsable: false,
+          children: [
+            '/guide/base-components/',
+            '/guide/business-components/'
+          ]
+        },
+        {
+          title: "开发",
+          collapsable: false,
+          children: [
+            '/guide/develop/layout.md',
+            '/guide/develop/login.md',
+            '/guide/develop/home.md',
+            '/guide/develop/course.md',
+            '/guide/develop/lesson.md',
+            '/guide/develop/read.md',
+            '/guide/develop/question.md',
+            '/guide/develop/article.md',
+            '/guide/develop/cart.md'
+          ]
+        },
+        {
+          title: "部署",
+          collapsable: false,
+          children: [
+            '/guide/depoly.md'
+          ]
+        },
       ],
       '/components/': [
         {

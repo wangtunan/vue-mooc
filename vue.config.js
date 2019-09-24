@@ -6,6 +6,11 @@ function resolve (dir) {
 module.exports = {
   publicPath: './',
   outputDir: 'dist',
+  chainWebpack: (config) => {
+    config
+      .plugin('webpack-bundle-analyzer')
+      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+  },
   configureWebpack: {
     resolve: {
       alias: {
@@ -24,9 +29,7 @@ module.exports = {
     port: 3400,
     proxy: {
       '/mock': {
-        target: 'http://localhost:3400',
-        ws: true,
-        changeOrigin: true
+        target: 'http://localhost:3400'
       }
     }
   },

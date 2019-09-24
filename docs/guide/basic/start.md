@@ -19,7 +19,7 @@
 图标字体选择了阿里的[iconfont](https://www.iconfont.cn/)，在线选择自己想要的图标并保存到指定项目中，再进行下载或者直接使用在线链接都是十分方便的，以下截图为部分图标的示例：
 <br/>
 <br/>
-![iconfont](../images/iconfont.png)
+![iconfont](../../images/iconfont.png)
 
 如果你对以上图标很满意，那么你可以在`src/assets/fonts`目录下找到找到他们。
 
@@ -152,7 +152,7 @@ img-box($width, $height)
 
 ### 安装Eslint插件
 以`Vscode`为例，在扩展菜单中搜索`Eslint`并按照它，如下：
-![安装Eslint](../images/eslint.png)
+![安装Eslint](../../images/eslint.png)
 
 ### 配置Eslint
 安装完以上插件后，我们首先需要在根目录下新建`.eslintrc.js`(或者`.eslintrc`和`.eslintrc.json`，这取决于你的爱好)文件，并填写如下配置：
@@ -230,11 +230,77 @@ module.exports =  {
 }
 ```
 如果我们运行`npm run lint`以上命令，它会在我们的终端输出一下错误信息，例如：
-![Eslint校验结果](../images/eslint-result.png)
+![Eslint校验结果](../../images/eslint-result.png)
 
 同时，如果我们想简单修复的话，可以运行`npm run lint -- --fix`命令。
 
 ## Webpack配置
+由于我们使用的是`Vue-Cli3.0`来搭建项目，它自动帮我们处理了一些`Webpack`配置，让我们很方便的使用`Webpack`，但有时候我们不得不使用`Webpack`来处理一些我们想要的东西。<br/>
+如果你对`Webpack`很熟悉的话，那么你可以在[Vue-Cli3.0官网](https://cli.vuejs.org/zh/guide/)上找到在哪里配置。<br/>
+如果你对`Webpack`不是很熟悉的话，那么你可以在[Webpack官网](https://webpack.js.org/)或者我之前的博客[《从今天开始学习Webpack4.0，减少对脚手架的依赖》](https://wangtunan.github.io/blog/webpack/)。
+
+
+根据官网上的描述，我们需要在我们的项目根目录创建一个叫`vue.config.js`的文件：
+```sh
+$ touch vue.config.js
+```
+
+创建完毕后，我们需要在`vue.config.js`中撰写一下代码：
+```js
+// 引入node核心模块
+const path = require('path')
+
+// 处理路径
+function resolve (dir) {
+  return path.join(__dirname, dir)
+}
+
+module.exports = {
+  publicPath: './',
+  outputDir: 'dist',
+  configureWebpack: {
+    resolve: {
+      alias: {
+        // 配置别名
+        '@': resolve('src'),
+        'api': resolve('src/api'),
+        'assets': resolve('src/assets'),
+        'base': resolve('src/base'),
+        'components': resolve('src/components'),
+        'pages': resolve('src/pages'),
+        'utils': resolve('src/utils'),
+        'router': resolve('src/router')
+      }
+    }
+  },
+  // 配置接口代理
+  devServer: {
+    port: 3400,
+    proxy: {
+      '/mock': {
+        target: 'http://localhost:3400'
+      }
+    }
+  },
+  // 启用eslint，在保存时校验
+  lintOnSave: true
+}
+```
+
+`Webpack`打包配置说明：
+* `publicPath`：`publicPath`的默认值是`/`，配置为`./`是为了方便我们部署到`gh-pages`上。实际上它取决于你想要部署在哪个目录，假如你要部署在`https://www.baidu.com/vue-mooc/`，那么你应该配置成`publicPath：'/vue-mooc/'`
+* `outputDir`：默认值就是`dist`，你也可以配置成你想要的名字，例如`vue-mooc`。
+* `alias`：配置了一些别名，这么做是为了方便我们引入模块，当你的项目目录特别深、特别长的时候，这会很有用。例如我们配置了`api`的别名，那么我们可以在项目中直接像下面这样使用:
+```js
+// 使用别名
+import { getHot } from 'api/common.js'
+
+// 不使用别名
+import { getHot } from 'src/api/common.js'
+```
+* `port`: 默认值为`8080`，为了不与其他项目的端口重复，我们可以指定一个喜欢的端口。配置后，我们就可以通过`http://localhost:xxx`的形式进行访问。
+* `proxy`：请求代理，其中`target`为要代理到的地址；`/mock`是我们的代理规则。
+* `lintOnSave`：每次保存时，启用`eslint-loader`来`lint`代码，强烈建议启用！
 
 ## 打包命令
 
