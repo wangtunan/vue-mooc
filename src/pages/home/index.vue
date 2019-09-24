@@ -123,6 +123,7 @@ export default {
         let { code, data} = res
         if (code === ERR_OK) {
           this.allstar = data
+          console.log(this.allstar)
         }
       })
     }

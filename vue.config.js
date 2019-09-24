@@ -6,11 +6,11 @@ function resolve (dir) {
 module.exports = {
   publicPath: './',
   outputDir: 'dist',
-  chainWebpack: (config) => {
-    config
-      .plugin('webpack-bundle-analyzer')
-      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-  },
+  // chainWebpack: (config) => {
+  //   config
+  //     .plugin('webpack-bundle-analyzer')
+  //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+  // },
   configureWebpack: {
     resolve: {
       alias: {

@@ -51,7 +51,7 @@ const BASE_WIDTH = 18
 export default {
   props: {
     allstar: {
-      type: Object,
+      type: [Object, Array],
       required: true
     }
   },

@@ -303,6 +303,24 @@ import { getHot } from 'src/api/common.js'
 * `lintOnSave`：每次保存时，启用`eslint-loader`来`lint`代码，强烈建议启用！
 
 ## 打包命令
+我们先来看一看`package.json`中一共有多少条打包命令：
+```json
+"scripts": {
+  "serve": "vue-cli-service serve",
+  "build": "vue-cli-service build",
+  "lint": "vue-cli-service lint",
+  "docs:dev": "vuepress dev docs",
+  "docs:build": "vuepess build docs",
+  "depoly": "depoly.sh"
+}
+```
+对于每一条打包命令，它们的解释如下：
+* `serve`和`build`，这两条命令不需要多解释。
+* `lint`：使用此条命令，可以启用`eslint-loader`对我们的代码进行校验，它会把错误输出在控制台，还会进行简单的格式修复。
+* `docs:dev`和`docs:build`，同`serve`和`build`类似，它们是`VuePress`本地写作和打包的命令。
+* `depoly`：部署我们的项目到`gh-pages`上的一条命令。
+
+关于自动化部署的部分，我们将在后续进行说明，你也可以直接点击 :point_right: [部署](/guide/depoly)去阅读更多关于部署方面的内容。
 
 <style lang="stylus">
   .container

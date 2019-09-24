@@ -4,14 +4,13 @@ import { ERR_OK } from 'api/config.js'
 import { BASE_URL, IS_MOCK_LOCAL } from 'api/config.js'
 
 const service = axios.create({
-  baseURL: IS_MOCK_LOCAL ? '' : BASE_URL,
+  baseURL: IS_MOCK_LOCAL ? BASE_URL : BASE_URL,
   timeout: 10000
 })
 
 // 请求拦截
 service.interceptors.request.use(
   config => {
-    config.headers['token'] = 'WHYXXXXXABC123'
     return config
   },
   error => {
