@@ -41,8 +41,8 @@ module.exports = {
           children: [
             '/guide/basic/start.md',
             '/guide/basic/mock.md',
-            '/guide/basic/router.md',
-            '/guide/basic/vuex.md'
+            '/guide/basic/vuex.md',
+            '/guide/basic/router.md'
           ]
         },
         {
