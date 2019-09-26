@@ -190,6 +190,8 @@ module.exports =  {
     "vue/no-template-shadow": 0,
     // 生产环境下不允许debugger调试
     "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
+    // 允许console打印
+    "no-console": 0,
     // 函数后必须跟一个空格
     "space-before-function-paren": 1,
     // 分号后必须跟一个空格
