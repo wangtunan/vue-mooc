@@ -146,6 +146,29 @@ img-box($width, $height)
 ```
 
 ## 项目结构设计
+良好的项目结构设计，能在一定程度上能够帮助我们更好的管理和维护我们的项目，以下是`vue-mooc`的目录结构设计：
+``` sh
+|-- docs                            # vuepress站点文档
+|-- public                          # 静态资源
+|   |-- favicon.ico                 # icon图标
+|   |-- index.html                  # html模板
+|   |-- mock                        # mock .json文件
+|-- src                             # 源代码目录
+|   |-- api                         # 请求接口目录
+|   |-- assets                      # 字体、js和样式资源目录
+|   |-- base                        # 基础公共组件目录
+|   |-- components                  # 业务公共组件目录
+|   |-- pages                       # 业务页面目录
+|   |-- App.vue                     # 入口页面
+|   |-- main.js                     # 入口js
+|   |-- router                      # 路由目录
+|   |-- store                       # 全局Vuex目录
+|   |-- utils                       # 工具类js目录
+|-- babel.config.js                 # babel配置
+|-- depoly.sh                       # 自动部署脚本
+|-- package.json                    # package.json
+|-- vue.config.js                   # vue-cli脚手架配置
+```
 
 ## Eslint配置
 良好的代码风格，无论是对于个人还是一个团队，都是十分重要的，统一的代码规范能让团队项目变得更加具有可维护性，而对于个人而言，这也是一条很基础和非常重要的一项技能。
