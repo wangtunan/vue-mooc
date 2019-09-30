@@ -3,16 +3,15 @@
     class="step-item" 
     :class="[
       `is-${$parent.direction}`,
-      isLast && 'is-last'
+      isLast && !parentSpace && 'is-last',
+      isCenter && !isVertical && 'is-center'
     ]"
     :style="getStepStyle"
   >
     <!-- icon & line -->
     <div
       class="step-item-head"
-      :class="[
-        `is-${currentStatus}`  
-      ]"
+      :class="currentStatus && `is-${currentStatus}`"
     >
       <div class="step-item-line">
         <i class="step-item-line-inner" :style="lineStyle"></i>
@@ -142,13 +141,24 @@ export default {
     isVertical () {
       return this.$parent.direction === 'vertical'
     },
+    isCenter () {
+      return this.$parent.alignCenter
+    },
     prevStatus () {
       const prevStep = this.$parent.steps[this.index - 1]
       return prevStep ? prevStep.currentStatus : ''
     },
+    parentSpace () {
+      return this.$parent.space
+    },
     getStepStyle () {
       let style = {}
-      style.flexBasis = `${ 100 / ( this.stepCount - 1 ) }%`
+      // 如果传递了space，则使用，否则自适应
+      if (this.parentSpace) {
+        style.flexBasis = `${this.parentSpace}px`
+      } else {
+        style.flexBasis = `${ 100 / ( this.stepCount - 1 ) }%`
+      }
       if (this.isLast) {
         style.maxWidth = `${ 100 / this.stepCount }%`
       }
@@ -288,6 +298,17 @@ export default {
         .step-item-title
           padding-bottom: $step-title-vertical-padding-bottom;
           line-height: $step-icon-vertical-width;
+    &.is-center
+      .step-item-head
+        text-align: center;
+        .step-item-line
+          left: 50%;
+          right: -50%;
+      .step-item-main
+        text-align: center;
+        .step-item-description
+          padding-left: 20%;
+          padding-right: 20%;
     &:last-child
       .step-item-head
         .step-item-line

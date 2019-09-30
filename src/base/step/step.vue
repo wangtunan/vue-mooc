@@ -19,6 +19,10 @@ export default {
         return ['vertical', 'horizontal'].includes(val)
       }
     },
+    space: {
+      type: Number,
+      default: 0
+    },
     processStatus: {
       type: String,
       default: 'process',
@@ -32,6 +36,10 @@ export default {
       validator (val) {
         return ['', 'finish', 'process', 'success', 'error'].includes(val)
       }
+    },
+    alignCenter: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
