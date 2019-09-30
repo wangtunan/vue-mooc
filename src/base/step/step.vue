@@ -18,12 +18,18 @@ export default {
       validator (val) {
         return ['vertical', 'horizontal'].includes(val)
       }
+    },
+    processStatus: {
+      type: String,
+      default: 'process',
+      validator (val) {
+        return ['', 'process', 'success', 'error'].includes(val)
+      }
     }
   },
   data () {
     return {
-      steps: [],
-      stepOffset: 0
+      steps: []
     }
   },
   watch: {

@@ -1,10 +1,16 @@
 <template>
   <div class="test">
-    <el-steps :space="200" :active="active" finish-status="success">
-      <el-step title="已完成"></el-step>
-      <el-step title="进行中"></el-step>
-      <el-step title="步骤 3"></el-step>
+    <el-steps :active="active" finish-status="success" process-status="error">
+      <el-step title="已完成" description="已完成已完成已完成已完成"></el-step>
+      <el-step title="进行中" description="进行中进行中进行中进行中"></el-step>
+      <el-step title="已完成" description="已完成已完成已完成已完成"></el-step>
     </el-steps>
+
+    <mooc-step :active="active" process-status="error">
+      <mooc-step-item title="未开始" description="已完成已完成已完成已完成"></mooc-step-item>
+      <mooc-step-item title="进行中" description="进行中进行中进行中进行中"></mooc-step-item>
+      <mooc-step-item title="已完成" description="已完成已完成已完成已完成"></mooc-step-item>
+    </mooc-step>
 
     <el-button @click="handleStepClick">
       下一步
