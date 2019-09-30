@@ -14,14 +14,22 @@
         `is-${currentStatus}`  
       ]"
     >
-      <div class="step-item-line"></div>
-      <div class="step-item-icon">
+      <div class="step-item-line">
+        <i class="step-item-line-inner" :style="lineStyle"></i>
+      </div>
+      <div
+        class="step-item-icon"
+        :class="`is-${icon ? 'icon' : 'text'}`"
+      >
         <div class="step-item-icon-inner">
           <slot 
             v-if="currentStatus !=='success' && currentStatus !=='error'"
             name="icon"
           >
-            {{ index + 1 }}
+            <i v-if="icon" :class="['customize-inner-icon', icon]"></i>
+            <template v-else>
+              {{ index + 1 }}
+            </template>
           </slot>
           <i v-else-if="currentStatus=='success'" class="iconfont">&#xe786;</i>
           <i v-else-if="currentStatus=='error'" class="iconfont">&#xe619;</i>
@@ -78,6 +86,7 @@ export default {
   data () {
     return {
       index: -1,
+      lineStyle: {},
       internalStatus: ''
     }
   },
@@ -96,14 +105,31 @@ export default {
   },
   methods: {
     updateStatus (val) {
-      // let prevChild = this.$parent.$children[this.index - 1]
+      let prevChild = this.$parent.$children[this.index - 1]
       if (val > this.index) {
-        this.internalStatus = 'success'
+        this.internalStatus = this.$parent.finishStatus
       } else if (val === this.index && this.prevStatus !== 'error') {
         this.internalStatus = this.$parent.processStatus
       } else {
         this.internalStatus = ''
       }
+      if (prevChild) {
+        prevChild.setLineStyle(this.internalStatus)
+      }
+    },
+    setLineStyle (status) {
+      let style = {}
+      let step = 100
+      if (status === this.$parent.processStatus || status === '') {
+        step = 0
+      }
+      style.borderWidth = step ? '1px' : '0'
+      if (this.isVertical) {
+        style.height = step + '%'
+      } else {
+        style.width = step + '%'
+      }
+      this.lineStyle = style
     }
   },
   computed: {
@@ -112,6 +138,9 @@ export default {
     },
     isLast () {
       return this.$parent.steps[this.stepCount - 1] === this
+    },
+    isVertical () {
+      return this.$parent.direction === 'vertical'
     },
     prevStatus () {
       const prevStep = this.$parent.steps[this.index - 1]
@@ -153,6 +182,14 @@ export default {
         position: absolute;
         border-color: inherit;
         background-color: $base-font-four-color;
+        .step-item-line-inner
+          display: block;
+          width: 0;
+          height: 0;
+          border-width: 1px;
+          border-style: solid;
+          border-color: inherit;
+          box-sizing: border-box;
       .step-item-icon
         z-index: 1;
         position: relative;
@@ -161,12 +198,15 @@ export default {
         align-items: center;
         width: $step-text-icon-width;
         height: $step-text-icon-width;
-        border: 2px solid;
-        border-color: inherit;
         background-color: #fff;
         box-sizing: border-box;
-        border-radius: 50%;
         font-size: $step-text-font-size;
+        &.is-text
+          border: 2px solid;
+          border-color: inherit;
+          border-radius: 50%;
+        &.is-icon
+          width: $step-customize-icon-width;
         .step-item-icon-inner
           display: inline-block;
           text-align: center;
@@ -174,12 +214,18 @@ export default {
           line-height: 1;
           font-weight: 700;
           color: inherit;
+          .customize-inner-icon
+            font-size: $step-customize-inner-icon-font-size;
+            color: inherit;
       &.is-process
         border-color: $base-font-first-color;
         color: $base-font-first-color;
       &.is-success
         border-color: $base-success;
         color: $base-success;
+      &.is-finish
+        border-color: $base-primary;
+        color: $base-primary;
       &.is-error
         border-color: $base-danger;
         color: $base-danger;
@@ -195,31 +241,53 @@ export default {
           color: $base-font-first-color;
         &.is-success
           color: $base-success;
+        &.is-finish
+          color: $base-primary;
         &.is-error
           color: $base-danger;
       .step-item-description
         margin-top: -5px;
-        padding-right: $step-desc-padding-right;
         font-size: $step-desc-font-size;
         line-height: $step-desc-line-height;
         font-weight: normal;
         color: $base-font-four-color;
         &.is-process
-          font-weight: 700;
           color: $base-font-first-color;
         &.is-success
           color: $base-success;
+        &.is-finish
+          color: $base-primary;
         &.is-error
           color: $base-danger;
     &.is-horizontal
       display: inline-block;
       .step-item-head
         .step-item-line
-          position: absolute;
           left: 0;
           right: 0;
           top: 11px;
-          height: 2px;
+          height: $step-line-size;
+      .step-item-main
+        .step-item-description
+          padding-right: $step-desc-horizontal-padding-right;
+    &.is-vertical
+      display: flex;
+      .step-item-head
+        flex: 0 0 $step-icon-vertical-width;
+        width: $step-icon-vertical-width;
+        .step-item-line
+          left: 11px;
+          top: 0;
+          bottom: 0;
+          width: $step-line-size;
+        .step-item-icon
+          width: $step-icon-vertical-width;
+      .step-item-main
+        flex: 1;
+        padding-left: $step-main-vertical-padding-left;
+        .step-item-title
+          padding-bottom: $step-title-vertical-padding-bottom;
+          line-height: $step-icon-vertical-width;
     &:last-child
       .step-item-head
         .step-item-line

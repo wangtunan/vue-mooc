@@ -23,7 +23,14 @@ export default {
       type: String,
       default: 'process',
       validator (val) {
-        return ['', 'process', 'success', 'error'].includes(val)
+        return ['', 'finish', 'process', 'success', 'error'].includes(val)
+      }
+    },
+    finishStatus: {
+      type: String,
+      default: 'finish',
+      validator (val) {
+        return ['', 'finish', 'process', 'success', 'error'].includes(val)
       }
     }
   },

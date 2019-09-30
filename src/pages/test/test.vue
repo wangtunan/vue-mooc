@@ -1,16 +1,20 @@
 <template>
   <div class="test">
-    <el-steps :active="active" finish-status="success" process-status="error">
-      <el-step title="已完成" description="已完成已完成已完成已完成"></el-step>
-      <el-step title="进行中" description="进行中进行中进行中进行中"></el-step>
-      <el-step title="已完成" description="已完成已完成已完成已完成"></el-step>
-    </el-steps>
-
-    <mooc-step :active="active" process-status="error">
-      <mooc-step-item title="未开始" description="已完成已完成已完成已完成"></mooc-step-item>
-      <mooc-step-item title="进行中" description="进行中进行中进行中进行中"></mooc-step-item>
-      <mooc-step-item title="已完成" description="已完成已完成已完成已完成"></mooc-step-item>
-    </mooc-step>
+    <div style="height: 250px">
+      <el-steps :active="active" direction="vertical">
+        <el-step title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></el-step>
+        <el-step title="进行中" description="进行中进行中进行中进行中" icon="el-icon-edit"></el-step>
+        <el-step title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></el-step>
+      </el-steps>
+    </div>
+    
+    <div style="height: 250px">
+      <mooc-step :active="active" direction="vertical">
+        <mooc-step-item title="未开始" description="已完成已完成已完成已完成" icon="el-icon-edit"></mooc-step-item>
+        <mooc-step-item title="进行中" description="进行中进行中进行中进行中" icon="el-icon-edit"></mooc-step-item>
+        <mooc-step-item title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></mooc-step-item>
+      </mooc-step>
+    </div>
 
     <el-button @click="handleStepClick">
       下一步
@@ -21,17 +25,8 @@
 export default {
   data () {
     return {
-      active: 0,
-      timeline: []
+      active: 0
     }
-  },
-  created () {
-    this.timeline = [
-      { timestamp: '2015-09-01', status: 'primary', content: '成立' },
-      { timestamp: '2016-09-01', status: 'primary', content: '高速发展' },
-      { timestamp: '2018-09-01', status: 'primary', content: '上市' },
-      { timestamp: '2019-09-13', status: 'primary', content: '至今' }
-    ]
   },
   methods: {
     handleStepClick () {
