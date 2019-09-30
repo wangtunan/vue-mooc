@@ -1,12 +1,12 @@
 <template>
   <div class="test">
-    <el-steps :active="active" direction="horizontal" :space="100">
+    <el-steps :active="active" direction="horizontal">
       <el-step title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></el-step>
       <el-step title="进行中" description="进行中进行中进行中进行中" icon="el-icon-edit"></el-step>
       <el-step title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></el-step>
     </el-steps>
     
-    <mooc-step :active="active" direction="horizontal" :space="100">
+    <mooc-step :active="active" direction="horizontal">
       <mooc-step-item title="未开始" description="已完成已完成已完成已完成" icon="el-icon-edit"></mooc-step-item>
       <mooc-step-item title="进行中" description="进行中进行中进行中进行中" icon="el-icon-edit"></mooc-step-item>
       <mooc-step-item title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></mooc-step-item>
