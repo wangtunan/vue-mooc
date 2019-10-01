@@ -17,7 +17,7 @@ module.exports = {
         link: '/guide/'
       },
       {
-        text: '公共组件',
+        text: '组件文档',
         link: '/components/'
       },
       {

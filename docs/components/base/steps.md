@@ -2,6 +2,8 @@
 
 ## 用法
 
-## 属性
+## MoocStep属性
 
-## 事件
+## MoocStepItem属性
+
+## MoocStepItem插槽

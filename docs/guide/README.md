@@ -32,7 +32,7 @@
 <input type="checkbox" checked /> Progress(进度条)<br/>
 <input type="checkbox"/> Breadcrumb(面包屑导航)<br/>
 <input type="checkbox" checked/> Timeline(时间线)<br/>
-<input type="checkbox"/> Step(步骤条)<br/>
+<input type="checkbox" checked/> Step(步骤条)<br/>
 <input type="checkbox"/> Scroll(滚动组件)<br/>
 <input type="checkbox"/> Pagination(分页)<br/>
 <input type="checkbox"/> dialog(弹出)<br/>
