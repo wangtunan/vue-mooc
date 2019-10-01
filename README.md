@@ -1,7 +1,75 @@
 # vue-mooc
 
 [预览地址](https://wangtunan.github.io/vue-mooc/#/home) 
-## Project setup
+
+## 介绍
+`vue-mooc`是一个使用`Vue`相关技术栈，高仿[慕课网](https://www.imooc.com/)PC端的一个项目，项目中涉及到的技术栈如下：
+
+**Vue生态**:
+* `Vue.js`：基础框架，[Vue.js官网](https://cn.vuejs.org/)。
+* `Vue-cli3.0+`：一个`Vue`官方提供的一个脚手架工具，它提供了标准的目录结构和一些必要的配置，[Vue-cli3.0官网](https://cli.vuejs.org/zh/)
+* `Vuex`：数据状态管理工具，[Vuex官网](https://vuex.vuejs.org/)。
+* `Vue-router`：路由管理工具，[Vue-router官网](https://router.vuejs.org/)。
+* `VuePress`：撰写静态站点的工具(你所看到的本站点是采用`VuePress1.x`)，[VuePress官网](https://v1.vuepress.vuejs.org/)。
+
+**CSS预编译器**：
+* `Stylus`：一种`CSS`预编译工具，类似的还有`Sass/Less`，[Stylus官网](https://www.zhangxinxu.com/jq/stylus/)
+
+**数据请求**：
+* `axios`：一个非常出名的`HTTP`请求工具，[axios官网](http://www.axios-js.com/)
+
+**Mock数据**：
+* `json`数据：本项目接口全部采用手写`json`数据的形式来模拟请求。
+* `easy-mock`：使用`easy-mock`接口服务+ `json`数据的形式来`Mock`数据。
+
+## 背景
+在目前的业务搬砖中，接触到的项目大多是中后台项目，每日搬砖无非就是拿`element-ui`轮子一把嗦，轮子仔当久了自己也安逸了，痛定思痛后决定当一会轮子的制造者。<br/>
+本项目中关于基础组件的封装，全部抛弃使用`element-ui`，而采用自己封装，已达到提高自己的目的。
+
+**基础公共组件完成情况**：<br/>
+<input type="checkbox" checked/> Star(星级评分) <br/>
+<input type="checkbox" checked/> Badge(标记)<br/>
+<input type="checkbox"/> Empty(空内容)<br/>
+<input type="checkbox" checked/> Switch(开关)<br/>
+<input type="checkbox"/> Message(消息提示)<br/>
+<input type="checkbox"/> MessageBox(消息确认)<br/>
+<input type="checkbox" checked /> Progress(进度条)<br/>
+<input type="checkbox"/> Breadcrumb(面包屑导航)<br/>
+<input type="checkbox" checked/> Timeline(时间线)<br/>
+<input type="checkbox" checked/> Step(步骤条)<br/>
+<input type="checkbox"/> Scroll(滚动组件)<br/>
+<input type="checkbox"/> Pagination(分页)<br/>
+<input type="checkbox"/> dialog(弹出)<br/>
+<input type="checkbox"/> BackTop(返回顶部)<br/>
+
+## 预览&源码地址
+
+如果你想观看此项目的演示效果，请移步:point_right: [预览地址](https://wangtunan.github.io/vue-mooc/#/home) <br/>
+如果你需要看一看此项目的源码，请移步:point_right: [源码仓库](https://github.com/wangtunan/vue-mooc)
+
+### 首页
+![首页](./docs/images/1.gif)
+
+### 课程页面
+![课程页面](./docs/images/2.gif)
+
+### 专栏
+![专栏](./docs/images/3.gif)
+
+### 手记
+![手记](./docs/images/4.gif)
+
+### 购物车
+![购物车](./docs/images/5.gif)
+
+### 消息中心
+![消息中心](./docs/images/6.gif)
+
+### 订单中心
+![订单中心](../docs/images/7.gif)
+
+
+## 安装
 ```
 npm install
 ```
