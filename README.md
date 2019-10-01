@@ -27,20 +27,20 @@
 本项目中关于基础组件的封装，全部抛弃使用`element-ui`，而采用自己封装，已达到提高自己的目的。
 
 **基础公共组件完成情况**：<br/>
-- [x] Star(星级评分) <br/>
-- [x] Badge(标记)<br/>
-- [] Empty(空内容)<br/>
-- [x] Switch(开关)<br/>
-- [] Message(消息提示)<br/>
-- [] MessageBox(消息确认)<br/>
-- [x] Progress(进度条)<br/>
-- [] Breadcrumb(面包屑导航)<br/>
-- [x] Timeline(时间线)<br/>
-- [x] Step(步骤条)<br/>
-- [] Scroll(滚动组件)<br/>
-- [] Pagination(分页)<br/>
-- [] dialog(弹出)<br/>
-- [] BackTop(返回顶部)<br/>
+-[x] Star(星级评分) <br/>
+-[x] Badge(标记)<br/>
+-[] Empty(空内容)<br/>
+-[x] Switch(开关)<br/>
+-[] Message(消息提示)<br/>
+-[] MessageBox(消息确认)<br/>
+-[x] Progress(进度条)<br/>
+-[] Breadcrumb(面包屑导航)<br/>
+-[x] Timeline(时间线)<br/>
+-[x] Step(步骤条)<br/>
+-[] Scroll(滚动组件)<br/>
+-[] Pagination(分页)<br/>
+-[] dialog(弹出)<br/>
+-[] BackTop(返回顶部)<br/>
 
 ## 预览&源码地址
 
