@@ -45,7 +45,6 @@
 ## 预览&源码地址
 
 如果你想观看此项目的演示效果，请移步:point_right: [预览地址](https://wangtunan.github.io/vue-mooc/#/home) <br/>
-如果你需要看一看此项目的源码，请移步:point_right: [源码仓库](https://github.com/wangtunan/vue-mooc)
 
 ### 首页
 ![首页](./docs/images/1.gif)
@@ -66,7 +65,7 @@
 ![消息中心](./docs/images/6.gif)
 
 ### 订单中心
-![订单中心](../docs/images/7.gif)
+![订单中心](./docs/images/7.gif)
 
 
 ## 安装
