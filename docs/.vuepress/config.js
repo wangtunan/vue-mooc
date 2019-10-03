@@ -19,11 +19,11 @@ module.exports = {
       {
         text: '组件文档',
         link: '/components/'
-      },
-      {
-        text: '储备知识',
-        link: '/base/'
       }
+      // {
+      //   text: '储备知识',
+      //   link: '/base/'
+      // }
     ],
     sidebar: {
       '/guide/': [
