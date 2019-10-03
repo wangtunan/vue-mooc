@@ -3,7 +3,7 @@
     class="step-item" 
     :class="[
       `is-${$parent.direction}`,
-      isLast && !parentSpace && 'is-last',
+      isLast && !isCenter && !parentSpace && 'is-last',
       isCenter && !isVertical && 'is-center'
     ]"
     :style="getStepStyle"
@@ -18,7 +18,7 @@
       </div>
       <div
         class="step-item-icon"
-        :class="`is-${icon ? 'icon' : 'text'}`"
+        :class="`is-${(icon || $slots.icon )? 'icon' : 'text'}`"
       >
         <div class="step-item-icon-inner">
           <slot 
@@ -49,7 +49,7 @@
         </slot>
       </div>
       <div
-        v-if="description"
+        v-if="description || $slots.description"
         class="step-item-description"
         :class="[
           `is-${currentStatus}`  
@@ -157,7 +157,7 @@ export default {
       if (this.parentSpace) {
         style.flexBasis = `${this.parentSpace}px`
       } else {
-        style.flexBasis = `${ 100 / ( this.stepCount - 1 ) }%`
+        style.flexBasis = this.isCenter ? `${ 100 / this.stepCount }%` : `${ 100 / (this.stepCount - 1 ) }%`
       }
       if (this.isLast) {
         style.maxWidth = `${ 100 / this.stepCount }%`

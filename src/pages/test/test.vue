@@ -1,15 +1,63 @@
 <template>
   <div class="test">
-    <el-steps :active="active" direction="horizontal">
-      <el-step title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></el-step>
-      <el-step title="进行中" description="进行中进行中进行中进行中" icon="el-icon-edit"></el-step>
-      <el-step title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></el-step>
+    <el-steps :active="active">
+      <el-step>
+        <i slot="icon" class="iconfont">&#xe629;</i>
+        <span slot="title">
+          未开始
+        </span>
+        <span slot="description">
+          未开始未开始未开始未开始
+        </span>
+      </el-step>
+      <el-step title="进行中" description="进行中进行中进行中进行中">
+        <i slot="icon" class="iconfont">&#xe629;</i>
+        <span slot="title">
+          进行中
+        </span>
+        <span slot="description">
+          进行中进行中进行中进行中
+        </span>
+      </el-step>
+      <el-step title="已完成" description="已完成已完成已完成已完成">
+        <i slot="icon" class="iconfont">&#xe629;</i>
+        <span slot="title">
+          已完成
+        </span>
+        <span slot="description">
+          已完成已完成已完成已完成
+        </span>
+      </el-step>
     </el-steps>
     
-    <mooc-step :active="active" direction="horizontal">
-      <mooc-step-item title="未开始" description="已完成已完成已完成已完成" icon="el-icon-edit"></mooc-step-item>
-      <mooc-step-item title="进行中" description="进行中进行中进行中进行中" icon="el-icon-edit"></mooc-step-item>
-      <mooc-step-item title="已完成" description="已完成已完成已完成已完成" icon="el-icon-edit"></mooc-step-item>
+    <mooc-step :active="active">
+      <mooc-step-item>
+        <i slot="icon" class="iconfont">&#xe629;</i>
+        <span slot="title">
+          未开始
+        </span>
+        <span slot="description">
+          未开始未开始未开始未开始
+        </span>
+      </mooc-step-item>
+      <mooc-step-item>
+        <i slot="icon" class="iconfont">&#xe629;</i>
+        <span slot="title">
+          进行中
+        </span>
+        <span slot="description">
+          进行中进行中进行中进行中
+        </span>
+      </mooc-step-item>
+      <mooc-step-item>
+        <i slot="icon" class="iconfont">&#xe629;</i>
+        <span slot="title">
+          已完成
+        </span>
+        <span slot="description">
+          已完成已完成已完成已完成
+        </span>
+      </mooc-step-item>
     </mooc-step>
 
     <el-button @click="handleStepClick">
