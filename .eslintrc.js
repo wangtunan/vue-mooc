@@ -23,6 +23,8 @@
     "vue/no-template-shadow": 0,
     // vue组件自闭和标签
     'vue/html-self-closing': 0,
+    // vue组标签空格
+    'vue/html-indent': 0,
     // 生产环境下不允许debugger调试
     "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
     // 允许console打印

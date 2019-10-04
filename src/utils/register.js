@@ -6,6 +6,8 @@ import TimelineItem from 'base/timeline-item/index.js'
 import Progress from 'base/progress/index.js'
 import Step from 'base/step/index.js'
 import StepItem from 'base/step-item/index.js'
+import Breadcrumb from 'base/breadcrumb/index.js'
+import BreadcrumbItem from 'base/breadcrumb-item/index.js'
 
 const components = [
   Star,
@@ -15,7 +17,9 @@ const components = [
   TimelineItem,
   Progress,
   Step,
-  StepItem
+  StepItem,
+  Breadcrumb,
+  BreadcrumbItem
 ]
 
 const install = function (Vue) {
@@ -37,5 +41,7 @@ export default {
   TimelineItem,
   Progress,
   Step,
-  StepItem
+  StepItem,
+  Breadcrumb,
+  BreadcrumbItem
 }
