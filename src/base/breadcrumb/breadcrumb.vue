@@ -1,10 +1,27 @@
 <template>
   <div class="breadcrumb">
-    breadcrumb
+    <slot></slot>
   </div>
 </template>
 <script>
 export default {
-  name: 'MoocBreadcrumb'
+  name: 'MoocBreadcrumb',
+  props: {
+    separator: {
+      type: String,
+      default: '/'
+    }
+  },
+  provide () {
+    return {
+      MoocBreadcrumb: this
+    }
+  }
 }
 </script>
+<style lang="stylus" scoped>
+  @import '~base/theme/src/breadcrumb-variables.styl'
+  .breadcrumb
+    font-size: $breadcrumb-font-size;
+    line-height: 1;
+</style>
