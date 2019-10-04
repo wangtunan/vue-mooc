@@ -10,6 +10,10 @@ export default {
     separator: {
       type: String,
       default: '/'
+    },
+    separatorIcon: {
+      type: String,
+      default: ''
     }
   },
   provide () {

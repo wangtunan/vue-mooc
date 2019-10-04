@@ -1,13 +1,34 @@
 <template>
   <div class="test">
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
-      <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+    <el-breadcrumb separator="/" separator-class="el-icon-d-arrow-right">
+      <el-breadcrumb-item to="/home" replace>
+        首页
+      </el-breadcrumb-item>
+      <el-breadcrumb-item to="/home">
+        活动管理
+      </el-breadcrumb-item>
+      <el-breadcrumb-item to="/home">
+        活动列表
+      </el-breadcrumb-item>
+      <el-breadcrumb-item to="/home">
+        活动详情
+      </el-breadcrumb-item>
     </el-breadcrumb>
 
-    <mooc-breadcrumb></mooc-breadcrumb>
+    <mooc-breadcrumb separator="/" separator-icon="el-icon-d-arrow-right">
+      <mooc-breadcrumb-item to="/home" replace>
+        首页
+      </mooc-breadcrumb-item>
+      <mooc-breadcrumb-item to="/home">
+        活动管理
+      </mooc-breadcrumb-item>
+      <mooc-breadcrumb-item to="/home">
+        活动列表
+      </mooc-breadcrumb-item>
+      <mooc-breadcrumb-item to="/home">
+        活动详情
+      </mooc-breadcrumb-item>
+    </mooc-breadcrumb>
   </div>
 </template>
 <script>
