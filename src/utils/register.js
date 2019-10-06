@@ -1,3 +1,7 @@
+import Container from 'base/container/index.js'
+import Header from 'base/header/index.js'
+import Main from 'base/main/index.js'
+import Footer from 'base/footer/index.js'
 import Star from 'base/star/index.js'
 import Badge from 'base/badge/index.js'
 import Switch from 'base/switch/index.js'
@@ -10,6 +14,10 @@ import Breadcrumb from 'base/breadcrumb/index.js'
 import BreadcrumbItem from 'base/breadcrumb-item/index.js'
 
 const components = [
+  Container,
+  Header,
+  Main,
+  Footer,
   Star,
   Badge,
   Switch,
@@ -34,6 +42,10 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
+  Container,
+  Header,
+  Main,
+  Footer,
   Star,
   Badge,
   Switch,

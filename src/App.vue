@@ -1,10 +1,19 @@
 <template>
-  <div id="app" :style="getOverflowStyle">
-    <m-header />
-    <m-sidebar />
-    <router-view />
-    <m-footer />
+  <div id="app" :style="getStyle">
+    <mooc-container>
+      <mooc-header height="72px">
+        <m-header />
+      </mooc-header>
+      <mooc-main>
+        <router-view />
+      </mooc-main>
+      <mooc-footer height="120px">
+        <m-footer />
+      </mooc-footer>
+    </mooc-container>
 
+    <m-sidebar />
+    
     <login v-if="showLogin" @maskClick="handleMaskClick" />
   </div>
 </template>
@@ -18,8 +27,9 @@ export default {
   name: 'App',
   mixins: [scrollMixin],
   computed: {
-    getOverflowStyle () {
+    getStyle () {
       return {
+        'max-height': this.showLogin ? '100%' : '',
         'overflow': this.showLogin ? 'hidden' : ''
       }
     },
