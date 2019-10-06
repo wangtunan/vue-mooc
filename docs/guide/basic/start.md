@@ -184,7 +184,7 @@ img-box($width, $height)
 :::
 
 ::: warning
-注意，如果你的命名文件为`.eslintrc`或者`.eslintrc.json`，则不需要`module.exports`导出模块，直接撰写`json`文件即可。
+注意，如果你的命名文件为`.eslintrc`或者`.eslintrc.json`，则不需要`module.exports`导出模块，直接撰写`json`格式即可。
 :::
 ```js
 // .eslintrc.js
@@ -270,7 +270,7 @@ module.exports =  {
 $ touch vue.config.js
 ```
 
-创建完毕后，我们需要在`vue.config.js`中撰写一下代码：
+创建完毕后，我们需要在`vue.config.js`中撰写以下代码：
 ```js
 // 引入node核心模块
 const path = require('path')

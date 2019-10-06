@@ -62,7 +62,9 @@ export default {
   @import '~assets/stylus/variables.styl';
   .footer
     width: 100%;
+    height: 100%;
     padding: 36px 0;
+    box-sizing: border-box;
     background-color: #F7F9FB;
     .footer-container
       position: relative;

@@ -57,7 +57,7 @@ export default {
     z-index: 99;
     position: relative;
     padding-right: 10px;
-    height: 72px;
+    height: 100%;
     background-color: #fff;
     box-shadow: 0 4px 8px $shadow;
     .logo-box
