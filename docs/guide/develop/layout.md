@@ -35,6 +35,7 @@
 * `mooc-header`对应`el-header`。
 * `mooc-main`对应`el-main`。
 * `mooc-footer`对应`el-foooter`。
+
 如果你对改造后布局容器组件感兴趣的话，那么你可以在`src/base/container`，`src/base/header`，`src/base/main`和`src/base/footer`等目录找到它们。
 
 
