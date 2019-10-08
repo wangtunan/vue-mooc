@@ -1,34 +1,8 @@
 <template>
   <div class="test">
-    <el-breadcrumb separator="/" separator-class="el-icon-d-arrow-right">
-      <el-breadcrumb-item to="/home" replace>
-        首页
-      </el-breadcrumb-item>
-      <el-breadcrumb-item to="/home">
-        活动管理
-      </el-breadcrumb-item>
-      <el-breadcrumb-item to="/home">
-        活动列表
-      </el-breadcrumb-item>
-      <el-breadcrumb-item to="/home">
-        活动详情
-      </el-breadcrumb-item>
-    </el-breadcrumb>
-
-    <mooc-breadcrumb separator="/" separator-icon="el-icon-d-arrow-right">
-      <mooc-breadcrumb-item to="/home" replace>
-        首页
-      </mooc-breadcrumb-item>
-      <mooc-breadcrumb-item to="/home">
-        活动管理
-      </mooc-breadcrumb-item>
-      <mooc-breadcrumb-item to="/home">
-        活动列表
-      </mooc-breadcrumb-item>
-      <mooc-breadcrumb-item to="/home">
-        活动详情
-      </mooc-breadcrumb-item>
-    </mooc-breadcrumb>
+    <el-button size="small" @click="handleMessageClick">
+      消息
+    </el-button>
   </div>
 </template>
 <script>
@@ -39,8 +13,15 @@ export default {
     }
   },
   methods: {
-    handleStepClick () {
-      this.active = this.active + 1
+    handleMessageClick () {
+      this.$message({
+        message: '登陆成功',
+        type: 'error'
+      })
+      // this.$moocMessage({
+      //   message: '登陆成功',
+      //   type: 'error'
+      // })
     }
   }
 }

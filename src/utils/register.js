@@ -12,6 +12,7 @@ import Step from 'base/step/index.js'
 import StepItem from 'base/step-item/index.js'
 import Breadcrumb from 'base/breadcrumb/index.js'
 import BreadcrumbItem from 'base/breadcrumb-item/index.js'
+import Message from 'base/message/index.js'
 
 const components = [
   Container,
@@ -27,13 +28,15 @@ const components = [
   Step,
   StepItem,
   Breadcrumb,
-  BreadcrumbItem
+  BreadcrumbItem,
+  Message
 ]
 
 const install = function (Vue) {
   components.forEach(component => {
     Vue.component(component.name, component)
   })
+  Vue.prototype.$moocMessage = Message
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -55,5 +58,6 @@ export default {
   Step,
   StepItem,
   Breadcrumb,
-  BreadcrumbItem
+  BreadcrumbItem,
+  Message
 }
