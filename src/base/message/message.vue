@@ -5,15 +5,21 @@
       class="mooc-message"
       :style="getStyle"
       :class="[
-        type && `mooc-message-${type}` 
+        type && !iconClass && `mooc-message-${type}`,
+        center && `is-center`,
+        customClass 
       ]"
+      @mouseenter="clearTimer"
+      @mouseleave="startTimer"
     >
-      <i class="mooc-message-icon" :class="typeClass"></i>
+      <i v-if="iconClass" class="mooc-message-icon" :class="iconClass"></i>
+      <i v-else class="mooc-message-icon" :class="typeClass"></i>
       <slot>
         <p class="mooc-message-content">
           {{ message }}
         </p>
       </slot>
+      <i v-if="showClose" class="mooc-message-close iconfont" @click="close">&#xe619;</i>
     </div>
   </transition>
 </template>
@@ -33,7 +39,11 @@ export default {
       message: '',
       closed: false,
       onClose: null,
-      duration: 3000
+      duration: 3000,
+      showClose: false,
+      customClass: '',
+      iconClass: '',
+      center: false
     }
   },
   mounted () {
@@ -49,6 +59,9 @@ export default {
       this.timer = setTimeout(() => {
         !this.closed && this.close()
       }, duration)
+    },
+    clearTimer () {
+      clearTimeout(this.timer)
     },
     close () {
       this.closed = true
@@ -108,6 +121,18 @@ export default {
     .mooc-message-content
       font-size: $message-content-font-size;
       line-height: 1;
+    .mooc-message-close
+      position: absolute;
+      top: 50%;
+      right: $message-close-icon-right ;
+      transform: translateY(-50%);
+      color: $base-font-four-color;
+      font-size: $message-close-icon-font-size;
+      cursor: pointer;
+      &:hover
+        color: $base-font-three-color;
+    &.is-center
+      justify-content: center;
     &.mooc-message-info
       background-color: $message-background-color;
       border-color: $base-border-three-color;

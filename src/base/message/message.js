@@ -5,6 +5,7 @@ let seed = 1
 let zIndex = 2000
 let instance = undefined
 let instances = []
+let types = ['success', 'warning', 'error', 'info']
 
 const OFFSET = 20
 const MESSAGE_OFFSET = 16
@@ -35,6 +36,18 @@ const Message = function (options = {}) {
   instances.push(instance)
   return instances
 }
+
+types.forEach(type => {
+  Message[type] = options => {
+    if (typeof options === 'string') {
+      options = {
+        message: options
+      }
+    }
+    options.type = type
+    return Message(options)
+  }
+})
 
 Message.close = function (id) {
   let len = instances.length

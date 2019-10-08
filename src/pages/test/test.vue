@@ -14,10 +14,17 @@ export default {
   },
   methods: {
     handleMessageClick () {
-      this.$message({
+      this.$moocMessage({
         message: '登陆成功',
-        type: 'error'
+        type: 'success',
+        duration: 300000,
+        showClose: true,
+        customClass: 'custom-class'
       })
+      // this.$moocMessage.success('成功')
+      // this.$moocMessage.warning('警告')
+      // this.$moocMessage.error('错误')
+      // this.$moocMessage.info('消息')
       // this.$moocMessage({
       //   message: '登陆成功',
       //   type: 'error'

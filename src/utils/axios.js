@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
+import  components  from './register.js'
 import { ERR_OK } from 'api/config.js'
 import { BASE_URL, IS_MOCK_LOCAL } from 'api/config.js'
-
+const Message = components.Message
 const service = axios.create({
   baseURL: IS_MOCK_LOCAL ? '' : BASE_URL,
   timeout: 10000
