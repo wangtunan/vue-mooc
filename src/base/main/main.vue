@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="mooc-main">
     <slot></slot>
   </div>
 </template>
@@ -10,7 +10,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .main
+  .mooc-main
     display: block;
     flex: 1;
     overflow: hidden;

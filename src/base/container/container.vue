@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container"
+    class="mooc-container"
     :class="{'is-vertical': isVertical }"
     :style="getStyle"
   >
@@ -43,7 +43,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .container
+  .mooc-container
     display: flex;
     flex-direction: row;
     flex-basis: auto;

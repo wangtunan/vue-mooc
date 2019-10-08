@@ -1,5 +1,5 @@
 <template>
-  <div class="header" :style="getStyle">
+  <div class="mooc-header" :style="getStyle">
     <slot></slot>
   </div>
 </template>
@@ -24,6 +24,6 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .header
+  .mooc-header
     box-sizing: border-box;
 </style>

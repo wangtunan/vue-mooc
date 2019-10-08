@@ -108,14 +108,15 @@ export default {
 <style lang="stylus">
   .layout-container
     position: relative;
-    .container
+    height: 400px;
+    .mooc-container
       height: 400px;
       color: #fff;
       text-align: center;
-      .header, .footer
+      .mooc-header, .mooc-footer
         line-height: 60px;
         background-color: #f60;
-      .main
+      .mooc-main
         display: flex;
         align-items: center;
         justify-content: center;
