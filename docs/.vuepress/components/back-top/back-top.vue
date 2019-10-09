@@ -14,7 +14,7 @@
   </transition>
 </template>
 <script>
-import { throttle } from 'utils/utils.js'
+import { throttle } from '../../utils.js'
 const throttleTime = 300
 export default {
   name: 'MoocBacktop',

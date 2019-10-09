@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     getStyle () {
-      let height = document.body.clientHeight
+      let height = this.$isServer ? 400 : document.body.clientHeight
       return {
         'min-height': `${height}px`,
       }
