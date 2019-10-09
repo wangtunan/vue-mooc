@@ -103,8 +103,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~base/theme/variables.styl';
-  @import '~base/theme/src/message-variables.styl';
+  @import '../../stylus/variables.styl';
+  @import '../../stylus/src/message-variables.styl';
   .mooc-message
     position: fixed;
     left: 50%;

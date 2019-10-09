@@ -1,5 +1,8 @@
 import Vue from 'vue'
+import Message from './components/message/message.js'
 import './stylus/iconfont.css'
+
+Vue.prototype.$message = Message
 export default({
   Vue,
   options, 

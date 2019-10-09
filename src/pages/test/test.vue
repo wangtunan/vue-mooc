@@ -1,8 +1,6 @@
 <template>
   <div class="test">
-    <el-button size="small" @click="handleMessageClick">
-      消息
-    </el-button>
+    <mooc-backtop></mooc-backtop>
   </div>
 </template>
 <script>
@@ -34,11 +32,4 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .test
-    margin-left: 50px;
-    margin-top: 50px;
-    min-height: 800px;
-    & > div
-      margin: 20px 0;
-      width: 1000px;
 </style>
