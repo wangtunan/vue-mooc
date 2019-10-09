@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <mooc-backtop></mooc-backtop>
+    <!-- <mooc-backtop></mooc-backtop> -->
   </div>
 </template>
 <script>

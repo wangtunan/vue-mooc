@@ -36,7 +36,19 @@ export default {
   methods: {
     // 返回顶部
     handleBackTopClick () {
-      document.body.scrollIntoView({ behavior: 'smooth' })
+      // document.body.scrollIntoView({ behavior: 'smooth' })
+      if (!this.timer) {
+        let step = 0
+        this.timer = setInterval(() => {
+          if (this.scrollTop <= 0) {
+            clearInterval(this.timer)
+            this.timer = null
+            return
+          }
+          step += 10
+          document.documentElement.scrollTop -= step
+        }, 20)
+      }
     }
   },
   computed: {
@@ -46,6 +58,10 @@ export default {
     },
     // vuex
     ...mapGetters(['scrollTop'])
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+    this.timer = null
   }
 }
 </script>

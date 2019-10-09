@@ -13,7 +13,7 @@
     </mooc-container>
 
     <m-sidebar />
-    
+    <mooc-backtop :show-height="500"></mooc-backtop>
     <login v-if="showLogin" @maskClick="handleMaskClick" />
   </div>
 </template>

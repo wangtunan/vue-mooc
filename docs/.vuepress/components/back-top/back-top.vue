@@ -106,8 +106,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~base/theme/variables.styl';
-  @import '~base/theme/src/backtop-variables.styl';
+  @import '../../stylus/variables.styl';
+  @import '../../stylus/src/backtop-variables.styl';
   .mooc-backtop
     z-index: $backtop-zIndex;
     display: flex;
