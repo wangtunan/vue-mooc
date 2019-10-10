@@ -4,6 +4,8 @@
     <el-button type="primary" plain size="medium">
       按钮
     </el-button>
+
+    <mooc-button>按钮</mooc-button>
   </div>
 </template>
 <script>
