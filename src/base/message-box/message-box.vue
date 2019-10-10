@@ -1,3 +1,14 @@
 <template>
-  <div>message-box</div>
+  <div class="mooc-messagebox">
+    message-box
+  </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      
+    }
+  }
+}
+</script>

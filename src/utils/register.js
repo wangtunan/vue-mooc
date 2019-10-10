@@ -14,6 +14,7 @@ import Breadcrumb from 'base/breadcrumb/index.js'
 import BreadcrumbItem from 'base/breadcrumb-item/index.js'
 import Message from 'base/message/index.js'
 import BackTop from 'base/back-top/index.js'
+import Button from 'base/button/index.js'
 
 const components = [
   Container,
@@ -31,7 +32,8 @@ const components = [
   Breadcrumb,
   BreadcrumbItem,
   Message,
-  BackTop
+  BackTop,
+  Button
 ]
 
 const install = function (Vue) {
@@ -62,5 +64,6 @@ export default {
   Breadcrumb,
   BreadcrumbItem,
   Message,
-  BackTop
+  BackTop,
+  Button
 }

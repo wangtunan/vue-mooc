@@ -121,6 +121,10 @@ export default {
     box-shadow: 0 0 6px rgba(0,0,0, 0.12);
     color: $base-primary;
     cursor: pointer;
+    &.mooc-fade-in-enter-active, &.mooc-fade-in-leave-active
+      transition: opacity 0.3s;
+    &.mooc-fade-in-enter, &.mooc-fade-in-leave-to
+      opacity: 0;
     &:hover
       background-color: $base-border-four-color;
     &.is-default

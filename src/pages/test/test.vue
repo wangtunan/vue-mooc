@@ -1,6 +1,9 @@
 <template>
   <div class="test">
-    <!-- <mooc-backtop></mooc-backtop> -->
+    <el-button>按钮</el-button>
+    <el-button type="primary" plain size="medium">
+      按钮
+    </el-button>
   </div>
 </template>
 <script>
