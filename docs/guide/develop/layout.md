@@ -109,6 +109,7 @@ export default {
   .layout-container
     position: relative;
     height: 400px;
+    max-height: 400px;
     .mooc-container
       height: 400px;
       color: #fff;

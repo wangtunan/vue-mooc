@@ -1,1 +1,1 @@
-# RecommendLesson(推荐课程)
+# RecommendLesson 推荐课程

@@ -1,2 +1,2 @@
 
-# CanvasBlur(高斯模糊)
+# CanvasBlur 高斯模糊
