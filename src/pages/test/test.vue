@@ -1,11 +1,12 @@
 <template>
   <div class="test">
-    <el-button>按钮</el-button>
-    <el-button type="primary" plain size="medium">
+    <el-button size="mini" circle>
       按钮
     </el-button>
-
-    <mooc-button>按钮</mooc-button>
+    <br />
+    <mooc-button size="mini">
+      按钮
+    </mooc-button>
   </div>
 </template>
 <script>

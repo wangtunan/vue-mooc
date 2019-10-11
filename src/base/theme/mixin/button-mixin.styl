@@ -1,0 +1,12 @@
+button-type($color, $borderColor, $backgroundColor, $hoverColor, $hoverBorderColor, $hoverBackgroundColor)
+  color: $color;
+  border-color: $borderColor;
+  background-color: $backgroundColor;
+  &:hover, &:active, &:focus
+    color: $hoverColor;
+    border-color: $hoverBorderColor;
+    background-color: $hoverBackgroundColor;
+button-size($fontSize, $verticalPadding, $horizontalPadding, $radius)
+  padding: $verticalPadding $horizontalPadding;
+  border-radius: $radius;
+  font-size: $fontSize;
