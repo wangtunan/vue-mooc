@@ -6,7 +6,26 @@ button-type($color, $borderColor, $backgroundColor, $hoverColor, $hoverBorderCol
     color: $hoverColor;
     border-color: $hoverBorderColor;
     background-color: $hoverBackgroundColor;
+
 button-size($fontSize, $verticalPadding, $horizontalPadding, $radius)
   padding: $verticalPadding $horizontalPadding;
   border-radius: $radius;
   font-size: $fontSize;
+
+button-round($verticalPadding, $horizontalpadding, $radius)
+  &.is-round
+    padding: $verticalPadding $horizontalpadding;
+    border-radius: $radius;
+
+button-disabled($color, $borderColor, $backgroundColor)
+  &.is-disabled
+    &, &:active, &:focus, &:hover
+      color: $color;
+      cursor: not-allowed;
+      border-color: $borderColor;
+      background-color: $backgroundColor;
+
+button-circle($padding, $radius)
+  &.is-circle
+    padding: $padding;
+    border-radius:$radius;

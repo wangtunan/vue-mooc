@@ -1,10 +1,10 @@
 <template>
   <div class="test">
-    <el-button size="mini" circle>
+    <el-button type="success" :disabled="true">
       按钮
     </el-button>
     <br />
-    <mooc-button size="mini">
+    <mooc-button type="success" :disabled="true">
       按钮
     </mooc-button>
   </div>
