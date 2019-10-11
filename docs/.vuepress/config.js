@@ -96,6 +96,7 @@ module.exports = {
             '/components/base/steps.md',
             '/components/base/breadcrumb.md',
             '/components/base/backtop.md',
+            '/components/base/button.md',
             '/components/base/message.md',
             '/components/base/message-box.md',
             '/components/base/pagination.md',
