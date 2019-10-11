@@ -25,18 +25,18 @@
 **基础公共组件完成情况**：<br/>
 <input type="checkbox" checked/> Star(星级评分) <br/>
 <input type="checkbox" checked/> Badge(标记)<br/>
-<input type="checkbox"/> Empty(空内容)<br/>
+<input type="checkbox" checked/> Empty(空内容)<br/>
 <input type="checkbox" checked/> Switch(开关)<br/>
-<input type="checkbox"/> Message(消息提示)<br/>
-<input type="checkbox"/> MessageBox(消息确认)<br/>
+<input type="checkbox" checked/> Message(消息提示)<br/>
+<input type="checkbox" checked/> MessageBox(消息确认)<br/>
 <input type="checkbox" checked /> Progress(进度条)<br/>
-<input type="checkbox"/> Breadcrumb(面包屑导航)<br/>
+<input type="checkbox" checked/> Breadcrumb(面包屑导航)<br/>
 <input type="checkbox" checked/> Timeline(时间线)<br/>
 <input type="checkbox" checked/> Step(步骤条)<br/>
-<input type="checkbox"/> Scroll(滚动组件)<br/>
-<input type="checkbox"/> Pagination(分页)<br/>
-<input type="checkbox"/> dialog(弹出)<br/>
-<input type="checkbox"/> BackTop(返回顶部)<br/>
+<input type="checkbox" checked/> Scroll(滚动组件)<br/>
+<input type="checkbox" checked/> Pagination(分页)<br/>
+<input type="checkbox" checked/> dialog(弹出)<br/>
+<input type="checkbox" checked/> BackTop(返回顶部)<br/>
 
 ## 预览&源码地址
 
