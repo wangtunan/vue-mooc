@@ -1,12 +1,17 @@
 <template>
   <div class="test">
-    <el-button type="success" :disabled="true">
-      按钮
-    </el-button>
+    <el-button-group>
+      <el-button size="mini" type="success" icon="el-icon-edit">
+        按钮
+      </el-button>
+    </el-button-group>
     <br />
-    <mooc-button type="success" :disabled="true">
-      按钮
-    </mooc-button>
+    <br />
+    <mooc-button-group>
+      <mooc-button size="mini" type="success" icon="el-icon-edit">
+        按钮
+      </mooc-button>
+    </mooc-button-group>
   </div>
 </template>
 <script>
@@ -38,4 +43,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  .test
+    margin: 100px auto;
+    width: 800px;
 </style>
