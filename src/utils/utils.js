@@ -24,3 +24,19 @@ export function throttle (fn, interval) {
     }, interval || 500)
   }
 }
+
+// object merge
+export function mere (target) {
+  for (let index = 1, len = arguments.length; index < len; index++) {
+    let source = arguments[index] || {}
+    for (const key in source) {
+      if (source.hasOwnProperty(key)) {
+        let value = source[key]
+        if (value !== 'undefined') {
+          target[key] = value
+        }
+      }
+    }
+  }
+  return target
+}

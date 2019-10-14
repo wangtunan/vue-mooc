@@ -13,6 +13,7 @@ import StepItem from 'base/step-item/index.js'
 import Breadcrumb from 'base/breadcrumb/index.js'
 import BreadcrumbItem from 'base/breadcrumb-item/index.js'
 import Message from 'base/message/index.js'
+import MessageBox from 'base/message-box/index.js'
 import BackTop from 'base/back-top/index.js'
 import Button from 'base/button/index.js'
 import ButtonGroup from 'base/button-group/index.js'
@@ -32,7 +33,6 @@ const components = [
   StepItem,
   Breadcrumb,
   BreadcrumbItem,
-  Message,
   BackTop,
   Button,
   ButtonGroup
@@ -43,6 +43,9 @@ const install = function (Vue) {
     Vue.component(component.name, component)
   })
   Vue.prototype.$moocMessage = Message
+  Vue.prototype.$moocMsgbox = MessageBox
+  Vue.prototype.$moocAlert = MessageBox.alert
+  Vue.prototype.$moocConfirm = MessageBox.confirm
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -66,6 +69,7 @@ export default {
   Breadcrumb,
   BreadcrumbItem,
   Message,
+  MessageBox,
   BackTop,
   Button,
   ButtonGroup

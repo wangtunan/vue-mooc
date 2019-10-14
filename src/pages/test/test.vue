@@ -1,17 +1,13 @@
 <template>
   <div class="test">
-    <el-button-group>
-      <el-button size="mini" type="success" icon="el-icon-edit">
-        按钮
-      </el-button>
-    </el-button-group>
+    <el-button size="mini" type="success" icon="el-icon-edit" @click="handleElButtonClick">
+      按钮
+    </el-button>
     <br />
     <br />
-    <mooc-button-group>
-      <mooc-button size="mini" type="success" icon="el-icon-edit">
-        按钮
-      </mooc-button>
-    </mooc-button-group>
+    <mooc-button size="mini" type="success" icon="el-icon-edit">
+      按钮
+    </mooc-button>
   </div>
 </template>
 <script>
@@ -22,22 +18,11 @@ export default {
     }
   },
   methods: {
-    handleMessageClick () {
-      this.$moocMessage({
-        message: '登陆成功',
-        type: 'success',
-        duration: 300000,
-        showClose: true,
-        customClass: 'custom-class'
+    handleElButtonClick () {
+      this.$confirm('Hello', 'hhh', {
+        type: 'warning',
+        roundButton: true
       })
-      // this.$moocMessage.success('成功')
-      // this.$moocMessage.warning('警告')
-      // this.$moocMessage.error('错误')
-      // this.$moocMessage.info('消息')
-      // this.$moocMessage({
-      //   message: '登陆成功',
-      //   type: 'error'
-      // })
     }
   }
 }
