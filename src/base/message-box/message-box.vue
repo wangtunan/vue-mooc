@@ -22,13 +22,13 @@
         </div>
         <div class="mooc-message-box-btns">
           <mooc-button
-            type="small"
+            size="small"
             :round="roundButton"
           >
             {{ cancelButtonText }}
           </mooc-button>
           <mooc-button
-            type="small"
+            size="small"
             :round="roundButton"
           >
             {{ confirmButtonText }}
@@ -51,7 +51,9 @@ export default {
     return {
       title: '',
       message: '',
-      type: ''
+      type: '',
+      confirmButtonText: '',
+      cancelButtonText: ''
     }
   },
   components: {

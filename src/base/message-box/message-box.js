@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import msgbox from './message-box.vue'
-import { merge } from 'utils/utils.js'
+// import { merge } from 'utils/utils.js'
 
+let msgQueue = []
+let instance = null
 const msgboxConstructor = Vue.extend(msgbox)
-const msgQueue = []
 const defaultOptions = {
   title: '',
   message: '',
-  type: ''
+  type: '',
+  confirmButtonText: '',
+  cancelButtonText: ''
 }
 
 const MessageBox  = function (options, callback) {
@@ -29,18 +32,32 @@ const MessageBox  = function (options, callback) {
   if (typeof Promise !== 'undefined') {
     return new Promise((resolve, reject) => {
       msgQueue.push({
-        options: merge({}, defaultOptions, options),
+        options: Object.assign({}, defaultOptions, options),
         callback: callback,
         resolve: resolve,
         reject: reject
       })
+      showNextMsg()
     })
   } else {
     msgQueue.push({
-      options: merge({}, defaultOptions, options),
+      options: Object.assign({}, defaultOptions, options),
       callback: callback
     })
   }
+  showNextMsg()
+}
+
+const showNextMsg = function () {
+  if (!instance) {
+    initInstance()
+  }
+}
+
+const initInstance = function () {
+  instance = new msgboxConstructor({
+    el: document.createElement('div')
+  })
 }
 
 // alert

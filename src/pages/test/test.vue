@@ -5,7 +5,7 @@
     </el-button>
     <br />
     <br />
-    <mooc-button size="mini" type="success" icon="el-icon-edit">
+    <mooc-button size="mini" type="success" icon="el-icon-edit" @click="handleMoocClick">
       按钮
     </mooc-button>
   </div>
@@ -19,9 +19,15 @@ export default {
   },
   methods: {
     handleElButtonClick () {
-      this.$confirm('Hello', 'hhh', {
-        type: 'warning',
-        roundButton: true
+      this.$msgbox({
+        title: 'title',
+        message: 'message'
+      })
+    },
+    handleMoocClick () {
+      this.$moocMsgbox({
+        title: 'title',
+        message: 'message'
       })
     }
   }

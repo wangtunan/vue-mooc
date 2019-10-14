@@ -13,6 +13,7 @@
       loading && 'is-loading',
       plain && 'is-plain'
     ]"
+    @click="handleBtnClick"
   >
     <i
       class="mooc-button-icon"
@@ -74,6 +75,11 @@ export default {
     nativeType: {
       type: String,
       default: 'button'
+    }
+  },
+  methods: {
+    handleBtnClick (event) {
+      this.$emit('click', event)
     }
   }
 }
