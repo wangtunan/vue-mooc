@@ -137,6 +137,6 @@ export default {
         .mooc-message-box-message > p
           line-height: $msgbox-content-message-line-height;
       .mooc-message-box-btns
-        padding: 5px 15px;
+        padding: $msgbox-btns-vertical-padding $msgbox-btns-horizontal-padding;
         text-align: right;
 </style>
