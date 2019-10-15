@@ -42,7 +42,7 @@ const install = function (Vue) {
   components.forEach(component => {
     Vue.component(component.name, component)
   })
-  Vue.prototype.$moocMessage = Message
+  Vue.prototype.$message = Message
   Vue.prototype.$moocMsgbox = MessageBox
   Vue.prototype.$moocAlert = MessageBox.alert
   Vue.prototype.$moocConfirm = MessageBox.confirm
