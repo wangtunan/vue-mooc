@@ -4,3 +4,14 @@ clearfix()
     display: table;
   &::after
     clear: both;
+
+extend-click($extend, $position)
+  if $position
+    position: $position;
+  &::after
+    content: '';
+    position: absolute;
+    left: $extend;
+    right: $extend;
+    top: $extend;
+    bottom: $extend;

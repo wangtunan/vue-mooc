@@ -19,15 +19,15 @@ export default {
   },
   methods: {
     handleElButtonClick () {
-      this.$msgbox({
+      this.$confirm('提醒内容', '标题', {
         title: 'title',
-        message: 'message'
+        message: 'message',
       })
     },
     handleMoocClick () {
-      this.$moocMsgbox({
+      this.$moocConfirm('提醒内容', '标题', {
         title: 'title',
-        message: 'message'
+        message: 'message',
       })
     }
   }

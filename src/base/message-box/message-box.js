@@ -1,16 +1,28 @@
 import Vue from 'vue'
 import msgbox from './message-box.vue'
-// import { merge } from 'utils/utils.js'
 
 let msgQueue = []
-let instance = null
+let currentMsgBox, instance
+const msgboxTypes = ['alert', 'confirm']
 const msgboxConstructor = Vue.extend(msgbox)
 const defaultOptions = {
   title: '',
   message: '',
   type: '',
-  confirmButtonText: '',
-  cancelButtonText: ''
+  confirmButtonText: '确定',
+  cancelButtonText: '取消',
+  showCancelButton: false,
+  showConfirmButton: true
+}
+const mergeOption = {
+  alert: {
+    showCancelButton: false,
+    showConfirmButton: true
+  },
+  confirm: {
+    showCancelButton: true,
+    showConfirmButton: true
+  }
 }
 
 const MessageBox  = function (options, callback) {
@@ -44,14 +56,28 @@ const MessageBox  = function (options, callback) {
       options: Object.assign({}, defaultOptions, options),
       callback: callback
     })
+    showNextMsg()
   }
-  showNextMsg()
 }
 
 const showNextMsg = function () {
   if (!instance) {
     initInstance()
   }
+  if (instance.visible || msgQueue.length === 0) {
+    return
+  }
+  currentMsgBox = msgQueue.shift()
+  let options = currentMsgBox.options
+  for (const key in options) {
+    if (options.hasOwnProperty(key)) {
+      instance[key] = options[key]
+    }
+  }
+  document.body.appendChild(instance.$el)
+  Vue.nextTick(() => {
+    instance.visible = true
+  })
 }
 
 const initInstance = function () {
@@ -60,19 +86,27 @@ const initInstance = function () {
   })
 }
 
-// alert
-MessageBox.alert = function (message, title, options) {
-  
-}
-
-// confirm
-MessageBox.confirm = function (message, title, options) {
-
-}
+msgboxTypes.forEach($type => {
+  MessageBox[$type] = (message, title, options) => {
+    if (typeof title === 'object') {
+      options = title
+      title = ''
+    } else if (!title) {
+      title = ''
+    }
+    return MessageBox(Object.assign({
+      $type: $type,
+      title: title,
+      message: message
+    }, mergeOption[$type], options))
+  }
+})
 
 // close
 MessageBox.close  = () => {
-
+  instance.messageBoxClose()
+  instance = null
+  msgQueue = []
 }
 
 export default MessageBox
