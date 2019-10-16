@@ -45,7 +45,7 @@
   </transition>
 </template>
 <script>
-import MoocButton from '../button/button.vue'
+import MoocButton from 'base/button/button.vue'
 export default {
   props: {
     roundButton: {
