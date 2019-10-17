@@ -159,6 +159,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~base/theme/variables.styl';
   @import '~base/theme/src/carousel-variables.styl';
   .mooc-carousel
     position: relative;

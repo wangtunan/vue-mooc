@@ -6,11 +6,27 @@
     <!-- 导航和轮播 -->
     <div class="home-container m-center">
       <home-nav />
-      <home-swiper @swiper="handelSwiper">
+      <!-- <home-swiper @swiper="handelSwiper">
         <swiper-slide v-for="(item,index) in swiperList" :key="index">
           <img :key="item.img" :src="item.img" alt="" class="swiper-img">
         </swiper-slide>
-      </home-swiper>
+      </home-swiper> -->
+      <mooc-carousel
+        :height="316"
+        @change="handelCarouselChange"
+      >
+        <mooc-carousel-item
+          v-for="(item,index) in swiperList"
+          :key="index"
+        >
+          <img
+            :key="item.img"
+            :src="item.img"
+            class="swiper-img"
+          >
+        </mooc-carousel-item>
+      </mooc-carousel>
+      
       <home-banner />
     </div>
 
@@ -41,7 +57,6 @@
 </template>
 <script>
 import HomeNav from './home-nav.vue'
-import HomeSwiper from 'base/swiper/swiper.vue'
 import HomeBanner from './home-banner.vue'
 import CourseList from './home-course-list.vue'
 import HomeArticle from './home-article.vue'
@@ -74,7 +89,7 @@ export default {
   },
   methods: {
     // 滚动轮播滚动完毕事件
-    handelSwiper (index) {
+    handelCarouselChange (index) {
       this.currentSwiper = this.swiperList[index].img
     },
     // 首页轮播信息
@@ -83,6 +98,9 @@ export default {
         let { code, data } = res
         if (code === ERR_OK) {
           this.swiperList = data
+          if (this.swiperList.length > 0) {
+            this.currentSwiper = this.swiperList[0].img
+          }
         }
       })
     },
@@ -136,7 +154,6 @@ export default {
   },
   components: {
     HomeNav,
-    HomeSwiper,
     HomeBanner,
     CourseList,
     HomeArticle,
@@ -163,8 +180,17 @@ export default {
       position: relative;
       box-shadow: 0 12px 24px 0 $shadow;
       border-radius: 8px;
-      .swiper-img
-        display: block;
-        width: 100%;
-        height: 316px;
+      .mooc-carousel
+        position: absolute;
+        left: 216px;
+        top: 0;
+        right: 0;
+        >>> .mooc-carousel-indicators
+          left: initial;
+          right: 20px;
+          transform: none;
+        .swiper-img
+          display: block;
+          width: 100%;
+          height: 316px;
 </style>
