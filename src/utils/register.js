@@ -17,6 +17,8 @@ import MessageBox from 'base/message-box/index.js'
 import BackTop from 'base/back-top/index.js'
 import Button from 'base/button/index.js'
 import ButtonGroup from 'base/button-group/index.js'
+import Carousel from 'base/carousel/index.js'
+import CarouselItem from 'base/carousel-item/index.js'
 
 const components = [
   Container,
@@ -35,7 +37,9 @@ const components = [
   BreadcrumbItem,
   BackTop,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  Carousel,
+  CarouselItem
 ]
 
 const install = function (Vue) {
