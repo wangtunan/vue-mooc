@@ -99,8 +99,8 @@ module.exports = {
             '/components/base/button.md',
             '/components/base/message.md',
             '/components/base/message-box.md',
+            '/components/base/carousel.md',
             '/components/base/pagination.md',
-            '/components/base/swiper.md',
             '/components/base/dialog.md'
           ]
         },
@@ -108,8 +108,6 @@ module.exports = {
           title: '业务公共组件',
           collapsable: false,
           children: [
-            '/components/business/header.md',
-            '/components/business/footer.md',
             '/components/business/sidebar.md',
             '/components/business/empty.md',
             '/components/business/canvas-blur.md',
