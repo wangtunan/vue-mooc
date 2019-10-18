@@ -6,24 +6,9 @@
     <!-- 导航和轮播 -->
     <div class="home-container m-center">
       <home-nav />
-      <!-- <home-swiper @swiper="handelSwiper">
-        <swiper-slide v-for="(item,index) in swiperList" :key="index">
-          <img :key="item.img" :src="item.img" alt="" class="swiper-img">
-        </swiper-slide>
-      </home-swiper> -->
-      <mooc-carousel
-        :height="316"
-        @change="handelCarouselChange"
-      >
-        <mooc-carousel-item
-          v-for="(item,index) in swiperList"
-          :key="index"
-        >
-          <img
-            :key="item.img"
-            :src="item.img"
-            class="swiper-img"
-          >
+      <mooc-carousel :height="316" @change="handelCarouselChange">
+        <mooc-carousel-item v-for="(item,index) in swiperList" :key="index">
+          <img :src="item.img" class="swiper-img">
         </mooc-carousel-item>
       </mooc-carousel>
       
@@ -193,4 +178,5 @@ export default {
           display: block;
           width: 100%;
           height: 316px;
+          border-top-right-radius: 8px;
 </style>

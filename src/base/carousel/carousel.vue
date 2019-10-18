@@ -1,9 +1,6 @@
 <template>
   <div
-    :class="[
-      'mooc-carousel',
-      `mooc-carousel-${direction}`
-    ]"
+    class="mooc-carousel"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave"
   >
@@ -24,7 +21,6 @@
         :key="index"
         :class="[
           'mooc-carousel-indicator',
-          `mooc-carousel-indicator-${direction}`,
           (index === activeIndex) && 'is-active'
         ]"
       >
@@ -59,13 +55,6 @@ export default {
     loop: {
       type: Boolean,
       default: true
-    },
-    direction: {
-      type: String,
-      default: 'horizontal',
-      validator (val) {
-        return ['vertical', 'horizontal'].includes(val)
-      }
     },
     showIndicator: {
       type: Boolean,
