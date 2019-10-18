@@ -19,6 +19,26 @@ no-scrollbar()
   &::-webkit-scrollbar
     width: 0!important;
 
+// 清除浮动
+clearfix()
+  &::after, &::before
+    content: '';
+    display: table;
+  &::after
+    clear: both;
+
+// 扩展可点击区域
+extend-click($extend, $position)
+  if $position
+    position: $position;
+  &::after
+    content: '';
+    position: absolute;
+    left: $extend;
+    right: $extend;
+    top: $extend;
+    bottom: $extend;
+
 // 全局遮罩
 mask($bg, $index)
   &::after

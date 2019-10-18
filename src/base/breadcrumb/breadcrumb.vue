@@ -24,7 +24,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~base/theme/src/breadcrumb-variables.styl';
+  @import '~assets/theme/src/breadcrumb-variables.styl';
   .breadcrumb
     font-size: $breadcrumb-font-size;
     line-height: 1;

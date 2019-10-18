@@ -1,6 +1,6 @@
 <template>
   <div
-    class="switch"
+    class="mooc-switch"
     :class="{
       'is-disabled': disabled,
       'is-checked': checked
@@ -10,7 +10,7 @@
     <input
       ref="checkbox"
       type="checkbox"
-      class="switch-input"
+      class="mooc-switch-input"
       :true-value="newActive.value"
       :false-value="newInActive.value"
       @change="handleInputChange"
@@ -18,7 +18,7 @@
     <span
       v-if="newInActive.text"
       ref="LeftLabel"
-      class="switch-label left"
+      class="mooc-switch-label left"
       :class="{
         'active': !checked
       }"
@@ -27,7 +27,7 @@
     </span>
     <span
       ref="SwitchRadius"
-      class="switch-radius"
+      class="mooc-switch-radius"
       :style="{
         'width': width + 'px'
       }"
@@ -35,7 +35,7 @@
     <span
       v-if="newActive.text"
       ref="RightLabel"
-      class="switch-label right"
+      class="mooc-switch-label right"
       :class="{
         'active': checked
       }"
@@ -136,9 +136,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~base/theme/variables.styl';
-  @import '~base/theme/src/switch-variables.styl';
-  .switch
+  @import '~assets/theme/variables.styl';
+  @import '~assets/theme/src/switch-variables.styl';
+  .mooc-switch
     display: inline-flex;
     position: relative;
     align-items: center;
@@ -147,24 +147,24 @@ export default {
     line-height: $switch-height;
     font-size: $switch-font-size;
     &.is-checked
-      .switch-radius
+      .mooc-switch-radius
         background-color: $base-success;
         border-color: $base-success;
         &::after
           left: 100%;
           margin-left: - $switch-btn-size - 1px;
     &.is-disabled
-      .switch-radius
+      .mooc-switch-radius
         opacity: 0.6;
         cursor: not-allowed;
     & > span
       display: inline-block;
       vertical-align: middle;
-    .switch-input
+    .mooc-switch-input
       width: 0;
       height: 0;
       opacity: 0
-    .switch-radius
+    .mooc-switch-radius
       position: relative;
       height: $switch-height;
       line-height: $switch-height;
@@ -184,7 +184,7 @@ export default {
         background-color: #fff;
         border-radius: 50%;
         transition: all $switch-duration;
-    .switch-label
+    .mooc-switch-label
       font-size: $switch-font-size;
       font-weight: 500;
       transition: color $switch-text-duration;

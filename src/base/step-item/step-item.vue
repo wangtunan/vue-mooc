@@ -178,8 +178,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~base/theme/variables.styl'
-  @import '~base/theme/src/step-variables.styl'
+  @import '~assets/theme/variables.styl'
+  @import '~assets/theme/src/step-variables.styl'
   .step-item
     position: relative;
     flex-shrink: 1;

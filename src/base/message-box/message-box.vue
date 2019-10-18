@@ -82,9 +82,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~base/theme/variables.styl';
-  @import '~base/theme/mixin/mixin.styl';
-  @import '~base/theme/src/messagebox-variables.styl';
+  @import '~assets/theme/variables.styl';
+  @import '~assets/stylus/mixin.styl';
+  @import '~assets/theme/src/messagebox-variables.styl';
   .mooc-message-box-wrapper
     z-index: 2000;
     position: fixed;

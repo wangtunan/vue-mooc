@@ -85,9 +85,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~base/theme/variables.styl';
-  @import '~base/theme/src/button-variables.styl';
-  @import '~base/theme/mixin/button-mixin.styl';
+  @import '~assets/theme/variables.styl';
+  @import '~assets/theme/src/button-variables.styl';
+  @import '~assets/theme/mixin/button-mixin.styl';
   .mooc-button
     display: inline-block;
     margin: 0;

@@ -1,0 +1,68 @@
+button-type($color, $borderColor, $backgroundColor, $hoverColor, $hoverBorderColor, $hoverBackgroundColor)
+  color: $color;
+  border-color: $borderColor;
+  background-color: $backgroundColor;
+  &:hover, &:active, &:focus
+    color: $hoverColor;
+    border-color: $hoverBorderColor;
+    background-color: $hoverBackgroundColor;
+
+button-size($fontSize, $verticalPadding, $horizontalPadding, $radius)
+  padding: $verticalPadding $horizontalPadding;
+  border-radius: $radius;
+  font-size: $fontSize;
+
+button-round($verticalPadding, $horizontalpadding, $radius)
+  &.is-round
+    padding: $verticalPadding $horizontalpadding;
+    border-radius: $radius;
+
+button-plain($color, $borderColor, $backgroundColor, $hoverColor, $hoverBorderColor, $hoverBackgroundColor)
+  &.is-plain
+    if $color
+      color: $color;
+    if $borderColor
+      border-color: $borderColor;
+    if $backgroundColor
+      background-color: $backgroundColor;
+    &:hover, &:active, &:focus
+      color: $hoverColor;
+      border-color: $hoverBorderColor;
+      background-color: $hoverBackgroundColor;
+
+button-disabled($color, $borderColor, $backgroundColor)
+  &.is-disabled
+    &, &:active, &:focus, &:hover
+      color: $color;
+      cursor: not-allowed;
+      border-color: $borderColor;
+      background-color: $backgroundColor;
+
+button-circle($padding, $radius)
+  &.is-circle
+    padding: $padding;
+    border-radius:$radius;
+
+button-loading($loadingBackgroundColor)
+  position: relative;
+  pointer-events: none;
+  &::after
+    content: '';
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    top: -1px;
+    bottom: -1px;
+    border-radius: inherit;
+    background-color: $loadingBackgroundColor;
+
+button-group-type($borderColor)
+  for type in 'primary' 'success' 'warning' 'danger' 'info'
+    .mooc-button-{type}
+      &:first-child
+        border-right-color: $borderColor;
+      &:last-child
+        border-left-color: $borderColor;
+      &:not(:first-child):not(:last-child)
+        border-right-color: $borderColor;
+        border-left-color: $borderColor;

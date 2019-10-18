@@ -51,16 +51,16 @@
           <span class="switch-title-line" />
         </dt>
         <dd v-for="(subItem, index) in item.data" :key="index">
-          <el-switch v-model="subItem.value" active-color="#f01414" inactive-color="#9199a1" />{{ subItem.label }}
+          <mooc-switch v-model="subItem.value" :active="{color: '#f01414'}" :in-active="{color: '#9199a1'}" />{{ subItem.label }}
         </dd>
       </dl>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible=false">
+        <mooc-button @click="dialogVisible=false">
           关闭
-        </el-button>
-        <el-button type="primary" @click="dialogVisible=false">
+        </mooc-button>
+        <mooc-button type="primary" @click="dialogVisible=false">
           保存
-        </el-button>
+        </mooc-button>
       </div>
     </el-dialog>
   </div>
@@ -224,7 +224,7 @@ export default {
               z-index: 1;
               position: relative;
               display: inline-block;
-              margin-right: 15px;
+              padding-right: 15px;
               background-color: #fff;
               font-size: 14px;
               color: #07111b;
@@ -241,10 +241,10 @@ export default {
             padding: 0 20px;
             width: 50%;
             box-sizing: border-box;
-            .el-switch
+            .mooc-switch
               margin-right: 15px;
       .el-dialog__footer
-        .el-button--primary
+        .mooc-button-primary
           background-color: #f01414;
           border-color: #f01414;
           color: #fff;
