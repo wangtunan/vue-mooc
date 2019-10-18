@@ -95,5 +95,5 @@ export default {
     &.is-active
       z-index: $carousel-item-normal-zIndex + 1;
     &.is-animation
-      transition: transform 0.4s ease-in-out;
+      transition: transform $carousel-item-animation-duration ease-in-out;
 </style>

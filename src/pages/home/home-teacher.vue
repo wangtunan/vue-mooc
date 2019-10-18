@@ -9,8 +9,8 @@
     </div>
 
     <div class="m-center">
-      <el-carousel :interval="interval" arrow="always" height="280px">
-        <el-carousel-item v-for="(page,index) in pages" :key="index">
+      <mooc-carousel :interval="interval" arrow="always" :height="300">
+        <mooc-carousel-item v-for="(page,index) in pages" :key="index">
           <div class="elite-teacher-slider">
             <div v-for="(item, index) in page" :key="index" class="teacher-item">
               <div class="img-box">
@@ -29,8 +29,8 @@
               </p>
             </div>
           </div>
-        </el-carousel-item>
-      </el-carousel>
+        </mooc-carousel-item>
+      </mooc-carousel>
     </div>
   </div>
 </template>
@@ -77,22 +77,18 @@ export default {
       background-position: center -432px;
     .right-icon
       background-position: center -468px;
-  >>> .el-carousel
-    padding-top: 20px;
-    .el-carousel__item
-      overflow: unset;
-    .el-carousel__arrow
+  >>> .mooc-carousel
+    .mooc-carousel-item
+      overflow: initial;
+    .mooc-carousel-arrow
       top: 45%;
-      &.el-carousel__arrow--left
+      &.mooc-carousel-arrow-left
         left: 0px;
-    .el-carousel__button
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
   .elite-teacher-slider
     display:flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 20px;
     .teacher-item
       width: 216px;
       height: 248px;
@@ -103,6 +99,8 @@ export default {
       text-align: center;
       cursor: pointer;
       transition: background 0.15s linear;
+      &:last-child
+        margin-right: 0;
       &:hover
         background: rgba(255, 255, 255, 1);
         .img-box

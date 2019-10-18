@@ -6,7 +6,7 @@
     <!-- 导航和轮播 -->
     <div class="home-container m-center">
       <home-nav />
-      <mooc-carousel :height="316" @change="handelCarouselChange">
+      <mooc-carousel :height="316" trigger="click" @change="handelCarouselChange">
         <mooc-carousel-item v-for="(item,index) in swiperList" :key="index">
           <img :src="item.img" class="swiper-img">
         </mooc-carousel-item>

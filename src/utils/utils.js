@@ -1,5 +1,5 @@
 // 函数节流
-export function throttle (fn, interval) {
+export function throttle (fn, interval = 500) {
   let first = true
   let timer = null;
   let _self = fn
@@ -21,7 +21,7 @@ export function throttle (fn, interval) {
       clearTimeout(timer)
       timer = null
       _self.apply(that, args)
-    }, interval || 500)
+    }, interval)
   }
 }
 

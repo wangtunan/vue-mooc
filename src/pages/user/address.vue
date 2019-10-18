@@ -51,12 +51,12 @@
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button size="small" @click="dialogVisible = false">
+        <mooc-button size="small" @click="dialogVisible = false">
           取消
-        </el-button>
-        <el-button type="primary" size="small" @click="handleSubmitClick">
+        </mooc-button>
+        <mooc-button type="primary" size="small" @click="handleSubmitClick">
           确定
-        </el-button>
+        </mooc-button>
       </div>
     </el-dialog>
   </div>

@@ -1,45 +1,6 @@
 <template>
   <div class="test">
-    <el-carousel height="316px" :interval="interval">
-      <el-carousel-item>
-        <img src="https://img.mukewang.com/5d1e0a1800013ca916000540.jpg" alt="">
-      </el-carousel-item>
-      <el-carousel-item>
-        <img src="https://img.mukewang.com/5d1c5aec00011c1016000540.jpg" alt="">
-      </el-carousel-item>
-      <el-carousel-item>
-        <img src="https://img.mukewang.com/5cb833cf0001efb716000540.jpg" alt="">
-      </el-carousel-item>
-      <el-carousel-item>
-        <img src="https://img.mukewang.com/5d1e0a1800013ca916000540.jpg" alt="">
-      </el-carousel-item>
-      <el-carousel-item>
-        <img src="https://img.mukewang.com/5d1c5aec00011c1016000540.jpg" alt="">
-      </el-carousel-item>
-      <el-carousel-item>
-        <img src="https://img.mukewang.com/5cb833cf0001efb716000540.jpg" alt="">
-      </el-carousel-item>
-    </el-carousel>
-    <mooc-carousel :height="316" :interval="interval">
-      <mooc-carousel-item>
-        <img src="https://img.mukewang.com/5d1e0a1800013ca916000540.jpg" alt="">
-      </mooc-carousel-item>
-      <mooc-carousel-item>
-        <img src="https://img.mukewang.com/5d1c5aec00011c1016000540.jpg" alt="">
-      </mooc-carousel-item>
-      <mooc-carousel-item>
-        <img src="https://img.mukewang.com/5cb833cf0001efb716000540.jpg" alt="">
-      </mooc-carousel-item>
-      <mooc-carousel-item>
-        <img src="https://img.mukewang.com/5d1e0a1800013ca916000540.jpg" alt="">
-      </mooc-carousel-item>
-      <mooc-carousel-item>
-        <img src="https://img.mukewang.com/5d1c5aec00011c1016000540.jpg" alt="">
-      </mooc-carousel-item>
-      <mooc-carousel-item>
-        <img src="https://img.mukewang.com/5cb833cf0001efb716000540.jpg" alt="">
-      </mooc-carousel-item>
-    </mooc-carousel>
+    test
   </div>
 </template>
 <script>
