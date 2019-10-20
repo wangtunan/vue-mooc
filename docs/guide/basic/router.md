@@ -93,3 +93,32 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  }
+]
+
+const router = new Router({
+  routes: routes,
+  scrollBehavior () {
+    return {
+      x: 0,
+      y: 0
+    }
+  }
+})
+
+// 路由拦截
+router.beforeEach((to, from, next) => {
+  let userinfo = getUserInfo()
+  if (to.meta.requireAuth) {
+    if (userinfo.name) {
+      next()
+    } else{
+      store.commit('login/SET_SHOW_LOGIN', true)
+    }
+  } else {
+    next()
+  }
+})
+
+
+export default router
