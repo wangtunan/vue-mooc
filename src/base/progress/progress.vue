@@ -65,8 +65,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '../theme/variables.styl';
-  @import '../theme/src/progress-variables.styl';
+  @import '~assets/theme/variables.styl';
+  @import '~assets/theme/src/progress-variables.styl';
   .progress
     position: relative;
     line-height: 1;

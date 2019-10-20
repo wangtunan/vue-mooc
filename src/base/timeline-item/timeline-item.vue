@@ -72,8 +72,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '../theme/variables.styl';
-  @import '../theme/src/timeline-variables.styl';
+  @import '~assets/theme/variables.styl';
+  @import '~assets/theme/src/timeline-variables.styl';
   
   .timeline-item
     position: relative;

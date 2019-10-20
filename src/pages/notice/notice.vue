@@ -23,7 +23,12 @@
         </span>
       </div>
       <ul>
-        <li v-for="(item,index) in filterList" :key="index" class="list-item" :class="{ready: item.isReady}">
+        <li
+          v-for="(item,index) in filterList"
+          :key="index"
+          class="list-item"
+          :class="{ready: item.isReady}"
+        >
           <div class="item-icon">
             {{ item.type }}
           </div>
@@ -45,16 +50,30 @@
 
     <!-- 消息中心设置dialog -->
     <el-dialog title="消息中心设置" :visible.sync="dialogVisible" width="45%" top="20vh">
-      <dl v-for="(item,index) in settingList" :key="index" class="switch-group">
+      <dl
+        v-for="(item,index) in settingList"
+        :key="index"
+        class="switch-group"
+      >
         <dt class="switch-title-box">
-          <span class="switch-title">{{ item.type }}</span>
+          <span class="switch-title">
+            {{ item.type }}
+          </span>
           <span class="switch-title-line" />
         </dt>
-        <dd v-for="(subItem, index) in item.data" :key="index">
-          <mooc-switch v-model="subItem.value" :active="{color: '#f01414'}" :in-active="{color: '#9199a1'}" />{{ subItem.label }}
+        <dd
+          v-for="(subItem, index) in item.data"
+          :key="index"
+        >
+          <mooc-switch
+            v-model="subItem.value"
+            :active="{color: '#f01414'}"
+            :in-active="{color: '#9199a1'}"
+          />
+          {{ subItem.label }}
         </dd>
       </dl>
-      <div slot="footer" class="dialog-footer">
+      <div slot="footer">
         <mooc-button @click="dialogVisible=false">
           关闭
         </mooc-button>
@@ -72,13 +91,13 @@ import { getNoticeList, getNoticeSetting } from 'api/notice.js'
 export default {
   data () {
     return {
-      total: 100,  // 总数
-      page: 1, // 当前页
+      total: 100,           // 总数
+      page: 1,              // 当前页
       dialogVisible: false, // 是否显示消息中心弹窗
-      settingList: [], // 设置数据
-      noticeList: [], // 消息中心列表 
-      currentNavIndex: 0, // 当前导航的索引
-      navList: [] // 导航数据
+      settingList: [],      // 设置数据
+      noticeList: [],       // 消息中心列表 
+      currentNavIndex: 0,   // 当前导航的索引
+      navList: []           // 导航数据
     }
   },
   created () {
@@ -98,10 +117,11 @@ export default {
     handleAllReadyClick () {
       let code = this.navList[this.currentNavIndex].code
       this.noticeList.forEach((item, index) => {
-        if (item.code === code) {
-          this.noticeList[index].isReady = true
+        if (item.code === code || code === 0) {
+          this.noticeList[index]['isReady'] = true
         }
       })
+      this.$message.success('标记成功')
     },
     // 获取消息中心列表数据
     getNoticeListData () {
@@ -124,7 +144,7 @@ export default {
   },
   computed: {
     filterList () {
-      let result = this.noticeList
+      let result = this.noticeList.slice()
       const code = this.navList[this.currentNavIndex].code
       if (this.currentNavIndex !== 0) {
         result = result.filter(item => item.code === code)
@@ -138,6 +158,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/variables.styl';
   .notice
     margin-top: 30px;
     .nav-list
@@ -149,45 +170,45 @@ export default {
         line-height: 60px;
         cursor: pointer;
         &.active
-          color: #f01414;
-          border-bottom: 2px solid #f01414;
+          color: $theme-red-color;
+          border-bottom: 2px solid $theme-red-color;
     .content-list
       .list-setting
         padding-left: 28px;
         padding-right: 20px;
         height: 50px;
         line-height: 50px;
-        border-top: 1px solid #b7bbbf;
+        border-top: 1px solid $border-first-color;
         background-color: #f3f5f7;
-        color: #93999f;
+        color: $font-four-color;
         font-size: 14px;
         .setting-box
           float: right;
           & > span
             margin-left: 20px;
-            color: #4d555d;
+            color: $font-second-color;
             cursor: pointer;
             &:hover
-              color: #07111b;
+              color: $font-first-color;
       .list-item
         padding: 20px 10px;
         display: flex;
         align-items: flex-start;
-        border-bottom: 1px solid #d9dde1;
+        border-bottom: 1px solid $border-second-color;
         &.ready
           .item-icon
-            border: 1px solid #d9dde1;
+            border: 1px solid $border-second-color;
             background-color: #fff;
-            color: #93999f;
+            color: $font-four-color;
           .item-content
             .title
-              color: #93999f;
+              color: $font-four-color;
         .item-icon
           margin-right: 20px;
           padding: 10px;
-          border: 1px solid #f01414;
+          border: 1px solid $theme-red-color;
           background-color: #fde7e5;
-          color: #f01414;
+          color: $theme-red-color;
           font-size: 14px;
         .item-content
           flex: 1;
@@ -200,18 +221,17 @@ export default {
             &.title
               font-size: 16px;
               font-weight: 700;
-              color: #4d555d;
-              font-family: "微软雅黑";
+              color: $font-second-color;
               cursor: pointer;
             &.time
               font-size: 14px;
-              color: #93999f;
+              color: $font-four-color;
           .delete
             display: none;
             position: absolute;
             top: 0px;
             right: 20px;
-            color: #93999f;
+            color: $font-four-color;
             cursor: pointer;
     >>> .el-dialog
       .el-dialog__body
@@ -227,14 +247,14 @@ export default {
               padding-right: 15px;
               background-color: #fff;
               font-size: 14px;
-              color: #07111b;
+              color: $font-second-color;
             .switch-title-line
               position: absolute;
               left: 0;
               top: 50%;
               width: 100%;
               height: 1px;
-              background-color: #d9dde1;
+              background-color: $border-second-color;
           dd
             display: inline-block;
             margin-bottom: 20px;
@@ -245,11 +265,11 @@ export default {
               margin-right: 15px;
       .el-dialog__footer
         .mooc-button-primary
-          background-color: #f01414;
-          border-color: #f01414;
+          background-color: $theme-red-color;
+          border-color: $theme-red-color;
           color: #fff;
           &:hover
-            background-color: #f01414;
-            border-color: #f01414;
+            background-color: $theme-red-color;
+            border-color: $theme-red-color;
             color: #fff;
 </style>

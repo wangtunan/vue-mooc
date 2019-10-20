@@ -25,7 +25,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '../theme/variables.styl';
+  @import '~assets/theme/variables.styl';
   .timeline
     font-size: $base-font-size;
     list-style: none;
