@@ -30,8 +30,8 @@ Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;
 Vue.prototype.$confirm = MessageBox.confirm;
 
-// custom base component
-import Mooc from 'utils/register.js'
+// register custom base component
+import Mooc from './register.js'
 Vue.use(Mooc)
 
 import 'assets/stylus/index.styl'

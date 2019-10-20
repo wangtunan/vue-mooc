@@ -23,7 +23,7 @@
 import CourseSearch from './course-search.vue'
 import CourseNav from './course-nav.vue'
 import CourseList from './course-list.vue'
-import Pagination from 'base/pagination/pagination.vue'
+import Pagination from 'components/pagination/pagination.vue'
 import { getCourseNav, getCourseList } from 'api/course.js'
 import { ERR_OK } from 'api/config.js'
 export default {

@@ -1,10 +1,10 @@
 <template>
-  <div class="mooc-dialog">
-    dialog
+  <div class="mooc-divider">
+    divider
   </div>
 </template>
 <script>
 export default {
-  name: 'MoocDialog'
+  name: 'MoocDivider'
 }
 </script>

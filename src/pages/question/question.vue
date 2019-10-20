@@ -63,7 +63,7 @@
   </div>
 </template>
 <script>
-import Pagination from 'base/pagination/pagination.vue'
+import Pagination from 'components/pagination/pagination.vue'
 import RecommendAuthor from 'components/recommend/recommend-author.vue'
 import { getQuestionList } from 'api/question.js'
 import { ERR_OK } from 'api/config.js'

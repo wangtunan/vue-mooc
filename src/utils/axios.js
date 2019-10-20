@@ -1,5 +1,5 @@
 import axios from 'axios'
-import  components  from './register.js'
+import  components  from '../register.js'
 import { ERR_OK } from 'api/config.js'
 import { BASE_URL, IS_MOCK_LOCAL } from 'api/config.js'
 const Message = components.Message

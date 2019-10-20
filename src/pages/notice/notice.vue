@@ -85,7 +85,7 @@
   </div>
 </template>
 <script>
-import Pagination from 'base/pagination/pagination.vue'
+import Pagination from 'components/pagination/pagination.vue'
 import { ERR_OK } from 'api/config.js'
 import { getNoticeList, getNoticeSetting } from 'api/notice.js'
 export default {

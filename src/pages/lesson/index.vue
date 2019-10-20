@@ -17,7 +17,7 @@
 import LessonSearch from './lesson-search.vue'
 import LessonNav from './lesson-nav.vue'
 import LessonList from './lesson-list.vue'
-import Pagination from 'base/pagination/pagination.vue'
+import Pagination from 'components/pagination/pagination.vue'
 import { getHot } from 'api/common.js'
 import { getLessonNav, getLessonList } from 'api/lesson.js'
 import { ERR_OK } from 'api/config.js'

@@ -8,6 +8,7 @@ import Switch from 'base/switch/index.js'
 import Timeline from 'base/timeline/index.js'
 import TimelineItem from 'base/timeline-item/index.js'
 import Progress from 'base/progress/index.js'
+import Pagination from 'base/pagination/index.js'
 import Step from 'base/step/index.js'
 import StepItem from 'base/step-item/index.js'
 import Breadcrumb from 'base/breadcrumb/index.js'
@@ -19,6 +20,8 @@ import Button from 'base/button/index.js'
 import ButtonGroup from 'base/button-group/index.js'
 import Carousel from 'base/carousel/index.js'
 import CarouselItem from 'base/carousel-item/index.js'
+import Dialog from 'base/dialog/index.js'
+import Divider from 'base/divider/index.js'
 
 const components = [
   Container,
@@ -31,6 +34,7 @@ const components = [
   Timeline,
   TimelineItem,
   Progress,
+  Pagination,
   Step,
   StepItem,
   Breadcrumb,
@@ -39,7 +43,9 @@ const components = [
   Button,
   ButtonGroup,
   Carousel,
-  CarouselItem
+  CarouselItem,
+  Dialog,
+  Divider
 ]
 
 const install = function (Vue) {
@@ -68,6 +74,7 @@ export default {
   Timeline,
   TimelineItem,
   Progress,
+  Pagination,
   Step,
   StepItem,
   Breadcrumb,
@@ -76,5 +83,7 @@ export default {
   MessageBox,
   BackTop,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  Dialog,
+  Divider
 }
