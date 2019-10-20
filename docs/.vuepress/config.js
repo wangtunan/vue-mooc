@@ -101,7 +101,8 @@ module.exports = {
             '/components/base/message-box.md',
             '/components/base/carousel.md',
             '/components/base/pagination.md',
-            '/components/base/dialog.md'
+            '/components/base/dialog.md',
+            '/components/base/divider.md'
           ]
         },
         {

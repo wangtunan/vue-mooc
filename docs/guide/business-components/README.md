@@ -1,9 +1,5 @@
 # 业务组件封装
 
-## Header 头部
-
-## Footer 底部
-
 ## Sidebar 侧边栏
 
 ## Chapter 章节
