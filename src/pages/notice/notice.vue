@@ -56,10 +56,9 @@
         class="switch-group"
       >
         <dt class="switch-title-box">
-          <span class="switch-title">
+          <mooc-divider position="left" :left="0" color="#d0d6d9">
             {{ item.type }}
-          </span>
-          <span class="switch-title-line" />
+          </mooc-divider>
         </dt>
         <dd
           v-for="(subItem, index) in item.data"
@@ -240,21 +239,6 @@ export default {
           .switch-title-box
             position: relative;
             margin-bottom: 20px;
-            .switch-title
-              z-index: 1;
-              position: relative;
-              display: inline-block;
-              padding-right: 15px;
-              background-color: #fff;
-              font-size: 14px;
-              color: $font-second-color;
-            .switch-title-line
-              position: absolute;
-              left: 0;
-              top: 50%;
-              width: 100%;
-              height: 1px;
-              background-color: $border-second-color;
           dd
             display: inline-block;
             margin-bottom: 20px;
