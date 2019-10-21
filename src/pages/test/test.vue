@@ -1,6 +1,8 @@
 <template>
   <div class="test">
-    test
+    <mooc-divider position="right" :size="4" color="#f60" :right="60">
+      包青天，包大人
+    </mooc-divider>
   </div>
 </template>
 <script>
