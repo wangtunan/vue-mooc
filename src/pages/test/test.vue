@@ -1,19 +1,47 @@
 <template>
   <div class="test">
-    <mooc-divider position="right" :size="4" color="#f60" :right="60">
-      包青天，包大人
-    </mooc-divider>
+    <mooc-button @click="handleDialogClick">
+      element弹窗
+    </mooc-button>
+    <mooc-button @click="moocVisible=true">
+      mooc弹窗
+    </mooc-button>
+
+    <el-dialog :visible.sync="visible">
+      内容内容
+      <div slot="footer">
+        <mooc-button size="small" @click="visible=false">
+          取消
+        </mooc-button>
+        <mooc-button size="small" type="primary" @click="visible=false">
+          确定
+        </mooc-button>
+      </div>
+    </el-dialog>
+
+    <mooc-dialog title="弹窗标题" :visible.sync="moocVisible">
+      内容内容
+      <mooc-button size="small" @click="moocVisible=false">
+        取消
+      </mooc-button>
+      <mooc-button size="small" type="primary" @click="moocVisible=false">
+        确定
+      </mooc-button>
+    </mooc-dialog>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      active: 0,
-      interval: 3000
+      visible: false,
+      moocVisible: false
     }
   },
   methods: {
+    handleDialogClick () {
+      this.visible = true
+    }
   }
 }
 </script>
@@ -21,10 +49,4 @@ export default {
   .test
     margin: 100px auto;
     width: 1000px;
-    & > div
-      margin-bottom: 30px;
-    img
-      display: inline-block;
-      width: 100%;
-      height: 316px;
 </style>
