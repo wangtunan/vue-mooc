@@ -7,26 +7,29 @@
       mooc弹窗
     </mooc-button>
 
-    <el-dialog :visible.sync="visible">
+    <el-dialog title="弹窗标题" :visible.sync="visible" :modal="false">
       内容内容
       <div slot="footer">
-        <mooc-button size="small" @click="visible=false">
+        <mooc-button @click="visible=false">
           取消
         </mooc-button>
-        <mooc-button size="small" type="primary" @click="visible=false">
+        <mooc-button type="primary" @click="visible=false">
           确定
         </mooc-button>
       </div>
     </el-dialog>
 
-    <mooc-dialog title="弹窗标题" :visible.sync="moocVisible">
+    <mooc-dialog title="弹窗标题" :visible.sync="moocVisible" :modal="false">
       内容内容
-      <mooc-button size="small" @click="moocVisible=false">
-        取消
-      </mooc-button>
-      <mooc-button size="small" type="primary" @click="moocVisible=false">
-        确定
-      </mooc-button>
+
+      <div slot="footer">
+        <mooc-button @click="moocVisible=false">
+          取消
+        </mooc-button>
+        <mooc-button type="primary" @click="moocVisible=false">
+          确定
+        </mooc-button>
+      </div>
     </mooc-dialog>
   </div>
 </template>

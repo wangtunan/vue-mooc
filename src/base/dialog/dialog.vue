@@ -1,5 +1,5 @@
 <template>
-  <transition name="dialog-fade">
+  <transition name="dialog-fade-in">
     <div
       v-if="visible"
       class="mooc-dialog-wrapper"
@@ -31,8 +31,10 @@
   </transition>
 </template>
 <script>
+import Popup from 'assets/js/popup.js'
 export default {
   name: 'MoocDialog',
+  mixins: [Popup],
   props: {
     visible: {
       type: Boolean,
@@ -53,6 +55,10 @@ export default {
     showClose: {
       type: Boolean,
       default: true
+    },
+    modal: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -62,6 +68,18 @@ export default {
         'width': this.width
       }
       return style
+    }
+  },
+  watch: {
+    visible (val) {
+      if (val) {
+        this.$nextTick(() => {
+          this.openModel()
+        })
+      } else {
+        this.closeModel()
+        this.$emit('close')
+      }
     }
   },
   methods: {
@@ -74,6 +92,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
   @import '~assets/stylus/mixin.styl';
+  @import '~assets/theme/animation.styl';
   @import '~assets/theme/variables.styl';
   @import '~assets/theme/src/dialog-variables.styl';
   .mooc-dialog-wrapper
@@ -83,6 +102,10 @@ export default {
     right: 0;
     bottom: 0;
     overflow: hidden;
+    &.dialog-fade-in-enter-active
+      animation: dialog-fade-in $dialog-animation-duration;
+    &.dialog-fade-in-leave-active
+      animation: dialog-fade-out $dialog-animation-duration;
     .mooc-dialog
       position: relative;
       margin: 0 auto $dialog-marign-bottom;
@@ -91,15 +114,29 @@ export default {
       box-shadow: $dialog-box-shadow;
       .mooc-dialog-header
         padding: $dialog-header-padding;
-        padding-bottom: $dialog-header-padding-bottom;
+        padding-bottom: $dialog-header-padding-bottom
+        .mooc-dialog-title
+          line-height: $dialog-title-line-height;
+          font-size: $dialog-title-font-size;
+          color: $base-font-first-color;
         .mooc-dialog-close
           position: absolute;
-          top: 20px;
-          right: 20px;
-          font-size: 16px;
+          top: $dialog-close-top;
+          right: $dialog-close-right;
+          font-size: $dialog-close-font-size;
           color: $base-font-three-color;
           cursor: pointer;
-          extend-click(-10px, '');
+          extend-click($dialog-close-extend-size, '');
           &:hover
             color: $base-primary;
+      .mooc-dialog-body
+        padding: $dialog-body-padding-vertical $dialog-body-padding-horizontal;
+        font-size: $dialog-body-font-size;
+        color: $base-font-second-color;
+        word-break: break-all;
+      .mooc-dialog-footer
+        padding: $dialog-footer-padding;
+        padding-top: $dialog-footer-padding-top;
+        text-align: right;
+        box-sizing: border-box;
 </style>

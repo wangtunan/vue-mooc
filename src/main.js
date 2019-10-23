@@ -32,6 +32,7 @@ Vue.prototype.$confirm = MessageBox.confirm;
 
 // register custom base component
 import Mooc from './register.js'
+import 'assets/theme/index.styl'
 Vue.use(Mooc)
 
 import 'assets/stylus/index.styl'
