@@ -8,19 +8,36 @@ export default {
     modal: {
       type: Boolean,
       default: false
+    },
+    closeOnEsc: {
+      type: Boolean,
+      default: false
+    }
+  },
+  mounted () {
+    if (!this.$isServer) {
+      window.addEventListener('keydown', this.listenKeydown)
     }
   },
   methods: {
-    openModel () {
+    openModal () {
       if (this.modal) {
         const zIndex = PopupManager.nextZIndex()
-        PopupManager.openModel(zIndex)
+        PopupManager.openModal(zIndex)
       }
       const $el = this.$el
       $el.style.zIndex = PopupManager.nextZIndex()
     },
-    closeModel () {
-      PopupManager.closeModel()
+    closeModal () {
+      PopupManager.closeModal()
+    },
+    listenKeydown (event) {
+      if (!this.closeOnEsc) {
+        return
+      }
+      if (event.keyCode === 27) {
+        this.handleCloseClick && this.handleCloseClick()
+      }
     }
   }
 }

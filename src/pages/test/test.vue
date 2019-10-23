@@ -7,7 +7,7 @@
       mooc弹窗
     </mooc-button>
 
-    <el-dialog title="弹窗标题" :visible.sync="visible" :modal="false">
+    <el-dialog title="弹窗标题" :visible.sync="visible" :modal="true">
       内容内容
       <div slot="footer">
         <mooc-button @click="visible=false">
@@ -19,7 +19,7 @@
       </div>
     </el-dialog>
 
-    <mooc-dialog title="弹窗标题" :visible.sync="moocVisible" :modal="false">
+    <mooc-dialog title="弹窗标题" :visible.sync="moocVisible" :before-close="handleBeforeClose">
       内容内容
 
       <div slot="footer">
@@ -44,6 +44,10 @@ export default {
   methods: {
     handleDialogClick () {
       this.visible = true
+    },
+    handleBeforeClose (done) {
+      console.log('before')
+      done()
     }
   }
 }

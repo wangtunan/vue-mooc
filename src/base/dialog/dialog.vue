@@ -3,6 +3,7 @@
     <div
       v-if="visible"
       class="mooc-dialog-wrapper"
+      @click.self="hanldeWrapperClick"
     >
       <div
         class="mooc-dialog"
@@ -59,7 +60,16 @@ export default {
     modal: {
       type: Boolean,
       default: true
-    }
+    },
+    closeOnModal: {
+      type: Boolean,
+      default: true
+    },
+    closeOnEsc: {
+      type: Boolean,
+      default: true
+    },
+    beforeClose: Function
   },
   computed: {
     dialogStyle () {
@@ -74,16 +84,29 @@ export default {
     visible (val) {
       if (val) {
         this.$nextTick(() => {
-          this.openModel()
+          this.openModal()
         })
       } else {
-        this.closeModel()
+        this.closeModal()
         this.$emit('close')
       }
     }
   },
   methods: {
     handleCloseClick () {
+      if (typeof this.beforeClose === 'function') {
+        this.beforeClose(this.hideModal)
+      } else {
+        this.hideModal()
+      }
+    },
+    hanldeWrapperClick () {
+      if (!this.closeOnModal) {
+        return
+      }
+      this.handleCloseClick()
+    },
+    hideModal () {
       this.$emit('update:visible', false)
       this.$emit('close')
     }

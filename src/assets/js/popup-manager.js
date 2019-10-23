@@ -1,30 +1,30 @@
 import Vue from 'vue'
 let zIndex
-let modelList = []
+let modalList = []
 const PopupManager = {
-  openModel (zIndex) {
+  openModal (zIndex) {
     if (Vue.prototype.$isServer) {
       return
     }
-    const model = PopupManager.getModel()
-    model.style.zIndex = zIndex
-    model.classList.add('mooc-model')
-    document.body.appendChild(model)
-    modelList.push(model)
+    const modal = PopupManager.getModal()
+    modal.style.zIndex = zIndex
+    modal.classList.add('mooc-modal')
+    document.body.appendChild(modal)
+    modalList.push(modal)
   },
-  closeModel () {
-    if (modelList.length === 0) {
+  closeModal () {
+    if (modalList.length === 0) {
       return
     }
-    modelList.forEach((model) => {
-      document.body.removeChild(model)
+    modalList.forEach((modal) => {
+      document.body.removeChild(modal)
     })
-    modelList = []
+    modalList = []
     
   },
-  getModel () {
-    const model = document.createElement('div')
-    return model
+  getModal () {
+    const modal = document.createElement('div')
+    return modal
 
   },
   nextZIndex () {
@@ -35,12 +35,10 @@ Object.defineProperty(PopupManager, 'zIndex', {
   configurable: true,
   get () {
     zIndex = zIndex || 2000
-    console.log(zIndex)
     return zIndex
   },
   set (val) {
     zIndex = val
-    console.log(zIndex)
   }
 })
 
