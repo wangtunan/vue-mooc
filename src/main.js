@@ -6,6 +6,7 @@ import store from './store/index.js'
 // element-ui
 import {
   Icon,
+  Rate,
   Table,
   TableColumn,
   Form,
@@ -17,6 +18,7 @@ import {
   Dialog
 } from 'element-ui'
 Vue.use(Icon)
+Vue.use(Rate)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Form)

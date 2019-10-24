@@ -1,20 +1,20 @@
 <template>
-  <div class="star">
+  <div class="mooc-star">
     <span
       v-for="(item, index) in max"
       :key="index"
-      class="star-item iconfont"
+      class="mooc-star-item"
       :style="getStyle(item)"
       :class="{'disabled': disabled}"
       @mouseenter="handleMouseEnter(item)"
       @mouseleave="handleMouseLeave"
       @click="handleStarClick(item)"
     >
-      &#xe610;
+      <i class="iconfont">&#xe716;</i>
     </span>
     <span
       v-if="showText || showValue"
-      class="star-text"
+      class="mooc-star-text"
       :style="{
         'color': textColor,
         'font-size': size + 'px'
@@ -71,21 +71,18 @@ export default {
     }
   },
   methods: {
-    // 鼠标移入事件
     handleMouseEnter (item) {
       if (this.disabled) {
         return
       }
       this.currentValue = item
     },
-    // 鼠标移出事件
     handleMouseLeave () {
       if (this.disabled) {
         return
       }
       this.currentValue = this.value
     },
-    // 点击事件
     handleStarClick (item) {
       if (this.disabled) {
         return
@@ -101,7 +98,6 @@ export default {
     }
   },
   computed: {
-    // 计算：显示评分或者评分内容
     text () {
       let result = ''
       if (this.showValue) {
@@ -115,17 +111,17 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .star
+  .mooc-star
     display: inline-block;
     & > span
       display: inline-block;
       vertical-align: middle;
       cursor: pointer;
-      &.star-item:not(.disabled)
+      &.mooc-star-item:not(.disabled)
         transition: transform 0.3s;
         &:hover
           transform: scale(1.15);
-      &.star-text
+      &.mooc-star-text
         padding-left: 5px;
         font-size: 14px;
 </style>

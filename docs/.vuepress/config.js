@@ -20,10 +20,6 @@ module.exports = {
         text: '组件文档',
         link: '/components/'
       }
-      // {
-      //   text: '储备知识',
-      //   link: '/base/'
-      // }
     ],
     sidebar: {
       '/guide/': [
@@ -32,7 +28,7 @@ module.exports = {
           collapsable: false,
           children: [
             '/guide/',
-            '/guide/forceword.md'
+            '/guide/forceword/'
           ]
         },
         {
@@ -46,11 +42,25 @@ module.exports = {
           ]
         },
         {
-          title: "组件封装",
+          title: "基础组件封装",
           collapsable: false,
           children: [
-            '/guide/base-components/',
-            '/guide/business-components/'
+            '/guide/components/',
+            '/guide/components/star.md',
+            '/guide/components/badge.md',
+            '/guide/components/switch.md',
+            '/guide/components/timeline.md',
+            '/guide/components/progress.md',
+            '/guide/components/steps.md',
+            '/guide/components/breadcrumb.md',
+            '/guide/components/backtop.md',
+            '/guide/components/button.md',
+            '/guide/components/message.md',
+            '/guide/components/message-box.md',
+            '/guide/components/carousel.md',
+            '/guide/components/pagination.md',
+            '/guide/components/dialog.md',
+            '/guide/components/divider.md'
           ]
         },
         {
@@ -72,7 +82,7 @@ module.exports = {
           title: "部署",
           collapsable: false,
           children: [
-            '/guide/depoly.md'
+            '/guide/depoly/'
           ]
         },
       ],
