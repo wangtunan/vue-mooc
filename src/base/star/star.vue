@@ -124,11 +124,12 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/theme/src/star-variables.styl';
   .mooc-star
     display: inline-block;
     .mooc-star-item
       display: inline-block;
-      margin-right: 6px;
+      margin-right: $star-item-margin-right;
       vertical-align: middle;
       cursor: default;
       &:last-child
@@ -137,13 +138,13 @@ export default {
         cursor: pointer;
         &:hover
           .iconfont
-            transform: scale(1.15);
+            transform: scale($star-icon-hover-scale);
         .iconfont
           display: inline-block;
-          transition: all 0.3s;
+          transition: all $star-icon-transition-duration;
     .mooc-star-text
       display: inline-block;
-      padding-left: 5px;
+      padding-left: $star-text-padding-left;
       vertical-align: middle;
-      font-size: 14px;
+      font-size: $star-text-font-size;
 </style>
