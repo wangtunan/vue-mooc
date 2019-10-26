@@ -122,10 +122,6 @@
   content: "\e61c";
 }
 
-.iconxingxing:before {
-  content: "\e610";
-}
-
 .iconhalf-cirle:before {
   content: "\e601";
 }
@@ -138,7 +134,7 @@
   content: "\e61e";
 }
 
-.iconxingxing1:before {
+.iconxingxing:before {
   content: "\e716";
 }
 

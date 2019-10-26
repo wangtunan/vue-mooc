@@ -16,7 +16,7 @@
       <div class="hide-course-box">
         <mooc-switch :value="isHide" :active="switchActive" :in-active="switchInActive" />隐藏已参与的课程
         <span class="like-number" :class="{active: isShowLike}" @click="handleShowLikeClick">
-          <i class="iconfont">&#xe610;</i>
+          <i class="iconfont">&#xe716;</i>
           我的收藏{{ computeLikeLesson }}
         </span>
       </div>
@@ -57,7 +57,7 @@
             <span v-if="item.newPrice" class="new">¥{{ item.newPrice }}</span>
             <span class="price-right">
               <span class="like" :class="{active: item.isLike}" @click="handleLikeClick(item,index)">
-                <i class="iconfont">&#xe610;</i>
+                <i class="iconfont">&#xe716;</i>
                 {{ item.isLike ? '已收藏' : '收藏' }}
               </span>
               <span class="cart">加入购物车</span>

@@ -4,13 +4,22 @@
       v-for="(item, index) in max"
       :key="index"
       class="mooc-star-item"
-      :style="getStyle(item)"
-      :class="{'disabled': disabled}"
+      :class="{
+        'is-disabled': disabled
+      }"
       @mouseenter="handleMouseEnter(item)"
       @mouseleave="handleMouseLeave"
       @click="handleStarClick(item)"
     >
-      <i class="iconfont">&#xe716;</i>
+      
+      <i
+        class="iconfont"
+        :class="iconClass"
+        :style="{
+          'font-size': size + 'px',
+          'color': getIconColor(item)
+        }"
+      ></i>
     </span>
     <span
       v-if="showText || showValue"
@@ -19,7 +28,9 @@
         'color': textColor,
         'font-size': size + 'px'
       }"
-    >{{ text }}</span>
+    >
+      {{ text }}
+    </span>
   </div>
 </template>
 <script>
@@ -27,11 +38,11 @@ export default {
   name: 'MoocStar',
   props: {
     value: {
-      type: [Number, String],
+      type: Number,
       default: 0
     },
     size: {
-      type: [Number, String],
+      type: Number,
       default: 14
     },
     max: {
@@ -45,6 +56,10 @@ export default {
     textColor: {
       type: String,
       default: '#ff9900'
+    },
+    iconClass: {
+      type: String,
+      default: 'iconxingxing'
     },
     disabled: {
       type: Boolean,
@@ -83,18 +98,16 @@ export default {
       }
       this.currentValue = this.value
     },
-    handleStarClick (item) {
+    handleStarClick (val) {
       if (this.disabled) {
         return
       }
-      this.$emit('change', item)
+      this.$emit('input', val)
+      this.$emit('change', val)
     },
-    getStyle (n) {
+    getIconColor (n) {
       let color = n <= this.currentValue ? this.color : '#eee' 
-      return {
-        'font-size': `${this.size}px`,
-        'color': color
-      }
+      return color
     }
   },
   computed: {
@@ -113,15 +126,24 @@ export default {
 <style lang="stylus" scoped>
   .mooc-star
     display: inline-block;
-    & > span
+    .mooc-star-item
       display: inline-block;
+      margin-right: 6px;
       vertical-align: middle;
-      cursor: pointer;
-      &.mooc-star-item:not(.disabled)
-        transition: transform 0.3s;
+      cursor: default;
+      &:last-child
+        margin-right: 0;
+      &:not(.is-disabled)
+        cursor: pointer;
         &:hover
-          transform: scale(1.15);
-      &.mooc-star-text
-        padding-left: 5px;
-        font-size: 14px;
+          .iconfont
+            transform: scale(1.15);
+        .iconfont
+          display: inline-block;
+          transition: all 0.3s;
+    .mooc-star-text
+      display: inline-block;
+      padding-left: 5px;
+      vertical-align: middle;
+      font-size: 14px;
 </style>

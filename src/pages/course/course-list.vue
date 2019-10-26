@@ -40,7 +40,7 @@
           <p>
             <span class="price">{{ item.price }}</span>
             <span class="collect" :class="{like: item.isLike}" @click="handleCollectClick(item,index)">
-              <i class="iconfont">&#xe610;</i>
+              <i class="iconfont">&#xe716;</i>
               {{ item.isLike ? '已收藏' : '收藏' }}
             </span>
           </p>

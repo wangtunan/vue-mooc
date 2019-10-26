@@ -6,7 +6,7 @@
           <span>课程 \ 前端开发 \ Vue.js \ vue2.5入门</span>
         </p>
         <p class="share-box">
-          <span class="iconfont">&#xe610;</span>
+          <span class="iconfont">&#xe716;</span>
           <span class="iconfont">&#xe646;</span>
           <span class="iconfont">&#xe6a0;</span>
           <span class="iconfont">&#xe699;</span>
