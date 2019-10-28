@@ -115,7 +115,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
   @import '~assets/stylus/mixin.styl';
-  @import '~assets/theme/animation.styl';
+  @import '~assets/theme/common/animation.styl';
   @import '~assets/theme/variables.styl';
   @import '~assets/theme/src/dialog-variables.styl';
   .mooc-dialog-wrapper
