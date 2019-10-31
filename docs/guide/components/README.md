@@ -48,6 +48,7 @@
 |   |-- timeline                    # 时间线组件
 |   |-- timeline-item               # 时间线子组件
 ```
+
 ## 公共变量提取
 在`Element-ui`中，所以关于组件变量都放置在`packages/theme-chalk/src/common/var.scss`文件中，这也就造成了`var.scss`文件的内容会非常多，接近一千行。在`vue-mooc`中，我们会把变量拆分成如下的目录形式：
 ```sh
@@ -165,7 +166,7 @@ export default {
 ```
 
 ::: tip
-对于非组件类的通知类型，例如`message`,`message-box`等，并不是像组件这样注册的。
+对于通知类型的组件，例如`message`,`message-box`等，并不是像组件这样注册的。
 :::
 以`message`和`message-box`为例，它是需要挂载在`Vue.prototype`上的，为此我们需要对以上代码做一些小小的改动：
 ```js
@@ -187,3 +188,8 @@ const install = function (Vue) {
 import Mooc from './register.js'
 Vue.use(Mooc)
 ```
+
+## 样式规则
+为统一公共组件中样式，方便管理和以免与其他库样式冲突，我们对于样式做以下规定
+* 统一使用前缀`mooc`并使用`-`连接符，例如：`mooc-star`和`mooc-button`。
+* 对于带是和否性质的样式，使用`is-xxx`的形式，例如：`is-disabled`和`is-vertical`。
