@@ -162,6 +162,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
+  install, // 重要
   Button,
   ButtonGroup,
   Star
