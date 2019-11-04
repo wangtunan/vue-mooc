@@ -26,8 +26,8 @@ $ mkdir star
 
 # 新建index.js和star.vue文件
 $ cd star
-$ touch index.js or echo index.js
-$ touch star.vue or echo star.vue
+$ touch index.js
+$ touch star.vue
 ```
 新建完毕后，`src/base`目录结构如下
 ```sh
@@ -97,13 +97,17 @@ Vue.use(Mooc)
 // ...省略其它部分
 ```
 
-在以上步骤都正确完成后，我们在任意已经路由注册过的页面，使用`mooc-star`组件，当出现`star`文本内容即意味着`Star`组件以及全局注册成功了。
+在以上步骤都正确完成后，我们在任意已经路由注册过的页面，使用`mooc-star`组件，当出现`star`文本内容即意味着`Star`组件已经全局注册成功了。
 
 ### Star组件基础实现
+::: tip
+项目中使用到的图标字体为`iconfont`，请根据自己需要引入对应的字体。
+:::
 根据我们个人对于`Star`组件最主要的功能理解，我们将`props`属性和`event`事件做如下划分：
 
 `props`入参：
 * `value`：星级评分的分值。
+* `max`：星星的数量。
 * `color`：激活时星星的颜色。
 * `disabled`：只读模式。
 * `showValue`：是否显示评分内容。
@@ -112,7 +116,207 @@ Vue.use(Mooc)
 * `mouseenter`：鼠标移入事件。
 * `mousenleave`：鼠标移出事件。
 * `click`：鼠标点击事件。
+
+根据以上划分，我们的基础`html`结构代码如下：
+```html
+<div class="mooc-star">
+  <span
+    v-for="n in max"
+    :key="n"
+    class="mooc-star-item"
+    :class="{
+      'is-disabled': disabled
+    }"
+  >
+    <i
+      class="iconfont iconxingxing"
+      :style="{
+        color: color
+      }"
+    ></i>
+  </span>
+  <span
+    v-if="showValue"
+    class="mooc-star-text">
+    {{ text }}
+  </span>
+</div>
+```
+基础`javascript`代码如下：
+```js
+export default {
+  name: 'MoocStar',
+  props: {
+    value: {
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 5
+    },
+    color: {
+      type: String,
+      default: '#ff9900'
+    },
+    showValue: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      currentValue: this.value
+    }
+  },
+  computed: {
+    text () {
+      let result = ''
+      if (this.showValue) {
+        result = this.currentValue
+      }
+      return result
+    }
+  }
+}
+</script>
+```
+
+实现以上基础代码后，在没有撰写任何`css`的情况下，我们可以得到如下图所示的结果：
+![Star基础实现](../../images/star-result1.png)
+
+紧接着，我们来撰写必要的`css`：
+::: tip
+我们把`Star`组件中关于变量的定义全部放在`src/assets/theme/src/star-variables.styl`文件中，如果你没有此文件，需要新建。
+:::
+
+`Star`组件中定义的变量如下：
+```stylus
+$star-item-margin-right = 6px;
+$star-icon-hover-scale  = 1.15;
+$star-icon-transition-duration = 0.3s;
+$star-text-padding-left = 5px;
+$star-text-font-size = 14px;
+```
+`Star`组件基础`css`代码：
+```stylus
+@import '~assets/theme/src/star-variables.styl';
+.mooc-star
+  display: inline-block;
+  .mooc-star-item, .mooc-star-text
+    display: inline-block;
+    vertical-align: middle;
+  .mooc-star-item
+    margin-right: $star-item-margin-right;
+    cursor: default;
+    &:last-child
+      margin-right: 0;
+    &.is-disabled
+      pointer-events: none;
+    &:not(.is-disabled)
+      cursor: pointer;
+      .iconfont
+        display: inline-block;
+        transition: all $star-icon-transition-duration;
+      &:hover
+        .iconfont
+          transform: scale($star-icon-hover-scale);
+  .mooc-star-text
+    padding-left: $star-text-padding-left;
+    font-size: $star-text-font-size;
+```
+
+接下来，我们来实现上面提到的事件：
+<br/>
+`html`结构改动：
+```html {9,10,11,16}
+<div class="mooc-star">
+  <span
+    v-for="n in max"
+    :key="n"
+    class="mooc-star-item"
+    :class="{
+      'is-disabled': disabled
+    }"
+    @mouseenter="handleMouseEnter(n)"
+    @mouseleave="handleMouseLeave"
+    @click="handleStarClick(n)"
+  >
+    <i
+      class="iconfont iconxingxing"
+      :style="{
+        color: getIconColor(n)
+      }"
+    ></i>
+  </span>
+  <span
+    v-if="showValue"
+    class="mooc-star-text">
+    {{ text }}
+  </span>
+</div>
+```
+
+`javascript`改动部分：
+```js
+export default {
+  // ...省略其它部分
+  methods: {
+    handleMouseEnter (val) {
+      if (this.disabled) {
+        return
+      }
+      this.currentValue = val
+    },
+    handleMouseLeave () {
+      if (this.disabled) {
+        return
+      }
+      this.currentValue = this.value
+    },
+    handleStarClick (val) {
+      if (this.disabled) {
+        return
+      }
+      this.currentValue = val
+      this.$emit('change', val)
+      this.$emit('input', val)
+    },
+    getIconColor (val) {
+      return val <= this.currentValue ? this.color : '#eee'
+    }
+  }
+}
+```
+
+最后我们在任意测试页面来测试一下`Star`组件，使用如下方式进行基础测试：
+```html
+<div class="home">
+  <mooc-star v-model="starVal"></mooc-star>
+  {{starVal}}
+</div>
+```
+
+```js
+export default {
+  data () {
+    return {
+      starVal: 3
+    }
+  }
+}
+```
+测试结果如下：
+
+![Star组件测试结果](../../images/star-result2.gif)
+
 ### Star组件完善
+`Star`组件实现了基础功能后，我们就完成了我们预定的`Star`组件大部分功能，接下来我们将对`Star`组件进一步完善。
+
 
 ## Star组件未来计划
 

@@ -106,8 +106,7 @@ export default {
       this.$emit('change', val)
     },
     getIconColor (n) {
-      let color = n <= this.currentValue ? this.color : '#eee' 
-      return color
+      return n <= this.currentValue ? this.color : '#eee'
     }
   },
   computed: {
@@ -127,24 +126,25 @@ export default {
   @import '~assets/theme/src/star-variables.styl';
   .mooc-star
     display: inline-block;
-    .mooc-star-item
+    .mooc-star-item, .mooc-star-text
       display: inline-block;
-      margin-right: $star-item-margin-right;
       vertical-align: middle;
+    .mooc-star-item
+      margin-right: $star-item-margin-right;
       cursor: default;
       &:last-child
         margin-right: 0;
+      &.is-disabled
+        pointer-events: none;
       &:not(.is-disabled)
         cursor: pointer;
-        &:hover
-          .iconfont
-            transform: scale($star-icon-hover-scale);
         .iconfont
           display: inline-block;
           transition: all $star-icon-transition-duration;
+        &:hover
+          .iconfont
+            transform: scale($star-icon-hover-scale);
     .mooc-star-text
-      display: inline-block;
       padding-left: $star-text-padding-left;
-      vertical-align: middle;
       font-size: $star-text-font-size;
 </style>
