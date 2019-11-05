@@ -1,23 +1,29 @@
 <template>
   <div class="test">
-    <el-rate :value="4" :max="10"></el-rate>
+    <el-steps :active="active" finish-status="process">
+      <el-step title="未开始"></el-step>
+      <el-step title="开始"></el-step>
+      <el-step title="进行中"></el-step>
+      <el-step title="完结"></el-step>
+    </el-steps>
 
-    <mooc-star v-model="value4" :max="10">
-      <i slot="icon" class="iconfont">&#xe668;</i>
-    </mooc-star>
-
-    <mooc-step :align-center="true">
+    <mooc-step :active="active" finish-status="process">
       <mooc-step-item title="未开始"></mooc-step-item>
       <mooc-step-item title="开始"></mooc-step-item>
       <mooc-step-item title="进行中"></mooc-step-item>
       <mooc-step-item title="完结"></mooc-step-item>
     </mooc-step>
+
+    <mooc-button @click="active++">
+      下一步
+    </mooc-button>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
+      active: 0,
       value4: 4,
       visible: false,
       moocVisible: false

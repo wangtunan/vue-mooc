@@ -4,15 +4,13 @@
     :class="[
       `is-${$parent.direction}`,
       isLast && !isCenter && !parentSpace && 'is-last',
-      isCenter && !isVertical && 'is-center'
+      isCenter && !isVertical && 'is-center',
+      currentStatus && `is-${currentStatus}`
     ]"
     :style="getStepStyle"
   >
     <!-- icon & line -->
-    <div
-      class="step-item-head"
-      :class="currentStatus && `is-${currentStatus}`"
-    >
+    <div class="step-item-head">
       <div class="step-item-line">
         <i class="step-item-line-inner" :style="lineStyle"></i>
       </div>
@@ -38,12 +36,7 @@
 
     <!-- title & description -->
     <div class="step-item-main">
-      <div
-        class="step-item-title"
-        :class="[
-          `is-${currentStatus}`  
-        ]"
-      >
+      <div class="step-item-title">
         <slot name="title">
           {{ title }}
         </slot>
@@ -51,9 +44,6 @@
       <div
         v-if="description || $slots.description"
         class="step-item-description"
-        :class="[
-          `is-${currentStatus}`  
-        ]"
       >
         <slot name="description">
           {{ description }}
@@ -178,11 +168,13 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~assets/theme/variables.styl'
-  @import '~assets/theme/src/step-variables.styl'
+  @import '~assets/theme/variables.styl';
+  @import '~assets/theme/src/step-variables.styl';
+  @import '~assets/theme/mixin/step-mixin.styl';
   .step-item
     position: relative;
     flex-shrink: 1;
+    step-status($base-font-first-color,$base-success,$base-primary,$base-danger);
     .step-item-head
       position: relative;
       width: 100%;
@@ -227,18 +219,6 @@ export default {
           .customize-inner-icon
             font-size: $step-customize-inner-icon-font-size;
             color: inherit;
-      &.is-process
-        border-color: $base-font-first-color;
-        color: $base-font-first-color;
-      &.is-success
-        border-color: $base-success;
-        color: $base-success;
-      &.is-finish
-        border-color: $base-primary;
-        color: $base-primary;
-      &.is-error
-        border-color: $base-danger;
-        color: $base-danger;
     .step-item-main
       text-align: left;
       white-space: normal;
@@ -246,29 +226,12 @@ export default {
         line-height: $step-title-line-height;
         font-size: $step-title-font-size;
         color: $base-font-four-color;
-        &.is-process
-          font-weight: 700;
-          color: $base-font-first-color;
-        &.is-success
-          color: $base-success;
-        &.is-finish
-          color: $base-primary;
-        &.is-error
-          color: $base-danger;
       .step-item-description
         margin-top: -5px;
         font-size: $step-desc-font-size;
         line-height: $step-desc-line-height;
         font-weight: normal;
         color: $base-font-four-color;
-        &.is-process
-          color: $base-font-first-color;
-        &.is-success
-          color: $base-success;
-        &.is-finish
-          color: $base-primary;
-        &.is-error
-          color: $base-danger;
     &.is-horizontal
       display: inline-block;
       .step-item-head

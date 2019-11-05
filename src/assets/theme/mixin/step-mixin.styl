@@ -1,0 +1,17 @@
+step-status($processColor, $successColor, $finishColor, $errorColor)
+  step-status-item('process',$processColor);
+  step-status-item('success',$successColor);
+  step-status-item('finish',$finishColor);
+  step-status-item('error',$errorColor);
+
+step-status-item($status, $color)
+  &.is-{$status}
+    .step-item-head
+      border-color: $color!important;
+      color: $color!important;
+    .step-item-main
+      .step-item-title, .step-item-description
+        color: $color!important;
+    if $status = 'process'
+      .step-item-title
+        font-weight: 700;

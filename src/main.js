@@ -8,6 +8,8 @@ import {
   Icon,
   Rate,
   Table,
+  Step,
+  Steps,
   TableColumn,
   Form,
   FormItem,
@@ -21,6 +23,8 @@ Vue.use(Icon)
 Vue.use(Rate)
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Steps)
+Vue.use(Step)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
