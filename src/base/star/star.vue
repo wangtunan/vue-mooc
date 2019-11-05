@@ -1,8 +1,8 @@
 <template>
   <div class="mooc-star">
     <span
-      v-for="(item, index) in max"
-      :key="index"
+      v-for="item in max"
+      :key="item"
       class="mooc-star-item"
       :class="{
         'is-disabled': disabled
@@ -11,9 +11,8 @@
       @mouseleave="handleMouseLeave"
       @click="handleStarClick(item)"
     >
-      
       <i
-        class="iconfont"
+        class="iconfont iconxingxing"
         :class="iconClass"
         :style="{
           'font-size': size + 'px',
@@ -57,10 +56,7 @@ export default {
       type: String,
       default: '#ff9900'
     },
-    iconClass: {
-      type: String,
-      default: 'iconxingxing'
-    },
+    iconClass: String,
     disabled: {
       type: Boolean,
       default: false

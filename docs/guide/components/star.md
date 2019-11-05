@@ -1,6 +1,6 @@
 # Star 星级评分
 
-## Star组件逻辑分析
+## 逻辑分析
 要整理`Star`组件的实现逻辑，我们从以下几个方面开始：
 * `props`入参：对于每一个参数的类型，默认值以及用户的整理。
 * 组件`event`事件：组件自身的事件，例如`click`和`mouseenter`等等。
@@ -11,7 +11,7 @@
 <br/>
 ![Star组件逻辑分析](../../images/xmind/star.png)
 
-## Star组件开发
+## 组件开发
 根据以上逻辑分析，我们将`Star`组件分为两步来实现：
 * 基础实现：先实现`Star`组件最主要的功能，例如`v-model/value`属性的实现。
 * 组件完善：按思维导图，详细完善`Star`组件的相关逻辑。
@@ -99,7 +99,7 @@ Vue.use(Mooc)
 
 在以上步骤都正确完成后，我们在任意已经路由注册过的页面，使用`mooc-star`组件，当出现`star`文本内容即意味着`Star`组件已经全局注册成功了。
 
-### Star组件基础实现
+### 基础实现
 ::: tip
 项目中使用到的图标字体为`iconfont`，请根据自己需要引入对应的字体。
 :::
@@ -314,13 +314,125 @@ export default {
 
 ![Star组件测试结果](../../images/star-result2.gif)
 
-### Star组件完善
-`Star`组件实现了基础功能后，我们就完成了我们预定的`Star`组件大部分功能，接下来我们将对`Star`组件进一步完善。
+### 组件完善
+`Star`组件实现了基础功能后就完成了我们预定的`Star`组件大部分功能，接下来我们将对`Star`组件进一步完善。
+
+`props`入参：
+* `size`: 星级评分的大小。
+* `texts`: 评分的内容。
+* `showText`: 是否显示评分的内容。
+* `textColor`: 评分内容的颜色。
+
+完善后的`html`代码(改动为高亮部分)：
+```html {14,15,16,17,18,19,23,24,25,26,27,28}
+<div class="mooc-star">
+  <span
+    v-for="n in max"
+    :key="n"
+    class="mooc-star-item"
+    :class="{
+      'is-disabled': disabled
+    }"
+    @mouseenter="handleMouseEnter(n)"
+    @mouseleave="handleMouseLeave"
+    @click="handleStarClick(n)"
+  >
+    <i
+      class="iconfont iconxingxing"
+      :class="iconClass"
+      :style="{
+        'font-size': `${ size }px`,
+        'color': getIconColor(n)
+      }"
+    ></i>
+  </span>
+  <span
+    v-if="showValue || showText"
+    class="mooc-star-text"
+    :style="{
+      'color': textColor,
+      'font-size': `${ size }px`
+    }"
+  >
+    {{ text }}
+  </span>
+</div>
+```
+完善后的`javascript`代码如下(仅改动部分)：
+```js
+export default {
+  // ... 省略其它部分
+  props: {
+    size: {
+      type: Number,
+      default: 14
+    },
+    textColor: {
+      type: String,
+      default: '#ff9900'
+    },
+    showText: {
+      type: Boolean,
+      default: false
+    },
+    texts: {
+      type: Array,
+      default () {
+        return ['极差', '失望', '一般', '满意', '惊喜']
+      }
+    },
+    iconClass: String
+  },
+  computed: {
+    text () {
+      let result = ''
+      if (this.showValue) {
+        result = this.currentValue
+      } else if (this.showText) {
+        result = this.texts[this.currentValue - 1]
+      }
+      return result
+    }
+  }
+}
+```
+
+在我们完善`Star`组件后，我们需要进行一些必要的测试工作，我们使用如下的代码来进行测试：
+```html
+<div class="home">
+  <mooc-star
+    v-model="starVal"
+    :size="30"
+    icon-class="iconbanxing"
+    :show-text="true"
+  ></mooc-star>
+</div>
+```
+```js
+export default {
+  name: 'home',
+  data () {
+    return {
+      starVal: 3
+    }
+  }
+}
+```
+
+测试结果如下图所示：
+
+![Star测试结果](../../images/star-result3.gif)
 
 
-## Star组件未来计划
 
-## Star组件文档
+## 未来计划
+正如你所看到的那样，虽然我们支持`v-model`，但并不支持表单，也同样不支持半星等等问题，因为我们是以业务为导向，根据业务来逐步完善我们代码的，所以我们对未来做了一些`Star`组件的迭代计划：
+1. 支持`form`表单。
+2. 支持半星。
+3. 支持未激活时，星星的颜色。
+4. 支持未激活时，文字的颜色。
+
+## 组件文档
 在以上`Star`组件完善以后，我们将得到一个比较完整的星级评分组件，但仅仅只是有组件对我们来说并不是十分足够的，我们还需要撰写一份关于`Star`组件的使用文档，组件文档结构按照以下内容来撰写：
 * 用法：`Star`组件的用法以及对应的案例。
 * 属性：`Star`组件每一个`props`属性的描述，包含类型，默认值以及说明。
