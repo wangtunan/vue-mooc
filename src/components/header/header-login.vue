@@ -241,7 +241,7 @@ export default {
         height: 100%;
         box-sizing: border-box;
         cursor: pointer;
-        .badge
+        .mooc-badge
           line-height: 1;
           .iconfont
             font-size: 22px;

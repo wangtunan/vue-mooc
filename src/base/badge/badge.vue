@@ -1,11 +1,11 @@
 <template>
-  <div class="badge">
+  <div class="mooc-badge">
     <slot />
     <span
       v-if="isShow"
-      class="badge-content"
+      class="mooc-badge-content"
       :class="[
-        'badge-content-'+ type,
+        'mooc-badge-content-'+ type,
         {
           'is-absolute': $slots.default,
           'is-dot': isDot
@@ -19,12 +19,8 @@
 export default {
   name: 'MoocBadge',
   props: {
-    value: {
-      type: [String, Number]
-    },
-    max: {
-      type: Number
-    },
+    value: [String, Number],
+    max: Number,
     isDot: {
       type: Boolean,
       default: false
@@ -61,44 +57,36 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/theme/mixin/badge-mixin.styl';
   @import '~assets/theme/variables.styl';
   @import '~assets/theme/src/badge-variables.styl';
-  .badge
+  .mooc-badge
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    .badge-content
+    .mooc-badge-content
       display: inline-block;
-      padding: 0 $badge-padding;
+      padding: $badge-vertical-padding $badge-horizontal-padding;
       height: $badge-size;
       line-height: $badge-size;
       border-radius: $badge-radius;
       background-color: $base-danger;
-      border: 1px solid $badge-color;
+      border: $badge-border-size solid $badge-color;
       color: $badge-color;
       font-size: $badge-font-size;
-      &-primary
-        background-color: $base-primary;
-      &-success
-        background-color: $base-success;
-      &-warning
-        background-color: $base-warning;
-      &-danger
-        background-color: $base-danger;
-      &-info
-        background-color: $base-info;
+      badge-status($base-primary, $base-success, $base-warning, $base-danger, $base-info);
       &.is-absolute
         position: absolute;
         top: 0;
         right: unit($badge-size / 2 + 1, 'px');
         transform: translate(100%, -50%);
         &.is-dot
-          right: 5px;
+          right: $badge-dot-absolute-right;
       &.is-dot
         right: 0;
         top: 0;
         padding: 0;
         width: $badge-dot-size;
-        height: @width;
-        border-radius: 50%;
+        height: $badge-dot-size;
+        border-radius: $base-border-radius-circle;
 </style>
