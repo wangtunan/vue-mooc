@@ -88,14 +88,12 @@ export default {
     this.$refs.checkbox.checked = this.checked
   },
   methods: {
-    // 开关切换
     handleSwithToggle () {
       if (this.disabled) {
         return false
       }
       this.handleInputChange()
     },
-    // input框值更新
     handleInputChange () {
       const val = this.checked ? this.newInActive.value : this.newActive.value
       this.$emit('input', val)
@@ -104,7 +102,6 @@ export default {
         this.$refs.checkbox.checked = this.checked
       })
     },
-    // 设置active时的颜色和in-active时的颜色
     setSwitchColor () {
       let color = this.checked ? this.newActive.color : this.newInActive.color
       if (color) {
@@ -143,8 +140,6 @@ export default {
     position: relative;
     align-items: center;
     vertical-align: middle;
-    height: $switch-height;
-    line-height: $switch-height;
     font-size: $switch-font-size;
     &.is-checked
       .mooc-switch-radius
