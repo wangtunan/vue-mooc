@@ -2,7 +2,7 @@
   <div class="mooc-badge">
     <slot />
     <span
-      v-if="isShow"
+      v-if="showContent"
       class="mooc-badge-content"
       :class="[
         'mooc-badge-content-'+ type,
@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+import { baseType } from 'assets/js/mooc.config.js'
 export default {
   name: 'MoocBadge',
   props: {
@@ -33,7 +34,7 @@ export default {
       type: String,
       default: 'danger',
       validator (val) {
-        return ['primary', 'success', 'warning', 'info', 'danger'].includes(val)
+        return baseType.includes(val)
       }
     }
   },
@@ -50,28 +51,28 @@ export default {
       return value > this.max ? `${this.max}+` : value
     },
     // 是否显示badge内容
-    isShow () {
+    showContent () {
       return !this.hidden && (this.content || +this.content === 0 || this.isDot)
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~assets/theme/mixin/badge-mixin.styl';
   @import '~assets/theme/variables.styl';
   @import '~assets/theme/src/badge-variables.styl';
+  @import '~assets/theme/mixin/badge-mixin.styl';
   .mooc-badge
     position: relative;
     display: inline-block;
     vertical-align: middle;
     .mooc-badge-content
       display: inline-block;
-      padding: $badge-vertical-padding $badge-horizontal-padding;
+      padding: $badge-veritcal-padding $badge-horizontal-padding;
       height: $badge-size;
       line-height: $badge-size;
-      border-radius: $badge-radius;
+      border-radius: $badge-border-radius;
       background-color: $base-danger;
-      border: $badge-border-size solid $badge-color;
+      border: $badge-border-width $badge-border-style $badge-border-color;
       color: $badge-color;
       font-size: $badge-font-size;
       badge-status($base-primary, $base-success, $base-warning, $base-danger, $base-info);
@@ -83,6 +84,7 @@ export default {
         &.is-dot
           right: $badge-dot-absolute-right;
       &.is-dot
+        position: absolute;
         right: 0;
         top: 0;
         padding: 0;
