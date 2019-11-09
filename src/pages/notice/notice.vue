@@ -66,8 +66,8 @@
         >
           <mooc-switch
             v-model="subItem.value"
-            :active="{color: '#f01414'}"
-            :in-active="{color: '#9199a1'}"
+            active-color="#f01414"
+            inactive-color="#9199a1"
           />
           {{ subItem.label }}
         </dd>

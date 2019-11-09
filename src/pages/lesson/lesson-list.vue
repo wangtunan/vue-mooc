@@ -14,7 +14,11 @@
         </li>
       </ul>
       <div class="hide-course-box">
-        <mooc-switch :value="isHide" :active="switchActive" :in-active="switchInActive" />隐藏已参与的课程
+        <mooc-switch
+          v-model="isHide"
+          active-color="#13ce66"
+          inactive-color="#9199a1"
+        />隐藏已参与的课程
         <span class="like-number" :class="{active: isShowLike}" @click="handleShowLikeClick">
           <i class="iconfont">&#xe716;</i>
           我的收藏{{ computeLikeLesson }}
@@ -83,12 +87,6 @@ export default {
   },
   data () {
     return {
-      switchActive: {
-        color: '#13ce66'
-      },
-      switchInActive: {
-        color: '#9199a1'
-      },
       isShowLike: false, // 是否展示已收藏课程
       isHide: false, // 是否隐藏已参与的课程
       currentFilterIndex: 0, // 当前筛选项的索引
@@ -181,7 +179,7 @@ export default {
         float: right;
         color: $font-three-color;
         font-size: 12px;
-        .switch
+        .mooc-switch
           margin-right: 15px;
       .like-number
         display: inline-block;
