@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <mooc-switch></mooc-switch>
+    <mooc-switch :value="true"></mooc-switch>
   </div>
 </template>
 <script>
