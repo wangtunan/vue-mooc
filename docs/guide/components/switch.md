@@ -251,10 +251,169 @@ export default {
 <br/>
 <br/>
 ![Switch组件测试结果1](../../images/switch-result1.gif)
-### 组件完善
 
-### 组件测试
+### 组件完善
+`Switch`组件实现了基础功能后就完成了我们预定的`Switch`组件大部分功能，接下来我们将对`Switch`组件进一步完善。
+
+`props`入参：
+* `activeColor`: 激活时文字颜色。
+* `activeText`: 激活时文字。
+* `inactiveColor`: 未激活时文字颜色。
+* `inactiveText`: 未激活时文字。
+* `name`: 表单控件原生`name`属性。
+
+完善后的`html`代码(改动为高亮部分)：
+```html {12,16,17,18,19,20,21,22,23,31,32,33,34,35,36,37,38}
+<div
+  class="mooc-switch"
+  :class="{
+    'is-disabled': disabled,
+    'is-checked': checked
+  }"
+  @click.prevent="handleSwitchClick"
+>
+  <input
+    ref="checkbox"
+    type="checkbox"
+    :name="name"
+    class="mooc-switch-input"
+    @change="handleInputChange"
+  >
+  <span
+    v-if="inactiveText"
+    v-text="inactiveText"
+    class="mooc-switch-label mooc-switch-label-left"
+    :class="{
+      'is-active': !checked
+    }"
+  ></span>
+  <span
+    ref="SwitchRadius"
+    class="mooc-switch-radius"
+    :style="{
+      width: `${width}px`
+    }"
+  ></span>
+  <span
+    v-if="activeText"
+    v-text="activeText"
+    class="mooc-switch-label mooc-switch-label-right"
+    :class="{
+      'is-active': checked
+    }"
+  ></span>
+</div>
+```
+
+完善后的`javascript`代码如下(仅改动部分)：
+```js
+// 其它未改动部分略
+export default {
+  name: 'MoocSwitch',
+  props: {
+    activeColor: {
+      type: String,
+      default: ''
+    },
+    activeText: {
+      type: String,
+      default: ''
+    },
+    inactiveColor: {
+      type: String,
+      default: ''
+    },
+    inactiveText: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: ''
+    }
+  },
+  mounted () {
+    this.setSwitchColor()
+    this.$refs.checkbox.checked = this.checked
+  },
+  methods: {
+    setSwitchColor () {
+      const color = this.checked ? this.activeColor : this.inactiveColor
+      if (color) {
+        let switchRaduis = this.$refs['SwitchRadius']
+        switchRaduis.style.backgroundColor = color
+        switchRaduis.style.borderColor = color
+      }
+    }
+  },
+  watch: {
+    checked (newVal, oldVal) {
+      if (newVal === oldVal) {
+        return false
+      }
+      this.setSwitchColor()
+    }
+  }
+}
+```
+完善后的`css`内容如下(仅改动部分)：
+```css
+/* 其它样式略 */
+@import '~assets/theme/variables.styl';
+@import '~assets/theme/src/switch-variables.styl';
+.mooc-switch
+  .mooc-switch-label, .mooc-switch-radius
+    display: inline-block;
+    vertical-align: middle;
+  .mooc-switch-label
+    transition: color $switch-transition-duration;
+    font-size: $switch-label-font-size;
+    font-weight: normal;
+    &.is-active
+      color: $base-primary;
+    &-left
+      margin-right: $switch-label-margin;
+    &-right
+      margin-left: $switch-label-margin;
+```
+**改动代码分析：**
+* `checked`：对于`switch`开关组件而言，我们需要监听`checked`变量，当它状态改变的时候我们需要切换对应的颜色。
+* `setSwitchColor`: 除了需要在`mounted`生命周期中调用一次以外，还需要在状态切换时调用。对于如何切换`switch`组件的颜色，一方面可以根据`checked`状态绑定不同的`style`，还可以像如上代码一样，使用`ref`拿到元素标签再进行绑定样式。
+* `v-if="inactiveText"`：只有当传递了`inactiveText`我们才显示文字标签，相同的道理`activeText`也是一样。
+
+在我们完善`Star`组件后，我们需要进行一些必要的测试工作，我们使用如下的代码来进行测试：
+```html
+<mooc-switch
+  v-model="value"
+  active-color="#f60"
+  active-text="按月付"
+  inactive-color="#666"
+  inactive-text="按年付"
+></mooc-switch>
+```
+```js
+export default {
+  data () {
+    return {
+      value: true
+    }
+  }
+}
+```
+测试结果如下：
+
+![Switch组件测试结果2](../../images/switch-result2.gif)
+
 
 ## 未来计划
+正如你所看到的那样，虽然我们支持`v-model`但并不支持表单，因为我们是以业务为导向，根据业务来逐步完善我们代码的，所以我们对未来做了一些`Switch`组件的迭代计划：
+1. 支持`form`表单。
 
 ## 组件文档
+在以上`Switch`组件完善以后，我们将得到一个比较完整的开关组件，但仅仅只是有组件对我们来说并不是十分足够的，我们还需要撰写一份关于`Switch`组件的使用文档，组件文档结构按照以下内容来撰写：
+* 用法：`Switch`组件的用法以及对应的案例。
+* 属性：`Switch`组件每一个`props`属性的描述，包含类型，默认值以及说明。
+* 事件：`Switch`组件相关的事件说明以及对应的案例。
+<br/>
+
+`Switch`组件对应的文档地址为[Switch组件文档](/components/base/switch#用法)，你可以点击这个地址查看更对内容。
