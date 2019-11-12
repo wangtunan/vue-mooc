@@ -1,46 +1,51 @@
 <template>
-  <li class="timeline-item">
-    <div class="timeline-item-line" />
+  <div class="mooc-timeline-item">
+    <!-- line -->
+    <div class="mooc-timeline-item-line"></div>
 
+    <!-- dot -->
     <div
       v-if="!$slots.dot"
-      class="timeline-item-dot"
+      class="mooc-timeline-item-dot"
       :style="{
         'background-color': color
       }"
       :class="[
-        `timeline-item-dot-${size || ''}`,
-        `timeline-item-dot-${type || ''}`
+        type && `mooc-timeline-item-dot-${type}`,
+        size && `mooc-timeline-item-dot-${size}`
       ]"
-    />
+    ></div>
+    <div v-else class="mooc-timeline-item-dot-customer">
+      <slot name="dot"></slot>
+    </div>
 
-    <div v-if="$slots.dot" class="timeline-item-dot-customer">
-      <slot name="dot" />
-    </div> 
-
-    <div class="timeline-item-wrapper">
-      <div v-if="!hideTimestamp && placement==='top'" class="timeline-item-timestamp top">
+    <!-- content -->
+    <div class="mooc-timeline-item-wrapper">
+      <div
+        v-if="!hideTimestamp && placement == 'top'"
+        class="mooc-timeline-item-timestamp is-top"
+      >
         {{ timestamp }}
       </div>
-      
-      <div class="timeline-item-content">
-        <slot />
+      <div class="mooc-timeline-item-content">
+        <slot></slot>
       </div>
-
-      <div v-if="!hideTimestamp && placement==='bottom'" class="timeline-item-timestamp bottom">
+      <div
+        v-if="!hideTimestamp && placement == 'bottom'"
+        class="mooc-timeline-item-timestamp is-bottom"
+      >
         {{ timestamp }}
       </div>
     </div>
-  </li>
+  </div>
 </template>
+
 <script>
+import { baseType } from 'assets/js/mooc.config.js'
 export default {
   name: 'MoocTimelineItem',
   props: {
-    timestamp: {
-      type: String,
-      default: ''
-    },
+    timestamp: String,
     hideTimestamp: {
       type: Boolean,
       default: false
@@ -52,21 +57,19 @@ export default {
         return ['top', 'bottom'].includes(val)
       }
     },
+    color: String,
+    type: {
+      type: String,
+      validator (val) {
+        return baseType.includes(val)
+      }
+    },
     size: {
       type: String,
       default: 'small',
       validator (val) {
         return ['small', 'normal', 'medium', 'large'].includes(val)
       }
-    },
-    type: {
-      type: String,
-      validator (val) {
-        return ['primary', 'success', 'warning', 'danger', 'info'].includes(val)
-      } 
-    },
-    color: {
-      type: String
     }
   }
 }
@@ -74,70 +77,43 @@ export default {
 <style lang="stylus" scoped>
   @import '~assets/theme/variables.styl';
   @import '~assets/theme/src/timeline-variables.styl';
-  
-  .timeline-item
+  @import '~assets/theme/mixin/timeline-mixin.styl';
+  .mooc-timeline-item
     position: relative;
     padding-bottom: $timeline-item-padding-bottom;
     &:last-child
-      .timeline-item-line
+      .mooc-timeline-item-line
         display: none;
-    &-line
+    .mooc-timeline-item-line
       position: absolute;
-      left: 4px;
+      left: $timeline-item-line-left;
       top: 0;
       height: 100%;
-      border-left: 2px solid $timeline-item-dot-color; 
-    &-dot
+      border-left: $timeline-item-border-left-size $timeline-item-border-left-style $base-border-second-color;
+    .mooc-timeline-item-dot
       position: absolute;
       top: 0;
-      border-radius: 50%;
-      background-color: $timeline-item-dot-color;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &-small
-        left: -1px;
-        width: $timeline-item-dot-small-size;
-        height: $timeline-item-dot-small-size;
-      &-normal
-        left: -2px;
-        width: $timeline-item-dot-normal-size;
-        height: $timeline-item-dot-normal-size;
-      &-medium
-        left: -3px
-        width: $timeline-item-dot-medium-size;
-        height: $timeline-item-dot-medium-size;
-      &-large
-        left: -4px
-        width: $timeline-item-dot-large-size;
-        height: $timeline-item-dot-large-size;
-      &-primary
-        background-color: $base-primary;
-      &-success
-        background-color: $base-success;
-      &-warning
-        background-color: $base-warning;
-      &-danger
-        background-color: $base-danger;
-      &-info
-        background-color: $base-info;
-    &-dot-customer
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    &-wrapper
+      border-radius: $base-border-radius-circle;
+      background-color: $base-border-second-color;
+      timeline-status($timeline-item-small-left, $timeline-item-small-size, $timeline-item-status-args);
+      timeline-type($timeline-item-type-args, $base-primary $base-success $base-warning $base-danger $base-info);
+      &-customer
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    .mooc-timeline-item-wrapper
       position: relative;
       top: 0;
       padding-left: $timeline-item-wrapper-padding-left;
-      .timeline-item-content
-        line-height: 1;
-        color: $timeline-item-title-color;
-      .timeline-item-timestamp
-        color: $base-info;
-        line-height: 1;
-        &.top
-          margin-bottom: 8px;
-        &.bottom
-          margin-top: 8px;
+      .mooc-timeline-item-content
+        line-height: $timeline-item-content-line-height;
+        color: $base-font-first-color;
+      .mooc-timeline-item-timestamp
+        color: $base-info
+        line-height: $timeline-item-content-line-height;
+        &.is-top
+          margin-bottom: $timeline-item-timestamp-margin;
+        &.is-bottom
+          margin-top: $timeline-item-timestamp-margin;
 </style>

@@ -11,22 +11,21 @@ export default {
     let reverse = this.reverse
     let slots = this.$slots.default || []
     let classes = {
-      'is-reverse': reverse,
-      'timeline': true
+      'mooc-timeline': true
     }
     if (reverse) {
       slots = slots.reverse()
     }
 
-    return (<ul class={ classes }>
-      { slots }
-    </ul>)
+    return (
+      <ul class={ classes }>
+        { slots }
+      </ul>
+    )
   }
 }
 </script>
 <style lang="stylus" scoped>
-  @import '~assets/theme/variables.styl';
-  .timeline
-    font-size: $base-font-size;
+  .mooc-timeline
     list-style: none;
 </style>

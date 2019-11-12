@@ -1,0 +1,11 @@
+timeline-status($left, $size, $args)
+  for size, index in $args
+    &-{size}
+      left: unit(- ($left + index ), 'px');
+      width: unit($size + index * 2, 'px');
+      height: @width;
+
+timeline-type($types, $colors)
+  for type, index in $types
+    &-{type}
+      background-color: $colors[index]
