@@ -1,21 +1,37 @@
 <template>
-  <div class="progress">
+  <div class="mooc-progress">
+    <!-- bar -->
     <div
-      class="progress-bar"
+      ref="ProgressBar"
+      class="mooc-progress-bar"
       :class="{
-        'progress-bar-no-text': !showText,
-        'progress-bar-inside-text': inside
+        'mooc-progress-bar-notext': !showText,
+        'mooc-progress-bar-inside-text': inside
       }"
     >
-      <div class="progress-bar-outer" :style="{ height: `${height}px` }">
-        <div class="progress-bar-inner" :style="innerBarStyle">
-          <div v-if="inside && showText" class="progress-bar-inner-text">
+      <div
+        class="mooc-progress-bar-outer"
+        :style="{
+          height: `${height}px`
+        }"
+      >
+        <div class="mooc-progress-bar-innter" :style="innerBarStyle">
+          <div v-if="showText && inside" class="mooc-progress-bar-inner-text">
             {{ text }}
           </div>
         </div>
       </div>
     </div>
-    <div v-if="!inside && showText" class="progress-text">
+
+    <!-- text -->
+    <div
+      v-if="showText && !inside"
+      ref="ProgressText"
+      class="mooc-progress-text"
+      :style="{
+        'font-size': `${progressFontSize}px`
+      }"
+    >
       {{ text }}
     </div>
   </div>
@@ -27,16 +43,14 @@ export default {
     percentage: {
       type: Number,
       default: 0,
+      required: true,
       validator (val) {
         return val >= 0 && val <= 100
       }
     },
-    color: {
-      type: String,
-      default: ''
-    },
+    color: String,
     height: {
-      type: [Number, String],
+      type: Number,
       default: 6
     },
     showText: {
@@ -48,18 +62,52 @@ export default {
       default: false
     }
   },
+  mounted () {
+    this.progressBarDistrance()
+  },
   computed: {
     innerBarStyle () {
       return {
-        'width': `${this._percentage}%`,
+        'width': `${this.innerPercentage}%`,
         'background-color': this.color
       }
     },
-    text () {
-      return `${this._percentage}%`
-    },
-    _percentage () {
+    innerPercentage () {
       return Math.max(0, Math.min(this.percentage, 100))
+    },
+    progressFontSize () {
+      return 12 + this.height * 0.4
+    },
+    listenObj () {
+      return {
+        percentage: this.percentage,
+        height: this.height
+      }
+    },
+    text () {
+      return `${this.innerPercentage}%`
+    }
+  },
+  methods: {
+    progressBarDistrance () {
+      const baseDistance = 50
+      const textMarginLeft = 10
+      let textWidth = this.$refs.ProgressText.clientWidth
+      let progressBar = this.$refs.ProgressBar
+      let margin, padding = baseDistance
+      if (textWidth + textMarginLeft > baseDistance) {
+        margin = textWidth + textMarginLeft + 1
+        padding = textWidth + textMarginLeft
+      }
+      progressBar.style.marginRight = `${-margin}px`
+      progressBar.style.paddingRight = `${padding}px`
+    }
+  },
+  watch: {
+    listenObj () {
+      this.$nextTick(() => {
+        this.progressBarDistrance()
+      })
     }
   }
 }
@@ -67,51 +115,44 @@ export default {
 <style lang="stylus" scoped>
   @import '~assets/theme/variables.styl';
   @import '~assets/theme/src/progress-variables.styl';
-  .progress
+  @import '~assets/theme/common/utils.styl';
+  .mooc-progress
     position: relative;
-    line-height: 1;
-    & > div
+    .mooc-progress-bar, .mooc-progress-text
       display: inline-block;
       vertical-align: middle;
-    .progress-bar
+    .mooc-progress-bar
+      margin-right: -50px;
+      padding-right: 50px;
       width: 100%;
-      margin-right: - $progress-bar-right;
-      padding-right: $progress-bar-right;
       box-sizing: border-box;
-      &.progress-bar-no-text, &.progress-bar-inside-text
-        margin-right: 0;
-        padding-right: 0;
-      .progress-bar-outer
+      .mooc-progress-bar-outer
         position: relative;
         width: 100%;
-        height: $progress-bar-height;
-        border-radius: $progress-bar-radius;
+        height: 6px;
+        border-radius: 100px;
         background-color: $base-border-three-color;
         overflow: hidden;
-        .progress-bar-inner
-          position: absolute;
-          left: 0;
-          top: 0;
-          height: 100%;
-          background-color: $base-primary;
-          white-space: nowrap;
-          text-align: right;
-          line-height: 1;
-          border-radius: $progress-bar-radius;
-          transition: width $progress-bar-duration ease;
-          &::after
-            content: '';
-            display: inline-block;
-            vertical-align: middle;
-            height: 100%;
-          .progress-bar-inner-text
-            display: inline-block;
-            vertical-align: middle;
-            margin: 0 5px;
-            color: #fff;
-            font-size: $progress-bar-inner-text-size;
-    .progress-text
-      margin-left: $progress-text-left;
+      .mooc-progress-bar-innter
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        border-radius: 100px;
+        background-color: $base-primary;
+        transition: width 0.6s ease;
+        text-align: right;
+        white-space: nowrap;
+        line-height: 1;
+        utils-vertical-align();
+        .mooc-progress-bar-inner-text
+          display: inline-block;
+          margin: 0 5px;
+          vertical-align: middle;
+          font-size: 12px;
+          color: #fff;
+    .mooc-progress-text
+      margin-left: 10px;
       line-height: 1;
       font-size: $base-font-size;
       color: $base-font-second-color;
