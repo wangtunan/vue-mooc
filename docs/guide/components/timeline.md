@@ -56,13 +56,13 @@ export default {
 </script>
 ```
 
-在`src/base`目录下新建`timeline-item`目录，并在新建的`src/base/timeline-item`目录中，再新建两个文件，分别是`index.js`和`timeline-item.vue`。
+然后在`src/base`目录下新建`timeline-item`目录，并在新建的`src/base/timeline-item`目录中，再新建两个文件，分别是`index.js`和`timeline-item.vue`。
 ```sh
 # 新建 timeline-item目录
 $ mkdir timeline-item
 
 # 新建index.js和timeline-item.vue文件
-$ cd star
+$ cd timeline-item
 $ touch index.js
 $ touch timeline-item.vue
 ```
