@@ -155,7 +155,7 @@ export default {
 * `reverse`：根据`reverse`的值，又因为`slots`是一个数组，所以我们可以使用`slots.reverse`进行节点内容的反转，从而达到让`timeline`时间线组件按正序或者反序排列的目的。
 
 ### TimelineItem开发
-根据上面的思维导图，我们列举`timeline-item`子组件的`prop`入参：
+根据上面的思维导图，我们列举`timeline-item`子组件的`props`入参：
 * `timestamp`：时间戳。
 * `hide-timestamp`：是否隐藏时间戳。
 * `placement`: 时间戳的位置。

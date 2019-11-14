@@ -2,12 +2,7 @@
   <div class="test">
     <el-progress :percentage="percentage" :stroke-width="height"></el-progress>
     <mooc-progress :percentage="percentage" :height="height"></mooc-progress>
-    <button @click="handleReduceClick">
-      减少
-    </button>
-    <button @click="handleAddClick">
-      增长
-    </button>
+
     <button @click="handleStartClick">
       开始(高{{ height }})
     </button>
@@ -18,7 +13,7 @@ export default {
   data () {
     return {
       height: 6,
-      percentage: 50
+      percentage: 100
     }
   },
   methods: {
@@ -34,7 +29,7 @@ export default {
         if (this.height >= 50) {
           clearInterval(this.timer)
         }
-      }, 50)
+      }, 100)
     },
     handleStopClick () {
       clearInterval(this.timer)
@@ -47,5 +42,5 @@ export default {
     margin: 100px auto;
     width: 1000px;
     .mooc-progress
-      margin: 50px 0;
+      margin: 20px 0;
 </style>

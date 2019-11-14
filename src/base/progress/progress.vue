@@ -90,6 +90,10 @@ export default {
   },
   methods: {
     progressBarDistrance () {
+      // 当不显示进度内容 或者进度内容内显时不计算
+      if (!this.showText || this.inside) {
+        return
+      }
       const baseDistance = 50
       const textMarginLeft = 10
       let textWidth = this.$refs.ProgressText.clientWidth
@@ -122,15 +126,15 @@ export default {
       display: inline-block;
       vertical-align: middle;
     .mooc-progress-bar
-      margin-right: -50px;
-      padding-right: 50px;
+      margin-right: $progress-bar-margin-right;
+      padding-right: $progress-bar-padding-right;
       width: 100%;
       box-sizing: border-box;
       .mooc-progress-bar-outer
         position: relative;
         width: 100%;
-        height: 6px;
-        border-radius: 100px;
+        height: $progress-bar-default-height;
+        border-radius: $progress-bar-border-radius;
         background-color: $base-border-three-color;
         overflow: hidden;
       .mooc-progress-bar-innter
@@ -138,21 +142,21 @@ export default {
         left: 0;
         top: 0;
         height: 100%;
-        border-radius: 100px;
+        border-radius: $progress-bar-border-radius;
         background-color: $base-primary;
-        transition: width 0.6s ease;
+        transition: width $progress-bar-transition-duration ease;
         text-align: right;
         white-space: nowrap;
         line-height: 1;
         utils-vertical-align();
         .mooc-progress-bar-inner-text
           display: inline-block;
-          margin: 0 5px;
+          margin: 0 $progress-bar-inner-text-margin;
           vertical-align: middle;
-          font-size: 12px;
+          font-size: $progress-bar-inner-text-font-size;
           color: #fff;
     .mooc-progress-text
-      margin-left: 10px;
+      margin-left: $progress-text-margin-left;
       line-height: 1;
       font-size: $base-font-size;
       color: $base-font-second-color;
