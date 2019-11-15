@@ -1,8 +1,11 @@
 <template>
   <div class="test">
-    <el-progress :percentage="percentage" :stroke-width="height"></el-progress>
-    <mooc-progress :percentage="percentage" :height="height"></mooc-progress>
-
+    <mooc-step>
+      <mooc-step-item></mooc-step-item>
+      <mooc-step-item></mooc-step-item>
+      <mooc-step-item></mooc-step-item>
+      <mooc-step-item></mooc-step-item>
+    </mooc-step>
     <button @click="handleStartClick">
       开始(高{{ height }})
     </button>

@@ -150,6 +150,7 @@ export default {
         style.flexBasis = this.isCenter ? `${ 100 / this.stepCount }%` : `${ 100 / (this.stepCount - 1 ) }%`
       }
       if (this.isLast) {
+        style.flexBasis = ''
         style.maxWidth = `${ 100 / this.stepCount }%`
       }
       return style

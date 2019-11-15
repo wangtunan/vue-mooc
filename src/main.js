@@ -18,8 +18,7 @@ import {
   MessageBox,
   Pagination,
   Dialog,
-  Button,
-  Progress
+  Button
 } from 'element-ui'
 Vue.use(Icon)
 Vue.use(Rate)
@@ -34,7 +33,6 @@ Vue.use(Checkbox)
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Button)
-Vue.use(Progress)
 
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;
