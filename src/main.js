@@ -6,10 +6,7 @@ import store from './store/index.js'
 // element-ui
 import {
   Icon,
-  Rate,
   Table,
-  Step,
-  Steps,
   TableColumn,
   Form,
   FormItem,
@@ -17,22 +14,17 @@ import {
   Checkbox,
   MessageBox,
   Pagination,
-  Dialog,
-  Button
+  Dialog
 } from 'element-ui'
 Vue.use(Icon)
-Vue.use(Rate)
 Vue.use(Table)
 Vue.use(TableColumn)
-Vue.use(Steps)
-Vue.use(Step)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Checkbox)
 Vue.use(Pagination)
 Vue.use(Dialog)
-Vue.use(Button)
 
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;

@@ -21,9 +21,8 @@ export default {
   },
   computed: {
     getStyle () {
-      let height = this.$isServer ? 400 : document.body.clientHeight
       return {
-        'min-height': `${height}px`,
+        'min-height': '400px',
       }
     },
     isVertical () {

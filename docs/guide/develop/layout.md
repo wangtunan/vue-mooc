@@ -112,6 +112,7 @@ export default {
     max-height: 400px;
     .mooc-container
       height: 400px;
+      max-height: 400px;
       color: #fff;
       text-align: center;
       .mooc-header, .mooc-footer
