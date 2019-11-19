@@ -1,6 +1,6 @@
 <template>
   <div class="notice m-center">
-    <!-- 消息导航 -->
+    <!-- nav -->
     <ul class="nav-list">
       <li
         v-for="(nav,index) in navList"
@@ -13,19 +13,20 @@
       </li>
     </ul>
 
-    <!-- 消息列表 -->
+    <!-- list -->
     <div class="content-list">
       <div class="list-setting">
         <span class="tips">消息中心只展示最近三个月的消息</span>
         <span class="setting-box">
           <span class="read-all" @click="handleAllReadyClick">全部标记为已读</span>
-          <span class="read-setting" @click="dialogVisible=true">通知设置</span>
+          <span class="read-setting" @click="handleSettingClick">通知设置</span>
         </span>
       </div>
       <ul>
         <li
           v-for="(item,index) in filterList"
           :key="index"
+          ref="NoticeList"
           class="list-item"
           :class="{ready: item.isReady}"
         >
@@ -39,48 +40,17 @@
             <p class="time">
               {{ item.time }}
             </p>
-            <span class="iconfont delete">&#xe622;</span>
+            <span class="iconfont delete" @click="handleDeleteClick(item, index)">&#xe622;</span>
           </div>
         </li>
       </ul>
     </div>
 
-    <!-- 分页 -->
+    <!-- pagination -->
     <pagination :total="total" :page.sync="page" />
 
-    <!-- 消息中心设置dialog -->
-    <el-dialog title="消息中心设置" :visible.sync="dialogVisible" width="45%" top="20vh">
-      <dl
-        v-for="(item,index) in settingList"
-        :key="index"
-        class="switch-group"
-      >
-        <dt class="switch-title-box">
-          <mooc-divider position="left" :left="0" color="#d0d6d9">
-            {{ item.type }}
-          </mooc-divider>
-        </dt>
-        <dd
-          v-for="(subItem, index) in item.data"
-          :key="index"
-        >
-          <mooc-switch
-            v-model="subItem.value"
-            active-color="#f01414"
-            inactive-color="#9199a1"
-          />
-          {{ subItem.label }}
-        </dd>
-      </dl>
-      <div slot="footer">
-        <mooc-button @click="dialogVisible=false">
-          关闭
-        </mooc-button>
-        <mooc-button type="primary" @click="dialogVisible=false">
-          保存
-        </mooc-button>
-      </div>
-    </el-dialog>
+    <!-- dialog -->
+    <notice-setting :list="settingList" :visible.sync="dialogVisible"></notice-setting>
   </div>
 </template>
 <script>
@@ -100,7 +70,6 @@ export default {
     }
   },
   created () {
-    // 初始化导航数据
     this.navList = [
       { title: '全部', code: 0 },
       { title: '实战', code: 1 },
@@ -109,10 +78,8 @@ export default {
   },
   mounted () {
     this.getNoticeListData()
-    this.getNoticeSettingData()
   },
   methods: {
-    // 全部标记为已读
     handleAllReadyClick () {
       let code = this.navList[this.currentNavIndex].code
       this.noticeList.forEach((item, index) => {
@@ -122,7 +89,21 @@ export default {
       })
       this.$message.success('标记成功')
     },
-    // 获取消息中心列表数据
+    handleDeleteClick (item, index) {
+      clearTimeout(this.timer)
+      let currentDeleteItem = this.$refs.NoticeList[index]
+      currentDeleteItem.style.height = 0
+      currentDeleteItem.style.opacity = 0
+      this.timer = setTimeout(() => {
+        currentDeleteItem.style.display = 'none'
+        this.noticeList.splice(index, 1)
+        this.$message.success('删除成功')
+      }, 300)
+    },
+    handleSettingClick () {
+      this.dialogVisible = true
+      this.getNoticeSettingData()
+    },
     getNoticeListData () {
       getNoticeList().then(res => {
         let { code, data } = res
@@ -131,7 +112,6 @@ export default {
         }
       })
     },
-    // 获取消息中心设置数据
     getNoticeSettingData () {
       getNoticeSetting().then(res => {
         let { code, data } = res
@@ -152,12 +132,17 @@ export default {
     }
   },
   components: {
-    Pagination
+    Pagination,
+    NoticeSetting: () => import('./notice-setting.vue')
+  },
+  beforeDestroy () {
+    clearTimeout(this.timer)
   }
 }
 </script>
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl';
+  @import '~assets/stylus/mixin.styl';
   .notice
     margin-top: 30px;
     .nav-list
@@ -193,7 +178,11 @@ export default {
         padding: 20px 10px;
         display: flex;
         align-items: flex-start;
+        height: 90px;
         border-bottom: 1px solid $border-second-color;
+        box-sizing: border-box;
+        transition: all 0.3s linear;
+        opacity: 1;
         &.ready
           .item-icon
             border: 1px solid $border-second-color;
@@ -222,6 +211,7 @@ export default {
               font-weight: 700;
               color: $font-second-color;
               cursor: pointer;
+              ellipsis();
             &.time
               font-size: 14px;
               color: $font-four-color;
@@ -232,28 +222,4 @@ export default {
             right: 20px;
             color: $font-four-color;
             cursor: pointer;
-    >>> .el-dialog
-      .el-dialog__body
-        padding: 15px 20px;
-        .switch-group
-          .switch-title-box
-            position: relative;
-            margin-bottom: 20px;
-          dd
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 0 20px;
-            width: 50%;
-            box-sizing: border-box;
-            .mooc-switch
-              margin-right: 15px;
-      .el-dialog__footer
-        .mooc-button-primary
-          background-color: $theme-red-color;
-          border-color: $theme-red-color;
-          color: #fff;
-          &:hover
-            background-color: $theme-red-color;
-            border-color: $theme-red-color;
-            color: #fff;
 </style>

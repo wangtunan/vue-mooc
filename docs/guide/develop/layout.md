@@ -21,9 +21,9 @@
 
 我们将对以上布局具体的业务含义进行如下解释：
 * `header`：放置公共头部，包含`logo`，导航，搜索和登录等模块。
-* `main`: 放置路由部分，即：`router-view`。
+* `main`：放置路由部分，即：`router-view`。
 * `footer`：放置底部版权等相关信息。
-* `sidebar`: 放置侧边栏信息。
+* `sidebar`：放置侧边栏信息。
 
 
 ## 封装布局公共组件
@@ -42,11 +42,15 @@
 ## 使用布局公共组件
 
 由于所有公共组件已经全部全局注册，所以我们只需要在`App.vue`文件中使用即可，像下面这样：
+::: tip
+`App.vue`中的代码在这里只做**示例使用**，其代码会在涉及到的模块中一一介绍。
+:::
 
 `html`代码：
 ```html
 <template>
   <div id="app" :style="getStyle">
+    <!-- content -->
     <mooc-container>
       <mooc-header height="72px">
         <m-header />
@@ -58,9 +62,11 @@
         <m-footer />
       </mooc-footer>
     </mooc-container>
-
+    <!-- sidebar -->
     <m-sidebar />
-    
+    <!-- back to top -->
+    <mooc-backtop :show-height="500"></mooc-backtop>
+    <!-- login -->
     <login v-if="showLogin" @maskClick="handleMaskClick" />
   </div>
 </template>
@@ -83,15 +89,12 @@ export default {
         'overflow': this.showLogin ? 'hidden' : ''
       }
     },
-    // vuex
     ...mapGetters(['showLogin'])
   },
   methods: {
-    // 遮罩点击事件
     handleMaskClick () {
       this.setShowLogin(!this.showLogin)
     },
-    // vuex
     ...mapMutations({
       'setShowLogin': 'login/SET_SHOW_LOGIN'
     })

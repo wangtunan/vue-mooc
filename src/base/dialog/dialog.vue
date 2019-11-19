@@ -90,6 +90,7 @@ export default {
         this.closeModal()
         this.$emit('close')
       }
+      document.body.style.overflow = val ? 'hidden' : ''
     }
   },
   methods: {

@@ -1,5 +1,6 @@
 <template>
   <div id="app" :style="getStyle">
+    <!-- content -->
     <mooc-container>
       <mooc-header height="72px">
         <m-header />
@@ -11,9 +12,11 @@
         <m-footer />
       </mooc-footer>
     </mooc-container>
-
+    <!-- sidebar -->
     <m-sidebar />
+    <!-- back to top -->
     <mooc-backtop :show-height="500"></mooc-backtop>
+    <!-- login -->
     <login v-if="showLogin" @maskClick="handleMaskClick" />
   </div>
 </template>
@@ -33,15 +36,12 @@ export default {
         'overflow': this.showLogin ? 'hidden' : ''
       }
     },
-    // vuex
     ...mapGetters(['showLogin'])
   },
   methods: {
-    // 遮罩点击事件
     handleMaskClick () {
       this.setShowLogin(!this.showLogin)
     },
-    // vuex
     ...mapMutations({
       'setShowLogin': 'login/SET_SHOW_LOGIN'
     })

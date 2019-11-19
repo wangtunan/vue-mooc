@@ -75,7 +75,8 @@ module.exports = {
             '/guide/develop/read.md',
             '/guide/develop/question.md',
             '/guide/develop/article.md',
-            '/guide/develop/cart.md'
+            '/guide/develop/cart.md',
+            '/guide/develop/notice.md'
           ]
         },
         {

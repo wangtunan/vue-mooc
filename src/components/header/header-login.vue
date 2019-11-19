@@ -22,7 +22,7 @@
     </li>
     <template v-if="userInfo && userInfo.avatar">
       <li class="item bell" @click="handleBellClick">
-        <mooc-badge :value="100" :max="99">
+        <mooc-badge :value="100" :max="99" is-dot>
           <i class="iconfont">&#xe6eb;</i>
         </mooc-badge>
       </li>
