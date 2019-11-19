@@ -1,6 +1,7 @@
 # vue-mooc
 
 [预览地址](https://wangtunan.github.io/vue-mooc/#/home) 
+[文档地址](https://wangtunan.github.io/vue-mooc-site/)
 
 ## 介绍
 `vue-mooc`是一个使用`Vue`相关技术栈，高仿[慕课网](https://www.imooc.com/)PC端的一个项目，项目中涉及到的技术栈如下：
@@ -27,20 +28,22 @@
 本项目中关于基础组件的封装，全部抛弃使用`element-ui`，而采用自己封装，已达到提高自己的目的。
 
 **基础公共组件完成情况**：<br/>
+- [x] Container(布局容器) <br/>
 - [x] Star(星级评分) <br/>
 - [x] Badge(标记)<br/>
-- [x] Empty(空内容)<br/>
 - [x] Switch(开关)<br/>
+- [x] Timeline(时间线)<br/>
+- [x] Progress(进度条)<br/>
+- [x] Step(步骤条)<br/>
+- [x] Breadcrumb(面包屑导航)<br/>
+- [x] BackTop(返回顶部)<br/>
+- [x] Button(按钮)<br/>
+- [x] Carousel(轮播)<br/>
 - [x] Message(消息提示)<br/>
 - [x] MessageBox(消息确认)<br/>
-- [x] Progress(进度条)<br/>
-- [x] Breadcrumb(面包屑导航)<br/>
-- [x] Timeline(时间线)<br/>
-- [x] Step(步骤条)<br/>
-- [x] Scroll(滚动组件)<br/>
 - [x] Pagination(分页)<br/>
-- [x] dialog(弹出)<br/>
-- [x] BackTop(返回顶部)<br/>
+- [x] dialog(弹窗)<br/>
+- [x] divider(分割线)<br/>
 
 ## 预览&源码地址
 

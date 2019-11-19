@@ -23,20 +23,22 @@
 本项目中关于基础组件的封装，全部抛弃使用`element-ui`，而采用自己封装，已达到提高自己的目的，如果你对本项目中封装的公共组件感兴趣的话，请移步这里:point_right: [基础组件](/base/)
 
 **基础公共组件完成情况**：<br/>
+<input type="checkbox" checked/> Container(布局容器) <br/>
 <input type="checkbox" checked/> Star(星级评分) <br/>
 <input type="checkbox" checked/> Badge(标记)<br/>
-<input type="checkbox" checked/> Empty(空内容)<br/>
 <input type="checkbox" checked/> Switch(开关)<br/>
+<input type="checkbox" checked/> Timeline(时间线)<br/>
+<input type="checkbox" checked/> Progress(进度条)<br/>
+<input type="checkbox" checked/> Step(步骤条)<br/>
+<input type="checkbox" checked/> Breadcrumb(面包屑导航)<br/>
+<input type="checkbox" checked/> BackTop(返回顶部)<br/>
+<input type="checkbox" checked/> Button(按钮)<br/>
 <input type="checkbox" checked/> Message(消息提示)<br/>
 <input type="checkbox" checked/> MessageBox(消息确认)<br/>
-<input type="checkbox" checked /> Progress(进度条)<br/>
-<input type="checkbox" checked/> Breadcrumb(面包屑导航)<br/>
-<input type="checkbox" checked/> Timeline(时间线)<br/>
-<input type="checkbox" checked/> Step(步骤条)<br/>
-<input type="checkbox" checked/> Scroll(滚动组件)<br/>
+<input type="checkbox" checked/> Carousel(轮播)<br/>
 <input type="checkbox" checked/> Pagination(分页)<br/>
-<input type="checkbox" checked/> dialog(弹出)<br/>
-<input type="checkbox" checked/> BackTop(返回顶部)<br/>
+<input type="checkbox" checked/> Dialog(弹窗)<br/>
+<input type="checkbox" checked/> Divider(分割线)<br/>
 
 ## 预览&源码地址
 
