@@ -1,7 +1,7 @@
 <template>
   <div class="notice m-center">
     <!-- nav -->
-    <ul class="nav-list">
+    <ul class="notice-nav">
       <li
         v-for="(nav,index) in navList"
         :key="nav.code"
@@ -14,7 +14,7 @@
     </ul>
 
     <!-- list -->
-    <div class="content-list">
+    <div class="notice-list">
       <div class="list-setting">
         <span class="tips">消息中心只展示最近三个月的消息</span>
         <span class="setting-box">
@@ -145,7 +145,7 @@ export default {
   @import '~assets/stylus/mixin.styl';
   .notice
     margin-top: 30px;
-    .nav-list
+    .notice-nav
       padding-left: 32px;
       .nav-item
         display: inline-block;
@@ -156,7 +156,7 @@ export default {
         &.active
           color: $theme-red-color;
           border-bottom: 2px solid $theme-red-color;
-    .content-list
+    .notice-list
       .list-setting
         padding-left: 28px;
         padding-right: 20px;
