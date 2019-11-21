@@ -46,10 +46,10 @@
 - [x] divider(分割线)<br/>
 
 ## 未来计划
-- [] 开发`vue-mooc`后台管理系统 <br/>
-- [] 开发`vue-mooc`Node.js后端版 <br/>
-- [] 开发`vue-mooc`服务端渲染(SSR)版 <br/>
-- [] 开发`vue-mooc`React版 <br/>
+- 开发`vue-mooc`后台管理系统 <br/>
+- 开发`vue-mooc`Node.js后端版 <br/>
+- 开发`vue-mooc`服务端渲染(SSR)版 <br/>
+- 开发`vue-mooc`React版 <br/>
 
 
 ## 预览&源码地址

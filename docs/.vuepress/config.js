@@ -68,6 +68,7 @@ module.exports = {
           collapsable: false,
           children: [
             '/guide/develop/layout.md',
+            '/guide/develop/sidebar.md',
             '/guide/develop/login.md',
             '/guide/develop/home.md',
             '/guide/develop/course.md',

@@ -34,9 +34,7 @@
 import { mapGetters } from 'vuex'
 export default {
   methods: {
-    // 返回顶部
     handleBackTopClick () {
-      // document.body.scrollIntoView({ behavior: 'smooth' })
       if (!this.timer) {
         let step = 0
         this.timer = setInterval(() => {
@@ -56,12 +54,10 @@ export default {
       let clientHeight = document.body.clientHeight
       return this.scrollTop >= clientHeight
     },
-    // vuex
     ...mapGetters(['scrollTop'])
   },
   beforeDestroy () {
     clearInterval(this.timer)
-    this.timer = null
   }
 }
 </script>
