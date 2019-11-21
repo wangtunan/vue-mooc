@@ -115,3 +115,28 @@ export default new Vuex.Store({
 })
 ```
 ## 侧边栏开发
+由于侧边栏相对来说比较简单，内容也很少，唯一值得一提的是：当点击返回顶部按钮的时候，我们选择使用`js`来创建动画，像下面这样：
+```js
+export default {
+  // 省略其它
+  methods: {
+    handleBackTopClick () {
+      if (!this.timer) {
+        let step = 0
+        this.timer = setInterval(() => {
+          if (this.scrollTop <= 0) {
+            clearInterval(this.timer)
+            this.timer = null
+            return
+          }
+          step += 10
+          document.documentElement.scrollTop -= step
+        }, 20)
+      }
+    }
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  }
+}
+```
