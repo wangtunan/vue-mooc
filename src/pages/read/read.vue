@@ -65,20 +65,18 @@ import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      readList: [], // 专栏列表数据
-      currentIndex: 0 // 当前分类的索引
+      readList: [],
+      currentIndex: 0
     }
   },
   mounted () {
     this.getReadListData()
   },
   methods: {
-    // 专栏点击事件
     handleReadClick () {
       let random = new Date().getTime()
       this.$router.push(`/read/${random}`)
     },
-    // 获取专栏列表数据
     getReadListData () {
       getReadList().then(res => {
         let { code, data } = res
@@ -89,7 +87,6 @@ export default {
     }
   },
   computed: {
-    // 专栏分类
     typeList () {
       let result = []
       let navSet = new Set(['全部'])
@@ -99,7 +96,6 @@ export default {
       result = Array.from(navSet)
       return result
     },
-    // filter后的专栏数据
     filterReadList () {
       let list = this.readList.slice()
       let currType = this.typeList[this.currentIndex]

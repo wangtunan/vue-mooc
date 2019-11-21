@@ -1,7 +1,7 @@
 <template>
   <div class="read-detail">
     <!-- 头部 -->
-    <div class="detail-header-container">
+    <div class="header-container">
       <div class="m-center">
         <div class="header">
           <div class="img-box">
@@ -68,7 +68,7 @@ import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      readDetail: {} // 专栏详情数据
+      readDetail: {}
     }
   },
   mounted () {
@@ -94,7 +94,7 @@ export default {
   @import '~assets/stylus/variables.styl';
   @import '~assets/stylus/mixin.styl';
   .read-detail
-    .detail-header-container
+    .header-container
       height: 244px;
       background-color: #383d42;
       .header
