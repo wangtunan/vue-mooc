@@ -1,7 +1,7 @@
 <template>
   <div class="read-detail">
     <!-- 头部 -->
-    <div class="header-container">
+    <div class="read-header-container">
       <div class="m-center">
         <div class="header">
           <div class="img-box">
@@ -94,7 +94,7 @@ export default {
   @import '~assets/stylus/variables.styl';
   @import '~assets/stylus/mixin.styl';
   .read-detail
-    .header-container
+    .read-header-container
       height: 244px;
       background-color: #383d42;
       .header

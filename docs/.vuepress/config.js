@@ -100,33 +100,21 @@ module.exports = {
           title: '基础公共组件',
           collapsable: false,
           children: [
-            '/components/base/star.md',
-            '/components/base/badge.md',
-            '/components/base/switch.md',
-            '/components/base/timeline.md',
-            '/components/base/progress.md',
-            '/components/base/steps.md',
-            '/components/base/breadcrumb.md',
-            '/components/base/backtop.md',
-            '/components/base/button.md',
-            '/components/base/message.md',
-            '/components/base/message-box.md',
-            '/components/base/carousel.md',
-            '/components/base/pagination.md',
-            '/components/base/dialog.md',
-            '/components/base/divider.md'
-          ]
-        },
-        {
-          title: '业务公共组件',
-          collapsable: false,
-          children: [
-            '/components/business/sidebar.md',
-            '/components/business/empty.md',
-            '/components/business/canvas-blur.md',
-            '/components/business/rem-lesson.md',
-            '/components/business/chapter.md',
-            '/components/business/comment.md'
+            '/components/star.md',
+            '/components/badge.md',
+            '/components/switch.md',
+            '/components/timeline.md',
+            '/components/progress.md',
+            '/components/steps.md',
+            '/components/breadcrumb.md',
+            '/components/backtop.md',
+            '/components/button.md',
+            '/components/message.md',
+            '/components/message-box.md',
+            '/components/carousel.md',
+            '/components/pagination.md',
+            '/components/dialog.md',
+            '/components/divider.md'
           ]
         }
       ]

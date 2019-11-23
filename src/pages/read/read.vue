@@ -4,7 +4,7 @@
     <div class="read-header">
       <img src="https://www.imooc.com/static/img/column/sub-logo2.png" alt="">
       <p class="total-course">
-        共20个专栏
+        共{{ total }}个专栏
       </p>
     </div>
 
@@ -14,7 +14,10 @@
         <dt>分类：</dt>
         <dd
           v-for="(type,index) in typeList"
-          :key="index" :class="{active: index == currentIndex}"
+          :key="index"
+          :class="{
+            active: index == currentIndex
+          }"
           @click="currentIndex = index"
         >
           {{ type }}
@@ -25,7 +28,12 @@
     <!-- 列表 -->
     <div class="read-list">
       <ul>
-        <li v-for="(item, index) in filterReadList" :key="index" class="read-item" @click="handleReadClick">
+        <li
+          v-for="(item, index) in filterReadList"
+          :key="index"
+          class="read-item"
+          @click="handleReadClick"
+        >
           <div class="img-box">
             <img :src="item.img" alt="">
           </div>
@@ -57,16 +65,21 @@
         </li>
       </ul>
     </div>
+
+    <!-- 分页 -->
+    <pagination :total.sync="total" />
   </div>
 </template>
 <script>
+import Pagination from 'components/pagination/pagination.vue'
 import { getReadList } from 'api/read.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
       readList: [],
-      currentIndex: 0
+      currentIndex: 0,
+      total: 50
     }
   },
   mounted () {
@@ -104,6 +117,9 @@ export default {
       }
       return list
     }
+  },
+  components: {
+    Pagination
   }
 }
 </script>
