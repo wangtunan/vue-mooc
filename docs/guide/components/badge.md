@@ -308,4 +308,4 @@ badge-status($primaryColor, $successColor, $warningColor, $dangerColor, $infoCol
 * 属性：`Badge`组件每一个`props`属性的描述，包含类型，默认值以及说明。
 <br/>
 
-`Badge`组件对应的文档地址为[Star组件文档](/components/base/badge#用法)，你可以点击这个地址查看更对内容。
+`Badge`组件对应的文档地址为[Badge组件文档](/components/badge#用法)，你可以点击这个地址查看更对内容。

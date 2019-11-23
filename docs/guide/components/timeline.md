@@ -390,4 +390,4 @@ timeline-type($types, $colors)
 * 属性：`Timeline`组件每一个`props`属性的描述，包含类型，默认值以及说明。
 <br/>
 
-`Timeline`组件对应的文档地址为[Timeline组件文档](/components/base/timeline#用法)，你可以点击这个地址查看更对内容。
+`Timeline`组件对应的文档地址为[Timeline组件文档](/components/timeline#用法)，你可以点击这个地址查看更对内容。

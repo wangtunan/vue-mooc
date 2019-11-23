@@ -303,4 +303,4 @@ export default {
 * 属性：`Progress`组件每一个`props`属性的描述，包含类型，默认值以及说明。
 <br/>
 
-`Progress`组件对应的文档地址为[Progress组件文档](/components/base/progress#用法)，你可以点击这个地址查看更对内容。
+`Progress`组件对应的文档地址为[Progress组件文档](/components/progress#用法)，你可以点击这个地址查看更对内容。

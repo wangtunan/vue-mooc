@@ -439,4 +439,4 @@ export default {
 * 事件：`Star`组件相关的事件说明以及对应的案例。
 <br/>
 
-`Star`组件对应的文档地址为[Star组件文档](/components/base/star#用法)，你可以点击这个地址查看更对内容。
+`Star`组件对应的文档地址为[Star组件文档](/components/star#用法)，你可以点击这个地址查看更对内容。

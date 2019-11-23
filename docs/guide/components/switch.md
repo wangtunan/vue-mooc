@@ -416,4 +416,4 @@ export default {
 * 事件：`Switch`组件相关的事件说明以及对应的案例。
 <br/>
 
-`Switch`组件对应的文档地址为[Switch组件文档](/components/base/switch#用法)，你可以点击这个地址查看更对内容。
+`Switch`组件对应的文档地址为[Switch组件文档](/components/switch#用法)，你可以点击这个地址查看更对内容。
