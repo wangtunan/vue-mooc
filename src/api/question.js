@@ -4,3 +4,7 @@ import axios from 'utils/axios.js'
 export function getQuestionList () {
   return axios.get('/mock/question/question.json')
 }
+// 获取猿问关注标签列表
+export function getLikeList () {
+  return axios.get('/mock/question/like.json')
+}

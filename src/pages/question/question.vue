@@ -1,7 +1,7 @@
 <template>
   <div class="question">
     <!-- 头部 -->
-    <div class="header m-center">
+    <div class="question-header m-center">
       <div class="question-search">
         <img src="https://www.imooc.com/static/img/wenda/wenda-logo.png" alt="">
         <div class="search-box">
@@ -15,24 +15,27 @@
       <div class="question-nav">
         <dl>
           <dt>我的关注：</dt>
-          <dd>Node.js</dd>
-          <dd>Html5</dd>
-          <dd>JavaScript</dd>
-          <dd>CSS3</dd>
-          <dd>WebApp</dd>
-          <dd>Vue.js</dd>
-          <dd>Webpack</dd>
+          <dd
+            v-for="(item, index) in like"
+            :key="index"
+            :class="{
+              active: currentIndex == index
+            }"
+            @click="handleLikeClick(item, index)"
+          >
+            {{ item }}
+          </dd>
         </dl>
       </div>
     </div>
 
     <!-- 列表部分 -->
     <div class="m-center">
-      <div class="question-list-container">
+      <div class="question-content-container">
         <div class="left">
           <div class="question-list">
-            <ul>
-              <li v-for="(item,index) in questionList" :key="index" class="question-item">
+            <ul v-if="filterQuestionList && filterQuestionList.length">
+              <li v-for="(item, index) in filterQuestionList" :key="index" class="question-item">
                 <div class="finish">
                   <span class="iconfont">&#xe786;</span>
                   <span>{{ item.answer }}</span>
@@ -43,7 +46,11 @@
                   </h3>
                   <p class="tag">
                     <img :src="item.icon" alt="">
-                    <span class="name">JavaScript</span>
+                    <span
+                      v-for="(tag, index) in item.tags"
+                      :key="index"
+                      class="name"
+                    >{{ tag }}</span>
                     <span class="view-box">
                       <i class="iconfont">&#xe681;</i>
                       <span class="view-number">{{ item.view }}</span>
@@ -52,6 +59,9 @@
                 </div>
               </li>
             </ul>
+            <p v-else class="list-empty">
+              暂无数据
+            </p>
           </div>
           <pagination :total="total" :page.sync="page" />
         </div>
@@ -65,20 +75,36 @@
 <script>
 import Pagination from 'components/pagination/pagination.vue'
 import RecommendAuthor from 'components/recommend/recommend-author.vue'
-import { getQuestionList } from 'api/question.js'
+import { getLikeList, getQuestionList } from 'api/question.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      question: {}, // 猿问数据
+      currentIndex: 0,
+      like: [],
+      question: {},
       total: 100,
       page: 1
     }
   },
   mounted () {
+    this.getLikeListData()
     this.getQuestionListData()
   },
   methods: {
+    // 关注标签点击
+    handleLikeClick (item, index) {
+      this.currentIndex = index
+    },
+    // 获取关注标签列表
+    getLikeListData () {
+      getLikeList().then(res => {
+        let { code, data } = res
+        if (code === ERR_OK) {
+          this.like = data
+        }
+      })
+    },
     // 获取猿问数据
     getQuestionListData () {
       getQuestionList().then(res => {
@@ -93,6 +119,16 @@ export default {
     // 猿问列表数据
     questionList () {
       return this.question.data || []
+    },
+    // 猿问列表筛选数据
+    filterQuestionList () {
+      let list = this.questionList.slice()
+      let like = this.like[this.currentIndex]
+      if (like !== '全部') {
+        return list.filter(item => item.tags.includes(like))
+      } else {
+        return list
+      }
     },
     // 回答排行榜
     recommend () {
@@ -109,7 +145,7 @@ export default {
   @import '~assets/stylus/variables.styl';
   .question
     padding: 20px 0 50px;
-    .header
+    .question-header
       .question-search
         position: relative;
         padding-right: 75px;
@@ -176,9 +212,9 @@ export default {
           padding-right: 20px;
           margin-bottom: 8px;
           cursor: pointer;
-          &:hover
+          &:hover, &.active
             color: $theme-green-color;
-    .question-list-container
+    .question-content-container
       display: flex;
       align-items: flex-start;
       margin-top: 30px;
@@ -237,12 +273,17 @@ export default {
                   display: inline-block;
                   vertical-align: middle;
                   &.name
-                    padding: 0 20px 0 5px;
+                    padding: 0 10px 0 5px;
                   &.view-box
                     padding-left: 10px;
                     & > i, & > span
                       display: inline-block;
                       vertical-align: middle;
+        .list-empty
+          padding: 10px 0;
+          text-align: center;
+          font-size: 14px;
+          color: $theme-red-color;
       .right
         margin-left: 30px;
         flex: 0 0 280px;

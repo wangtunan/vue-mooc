@@ -47,6 +47,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  @import '~assets/stylus/mixin.styl';
   .recommend
     .recommend-title
       margin-bottom: 12px;
@@ -60,13 +61,8 @@ export default {
       cursor: pointer;
       .img-box
         flex: 0 0 48px;
-        width: 48px;
-        height: 48px;
+        img-box(48px, 48px);
         & > img
-          display: block;
-          width: 100%;
-          height: 100%;
-          background-color: #ccc;
           border-radius: 50%;
       .recommend-content
         flex: 1;
