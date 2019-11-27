@@ -71,12 +71,14 @@ module.exports = {
             '/guide/develop/sidebar.md',
             '/guide/develop/login.md',
             '/guide/develop/home.md',
-            '/guide/develop/course.md',
             '/guide/develop/lesson.md',
             '/guide/develop/read.md',
             '/guide/develop/question.md',
             '/guide/develop/article.md',
             '/guide/develop/cart.md',
+            '/guide/develop/course.md',
+            '/guide/develop/order.md',
+            '/guide/develop/user.md',
             '/guide/develop/notice.md'
           ]
         },
