@@ -15,11 +15,11 @@ module.exports = {
       {
         text: '指南',
         link: '/guide/'
-      },
-      {
-        text: '组件文档',
-        link: '/components/'
       }
+      // {
+      //   text: '组件文档',
+      //   link: '/components/'
+      // }
     ],
     sidebar: {
       '/guide/': [

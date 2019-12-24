@@ -33,9 +33,13 @@
         </div>
       </li>
     </ul>
+
+    <!-- 分页 -->
+    <pagination :total.sync="total" />
   </div>
 </template>
 <script>
+import Pagination from 'components/pagination/pagination.vue'
 export default {
   props: {
     list: {
@@ -53,6 +57,7 @@ export default {
   },
   data () {
     return {
+      total: 100,
       currentIndex: 0
     }
   },
@@ -60,6 +65,9 @@ export default {
     filterList () {
       this.currentIndex = 0
     }
+  },
+  components: {
+    Pagination
   }
 }
 </script>
