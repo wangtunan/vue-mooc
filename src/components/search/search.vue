@@ -166,14 +166,13 @@ export default {
         font-weight: 700;
     .search-suggestion
       display: none;
-      z-index: 1200;
       position: absolute;
       left: 0;
       top: 100%;
       right: 0;
       background-color: #fff;
       border-radius: 0 0 8px 8px;
-      box-shadow: 0 4px 8px rgba(7,17,27,0.1);
+      box-shadow: 0 4px 14px rgba(7,17,27,0.1);
       overflow: hidden;
       dl
         font-size: 12px;

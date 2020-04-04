@@ -50,7 +50,7 @@ export default {
   @import '~assets/stylus/variables.styl';
   @import '~assets/stylus/mixin.styl';
   .nav-content
-    z-index: 999;
+    z-index: 100;
     position: absolute;
     top: 0;
     left: 216px;

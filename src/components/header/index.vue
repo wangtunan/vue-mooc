@@ -54,7 +54,7 @@ export default {
 <style lang="stylus" scoped>
   @import '~assets/stylus/variables.styl';
   .header
-    z-index: 99;
+    z-index: 200;
     position: relative;
     padding-right: 10px;
     height: 100%;
