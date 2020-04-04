@@ -4,33 +4,52 @@
       <span v-for="(item,index) in tags" :key="index" class="tag-item">{{ item }}</span>
     </div>
     <div class="search-input-box">
-      <input type="text" class="search-input" @focus="isFocus = !isFocus" @blur="isFocus = false">
+      <input
+        v-model="keyword"
+        type="text"
+        class="search-input"
+        @focus="isFocus = !isFocus"
+        @blur="isFocus = false"
+        @input="handleInput"
+      >
     </div>
     <div class="search-icon">
       <i class="iconfont">&#xe63c;</i>
     </div>
     <div class="search-suggestion">
-      <dl class="hot-key">
-        <dt>热搜</dt>
-        <dd v-for="(item,index) in hot" :key="index">
-          {{ item }}
-        </dd>
-      </dl>
-      <dl class="history">
-        <dt>搜索历史</dt>
-        <dd v-for="(item,index) in history" :key="index">
-          {{ item }}
-        </dd>
-      </dl>
+      <template v-if="searchResult && searchResult.length > 0">
+        <dl class="result">
+          <dd v-for="(item,index) in searchResult" :key="index">
+            {{ item.word }}
+          </dd>
+        </dl>
+      </template>
+      <template v-else>
+        <dl class="hot-key">
+          <dt>热搜</dt>
+          <dd v-for="(item,index) in hot" :key="index">
+            {{ item }}
+          </dd>
+        </dl>
+        <dl class="history">
+          <dt>搜索历史</dt>
+          <dd v-for="(item,index) in history" :key="index">
+            {{ item }}
+          </dd>
+        </dl>
+      </template>
     </div>
   </div>
 </template>
 <script>
-import { getHot, getSearchHistory } from 'api/common.js'
+import { getHot, getSearchHistory, getSearch } from 'api/common.js'
+import { debounce } from 'utils/utils.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      keyword: '', // 搜索关键词
+      searchResult: [], // 实时搜索结果
       history: [], // 搜索历时
       hot: [], // 热搜
       isFocus: false, // 是否聚焦
@@ -42,10 +61,27 @@ export default {
     this.getSearchHistoryData()
   },
   methods: {
+    // 实时搜索
+    handleInput: debounce(function () {
+      if (!this.keyword) {
+        this.searchResult = []
+        return false
+      }
+      getSearch(this.keyword).then(res => {
+        const { code, data } = res
+        if (code === ERR_OK) {
+          this.searchResult = data
+        } else {
+          this.searchResult = []
+        }
+      }).catch(() => {
+        this.searchResult = []
+      })
+    }, 100),
     // 获取热搜数据
     getHotData () {
       getHot().then(res => {
-        let { code, data } = res
+        const { code, data } = res
         if (code === ERR_OK) {
           this.hot = data
         }
@@ -54,7 +90,7 @@ export default {
     // 获取搜索历时
     getSearchHistoryData () {
       getSearchHistory().then(res => {
-        let { code, data } = res
+        const { code, data } = res
         if (code === ERR_OK) {
           this.history = data
         }
@@ -87,7 +123,7 @@ export default {
         background-color: rgba(240,20,20,0.2)
         color: $red;
       .search-suggestion
-        height: 333px;
+        display: block;
     .search-tags
       position: absolute;
       right: 40px;
@@ -112,6 +148,7 @@ export default {
         height: 46px;
         box-sizing: border-box;
         background-color: transparent;
+        text-indent: 10px;
         font-size: 12px;
         color: #71777d;
         outline: none;
@@ -128,12 +165,12 @@ export default {
       .iconfont
         font-weight: 700;
     .search-suggestion
+      display: none;
+      z-index: 1200;
       position: absolute;
       left: 0;
       top: 100%;
       right: 0;
-      height: 0;
-      transition: height 0.2s;
       background-color: #fff;
       border-radius: 0 0 8px 8px;
       box-shadow: 0 4px 8px rgba(7,17,27,0.1);
@@ -160,7 +197,7 @@ export default {
             border-radius: 12px;
             line-height: 16px;
             background-color: rgba(84, 92, 99, 0.1);
-        &.history
+        &.history, &.result
           margin-top: 4px;
           dt
             padding-left: 8px;

@@ -25,6 +25,20 @@ export function throttle (fn, interval = 500) {
   }
 }
 
+// 函数防抖
+export function debounce (fn, delay) {
+  var timer = null;
+  return function () {
+    var context = this;
+    if(timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      fn.call(context, ...arguments);
+    }, delay || 500);
+  }
+}
+
 // object merge
 export function mere (target) {
   for (let index = 1, len = arguments.length; index < len; index++) {
