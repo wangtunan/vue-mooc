@@ -110,6 +110,7 @@ export default {
             border-radius: 4px;
         .course-content
           flex: 1;
+          max-width: calc(100% - 100px);
           .title
             font-size: 12px;
             line-height: 24px;

@@ -87,6 +87,8 @@ export default {
             this.currentSwiper = this.swiperList[0].img
           }
         }
+      }).catch(() => {
+        this.swiperList = []
       })
     },
     // 获取课程信息
@@ -100,6 +102,12 @@ export default {
           this.improveList = data.improve
           this.technologyList = data.technology
         }
+      }).catch(() => {
+        this.practiceList = {}
+        this.newList = {}
+        this.guideList = {}
+        this.improveList = {}
+        this.technologyList = {}
       })
     },
     // 获取猿问和手记
@@ -109,6 +117,8 @@ export default {
         if (code === ERR_OK) {
           this.articleList = data
         }
+      }).catch(() => {
+        this.articleList = []
       })
     },
     // 获取精英讲师信息
@@ -118,6 +128,8 @@ export default {
         if (code === ERR_OK) {
           this.teacherList = data
         }
+      }).catch(() => {
+        this.teacherList = []
       })
     },
     // 获取精英讲师信息
@@ -127,6 +139,8 @@ export default {
         if (code === ERR_OK) {
           this.allstar = data
         }
+      }).catch(() => {
+        this.allstar
       })
     }
   },

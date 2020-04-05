@@ -1,12 +1,12 @@
 import axios from 'utils/axios.js'
-
+import { IS_MOCK } from 'api/config.js'
 // 获取主页导航信息
 export function getHomeNav () {
   return axios.get('/mock/home/nav.json')
 }
 // 获取主页滚动轮播数据
 export function getSliderList () {
-  return axios.get('/mock/home/slider.json')
+  return axios.get(`/mock/home/slider${ IS_MOCK ? '' : '.json' }`)
 }
 // 获取主页课程信息
 export function getHomeCourse () {

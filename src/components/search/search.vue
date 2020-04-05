@@ -8,8 +8,8 @@
         v-model="keyword"
         type="text"
         class="search-input"
-        @focus="isFocus = !isFocus"
-        @blur="isFocus = false"
+        @focus="handleFocus"
+        @blur="handleBlur"
         @input="handleInput"
       >
     </div>
@@ -19,7 +19,7 @@
     <div class="search-suggestion">
       <template v-if="searchResult && searchResult.length > 0">
         <dl class="result">
-          <dd v-for="(item,index) in searchResult" :key="index">
+          <dd v-for="(item,index) in searchResult" :key="index" @click.stop="handleResultClick(item)">
             {{ item.word }}
           </dd>
         </dl>
@@ -27,14 +27,14 @@
       <template v-else>
         <dl class="hot-key">
           <dt>热搜</dt>
-          <dd v-for="(item,index) in hot" :key="index">
-            {{ item }}
+          <dd v-for="(item,index) in hot" :key="index" @click.stop="handleResultClick(item)">
+            {{ item.value }}
           </dd>
         </dl>
         <dl class="history">
           <dt>搜索历史</dt>
-          <dd v-for="(item,index) in history" :key="index">
-            {{ item }}
+          <dd v-for="(item,index) in history" :key="index" @click.stop="handleResultClick(item)">
+            {{ item.value }}
           </dd>
         </dl>
       </template>
@@ -58,7 +58,6 @@ export default {
   },
   mounted () {
     this.getHotData()
-    this.getSearchHistoryData()
   },
   methods: {
     // 实时搜索
@@ -78,6 +77,36 @@ export default {
         this.searchResult = []
       })
     }, 100),
+    // input聚焦事件
+    handleFocus () {
+      this.isFocus = !this.isFocus
+      if (this.history.length === 0) {
+        this.getSearchHistoryData()
+      }
+    },
+    // input失去焦点
+    handleBlur () {
+      // 搜索框弹出框点击时，input会首先失去焦点，需要延时关闭弹出，点击事件才能捕获到
+      this.blurTimer = setTimeout(() => {
+        this.isFocus = false
+      }, 200)
+    },
+    // 搜索结果点击
+    handleResultClick (item) {
+      const keyword = item.value || item.word || item
+      // 判断是否已经是搜索结果页面，如果是不跳转
+      if (this.$route.name !== 'SearchResult') {
+        this.$router.push({
+          path: '/search/result',
+          query: {
+            keyword: keyword
+          }
+        })
+      }
+      
+      this.keyword = ''
+      this.searchResult = []
+    },
     // 获取热搜数据
     getHotData () {
       getHot().then(res => {
@@ -85,6 +114,8 @@ export default {
         if (code === ERR_OK) {
           this.hot = data
         }
+      }).catch(() => {
+        this.hot = []
       })
     },
     // 获取搜索历时
@@ -94,8 +125,14 @@ export default {
         if (code === ERR_OK) {
           this.history = data
         }
+      }).catch(() => {
+        this.history = []
       })
     }
+  },
+  beforeDestroy () {
+    clearTimeout(this.blurTimer)
+    this.blurTimer = null
   }
 }
 </script>

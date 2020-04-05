@@ -1,13 +1,14 @@
 import axios from 'utils/axios.js'
 import Axios from 'axios'
+import { IS_MOCK } from 'api/config.js'
 
 // 获取用户搜索历史
 export function getSearchHistory () {
-  return axios.get('/mock/common/search-history.json')
+  return axios.get(`/mock/common/${ IS_MOCK ? 'history' : 'search-history.json' }`)
 }
 // 获取热搜词接口
 export function getHot () {
-  return axios.get('/mock/common/hot.json')
+  return axios.get(`/mock/common/hot${ IS_MOCK ? '' : '.json' }`)
 }
 // 获取底部版权footer数据
 export function getFooter () {

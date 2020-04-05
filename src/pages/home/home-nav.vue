@@ -55,6 +55,9 @@ export default {
           this.navList = data
           this.currentNav = data[0].data
         }
+      }).catch(() => {
+        this.navList = []
+        this.currentNav = {}
       })
     }
   },

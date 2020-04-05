@@ -1,16 +1,10 @@
 const path = require('path')
-
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
   publicPath: './',
   outputDir: 'dist',
-  // chainWebpack: (config) => {
-  //   config
-  //     .plugin('webpack-bundle-analyzer')
-  //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-  // },
   configureWebpack: {
     resolve: {
       alias: {
@@ -30,7 +24,10 @@ module.exports = {
     port: 3400,
     proxy: {
       '/mock': {
-        target: 'http://localhost:3400'
+        target: 'http://localhost:4300',
+        pathRewrite: {
+          '/mock': process.env.NODE_ENV === 'development' ? '' : '/mock'
+        }
       }
     }
   },
