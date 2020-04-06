@@ -4,7 +4,7 @@
       <div class="footer-links">
         <ul>
           <li
-            v-for="(item,index) in footer.links"
+            v-for="(item,index) in linkList"
             :key="index"
             class="link-item"
           >
@@ -13,7 +13,7 @@
         </ul>
       </div>
       <div class="copyright">
-        <p>© {{ year }} {{ footer.website }}  {{ footer.caseCode }}  {{ footer.company }}</p>
+        <p>© {{ year }} imooc.com  京ICP备 12003892号-11  北京奥鹏文化传媒有限公司</p>
       </div>
       <div class="share">
         <div class="share-item wechart">
@@ -35,7 +35,7 @@ import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      footer: {}
+      linkList: []
     }
   },
   created () {
@@ -50,8 +50,10 @@ export default {
       getFooter().then(res => {
         let { code, data } = res
         if (code === ERR_OK) {
-          this.footer = data
+          this.linkList = data
         }
+      }).catch(() => {
+        this.linkList = []
       })
     }
   }

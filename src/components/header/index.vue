@@ -3,12 +3,12 @@
     <!-- logo -->
     <div class="logo-box">
       <router-link to="/">
-        <img :src="header.logo" height="72" alt="">
+        <img src="https://www.imooc.com/static/img/index/logo.png" height="72" alt="Logo">
       </router-link>
     </div>
 
     <!-- 导航栏模块 -->
-    <m-nav v-if="header.nav" :list="header.nav" />
+    <m-nav v-if="navList.length" :list="navList" />
 
     <!-- 搜索框模块 -->
     <search />
@@ -26,20 +26,22 @@ import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      header: {} // 头部数据
+      navList: {}
     }
   },
   mounted () {
     this.getHeaderData()
   },
   methods: {
-    // 获取头部数据
+    // 获取头部导航数据
     getHeaderData () {
       getHeader().then(res => {
         let { code, data } = res
         if (code === ERR_OK) {
-          this.header = data
+          this.navList = data
         }
+      }).catch(() => {
+        this.navList = []
       })
     }
   },

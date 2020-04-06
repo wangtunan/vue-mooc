@@ -28,13 +28,13 @@
         <dl class="hot-key">
           <dt>热搜</dt>
           <dd v-for="(item,index) in hot" :key="index" @click.stop="handleResultClick(item)">
-            {{ item.value }}
+            {{ item.value || item }}
           </dd>
         </dl>
         <dl class="history">
           <dt>搜索历史</dt>
           <dd v-for="(item,index) in history" :key="index" @click.stop="handleResultClick(item)">
-            {{ item.value }}
+            {{ item.value || item }}
           </dd>
         </dl>
       </template>
@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-import { getHot, getSearchHistory, getSearch } from 'api/common.js'
+import { getHot, getSearchHistory, getSearch, createSearchHistory } from 'api/common.js'
 import { debounce } from 'utils/utils.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -80,9 +80,7 @@ export default {
     // input聚焦事件
     handleFocus () {
       this.isFocus = !this.isFocus
-      if (this.history.length === 0) {
-        this.getSearchHistoryData()
-      }
+      this.getSearchHistoryData()
     },
     // input失去焦点
     handleBlur () {
@@ -94,6 +92,17 @@ export default {
     // 搜索结果点击
     handleResultClick (item) {
       const keyword = item.value || item.word || item
+      // 本地开发环境时，点击结果生成一条搜索历史
+      if (process.env.NODE_ENV === 'development') {
+        createSearchHistory(keyword).then(res => {
+          const { code, msg } = res
+          if (code !== ERR_OK) {
+            console.log(msg)
+          }
+        }).catch(() => {
+          console.log('生成搜索历史结果失败')
+        })
+      }
       // 判断是否已经是搜索结果页面，如果是不跳转
       if (this.$route.name !== 'SearchResult') {
         this.$router.push({
@@ -103,7 +112,6 @@ export default {
           }
         })
       }
-      
       this.keyword = ''
       this.searchResult = []
     },

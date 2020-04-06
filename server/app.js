@@ -3,6 +3,7 @@ import json from 'koa-json'
 import bodyParser from 'koa-bodyparser'
 import homeRouter from './interface/home.js'
 import commonRouter from './interface/common.js'
+import noticeRouter from './interface/notice.js'
 import mongoose from 'mongoose'
 import dbConfig from './config.js'
 
@@ -38,6 +39,7 @@ mongoose.connect(dbConfig.dbs, {
 // 路由
 app.use(homeRouter.routes(), homeRouter.allowedMethods())
 app.use(commonRouter.routes(), commonRouter.allowedMethods())
+app.use(noticeRouter.routes(), noticeRouter.allowedMethods())
 
 // 启动服务
 app.listen(port, () => {

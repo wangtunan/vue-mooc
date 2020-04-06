@@ -7,7 +7,7 @@
         :key="nav.code"
         class="nav-item"
         :class="{active: currentNavIndex == index}"
-        @click="currentNavIndex = index"
+        @click="handleNavClick(nav, index)"
       >
         {{ nav.title }}
       </li>
@@ -18,36 +18,36 @@
       <div class="list-setting">
         <span class="tips">消息中心只展示最近三个月的消息</span>
         <span class="setting-box">
-          <span class="read-all" @click="handleAllReadyClick">全部标记为已读</span>
+          <span class="read-all" @click="handleAllReadClick">全部标记为已读</span>
           <span class="read-setting" @click="handleSettingClick">通知设置</span>
         </span>
       </div>
       <ul>
         <li
-          v-for="(item,index) in filterList"
+          v-for="(item,index) in noticeList"
           :key="index"
           ref="NoticeList"
           class="list-item"
-          :class="{ready: item.isReady}"
+          :class="{ready: item.isRead}"
         >
           <div class="item-icon">
-            {{ item.type }}
+            {{ item.code == 1 ? '实战' : '系统' }}
           </div>
           <div class="item-content">
-            <p class="title">
+            <p class="title" @click="handleNoticeClick(item, index)">
               {{ item.title }}
             </p>
             <p class="time">
               {{ item.time }}
             </p>
-            <span class="iconfont delete" @click="handleDeleteClick(item, index)">&#xe622;</span>
+            <span class="iconfont delete" @click.stop="handleDeleteClick(item, index)">&#xe622;</span>
           </div>
         </li>
       </ul>
     </div>
 
     <!-- pagination -->
-    <pagination :total="total" :page.sync="page" />
+    <pagination :total="total" :page.sync="page" @change="handlePaginationChange" />
 
     <!-- dialog -->
     <notice-setting :list="settingList" :visible.sync="dialogVisible"></notice-setting>
@@ -56,11 +56,11 @@
 <script>
 import Pagination from 'components/pagination/pagination.vue'
 import { ERR_OK } from 'api/config.js'
-import { getNoticeList, getNoticeSetting } from 'api/notice.js'
+import { getNoticeList, getNoticeSetting, noticeReadOne, noticeReadAll, noticeNoticeDelete } from 'api/notice.js'
 export default {
   data () {
     return {
-      total: 100,           // 总数
+      total: 0,             // 总数
       page: 1,              // 当前页
       dialogVisible: false, // 是否显示消息中心弹窗
       settingList: [],      // 设置数据
@@ -70,6 +70,7 @@ export default {
     }
   },
   created () {
+    this.isDev = process.env.NODE_ENV === 'development',
     this.navList = [
       { title: '全部', code: 0 },
       { title: '实战', code: 1 },
@@ -80,55 +81,141 @@ export default {
     this.getNoticeListData()
   },
   methods: {
-    handleAllReadyClick () {
-      let code = this.navList[this.currentNavIndex].code
-      this.noticeList.forEach((item, index) => {
-        if (item.code === code || code === 0) {
-          this.noticeList[index]['isReady'] = true
-        }
-      })
-      this.$message.success('标记成功')
+    // 选项卡切换
+    handleNavClick (nav, index) {
+      this.page = 1
+      this.currentNavIndex = index
+      this.getNoticeListData()
     },
+    // 单个通知删除
     handleDeleteClick (item, index) {
-      clearTimeout(this.timer)
-      let currentDeleteItem = this.$refs.NoticeList[index]
-      currentDeleteItem.style.height = 0
-      currentDeleteItem.style.opacity = 0
-      this.timer = setTimeout(() => {
-        currentDeleteItem.style.display = 'none'
-        this.noticeList.splice(index, 1)
-        this.$message.success('删除成功')
-      }, 300)
+      // 本地开发环境下才请求接口
+      if (this.isDev) {
+        const data = {
+          id: item.id
+        }
+        noticeNoticeDelete(data).then(res => {
+          const { code, msg } = res
+          if (code !== ERR_OK) {
+            this.$message.error(msg)
+            return false
+          }
+          this.$message.success('删除成功')
+          this.getNoticeListData()
+        }).catch(() => {
+          this.$message.error('删除失败')
+        })
+      } else {
+        clearTimeout(this.timer)
+        let currentDeleteItem = this.$refs.NoticeList[index]
+        currentDeleteItem.style.height = 0
+        currentDeleteItem.style.opacity = 0
+        this.timer = setTimeout(() => {
+          currentDeleteItem.style.display = 'none'
+          this.noticeList.splice(index, 1)
+          this.$message.success('删除成功')
+        }, 300)
+      }
     },
+    // 单个通知已读
+    handleNoticeClick (item, index) {
+      // 本地开发环境下才请求接口
+      if (this.isDev) {
+        const data = {
+          id: item.id
+        }
+        noticeReadOne(data).then(res => {
+          const { code, msg } = res
+          if (code !== ERR_OK) {
+            this.$message.error(msg)
+            return false
+          }
+          this.$message.success('消息已读成功')
+          this.getNoticeListData()
+        }).catch(() => {
+          this.$message.error('消息已读失败')
+        })
+      } else {
+        item.isRead = true
+        this.$set(this.noticeList, index, item)
+      }
+    },
+    // 全部标记已读
+    handleAllReadClick () {
+      // 本地开发环境才请求接口
+      if (this.isDev) {
+        const data = {
+          code: this.currentCode
+        }
+        noticeReadAll(data).then(res => {
+          const { code, msg } = res
+          if (code !== ERR_OK) {
+            this.$message.error(msg)
+            return false
+          }
+          this.$message.success('全部标记成功')
+          this.getNoticeListData()
+        }).catch(() => {
+          this.$message.error('全部标记失败')
+        })
+      } else {
+        this.noticeList.forEach((item, index) => {
+          if (item.code === this.currentCode || !this.currentCode) {
+            item.isRead = true
+            this.$set(this.noticeList, index, item)
+          }
+        })
+        this.$message.success('全部标记成功')
+      }
+    },
+    // 通知设置点击
     handleSettingClick () {
       this.dialogVisible = true
       this.getNoticeSettingData()
     },
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
+      // 本地开发环境下才有分页
+      if (process.env.NODE_ENV === 'development') {
+        this.getNoticeListData()
+      }
+    },
+    // 获取通知列表数据
     getNoticeListData () {
-      getNoticeList().then(res => {
+      const params = {
+        page: this.page,
+        code: this.currentCode
+      }
+      getNoticeList(params).then(res => {
+        this.noticeList = []
+        this.total = 0
         let { code, data } = res
         if (code === ERR_OK) {
-          this.noticeList = data
+          this.noticeList = data.list
+          this.total = data.total
         }
+      }).catch(() => {
+        this.noticeList = []
+        this.total = 0
       })
     },
+    // 获取通知设置数据
     getNoticeSettingData () {
       getNoticeSetting().then(res => {
+        this.settingList = []
         let { code, data } = res
         if (code === ERR_OK) {
           this.settingList = data
         }
+      }).catch(() => {
+        this.settingList = []
       })
     }
   },
   computed: {
-    filterList () {
-      let result = this.noticeList.slice()
-      const code = this.navList[this.currentNavIndex].code
-      if (this.currentNavIndex !== 0) {
-        result = result.filter(item => item.code === code)
-      }
-      return result
+    currentCode () {
+      return this.navList[this.currentNavIndex].code || ''
     }
   },
   components: {

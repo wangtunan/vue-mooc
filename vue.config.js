@@ -26,7 +26,7 @@ module.exports = {
       '/mock': {
         target: 'http://localhost:4300',
         pathRewrite: {
-          '/mock': process.env.NODE_ENV === 'development' ? '' : '/mock'
+          '/mock': ''
         }
       }
     }

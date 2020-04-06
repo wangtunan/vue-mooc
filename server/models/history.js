@@ -4,7 +4,7 @@ import { getGuid } from '../../src/utils/utils.js'
 const Schema  = moogose.Schema
 const HistorySchema = new Schema({
   id: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
     index: true

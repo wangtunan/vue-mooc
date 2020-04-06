@@ -57,5 +57,8 @@ export function mere (target) {
 
 // 获取随机主键
 export function getGuid () {
-  return Number((Math.random() * 1000 + new Date().getTime()).toString().substring(0, 12))
+  function S4 () {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+ }
+ return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
 }

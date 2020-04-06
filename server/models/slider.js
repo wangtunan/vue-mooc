@@ -5,7 +5,7 @@ import { getGuid } from '../../src/utils/utils.js'
 const Schema = mongoose.Schema
 const SliderSchema = new Schema({
   id: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
     index: true

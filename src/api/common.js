@@ -1,23 +1,36 @@
 import axios from 'utils/axios.js'
 import Axios from 'axios'
-import { IS_MOCK } from 'api/config.js'
+import { IS_MOCK, ERR_OK } from 'api/config.js'
 
 // 获取用户搜索历史
 export function getSearchHistory () {
-  return axios.get(`/mock/common/${ IS_MOCK ? 'history' : 'search-history.json' }`)
+  return axios.get(`/mock/common/history${ IS_MOCK ? '' : '.json' }`)
 }
+
+// 生成一条搜索历史
+export function createSearchHistory (keyword) {
+  return axios.get('/mock/common/history/create', {
+    params: {
+      keyword
+    }
+  })
+}
+
 // 获取热搜词接口
 export function getHot () {
   return axios.get(`/mock/common/hot${ IS_MOCK ? '' : '.json' }`)
 }
+
 // 获取底部版权footer数据
 export function getFooter () {
-  return axios.get('/mock/common/footer.json')
+  return axios.get(`/mock/common/footer${ IS_MOCK ? '' : '.json' }`)
 }
+
 // 获取头部数据接口
 export function getHeader () {
-  return axios.get('/mock/common/header.json')
+  return axios.get(`/mock/common/nav${ IS_MOCK ? '' : '.json' }`)
 }
+
 // 获取实时搜索数据
 export function getSearch (keyword) {
   return new Promise((resolve, reject) => {
@@ -29,7 +42,7 @@ export function getSearch (keyword) {
       const { status, data: { result, data } } = res
       if (status === 200 && result === 0) {
         resolve({
-          code: 0,
+          code: ERR_OK,
           msg: '获取成功',
           data: data
         })

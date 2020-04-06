@@ -1,34 +1,38 @@
 import mongoose from 'mongoose'
-import hotData  from '../initData/hot.js'
+import navData from '../initData/header.js'
 import { getGuid } from '../../src/utils/utils.js'
 const Schema = mongoose.Schema
-const HotSchema = new Schema({
+const NavSchema = new Schema({
   id: {
     type: String,
     required: true,
     unique: true,
     index: true
   },
-  value: {
+  title: {
     type: String,
     required: true
   },
-  time: {
+  path: {
+    type: String,
+    required: true,
+    default: '/'
+  },
+  icon: {
     type: String
   }
 })
 
-const hotModel = mongoose.model('hot', HotSchema)
+const navModel = mongoose.model('nav', NavSchema)
 
 // 如果没有数据，则初始化
-hotModel.find((err, data) => {
+navModel.find((err, data) => {
   if (!data || data.length === 0) {
-    hotData.forEach(item => {
+    navData.forEach(item => {
       item.id = getGuid()
-      item.time = new Date().toISOString()
-      hotModel.create(item)
+      navModel.create(item)
     })
   }
 })
 
-export default hotModel
+export default navModel
