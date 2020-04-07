@@ -18,7 +18,7 @@
           :class="{
             active: index == currentIndex
           }"
-          @click="currentIndex = index"
+          @click="handleTypeClick(type, index)"
         >
           {{ type }}
         </dd>
@@ -29,10 +29,10 @@
     <div class="read-list">
       <ul>
         <li
-          v-for="(item, index) in filterReadList"
+          v-for="(item, index) in readList"
           :key="index"
           class="read-item"
-          @click="handleReadClick"
+          @click="handleReadClick(item)"
         >
           <div class="img-box">
             <img :src="item.img" alt="">
@@ -59,7 +59,7 @@
             <p class="other">
               <span class="price">¥ {{ item.price }}</span>
               <span class="trem">共{{ item.term }}小节</span>
-              <span class="number">共{{ item.number }}人购买</span>
+              <span class="number">共{{ item.persons }}人购买</span>
             </p>
           </div>
         </li>
@@ -67,7 +67,7 @@
     </div>
 
     <!-- 分页 -->
-    <pagination :total.sync="total" />
+    <pagination :total="total" :page.sync="page" />
   </div>
 </template>
 <script>
@@ -79,43 +79,73 @@ export default {
     return {
       readList: [],
       currentIndex: 0,
-      total: 50
+      total: 0,
+      page: 1
     }
   },
   mounted () {
+    this.typeList = ['全部', '前端开发', '后端开发', '数据库', '面试', '其它']
     this.getReadListData()
   },
   methods: {
+    // 专栏类型点击
+    handleTypeClick (type, index) {
+      this.page = 1
+      this.currentIndex = index
+      this.getReadListData()
+    },
+    // 专栏点击
     handleReadClick () {
       let random = new Date().getTime()
       this.$router.push(`/read/${random}`)
     },
+    // 获取专栏列表数据
     getReadListData () {
-      getReadList().then(res => {
-        let { code, data } = res
+      const params = {
+        page: this.page,
+        type: this.currentType
+      }
+      getReadList(params).then(res => {
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.readList = data
+          data.list = this.getTryReadData(data.list)
+          this.readList = data.list
+          this.total = data.total
+        } else {
+          this.readList = []
+          this.total = 0
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.readList = []
+        this.total = 0
       })
+    },
+    // 获取专栏试读章节
+    getTryReadData (array) {
+      if (!array || array.lenght === 0) {
+        return []
+      }
+      for (let i = 0; i < array.length; i++) {
+        const chapter = array[i].chapter
+        let result = []
+        for (let j = 0; j < chapter.length; j++) {
+          const chapterData = chapter[j]['data']
+          for (let k = 0; k < chapterData.length; k++) {
+            if (chapterData[k]['isTry']) {
+              result.push(chapterData[k]['title'])
+            }
+          }
+        }
+        array[i]['tryRead'] = result
+      }
+      return array
     }
   },
   computed: {
-    typeList () {
-      let result = []
-      let navSet = new Set(['全部'])
-      this.readList.forEach(item => {
-        navSet.add(item.type)
-      })
-      result = Array.from(navSet)
-      return result
-    },
-    filterReadList () {
-      let list = this.readList.slice()
-      let currType = this.typeList[this.currentIndex]
-      if (this.currentIndex !== 0) {
-        list = list.filter(item => item.type === currType)
-      }
-      return list
+    currentType () {
+      const type = this.typeList[this.currentIndex]
+      return type === '全部' ? '' : type
     }
   },
   components: {

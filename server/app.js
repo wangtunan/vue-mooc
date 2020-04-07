@@ -4,6 +4,7 @@ import bodyParser from 'koa-bodyparser'
 import homeRouter from './interface/home.js'
 import commonRouter from './interface/common.js'
 import noticeRouter from './interface/notice.js'
+import readRouter from './interface/read.js'
 import mongoose from 'mongoose'
 import dbConfig from './config.js'
 
@@ -40,6 +41,7 @@ mongoose.connect(dbConfig.dbs, {
 app.use(homeRouter.routes(), homeRouter.allowedMethods())
 app.use(commonRouter.routes(), commonRouter.allowedMethods())
 app.use(noticeRouter.routes(), noticeRouter.allowedMethods())
+app.use(readRouter.routes(), readRouter.allowedMethods())
 
 // 启动服务
 app.listen(port, () => {

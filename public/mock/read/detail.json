@@ -10,7 +10,7 @@
       "job": "前端性能优化极客"
     },
     "term": "27",
-    "number": 588,
+    "persons": 588,
     "price": "48.00",
     "chapter": [
       {
@@ -109,35 +109,35 @@
         "title": "从0到1 实战朋友圈移动Web App开发",
         "img": "https://img2.mukewang.com/5d3138f000015f4c05400720.jpg",
         "price": "48",
-        "number": "472",
+        "persons": "472",
         "term": "36"
       },
       {
         "title": "你不知道的前端性能优化技巧",
         "img": "https://img3.mukewang.com/5d283a2c0001b89205400720.jpg",
         "price": "48",
-        "number": "508",
+        "persons": "508",
         "term": "27"
       },
       {
         "title": "零基础实现微信电商小程序开发",
         "img": "https://img2.mukewang.com/5d22a6be0001d12805400720.jpg",
         "price": "68",
-        "number": "491",
+        "persons": "491",
         "term": "50"
       },
       {
         "title": "Python入门指南",
         "img": "https://img.mukewang.com/5d5510fa00011fa605400720.jpg",
         "price": "46",
-        "number": "86",
+        "persons": "86",
         "term": "33"
       },
       {
         "title": "Spring Cloud微服务开发实践",
         "img": "https://img3.mukewang.com/5d12d7e500013ada03600480.jpg",
         "price": "88",
-        "number": "299",
+        "persons": "299",
         "term": "39"
       }
     ]

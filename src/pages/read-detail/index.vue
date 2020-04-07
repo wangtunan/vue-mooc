@@ -17,7 +17,7 @@
             <p class="other-info">
               <span v-if="readDetail.teacher" class="teacher-info">{{ readDetail.teacher.name }} / {{ readDetail.teacher.job }}</span>
               <span class="term">共{{ readDetail.term }}小节</span>
-              <span class="number">共{{ readDetail.number }}人购买</span>
+              <span class="number">共{{ readDetail.persons }}人购买</span>
             </p>
             <p class="price">
               ¥ {{ readDetail.price }}
@@ -126,6 +126,9 @@ export default {
             padding-bottom: 16px;
             font-size: 14px;
             color: rgba(255,255,255,0.6);
+            & > span {
+              margin-right: 10px;
+            }
           .price
             margin-bottom: 16px;
             font-size: 24px;
