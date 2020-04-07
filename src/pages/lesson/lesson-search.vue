@@ -13,7 +13,7 @@
         <dl v-if="hot.length" class="hot-box">
           <dt>热搜：</dt>
           <dd v-for="(item,index) in hot" :key="index" class="hot-item">
-            {{ item }}
+            {{ item.value }}
           </dd>
         </dl>
       </div>

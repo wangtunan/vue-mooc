@@ -34,13 +34,13 @@
             {{ item.code == 1 ? '实战' : '系统' }}
           </div>
           <div class="item-content">
-            <p class="title" @click="handleNoticeClick(item, index)">
+            <p class="title" @click="handleNoticeClick(item)">
               {{ item.title }}
             </p>
             <p class="time">
               {{ item.time }}
             </p>
-            <span class="iconfont delete" @click.stop="handleDeleteClick(item, index)">&#xe622;</span>
+            <span class="iconfont delete" @click.stop="handleDeleteClick(item)">&#xe622;</span>
           </div>
         </li>
       </ul>
@@ -70,7 +70,6 @@ export default {
     }
   },
   created () {
-    this.isDev = process.env.NODE_ENV === 'development',
     this.navList = [
       { title: '全部', code: 0 },
       { title: '实战', code: 1 },
@@ -88,85 +87,55 @@ export default {
       this.getNoticeListData()
     },
     // 单个通知删除
-    handleDeleteClick (item, index) {
-      // 本地开发环境下才请求接口
-      if (this.isDev) {
-        const data = {
-          id: item.id
-        }
-        noticeNoticeDelete(data).then(res => {
-          const { code, msg } = res
-          if (code !== ERR_OK) {
-            this.$message.error(msg)
-            return false
-          }
-          this.$message.success('删除成功')
-          this.getNoticeListData()
-        }).catch(() => {
-          this.$message.error('删除失败')
-        })
-      } else {
-        clearTimeout(this.timer)
-        let currentDeleteItem = this.$refs.NoticeList[index]
-        currentDeleteItem.style.height = 0
-        currentDeleteItem.style.opacity = 0
-        this.timer = setTimeout(() => {
-          currentDeleteItem.style.display = 'none'
-          this.noticeList.splice(index, 1)
-          this.$message.success('删除成功')
-        }, 300)
+    handleDeleteClick (item) {
+      const data = {
+        id: item.id
       }
+      noticeNoticeDelete(data).then(res => {
+        const { code, msg } = res
+        if (code !== ERR_OK) {
+          this.$message.error(msg)
+          return false
+        }
+        this.$message.success('删除成功')
+        this.getNoticeListData()
+      }).catch(() => {
+        this.$message.error('删除失败')
+      })
     },
     // 单个通知已读
-    handleNoticeClick (item, index) {
-      // 本地开发环境下才请求接口
-      if (this.isDev) {
-        const data = {
-          id: item.id
-        }
-        noticeReadOne(data).then(res => {
-          const { code, msg } = res
-          if (code !== ERR_OK) {
-            this.$message.error(msg)
-            return false
-          }
-          this.$message.success('消息已读成功')
-          this.getNoticeListData()
-        }).catch(() => {
-          this.$message.error('消息已读失败')
-        })
-      } else {
-        item.isRead = true
-        this.$set(this.noticeList, index, item)
+    handleNoticeClick (item) {
+      const data = {
+        id: item.id
       }
+      noticeReadOne(data).then(res => {
+        const { code, msg } = res
+        if (code !== ERR_OK) {
+          this.$message.error(msg)
+          return false
+        }
+        this.$message.success('消息已读成功')
+        this.getNoticeListData()
+      }).catch(() => {
+        this.$message.error('消息已读失败')
+      })
     },
     // 全部标记已读
     handleAllReadClick () {
-      // 本地开发环境才请求接口
-      if (this.isDev) {
-        const data = {
-          code: this.currentCode
-        }
-        noticeReadAll(data).then(res => {
-          const { code, msg } = res
-          if (code !== ERR_OK) {
-            this.$message.error(msg)
-            return false
-          }
-          this.$message.success('全部标记成功')
-          this.getNoticeListData()
-        }).catch(() => {
-          this.$message.error('全部标记失败')
-        })
-      } else {
-        this.noticeList.forEach((item, index) => {
-          if (item.code === this.currentCode || !this.currentCode) {
-            item.isRead = true
-            this.$set(this.noticeList, index, item)
-          }
-        })
-        this.$message.success('全部标记成功')
+      const data = {
+        code: this.currentCode
       }
+      noticeReadAll(data).then(res => {
+        const { code, msg } = res
+        if (code !== ERR_OK) {
+          this.$message.error(msg)
+          return false
+        }
+        this.$message.success('全部标记成功')
+        this.getNoticeListData()
+      }).catch(() => {
+        this.$message.error('全部标记失败')
+      })
     },
     // 通知设置点击
     handleSettingClick () {
@@ -176,10 +145,7 @@ export default {
     // 分页值更新
     handlePaginationChange (page) {
       this.page = page
-      // 本地开发环境下才有分页
-      if (process.env.NODE_ENV === 'development') {
-        this.getNoticeListData()
-      }
+      this.getNoticeListData()
     },
     // 获取通知列表数据
     getNoticeListData () {
@@ -190,10 +156,14 @@ export default {
       getNoticeList(params).then(res => {
         this.noticeList = []
         this.total = 0
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
           this.noticeList = data.list
           this.total = data.total
+        } else {
+          this.$message.error(msg)
+          this.noticeList = []
+          this.total = 0
         }
       }).catch(() => {
         this.noticeList = []

@@ -1,10 +1,10 @@
 import axios from 'utils/axios.js'
 import Axios from 'axios'
-import { IS_MOCK, ERR_OK } from 'api/config.js'
+import { ERR_OK } from 'api/config.js'
 
 // 获取用户搜索历史
 export function getSearchHistory () {
-  return axios.get(`/mock/common/history${ IS_MOCK ? '' : '.json' }`)
+  return axios.get(`/mock/common/history`)
 }
 
 // 生成一条搜索历史
@@ -18,17 +18,17 @@ export function createSearchHistory (keyword) {
 
 // 获取热搜词接口
 export function getHot () {
-  return axios.get(`/mock/common/hot${ IS_MOCK ? '' : '.json' }`)
+  return axios.get(`/mock/common/hot`)
 }
 
 // 获取底部版权footer数据
 export function getFooter () {
-  return axios.get(`/mock/common/footer${ IS_MOCK ? '' : '.json' }`)
+  return axios.get(`/mock/common/footer`)
 }
 
 // 获取头部数据接口
 export function getHeader () {
-  return axios.get(`/mock/common/nav${ IS_MOCK ? '' : '.json' }`)
+  return axios.get(`/mock/common/nav`)
 }
 
 // 获取实时搜索数据

@@ -36,9 +36,12 @@ export default {
     // 获取头部导航数据
     getHeaderData () {
       getHeader().then(res => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
           this.navList = data
+        } else {
+          this.$message.error(msg)
+          this.navList = []
         }
       }).catch(() => {
         this.navList = []

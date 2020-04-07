@@ -1,9 +1,8 @@
 import axios from 'utils/axios.js'
-import { IS_MOCK } from './config.js'
 
 // 分页获取中心列表
 export function getNoticeList (params) {
-  return axios.get(`/mock/notice/list${ IS_MOCK ? '' : '.json' }`, {
+  return axios.get(`/mock/notice/list`, {
     params: params
   })
 }

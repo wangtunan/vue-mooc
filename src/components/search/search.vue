@@ -28,13 +28,13 @@
         <dl class="hot-key">
           <dt>热搜</dt>
           <dd v-for="(item,index) in hot" :key="index" @click.stop="handleResultClick(item)">
-            {{ item.value || item }}
+            {{ item.value }}
           </dd>
         </dl>
         <dl class="history">
           <dt>搜索历史</dt>
           <dd v-for="(item,index) in history" :key="index" @click.stop="handleResultClick(item)">
-            {{ item.value || item }}
+            {{ item.value }}
           </dd>
         </dl>
       </template>
@@ -48,15 +48,16 @@ import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      keyword: '', // 搜索关键词
+      keyword: '',      // 搜索关键词
       searchResult: [], // 实时搜索结果
-      history: [], // 搜索历时
-      hot: [], // 热搜
-      isFocus: false, // 是否聚焦
-      tags: ['Java入门', '前端入门'], // tags
+      history: [],      // 搜索历时
+      hot: [],          // 热搜
+      isFocus: false,   // 是否聚焦
+      tags: [],         // tags
     }
   },
   mounted () {
+    this.tags = ['Java入门', '前端入门']
     this.getHotData()
   },
   methods: {
@@ -67,10 +68,11 @@ export default {
         return false
       }
       getSearch(this.keyword).then(res => {
-        const { code, data } = res
+        const { code, data, msg } = res
         if (code === ERR_OK) {
           this.searchResult = data
         } else {
+          this.$message.error(msg)
           this.searchResult = []
         }
       }).catch(() => {
@@ -91,18 +93,15 @@ export default {
     },
     // 搜索结果点击
     handleResultClick (item) {
-      const keyword = item.value || item.word || item
-      // 本地开发环境时，点击结果生成一条搜索历史
-      if (process.env.NODE_ENV === 'development') {
-        createSearchHistory(keyword).then(res => {
-          const { code, msg } = res
-          if (code !== ERR_OK) {
-            console.log(msg)
-          }
-        }).catch(() => {
-          console.log('生成搜索历史结果失败')
-        })
-      }
+      const keyword = item.value || item.word
+      createSearchHistory(keyword).then(res => {
+        const { code, msg } = res
+        if (code !== ERR_OK) {
+          console.log(msg)
+        }
+      }).catch(() => {
+        console.log('生成搜索历史结果失败')
+      })
       // 判断是否已经是搜索结果页面，如果是不跳转
       if (this.$route.name !== 'SearchResult') {
         this.$router.push({
@@ -118,9 +117,12 @@ export default {
     // 获取热搜数据
     getHotData () {
       getHot().then(res => {
-        const { code, data } = res
+        const { code, data, msg } = res
         if (code === ERR_OK) {
           this.hot = data
+        } else {
+          this.$message.error(msg)
+          this.hot = []
         }
       }).catch(() => {
         this.hot = []
@@ -129,9 +131,12 @@ export default {
     // 获取搜索历时
     getSearchHistoryData () {
       getSearchHistory().then(res => {
-        const { code, data } = res
+        const { code, data, msg } = res
         if (code === ERR_OK) {
           this.history = data
+        } else {
+          this.$message.error(msg)
+          this.history = []
         }
       }).catch(() => {
         this.history = []

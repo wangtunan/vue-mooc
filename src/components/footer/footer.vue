@@ -48,9 +48,12 @@ export default {
     // 获取底部版权数据
     getFooterData () {
       getFooter().then(res => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
           this.linkList = data
+        } else {
+          this.$message.error(msg)
+          this.linkList = []
         }
       }).catch(() => {
         this.linkList = []

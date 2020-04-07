@@ -19,7 +19,7 @@ module.exports = {
       }
     }
   },
-  productionSourceMap: true,
+  productionSourceMap: false,
   devServer: {
     port: 3400,
     proxy: {

@@ -1,9 +1,8 @@
 import axios from 'utils/axios.js'
-import { IS_MOCK } from './config.js'
 
 // 获取专栏列表数据
 export function getReadList (params) {
-  return axios.get(`/mock/read/list${ IS_MOCK ? '' : '.json' }`, {
+  return axios.get(`/mock/read/list`, {
     params
   })
 }

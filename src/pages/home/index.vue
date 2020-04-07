@@ -80,15 +80,20 @@ export default {
     // 首页轮播信息
     getBanner () {
       getSliderList().then((res) => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
           this.swiperList = data
           if (this.swiperList.length > 0) {
             this.currentSwiper = this.swiperList[0].img
           }
+        } else {
+          this.$message.error(msg)
+          this.swiperList = []
+          this.currentSwiper = ''
         }
       }).catch(() => {
         this.swiperList = []
+        this.currentSwiper = ''
       })
     },
     // 获取课程信息
