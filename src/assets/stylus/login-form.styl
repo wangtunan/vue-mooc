@@ -2,11 +2,6 @@
     position:relative;
     padding: 0 32px 0px
     .el-form-item
-      &.password-item
-        margin-bottom: 15px;
-        >>> .el-input__clear
-          padding-top: 4px;
-          font-size: 20px;
       &.auto-login-item
         .auto-login-btn-box
           float: right;
@@ -35,6 +30,10 @@
         background-color: rgba(28,31,33,.06);
         font-size: 16px;
     .login-btn
+      display: block;
+      width: 100%;
+      border: none;
+      outline: none;
       padding: 11px 32px;
       background-color: #f20d0d;
       border-radius: 24px;
@@ -45,3 +44,12 @@
       line-height: 24px;
       &:hover
         background-color: #C20A0A;
+      &.is-loading
+        background-color: rgba(242, 13, 13, 0.5);
+        pointer-events: none;
+        cursor: not-allowed;
+    .agreement
+      color: #37f;
+      cursor: pointer;
+    >>> .el-checkbox__label
+      color: #9199a1!important;

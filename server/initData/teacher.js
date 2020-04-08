@@ -1,0 +1,64 @@
+const teacherData = [
+  {
+    name: "七月",
+    avatar: "https://img1.mukewang.com/54584e2c00010a2c02200220-100-100.jpg",
+    job: "全栈工程师",
+    introduction: "十年研发及团队管理经验，对程序员面临的各种问题深有体会；精通Python、Java、Node.js、JavaScript等语言，对Web的基础研发、高并发处理与分布式有非常深入的理解。课程讲解深入浅出，极为擅长培养学生的编程思维。"
+  },
+  {
+    name: "liuyubobobo",
+    avatar: "https://img1.mukewang.com/5347593e00010cfb01400140-100-100.jpg",
+    job: "全栈工程师",
+    introduction: "创业者，全栈工程师，持续学习者。对技术开发，产品设计、前后端，ios，html5，智能算法等领域均有接触；拥有多款独立App作品；对一切可编程的东西有浓厚兴趣，对游戏编程格外感兴趣。相信编程改变一切。"
+  },
+  {
+    name: "ustbhuangyi",
+    avatar: "https://img2.mukewang.com/577baef700019c4501400140-100-100.jpg",
+    job: "前端架构师",
+    introduction: "北京科技大学毕业，计算机专业硕士。对前端工程化，前后端性能优化有丰富的经验。曾任职百度、滴滴，现担任Zoom前端架构师。慕课网明星讲师，Vue.js 布道者，《Vue.js 技术揭秘》独立作者，《Vue.js 权威指南》主要作者。开源项目 better-scroll 作者，并主导滴滴开源项目 cube-ui，建立团队技术博客。"
+  },
+  {
+    name: "慕课官方号",
+    avatar: "https://img.mukewang.com/5b88f1f50001688401500150-100-100.jpg",
+    job: "页面重构设计",
+    introduction: "慕课，Massive（大规模）Open（开放）Online（在线）Course（课程）。专注做好IT技能教育的MOOC，符合互联网发展潮流接地气儿的MOOC。我们有更多免费资源，我们只教有用的，我们专心做教育。"
+  },
+  {
+    name: "Oeasy",
+    avatar: "https://img3.mukewang.com/53855e6f0001034501400140-100-100.jpg",
+    job: "页面重构设计",
+    introduction: "他，授课风趣幽默，激情四射，自称屌丝青年，中国传媒大学计算机教师；他，专注于网页制作、平面设计、多媒体等多个领域的软件以及应用的挖掘与创新，热爱分享，是新鲜热门软件和应用的导航标，他就是众粉丝心中的“Oeasy老湿”"
+  },
+  {
+    name: "城南大师兄",
+    avatar: "https://img2.mukewang.com/5cac7e810001fe7705270698-100-100.jpg",
+    job: "JAVA开发工程师",
+    introduction: "目前主要负责后端架构设计，具有十多年一线开发和架构经验，拥有丰富的高性能、高并发处理以及大型服务器软件设计架构经验。深谙各种源码。工作中常常和千万级高并发的问题“正面硬钢” ，因此在高并发调优等方面积累了丰富的实战经验。十几年的架构经验，让讲师早已将理论和实践锻造的炉火纯青。如果你想学习他密不外传的工作‘渡劫’经验，讲师等你打Call~"
+  },
+  {
+    name: "bobby",
+    avatar: "https://img4.mukewang.com/58d9c48f0001ad0304070270-100-100.jpg",
+    job: "全栈工程师",
+    introduction: "python全栈工程师，五年工作经验，喜欢钻研python技术，对爬虫、web开发以及机器学习有浓厚的兴趣，关注前沿技术以及发展趋势。"
+  },
+  {
+    name: "大目",
+    avatar: "https://img1.mukewang.com/5d142f090804929712361209-100-100.jpg",
+    job: "JAVA开发工程师",
+    introduction: "阿里技术专家，9年软件系统开发经验，多年系统架构经验。参与开发/架构多个大型项目，Spring Cloud、微服务、持续集成、持续交付、Cloud Native生态均有涉猎。热爱技术交流，代表公司参加全球微服务架构高峰论坛、QCon等技术沙龙。拥抱开源，多个项目开源在Github与Gitee上，也是多个项目的Contributor，为多个开源项目提交PR。"
+  },
+  {
+    name: "hyman",
+    avatar: "https://img.mukewang.com/54169c430001face18403264-100-100.jpg",
+    job: "移动开发工程师",
+    introduction: "同大千攻城狮般无异，本狮有着巨大的火热的不灭的技术热情，痴迷于Android开发。乐于分享，善于将技术生活化，唯愿与大千男女攻城狮共同进步"
+  },
+  {
+    name: "PegasusWang",
+    avatar: "https://img3.mukewang.com/5bfba2490001457005750575-100-100.jpg",
+    job: "Python工程师",
+    introduction: "从事web开发4年，工作中以 Python 作为主力语言，代码控，实践经验丰富，乐于分享技术知识，知乎专栏作者。"
+  }
+]
+
+export default teacherData

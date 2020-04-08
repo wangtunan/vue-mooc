@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import NavContent from './home-nav-content.vue'
+import NavContent from './nav-content.vue'
 import { ERR_OK } from 'api/config.js'
 import { getHomeNav } from 'api/home.js'
 export default {

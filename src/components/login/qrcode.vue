@@ -1,6 +1,6 @@
 <template>
   <div class="qrcode-container">
-    <img class="qrcode-img" src="./qrcode.png" width="160" height="160" alt="">
+    <img class="qrcode-img" src="@/assets/images/qrcode.png" width="160" height="160" alt="">
     <p class="qrcode-title">
       扫描二维码登录慕课网
     </p>

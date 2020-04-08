@@ -50,7 +50,7 @@ export default {
     MHeader,
     MFooter,
     MSidebar,
-    Login: () => import('components/login/login.vue')
+    Login: () => import('components/login/index.vue')
   }
 }
 </script>

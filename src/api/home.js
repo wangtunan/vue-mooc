@@ -22,10 +22,10 @@ export function getArticle () {
 
 // 获取精英讲师信息
 export function getTeacher () {
-  return axios.get('/mock/home/teacher.json')
+  return axios.get('/mock/home/teacher')
 }
 
 // 获取全明星信息
 export function getAllStar () {
-  return axios.get('/mock/home/allstar.json')
+  return axios.get('/mock/home/student')
 }

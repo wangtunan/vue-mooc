@@ -21,7 +21,7 @@
                   {{ item.name }}
                 </p>
                 <p class="label">
-                  {{ item.label }}
+                  {{ item.job }}
                 </p>
               </div>
               <p class="teacher-intro">
@@ -45,7 +45,7 @@ export default {
   },
   data () {
     return {
-      interval: 5000, // 轮播的间隔
+      interval: 5000
     }
   },
   computed: {

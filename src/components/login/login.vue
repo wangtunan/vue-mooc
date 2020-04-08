@@ -1,183 +1,143 @@
 <template>
-  <div class="login-container">
-    <div class="login-mask" @click="handleMaskClick" />
-    <div class="login-main">
-      <div class="login-tab">
-        <span
-          v-for="(item,index) in loginTabs"
-          :key="index"
-          class="login-tab-item"
-          :class="{active: index==currentTabIndex}"
-          @click="handleLoginTabClick(index)"
-        >{{ item }}</span>
-        <span class="login-close iconfont" @click="setShowLogin(false)">&#xe619;</span>
-      </div>
-      <component :is="componentName" />
-      <div v-show="componentName!='qrcode-way'" class="three-login-way">
-        <span class="phone-login">{{ threeTitle }}</span>
-        <span class="three-way-item">
-          <i class="iconfont weibo">&#xe653;</i>
-          <i class="iconfont wechart">&#xe646;</i>
-          <i class="iconfont qq">&#xe6a0;</i>
-        </span>
-      </div>
-      <div class="qrcode-way" :style="getQrcodeBackground" @click="handleQrcodeClick" />
-    </div>
+  <div class="login-way">
+    <el-form ref="loginForm" :model="loginForm" :rules="rules">
+      <el-form-item prop="username">
+        <el-input ref="username" v-model.trim="loginForm.username" placeholder="请输入手机号/邮箱" clearable />
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input ref="passowrd" v-model.trim="loginForm.password" placeholder="请输入密码" show-password />
+      </el-form-item>
+      <el-form-item v-if="index === 1" prop="ckpassword">
+        <el-input v-model.trim="loginForm.ckpassword" placeholder="请再次输入密码" show-password />
+      </el-form-item>
+      <el-form-item class="auto-login-item">
+        <template v-if="index == 0">
+          <el-checkbox v-model="loginForm.auto">
+            七天内自动登录
+          </el-checkbox>
+          <div class="auto-login-btn-box">
+            <span>找回密码</span>
+            <span>无法登陆</span>
+          </div>
+        </template>
+        <template v-else>
+          <el-checkbox v-model="loginForm.argement">
+            同意
+          </el-checkbox>
+          <span class="agreement">《慕课网注册协议》</span>
+        </template>
+      </el-form-item>
+    </el-form>
+    <button class="login-btn" :class="{'is-loading': isLoading || (index == 1 && !loginForm.argement)}" @click="handleValidateForm">
+      {{ index == 0 ? '登录' : '注册' }}
+    </button>
   </div>
 </template>
 <script>
-import LoginWay from './login-way.vue'
-import RegisterWay from './register-way.vue'
-import QrcodeWay from './qrcode-way.vue'
-import { mapMutations, mapGetters } from 'vuex'
+import crypto from 'crypto-js'
+import { mapMutations } from 'vuex'
+import { userLogin, userRegister } from 'api/user.js'
+import { ERR_OK } from 'api/config.js'
 export default {
+  props: {
+    index: Number
+  },
   data () {
+    const checkPassword = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.loginForm.password) {
+        callback(new Error('两次输入的密码不一致'))
+      } else {
+        callback()
+      }
+    }
+    const rules = {
+      username: [
+        { required: true, message: '请输入手机号/邮箱', trigger: 'blur' }
+      ],
+      password: [
+        { required: true, message: '请输入密码', trigger: 'blur' }
+      ],
+      ckpassword: [
+        { required: true, message: '请再次输入密码', trigger: 'blur' },
+        { validator: checkPassword, trigger: 'blur' }
+      ]
+    }
     return {
-      loginTabs: ['登录', '注册'],
-      currentTabIndex: 0,
-      componentName: 'login-way'
+      isLoading: false,
+      rules: rules,
+      loginForm: {
+        username: '',
+        password: '',
+        ckpassword: '',
+        auto: true,
+        argement: false
+      }
     }
   },
-  created () {
-    this.currentTabIndex = this.loginAction === 'login' ? 0 : 1
+  mounted () {
+    // 自动聚焦
+    const usernameRef = this.$refs.username
+    const passwordRef = this.$refs.password
+    if (!this.loginForm.username) {
+      usernameRef.focus()
+    } else if (!this.loginForm.password) {
+      passwordRef.focus()
+    }
   },
   methods: {
-    // 遮罩点击
-    handleMaskClick () {
-      this.$emit('maskClick')
+    // 表单校验
+    handleValidateForm () {
+      if (this.isLoading || (this.index === 1 && !this.loginForm.argement)) {
+        return false
+      }
+      this.$refs['loginForm'].validate((valid) => {
+        if (valid) {
+          // this.handleBtnClick()
+        }
+      })
     },
-    // 登陆tab点击
-    handleLoginTabClick (index) {
-      this.currentTabIndex = index
-    },
-    // 二维码点击事件
-    handleQrcodeClick () {
-      this.componentName = this.componentName === 'qrcode-way' ? 'login-way' : 'qrcode-way'
+    // 按钮点击
+    handleBtnClick () {
+      const params = {
+        username: this.loginForm.username,
+        passowrd: crypto.MD5(this.loginForm.password).toString()
+      }
+      // 判断是登陆还是注册
+      const func = this.index === 0 ? userLogin : userRegister
+      this.isLoading = true
+      func(params).then(res => {
+        this.isLoading = false
+        let { code, data, msg } = res
+        if (code !== ERR_OK) {
+          this.$message.error(msg)
+          return false
+        }
+        // 缓存用户数据
+        this.setUserInfo(data)
+        // 关闭弹窗
+        this.setShowLogin(false)
+        // 重载页面
+        window.location.reload()
+      }).catch(() => {
+        this.isLoading = true
+        this.$message.error('服务器异常')
+      })
     },
     // vuex
-    ...mapMutations({
-      'setShowLogin': 'login/SET_SHOW_LOGIN'
+    ...mapMutations('login', {
+      'setUserInfo': 'SET_USER_INFO',
+      'setShowLogin': 'SET_SHOW_LOGIN'
     })
   },
-  computed: {
-    getQrcodeBackground () {
-      let background = this.componentName === 'qrcode-way' ? `url('https://www.imooc.com/static/img/pcLogin.png') no-repeat 0 0` : `url('https://www.imooc.com/static/img/erweima.png') no-repeat 0 0`
-      return {
-        background: background
-      }
-    },
-    threeTitle () {
-      return this.currentTabIndex === 0 ? '手机短信登陆' : '其它登陆方式'
-    },
-    // vuex
-    ...mapGetters(['loginAction'])
-  },
   watch: {
-    currentTabIndex (newVal) {
-      this.componentName = newVal === 0 ? 'login-way' : 'register-way'      
+    index () {
+      this.$refs.loginForm.resetFields()
     }
-  },
-  components: {
-    LoginWay,
-    RegisterWay,
-    QrcodeWay
   }
 }
 </script>
-
 <style lang="stylus" scoped>
-  @import '~assets/stylus/mixin.styl';
-  $red = #f20d0d;
-  .login-container
-    z-index: 99;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    .login-mask
-      mask(rgba(0,0,0,0.6), 1000);
-    .login-main
-      z-index: 100000;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      padding: 10px 0 30px;
-      width: 384px;
-      transform: translate(-50%, -50%);
-      background-color: #fff;
-      border-radius: 12px;
-      min-height: 300px;
-      .login-tab
-        position: relative;
-        padding: 0 20px 25px;
-        .login-close
-          float: right;
-          display: inline-block;
-          padding: 0 10px;
-          line-height: 50px;
-          font-size: 24px;
-          color: #787d82;
-          cursor: pointer;
-          &:hover
-            transform: scale(1.2);
-            color:$red;
-        .login-tab-item
-          display: inline-block;
-          width: 80px;
-          font-size: 16px;
-          line-height: 50px;
-          color: #787d82;
-          text-align: center;
-          font-weight: 700;
-          cursor: pointer;
-          &.active
-            color: $red;
-            &::after
-              content: '';
-              display: block;
-              margin: 0 auto;
-              width: 16px;
-              height: 4px;
-              border-radius: 4px;
-              background-color: $red; 
-      .three-login-way
-        margin-top: 22px;
-        padding: 0 32px;
-        .phone-login
-          display: inline-block;
-          vertical-align: middle;
-          margin-right: 24px;
-          padding-left: 24px;
-          padding-right: 24px;
-          border-right: 1px solid #1a1C1F21
-          line-height: 24px;
-          font-size: 14px;
-          color: #f20d0d;
-        .three-way-item
-          display: inline-block;
-          vertical-align: middle;
-          line-height: 24px;
-          .iconfont
-            margin: 0 12px;
-            display: inline-block;
-            vertical-align: middle;
-            color: #b5b9bc;
-            font-size: 24px;
-            cursor: pointer;
-            &.weibo:hover
-              color: #f20d0d;
-            &.wechart:hover
-              color: #00B33B;
-            &.qq:hover
-              color: #0088CC;
-      .qrcode-way
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 60px;
-        height: 60px;
-        background:url('https://www.imooc.com/static/img/erweima.png') no-repeat 0 0;
-        border-bottom-right-radius: 12px;
-        cursor: pointer; 
+  @import '~assets/stylus/login-form.styl';
 </style>

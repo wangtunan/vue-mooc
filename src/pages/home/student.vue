@@ -10,7 +10,7 @@
 
     <div class="all-star m-center">
       <ul class="best-star star">
-        <li v-for="(item,index) in allstar.best" :key="index" class="star-item">
+        <li v-for="(item,index) in best" :key="index" class="star-item">
           <img :src="item.avatar" width="56" height="56" alt="">
           <p class="star-name">
             {{ item.name }}
@@ -22,7 +22,7 @@
         </li>
       </ul>
       <ul class="all-star-list star">
-        <li v-for="(item,index) in allstar.data" :key="index" class="all-item star-item" :class="getItemclass(item.type.code)">
+        <li v-for="(item,index) in student" :key="index" class="all-item star-item" :class="getItemclass(item.type.code)">
           <img :src="item.avatar" width="48" height="48" alt="">
           <div class="star-info">
             <p class="star-type">
@@ -51,7 +51,7 @@ const BASE_WIDTH = 18
 export default {
   props: {
     allstar: {
-      type: [Object, Array],
+      type: Array,
       required: true
     }
   },
@@ -70,6 +70,14 @@ export default {
         "3": "green"
       }
       return classMap[code]
+    }
+  },
+  computed: {
+    best () {
+      return this.allstar.slice(0, 4)
+    },
+    student () {
+      return this.allstar.slice(4)
     }
   }
 }

@@ -5,14 +5,14 @@
 
     <!-- 导航和轮播 -->
     <div class="home-container m-center">
-      <home-nav />
+      <Nav />
       <mooc-carousel :height="316" trigger="click" @change="handelCarouselChange">
         <mooc-carousel-item v-for="(item,index) in swiperList" :key="index">
           <img :src="item.img" class="swiper-img">
         </mooc-carousel-item>
       </mooc-carousel>
       
-      <home-banner />
+      <Banner />
     </div>
 
     <!--  实战导航 -->
@@ -31,22 +31,22 @@
     <course-list :course="technologyList" />
 
     <!-- 猿问和手记 -->
-    <home-article :article="articleList" />
+    <Article :article="articleList" />
 
     <!-- 精英讲师 -->
-    <home-teacher :teacher-list="teacherList" />
+    <Teacher :teacher-list="teacherList" />
 
     <!-- 全明星 -->
-    <home-student :allstar="allstar" />
+    <Student :allstar="allstar" />
   </div>
 </template>
 <script>
-import HomeNav from './home-nav.vue'
-import HomeBanner from './home-banner.vue'
-import CourseList from './home-course-list.vue'
-import HomeArticle from './home-article.vue'
-import HomeTeacher from './home-teacher.vue'
-import HomeStudent from './home-student.vue'
+import Nav from './nav.vue'
+import Banner from './banner.vue'
+import CourseList from './course-list.vue'
+import Article from './article.vue'
+import Teacher from './teacher.vue'
+import Student from './student.vue'
 import { getSliderList, getHomeCourse, getArticle, getTeacher, getAllStar } from 'api/home.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -129,23 +129,29 @@ export default {
     // 获取精英讲师信息
     getTeacherList () {
       getTeacher().then(res => {
-        let { code, data} = res
+        let { code, data, msg} = res
         if (code === ERR_OK) {
           this.teacherList = data
+        } else {
+          this.teacherList = []
+          this.$message.error(msg)
         }
       }).catch(() => {
         this.teacherList = []
       })
     },
-    // 获取精英讲师信息
+    // 获取全明星学员信息
     getAllStarList () {
       getAllStar().then(res => {
-        let { code, data} = res
+        let { code, data, msg} = res
         if (code === ERR_OK) {
           this.allstar = data
+        } else {
+          this.$message.error(msg)
+          this.allstar = []
         }
       }).catch(() => {
-        this.allstar
+        this.allstar = []
       })
     }
   },
@@ -157,12 +163,12 @@ export default {
     }
   },
   components: {
-    HomeNav,
-    HomeBanner,
+    Nav,
+    Banner,
     CourseList,
-    HomeArticle,
-    HomeTeacher,
-    HomeStudent
+    Article,
+    Teacher,
+    Student
   }
 }
 </script>
