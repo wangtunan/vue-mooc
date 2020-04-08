@@ -21,6 +21,7 @@ const ReadSchema = new Schema({
     type: String,
     required: true
   },
+  detailImg: String,
   desc: String,
   price: {
     type: Number,
@@ -33,6 +34,10 @@ const ReadSchema = new Schema({
   term: {
     type: Number,
     default: 0
+  },
+  isRecommend: {
+    type: Boolean,
+    default: false
   },
   author: {
     avatar: String,

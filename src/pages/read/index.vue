@@ -20,7 +20,7 @@
           }"
           @click="handleTypeClick(type, index)"
         >
-          {{ type }}
+          {{ type.value }}
         </dd>
       </dl>
     </div>
@@ -67,12 +67,12 @@
     </div>
 
     <!-- 分页 -->
-    <pagination :total="total" :page.sync="page" />
+    <pagination :total="total" :page.sync="page" @change="handlePaginationChange" />
   </div>
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
-import { getReadList } from 'api/read.js'
+import { getReadTypes, getReadList } from 'api/read.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
@@ -80,11 +80,12 @@ export default {
       readList: [],
       currentIndex: 0,
       total: 0,
-      page: 1
+      page: 1,
+      typeList: []
     }
   },
   mounted () {
-    this.typeList = ['全部', '前端开发', '后端开发', '数据库', '面试', '其它']
+    this.getReadTypes()
     this.getReadListData()
   },
   methods: {
@@ -95,9 +96,30 @@ export default {
       this.getReadListData()
     },
     // 专栏点击
-    handleReadClick () {
-      let random = new Date().getTime()
-      this.$router.push(`/read/${random}`)
+    handleReadClick (read) {
+      this.$router.push(`/read/${read.id}`)
+    },
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
+      this.getReadListData()
+    },
+    // 获取专栏类型数据
+    getReadTypes () {
+      getReadTypes().then(res => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          data.unshift({
+            value: '全部'
+          })
+          this.typeList = data
+        } else {
+          this.typeList = []
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.typeList = []
+      })
     },
     // 获取专栏列表数据
     getReadListData () {
@@ -108,7 +130,6 @@ export default {
       getReadList(params).then(res => {
         let { code, data, msg } = res
         if (code === ERR_OK) {
-          data.list = this.getTryReadData(data.list)
           this.readList = data.list
           this.total = data.total
         } else {
@@ -120,31 +141,14 @@ export default {
         this.readList = []
         this.total = 0
       })
-    },
-    // 获取专栏试读章节
-    getTryReadData (array) {
-      if (!array || array.lenght === 0) {
-        return []
-      }
-      for (let i = 0; i < array.length; i++) {
-        const chapter = array[i].chapter
-        let result = []
-        for (let j = 0; j < chapter.length; j++) {
-          const chapterData = chapter[j]['data']
-          for (let k = 0; k < chapterData.length; k++) {
-            if (chapterData[k]['isTry']) {
-              result.push(chapterData[k]['title'])
-            }
-          }
-        }
-        array[i]['tryRead'] = result
-      }
-      return array
     }
   },
   computed: {
     currentType () {
-      const type = this.typeList[this.currentIndex]
+      if (this.typeList.length === 0) {
+        return ''
+      }
+      const type = this.typeList[this.currentIndex].value
       return type === '全部' ? '' : type
     }
   },
@@ -171,22 +175,20 @@ export default {
         color: $font-four-color;
     .read-nav
       dl
-        position: relative;
-        padding: 16px 0px 10px 52px;
+        padding-top: 16px;
+        padding-bottom: 16px;
         border-bottom: 1px solid rgba(7,17,27,0.1);
         font-size: 14px;
-        dt
-          position: absolute;
-          left: 0;
-          top: 23px;
-          font-weight: 700;
-        dd
+        dt, dd
           display: inline-block;
           vertical-align: middle;
-          margin-right: 5px;
-          margin-bottom: 10px;
-          padding: 0 10px;
           line-height: 30px;
+        dt
+          margin-right: 10px;
+          font-weight: 700;
+        dd
+          margin-right: 5px;
+          padding: 0 10px;
           cursor: pointer;
           &.active
             color: $theme-red-color;

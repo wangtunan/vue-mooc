@@ -9,10 +9,10 @@
         v-for="(item,index) in list"
         :key="index"
         class="recommend-item"
-        @click="handleReadItemClick"
+        @click="handleReadItemClick(item)"
       >
         <div class="img-box">
-          <img :src="item.img" alt="">
+          <img :src="item.detailImg" alt="">
         </div>
         <div class="recommend-content">
           <p class="name ellipsis">
@@ -23,7 +23,7 @@
               共{{ item.term }}小节
             </span>
             <span class="number">
-              共{{ item.term }}人购买
+              共{{ item.persons }}人购买
             </span>
           </p>
           <p class="price">
@@ -54,12 +54,13 @@ export default {
     }
   },
   methods: {
+    // 更多点击
     handleMoreClick () {
       this.$router.push('/read')
     },
-    handleReadItemClick () {
-      let random = new Date().getTime()
-      this.$router.push(`/read/${random}`)
+    // 专栏点击
+    handleReadItemClick (read) {
+      this.$router.push(`/read/${read.id}`)
     }
   }
 }

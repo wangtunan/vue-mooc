@@ -5,7 +5,7 @@
       <div class="m-center">
         <div class="header">
           <div class="img-box">
-            <img :src="readDetail.img" alt="">
+            <img :src="readDetail.detailImg" alt="">
           </div>
           <div class="header-content">
             <h3 class="title">
@@ -54,8 +54,8 @@
             </dl>
           </dd>
         </dl>
-        <div class="right">
-          <recommend-read title="慕课专栏" :list="readDetail.recommend" />
+        <div v-if="readRecommend.length" class="right">
+          <recommend-read title="慕课专栏" :list="readRecommend" />
         </div>
       </div>
     </div>
@@ -63,26 +63,55 @@
 </template>
 <script>
 import RecommendRead from 'components/recommend/recommend-read.vue'
-import { getReadDetail } from 'api/read.js'
+import { getReadDetail, getRecommendRead } from 'api/read.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      readDetail: {}
+      readDetail: {},
+      readRecommend: []
     }
   },
   mounted () {
     this.getReadDetailData()
+    this.getRecommendReadData()
   },
   methods: {
+    // 获取专栏详情
     getReadDetailData () {
       let id = this.$route.params.id
       getReadDetail(id).then(res => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
           this.readDetail = data
+        } else {
+          this.readDetail = {}
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.readDetail = {}
       })
+    },
+    // 获取推荐专栏
+    getRecommendReadData () {
+      getRecommendRead().then(res => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.readRecommend = data
+        } else {
+          this.readRecommend = []
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.readRecommend = []
+      })
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      if (to.params.id !== from.params.id) {
+        this.getReadDetailData()
+      }
     }
   },
   components: {
