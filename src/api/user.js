@@ -15,6 +15,13 @@ export function getUserInfo () {
   return axios.get('/mock/user/userinfo.json')
 }
 
+// 分页获取用户登录日志
+export function getUserLogs (params) {
+  return axios.get('/mock/log/list', {
+    params
+  })
+}
+
 // 获取用户课程信息接口
 export function getUserCourse () {
   return axios.get('/mock/user/course.json')

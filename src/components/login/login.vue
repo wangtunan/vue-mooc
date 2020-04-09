@@ -28,7 +28,11 @@
         </template>
       </el-form-item>
     </el-form>
-    <button class="login-btn" :class="{'is-loading': isLoading || (index == 1 && !loginForm.argement)}" @click="handleValidateForm">
+    <button
+      class="login-btn"
+      :class="{'is-loading': isLoading || (index == 1 && !loginForm.argement)}"
+      @click="handleValidateForm"
+    >
       {{ btnText }}
     </button>
   </div>
@@ -68,8 +72,8 @@ export default {
       isLoading: false,
       rules: rules,
       loginForm: {
-        username: '',
-        password: '',
+        username: 'why',
+        password: '123456',
         ckpassword: '',
         auto: true,
         argement: false
@@ -85,6 +89,8 @@ export default {
     } else if (!this.loginForm.password) {
       passwordRef.focus()
     }
+    // 监听enter事件
+    window.addEventListener('keyup', this.handleListenKeyup)
   },
   methods: {
     // 表单校验
@@ -112,6 +118,9 @@ export default {
         this.isLoading = false
         let { code, data, msg } = res
         if (code !== ERR_OK) {
+          this.loginForm.password = ''
+          this.loginForm.ckpassword = ''
+          this.loginForm.argement = false
           this.$message.error(msg)
           return false
         }
@@ -125,6 +134,12 @@ export default {
         this.isLoading = false
         this.$message.error('服务器异常')
       })
+    },
+    // 监听页面enter事件
+    handleListenKeyup (e) {
+      if (e.keyCode === 13) {
+        this.handleValidateForm()
+      }
     },
     // vuex
     ...mapMutations('login', {
@@ -147,6 +162,9 @@ export default {
       }
       return text
     }
+  },
+  beforeDestroy () {
+    window.removeEventListener('keyup', this.handleListenKeyup)
   }
 }
 </script>

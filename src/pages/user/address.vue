@@ -16,14 +16,14 @@
         <p class="name">
           {{ item.name }}
         </p>
-        <p>电话：{{ item.phhone }}</p>
+        <p>电话：{{ item.phone }}</p>
         <p>地区：{{ item.area }}</p>
         <p>地址：{{ item.address }}</p>
         <p>邮编：{{ item.postcode }}</p>
         <div class="address-btn">
-          <span v-if="!item.isDefault" class="default" @click="handleSetDefault(item)">设为默认地址</span>
+          <span v-if="!item.isDefault" class="default" @click="handleDefaultClick(item)">设为默认地址</span>
           <span @click="handleEditClick(item)">修改</span>
-          <span @click="handleDeleteClick(index)">删除</span>
+          <span @click="handleDeleteClick(item)">删除</span>
         </div>
         <div v-if="item.isDefault" class="default-icon">
           默认
@@ -31,133 +31,179 @@
       </dd>
     </dl>
 
-    <el-dialog :title="title" :visible.sync="dialogVisible" width="500px">
-      <el-form :model="editForm" label-width="80px" label-position="right">
-        <el-form-item label="姓名">
-          <el-input v-model="editForm.name" placeholder="请输入收件名称" clearable />
+    <mooc-dialog :title="title" :visible.sync="dialogVisible" width="500px">
+      <el-form ref="editForm" :model="editForm" :rules="rules" label-width="80px" label-position="right">
+        <el-form-item label="姓名" prop="name">
+          <el-input v-model="editForm.name" placeholder="请输入收件人姓名" clearable />
         </el-form-item>
-        <el-form-item label="电话">
-          <el-input v-model="editForm.phone" placeholder="请输入手机号" clearable />
+        <el-form-item label="电话" prop="phone">
+          <el-input v-model="editForm.phone" placeholder="请输入收件人手机号" clearable />
         </el-form-item>
-        <el-form-item label="区域">
+        <el-form-item label="区域" prop="area">
           <el-input v-model="editForm.area" placeholder="请输入区域" clearable />
         </el-form-item>
-        <el-form-item label="详细地址">
+        <el-form-item label="详细地址" prop="address">
           <el-input v-model="editForm.address" placeholder="请输入详细收货地址" clearable />
         </el-form-item>
-        <el-form-item label="邮政编码">
+        <el-form-item label="邮政编码" prop="postcode">
           <el-input v-model="editForm.postcode" placeholder="请输入邮政编码" clearable />
         </el-form-item>
       </el-form>
 
-      <div slot="footer" class="dialog-footer">
+      <div slot="footer">
         <mooc-button size="small" @click="dialogVisible = false">
           取消
         </mooc-button>
-        <mooc-button type="primary" size="small" @click="handleSubmitClick">
+        <mooc-button type="primary" size="small" @click="handleValidateForm">
           确定
         </mooc-button>
       </div>
-    </el-dialog>
+    </mooc-dialog>
   </div>
 </template>
 <script>
-import { setUserAddress, getUserAddress } from 'utils/cache.js'
+import { getUserAddresss, createUserAddress, updateUserAddress, deleteUserAddress, defaultUserAddress } from 'api/address.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   data () {
+    const rules = {
+      name: [
+        { required: true, message: '请输入收件人姓名', trigger: 'blur' }
+      ],
+      phone: [
+        { required: true, message: '请输入收件人手机号', trigger: 'blur' }
+      ],
+      area: [
+        { required: true, message: '请输入区域', trigger: 'blur' }
+      ],
+      address: [
+        { required: true, message: '请输入详细收件地址', trigger: 'blur' }
+      ],
+      postcode: [
+        { required: true, message: '请输入邮政编码', trigger: 'blur' }
+      ]
+    }
     return {
-      isAdd: false, // 是否为新增
-      dialogVisible: false, // 编辑弹窗是否课件
-      addressList: [], // 收货地址列表
+      rules: rules,
+      dialogVisible: false,
+      addressList: [],
       editForm: {
+        id: '',
         name: '',
         phone: '',
         area: '',
         address: '',
-        postcode: '',
-        isDefault: false
+        postcode: ''
       }
     };
   },
-  created () {
-    this.getAddress()
+  mounted () {
+    this.getAddressData()
   },
   methods: {
     // 新增收货地址
     handleAddClick () {
-      this.isAdd = true
       this.dialogVisible = true
       this.editForm = {
-        name: '',
-        phone: '',
-        area: '',
-        address: '',
-        postcode: '',
-        isDefault: false
+        id: '',
+        name: '汪图南',
+        phone: '18277776666',
+        area: '广东省广州市',
+        address: '天河区xxx路xxx号xxx公司',
+        postcode: '000000'
       }
+      this.$nextTick(() => {
+        this.$refs.editForm.resetFields()
+      })
     },
     // 修改收货地址
     handleEditClick (item) {
-      this.isAdd = false
       this.dialogVisible = true
       this.editForm = Object.assign({}, item)
+      this.$nextTick(() => {
+        this.$refs.editForm.resetFields()
+      })
     },
     // 删除收货地址
-    handleDeleteClick (index) {
+    handleDeleteClick (item) {
       this.$confirm('此操作将删除该收件地址，是否确定？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        let address = this.addressList.slice()
-        address.splice(index, 1)
-        this.addressList = address
-        setUserAddress(address)
+        const params = {
+          id: item.id
+        }
+        deleteUserAddress(params).then(res => {
+          const { code, msg } = res
+          if (code === ERR_OK) {
+            this.$message.success(msg || '删除成功')
+            this.getAddressData()
+          } else {
+            this.$message.error(msg)
+          }
+        })
+      })
+    },
+    // 默认收获地址
+    handleDefaultClick (item) {
+      const params = {
+        id: item.id
+      }
+      defaultUserAddress(params).then(res => {
+        const { code, msg } = res
+        if (code === ERR_OK) {
+          this.$message.success(msg)
+          this.getAddressData()
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
+      })
+    },
+    // 校验收获地址
+    handleValidateForm () {
+      this.$refs.editForm.validate(valid => {
+        if (valid) {
+          this.handleSubmitClick()
+        }
       })
     },
     // 确认收货地址
     handleSubmitClick () {
-      let address = this.addressList.slice()
-      if (this.isAdd) {
-        address.push(this.editForm)
-      } else {
-        address.forEach((item, index) => {
-          if (item.name === this.editForm.name) {
-            address[index] = this.editForm
-          }
-        })
-      }
-      // 判断是否只有一条，是的话设置为默认
-      if (address.length === 1) {
-        address[0].isDefault = true
-      }
-      this.addressList = address
-      setUserAddress(address) 
-      this.dialogVisible = false
-      this.editForm = {
-        name: '',
-        phone: '',
-        area: '',
-        address: '',
-        postcode: '',
-        isDefault: false
-      }
-    },
-    // 设为默认收货地址
-    handleSetDefault (address) {
-      this.addressList.forEach((item, index) => {
-        this.addressList[index].isDefault = item.name === address.name
+      const func = this.editForm.id ? updateUserAddress : createUserAddress
+      func(this.editForm).then(res => {
+        const { code, msg } = res
+        if (code === ERR_OK) {
+          this.$message.success(msg || '操作成功')
+          this.dialogVisible = false
+          this.getAddressData()
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
       })
-      setUserAddress(this.addressList)
     },
     // 获取收货地址
-    getAddress () {
-      this.addressList = getUserAddress()
+    getAddressData () {
+      getUserAddresss().then(res => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.addressList = data
+        } else {
+          this.addressList = []
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.addressList = []
+      })
     }
   },
   computed: {
     title () {
-      return this.isAdd ? "新增收件地址" : "编辑收件地址";
+      return this.editForm.id ? '编辑收件地址' : '新增收件地址'
     }
   }
 };
@@ -165,7 +211,6 @@ export default {
 
 <style lang="stylus" scoped>
 @import '~assets/stylus/mixin.styl';
-
 .address-container
   .address-title
     margin-bottom: 24px;
@@ -247,10 +292,7 @@ export default {
         color: #fff;
         text-align: center;
         font-size: 12px;
-  >>> .el-dialog
-    border-radius: 12px;
-    .el-dialog__body
-      padding: 30px;
-  >>> .el-form-item__label
-    font-weight: 700;
+  >>> .mooc-dialog
+    .mooc-dialog-body
+      padding: 30px 30px 30px 20px;
 </style>

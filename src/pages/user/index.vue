@@ -6,13 +6,13 @@
           <img :src="userInfo.avatar" alt>
         </div>
         <p class="user-name ellipsis">
-          {{ userInfo.name }}
+          {{ userInfo.nickname }}
         </p>
         <p class="user-id">
-          ID: {{ userInfo.ID }}
+          ID: 583466557899
         </p>
         <p class="user-auth">
-          <i
+          <!-- <i
             class="iconfont"
             :class="{red: mainBind.authenticate}"
             :title="mainBind.authenticate?'已实名认证': '未实名认证'"
@@ -31,7 +31,7 @@
             class="iconfont"
             :class="{red: mainBind.email}"
             :title="mainBind.email?'已绑定邮箱': '未绑定邮箱'"
-          >&#xe75d;</i>
+          >&#xe75d;</i> -->
         </p>
         <dl class="user-nav">
           <dt class="nav-title">
@@ -60,35 +60,29 @@
   </div>
 </template>
 <script>
-import AccountBind from "./account-bind.vue";
-import Information from "./information.vue";
-import OperateLog from "./operate-log.vue";
-import Authenticate from "./authenticate.vue";
-import Certificate from "./certificate.vue";
-import MAddress from "./address.vue";
-import { getUserInfo } from "api/user.js";
-import { ERR_OK } from "api/config.js";
+import AccountBind from "./account-bind.vue"
+import Information from "./information.vue"
+import Log from "./log.vue"
+import Authenticate from "./authenticate.vue"
+import MAddress from "./address.vue"
+// import { ERR_OK } from "api/config.js";
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      componentName: "account-bind", // 默认的动态组件的名称
-      currentNavIndex: 0, // 当前激活的到昂
-      navList: [], // 导航列表
-      userInfo: {} // 用户详细信息
+      componentName: "account-bind",
+      currentNavIndex: 0,
+      navList: []
     };
   },
   created () {
     this.navList = [
       { id: 1, title: "账号绑定", componentName: "account-bind" },
       { id: 2, title: "个人信息", componentName: "information" },
-      { id: 3, title: "操作记录", componentName: "operate-log" },
+      { id: 3, title: "操作记录", componentName: "log" },
       { id: 4, title: "实名认证", componentName: "authenticate" },
-      { id: 5, title: "学籍认证", componentName: "certificate" },
-      { id: 6, title: "收件地址", componentName: "m-address" }
+      { id: 5, title: "收件地址", componentName: "m-address" }
     ];
-  },
-  mounted () {
-    this.getUserDetailInfo()
   },
   methods: {
     // 导航点击事件
@@ -100,32 +94,20 @@ export default {
     handleComponentClick (type) {
       switch (type) {
         case "record":
-          this.componentName = "operate-log"
+          this.componentName = "log"
           this.currentNavIndex = 2
           break
       }
-    },
-    // 获取用户详细信息接口
-    getUserDetailInfo () {
-      getUserInfo().then(res => {
-        let { code, data } = res
-        if (code === ERR_OK) {
-          this.userInfo = data
-        }
-      });
     }
   },
   computed: {
-    mainBind () {
-      return this.userInfo.mainBind || {}
-    }
+    ...mapGetters(['userInfo'])
   },
   components: {
     AccountBind,
     Information,
-    OperateLog,
+    Log,
     Authenticate,
-    Certificate,
     MAddress
   }
 };

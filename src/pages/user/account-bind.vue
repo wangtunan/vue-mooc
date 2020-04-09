@@ -7,37 +7,68 @@
     <dl>
       <dt class="bind-title">
         账号绑定
-        <span class="bind-rate">完成 <strong>4/4</strong></span>
+        <span class="bind-rate">完成 <strong>5/5</strong></span>
       </dt>
-      <dd v-for="(item,index) in userinfo.binds" :key="index" class="bind-item">
-        <i v-if="item.icon=='email'" class="iconfont">&#xe75d;</i>
-        <i v-if="item.icon=='phone'" class="iconfont">&#xe61a;</i>
-        <i v-if="item.icon=='password'" class="iconfont">&#xe61e;</i>
-        <i v-if="item.icon=='social'" class="iconfont">&#xe671;</i>
+      <dd class="bind-item">
+        <i class="iconfont">&#xe75d;</i>
         <div class="bind-introduction">
           <p class="bind-title">
-            <span class="bind-type">{{ item.type }}</span>
-            {{ getBindValue(item) }}
+            <span class="bind-type">邮箱</span>
+            {{ userinfo.email }}
           </p>
-          <p class="bind-subtitle">
-            {{ item.desc }}
+          <p class="bind-subtitle">可用邮箱加密码登录慕课网，可用邮箱找回密码</p>
+          <mooc-button class="bind-btn" size="medium" round>
+            {{ userinfo.email ? '更改' : '去绑定' }}
+          </mooc-button>
+        </div>
+      </dd>
+      <dd class="bind-item">
+        <i class="iconfont">&#xe61a;</i>
+        <div class="bind-introduction">
+          <p class="bind-title">
+            <span class="bind-type">手机</span>
+            {{ userinfo.phone }}
           </p>
-          <ul v-if="item.icon=='social'" class="social-list">
-            <li v-for="(social, index) in item.account" :key="index" class="social-item">
-              <i v-if="social.type=='weibo'" class="iconfont" :class="{yellow: social.value}">&#xe699;</i>
-              <i v-if="social.type=='qq'" class="iconfont" :class="{blue: social.value}">&#xe646;</i>
-              <i v-if="social.type=='wechat'" class="iconfont" :class="{green: social.value}">&#xe6a0;</i>
-              <div class="social-content">
-                <p class="social-type">
-                  {{ social.title }}
-                </p>
-                <p class="social-bind-type" :class="{green: social.value}">
-                  {{ social.value ? '已绑定' : '未绑定' }}
-                </p>
-                <span class="social-bind-btn">{{ social.value ? '添加绑定' : '解除绑定' }}</span>
-              </div>
-            </li>
-          </ul>
+          <p class="bind-subtitle">可用手机号加密码登录慕课网，可通过手机号找回密码</p>
+          <mooc-button class="bind-btn" size="medium" round>
+            {{ userinfo.phone ? '更改' : '去绑定' }}
+          </mooc-button>
+        </div>
+      </dd>
+      <dd class="bind-item">
+        <i class="iconfont">&#xe61e;</i>
+        <div class="bind-introduction">
+          <p class="bind-title">
+            <span class="bind-type">密码</span>
+          </p>
+          <p class="bind-subtitle">用于保护账号信息和登录安全</p>
+          <mooc-button class="bind-btn" size="medium" round>修改</mooc-button>
+        </div>
+      </dd>
+      <dd class="bind-item">
+        <i class="iconfont">&#xe6a0;</i>
+        <div class="bind-introduction">
+          <p class="bind-title">
+            <span class="bind-type">QQ</span>
+            {{ userinfo.qq }}
+          </p>
+          <p class="bind-subtitle">可用第三方QQ账号快速登录慕课网</p>
+          <mooc-button class="bind-btn" size="medium" round>
+            {{ userinfo.qq ? '更改' : '去绑定' }}
+          </mooc-button>
+        </div>
+      </dd>
+      <dd class="bind-item">
+        <i class="iconfont">&#xe646;</i>
+        <div class="bind-introduction">
+          <p class="bind-title">
+            <span class="bind-type">微信</span>
+            {{ userinfo.wechat }}
+          </p>
+          <p class="bind-subtitle">可用第三方微信账号快速登录慕课网</p>
+          <mooc-button class="bind-btn" size="medium" round>
+            {{ userinfo.wechat ? '更改' : '去绑定' }}
+          </mooc-button>
         </div>
       </dd>
     </dl>
@@ -110,6 +141,7 @@ export default {
           font-weight: 700;
           color: #ef1514
     .bind-item
+      position: relative;
       display: flex;
       align-items: center;
       height: 88px;
@@ -138,45 +170,10 @@ export default {
         .bind-subtitle
           font-size: 14px;
           color: #93999f;
-        .social-list
+        .bind-btn
+          z-index: 100;
           position: absolute;
-          left: 0;
-          top: 80px;
-          .social-item
-            display: inline-flex;
-            align-items: center;
-            margin-right: 60px;
-            .iconfont
-              display: inline-block;
-              margin-right: 10px;
-              width: 80px;
-              height: 80px;
-              font-size: 80px;
-              text-align: center;
-              line-height: 80px;
-              color: #c8cdd2;
-              &.blue
-                color: #0788CA;
-              &.green
-                color: #13BC6C;
-              &.yellow
-                color: #FDD449;
-            .social-content
-              display: inline-block;
-              margin-top: 4px;
-              .social-type
-                font-size: 16px;
-                color: #333;
-                font-weight: 700;
-              .social-bind-type
-                margin: 5px 0 8px;
-                font-size: 12px;
-                color: #ef1514;
-                &.green
-                  color: green;
-              .social-bind-btn
-                padding: 3px 5px;
-                font-size: 12px;
-                border: 1px solid #d9dde1;
-                cursor: pointer;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
 </style>

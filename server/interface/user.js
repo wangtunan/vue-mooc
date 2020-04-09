@@ -1,6 +1,8 @@
 import Router from 'koa-router'
 import User from '../models/user.js'
 import axios from 'axios'
+import Log from '../models/log.js'
+import { initUserLogs } from '../models/log.js'
 import { ERR_OK } from '../config.js'
 import { getGuid } from '../../src/utils/utils.js'
 const router = new Router({
@@ -28,8 +30,7 @@ router.post('/register', async (ctx) => {
   }
   // 判断用户是否已存在
   const checkUser = await User.find({
-    username,
-    password
+    username
   })
   if (checkUser.length > 0) {
     ctx.body = {
@@ -101,7 +102,7 @@ router.post('/login', async (ctx) => {
   const userInfo = await User.findOne({
     username,
     password
-  })
+  }).lean()
   if (!userInfo) {
     ctx.body = {
       code: -1,
@@ -109,6 +110,37 @@ router.post('/login', async (ctx) => {
     }
   } else {
     ctx.session.user_id = userInfo.id
+    initUserLogs(userInfo.id)
+    // 登录成功后，新增一条登录日志
+    try {
+      const params = {
+        id: getGuid(),
+        userId: userInfo.id,
+        type: {
+          text: '账号登陆',
+          code: 0
+        },
+        time: new Date().toISOString(),
+        ip: '192.168.2.102',
+        device: 'web',
+        city: '广东省广州市'
+      }
+      await axios.post('http://localhost:4300/user/login', params)
+      // 获取最新登录时间
+      const lastLoginLog = await Log.find({
+        userid: userInfo.id
+      }).sort({
+        time: 'desc'
+      })
+      if (lastLoginLog.length > 0) {
+        userInfo.lastLoginTime = lastLoginLog[0].time
+      } else {
+        userInfo.lastLoginTime = ''
+      }
+    } catch (e) {
+      userInfo.lastLoginTime = ''
+      console.log(e.message)
+    }
     ctx.body = {
       code: ERR_OK,
       msg: '用户登录成功',

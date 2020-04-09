@@ -1,7 +1,8 @@
+import crypto from 'crypto-js'
 const userData = [
   {
     username: 'why',
-    password: '123456',
+    password: crypto.MD5('123456').toString(),
     nickname: 'BlueMan_汪汪汪',
     avatar: 'https://img.mukewang.com/5882f5f70001525e01000100-100-100.jpg',
     sex: 'male',
@@ -14,8 +15,8 @@ const userData = [
     follow: 5,
     fans: 1,
     email: 'why583440138@gmail.com',
-    qq: '583440138@qq.com',
-    phone: '18277776666',
+    qq: '583xxxxx38',
+    phone: '182xxxxxx66',
     wechat: 'wechat',
     weibo: 'weibo'
   }

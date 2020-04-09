@@ -6,21 +6,23 @@
     </h2>
     <div class="log-list">
       <!-- 表格 -->
-      <el-table :data="userinfo.logs">
-        <el-table-column label="类型" prop="type" align="center" width="120" />
+      <el-table :data="logs">
+        <el-table-column label="类型" prop="type.text" align="center" width="120" />
         <el-table-column label="登陆时间" prop="time" align="center" width="180" />
         <el-table-column label="城市" prop="city" align="center" width="390" />
-        <el-table-column label="IP" prop="IP" align="center" width="120" />
+        <el-table-column label="IP" prop="ip" align="center" width="120" />
         <el-table-column label="设备" prop="device" align="center" width="90" />
       </el-table>
 
       <!-- 分页 -->
-      <pagination :total="total" :page.sync="page" />
+      <pagination :total="total" :page.sync="page" @change="hanlePaginationChange" />
     </div>
   </div>
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
+import { ERR_OK } from 'api/config.js'
+import { getUserLogs } from 'api/user.js'
 export default {
   props: {
     userinfo: {
@@ -29,8 +31,39 @@ export default {
   },
   data () {
     return {
+      logs: [],
       page: 1,
-      total: 100,
+      total: 0,
+    }
+  },
+  mounted () {
+    this.getUserLogsData()
+  },
+  methods: {
+    // 分页值更新
+    hanlePaginationChange (page) {
+      this.page = page
+      this.getUserLogsData()
+    },
+    // 分页获取登录日志数据
+    getUserLogsData () {
+      const params = {
+        page: this.page
+      }
+      getUserLogs(params).then(res => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.logs = data.list
+          this.total = data.total
+        } else {
+          this.logs = []
+          this.total = 0
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.logs = []
+        this.total = 0
+      })
     }
   },
   components: {

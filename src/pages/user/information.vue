@@ -3,6 +3,10 @@
     <dl>
       <dt class="info-title">
         个人信息
+        <mooc-button size="mini" round>
+          <i class="iconfont">&#xe600;</i>
+          编辑
+        </mooc-button>
       </dt>
       <dd v-for="(item,index) in information" :key="index" class="info-item">
         <div class="info-type">
@@ -29,7 +33,7 @@ export default {
   },
   created () {
     this.information = [
-      { id: 1, type: '昵称', value: this.userinfo.name },
+      { id: 1, type: '昵称', value: this.userinfo.nickname },
       { id: 2, type: '职位', value: this.userinfo.job },
       { id: 3, type: '城市', value: this.userinfo.city },
       { id: 4, type: '性别', value: this.userinfo.sex },
@@ -48,6 +52,11 @@ export default {
       font-size: 16px;
       font-weight: 700;
       color: #333;
+      .mooc-button
+        float: right;
+        margin-top: 5px;
+        border: none;
+        font-size: 15px;
     .info-item
       display: flex;
       align-items: center;
