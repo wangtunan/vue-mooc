@@ -26,3 +26,8 @@ export function noticeReadAll (data) {
 export function getNoticeSetting () {
   return axios.get('/mock/notice/setting.json')
 }
+
+// 是否存在未读消息
+export function getNotReadNotice () {
+  return axios.get('/mock/notice/read/not')
+}

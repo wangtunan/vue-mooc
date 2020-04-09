@@ -1,6 +1,5 @@
 import axios from 'axios'
 import  components  from '../register.js'
-import { ERR_OK } from 'api/config.js'
 const Message = components.Message
 const service = axios.create({
   timeout: 10000
@@ -23,10 +22,6 @@ service.interceptors.response.use(
     if (status !== 200) {
       Message.error('网络异常，请刷新或者重试!')
       return Promise.reject('网络异常!')
-    }
-    if (data.code !== ERR_OK) {
-      Message.error(data.msg || '接口请求异常，请重试!')
-      return Promise.reject(data.msg || '接口异常!')
     }
     return Promise.resolve(data)
   },

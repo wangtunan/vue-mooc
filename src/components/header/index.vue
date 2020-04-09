@@ -19,8 +19,8 @@
 </template>
 <script>
 import Search from 'components/search/search.vue'
-import MNav from './header-nav.vue'
-import LoginArea from './header-login.vue'
+import MNav from './nav.vue'
+import LoginArea from './login.vue'
 import { getHeader } from 'api/common.js'
 import { ERR_OK } from 'api/config.js'
 export default {

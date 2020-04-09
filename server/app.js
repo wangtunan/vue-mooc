@@ -29,15 +29,14 @@ app.use(async (ctx, next) => {
 app.keys = ['vue-mooc-keys']
 
 // 中间件
-app.use(bodyParser({
-  extendTypes: ['text', 'form', 'json']
-}))
-app.use(json())
 app.use(session({
   prefix: 'mooc',
   key: 'mooc',
   maxAge: 30 * 60 * 1000
 }, app))
+app.use(bodyParser())
+app.use(json())
+
 
 // 链接mongodb
 mongoose.connect(dbConfig.dbs, {

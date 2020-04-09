@@ -1,13 +1,13 @@
 import axios from 'utils/axios.js'
 
 // 用户登录
-export function userLogin () {
-  return axios.get('/mock/user/login')
+export function userLogin (data) {
+  return axios.post('/mock/user/login', data)
 }
 
 // 用户注册接口
-export function userRegister () {
-  return axios.get('/mock/user/register')
+export function userRegister (data) {
+  return axios.post('/mock/user/register', data)
 }
 
 // 获取用户详细信息接口

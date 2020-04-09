@@ -2,6 +2,7 @@ import Router from 'koa-router'
 import User from '../models/user.js'
 import axios from 'axios'
 import { ERR_OK } from '../config.js'
+import { getGuid } from '../../src/utils/utils.js'
 const router = new Router({
   prefix: '/user'
 })
@@ -15,7 +16,7 @@ router.post('/register', async (ctx) => {
       code: -1,
       msg: '用户名不能为空'
     }
-    return false
+    return
   }
   // 校验密码
   if (!password) {
@@ -23,7 +24,7 @@ router.post('/register', async (ctx) => {
       code: -1,
       msg: '密码不能为空'
     }
-    return false
+    return
   }
   // 判断用户是否已存在
   const checkUser = await User.find({
@@ -35,10 +36,11 @@ router.post('/register', async (ctx) => {
       code: -1,
       msg: '该用户已存在'
     }
-    return false
+    return
   }
   // 判断是否成功写入数据库
   const checkRegister = await User.create({
+    id: getGuid(),
     username: username,
     password: password,
     nickname: `用户${new Date().getTime()}`
@@ -48,24 +50,31 @@ router.post('/register', async (ctx) => {
       code: -1,
       msg: '用户注册失败'
     }
-    return false
+    return
   }
   // 判断是否自动登录成功
-  const { status, data: { code, data } } = await axios.post('/user/login', {
-    username,
-    password
-  })
-  if (status !== 200 || code !== ERR_OK) {
+  try {
+    const { status, data: { code, data } } = await axios.post('http://localhost:4300/user/login', {
+      username,
+      password
+    })
+    if (status !== 200 || code !== ERR_OK) {
+      ctx.body = {
+        code: -1,
+        msg: '注册后自动登录失败'
+      }
+      return
+    }
+    ctx.body = {
+      code: ERR_OK,
+      msg: '用户注册成功',
+      data: data
+    }
+  } catch(e) {
     ctx.body = {
       code: -1,
-      msg: '注册后自动登录失败'
+      msg: e.message
     }
-    return false
-  }
-  ctx.body = {
-    code: ERR_OK,
-    msg: '用户注册成功',
-    data: data
   }
 })
 
@@ -78,7 +87,7 @@ router.post('/login', async (ctx) => {
       code: -1,
       msg: '用户名不能为空'
     }
-    return false
+    return
   }
   // 校验密码
   if (!password) {
@@ -86,7 +95,7 @@ router.post('/login', async (ctx) => {
       code: -1,
       msg: '密码不能为空'
     }
-    return false
+    return
   }
   // 判断是否登录成功
   const userInfo = await User.findOne({
@@ -132,7 +141,7 @@ router.get('/info', async (ctx) => {
       code: -2,
       msg: '登录信息已过期'
     }
-    return false
+    return
   }
   const info = await User.findOne({
     id: userId

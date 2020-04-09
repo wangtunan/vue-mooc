@@ -29,7 +29,7 @@
       </el-form-item>
     </el-form>
     <button class="login-btn" :class="{'is-loading': isLoading || (index == 1 && !loginForm.argement)}" @click="handleValidateForm">
-      {{ index == 0 ? '登录' : '注册' }}
+      {{ btnText }}
     </button>
   </div>
 </template>
@@ -94,7 +94,7 @@ export default {
       }
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
-          // this.handleBtnClick()
+          this.handleBtnClick()
         }
       })
     },
@@ -102,10 +102,11 @@ export default {
     handleBtnClick () {
       const params = {
         username: this.loginForm.username,
-        passowrd: crypto.MD5(this.loginForm.password).toString()
+        password: crypto.MD5(this.loginForm.password).toString()
       }
       // 判断是登陆还是注册
       const func = this.index === 0 ? userLogin : userRegister
+      const tips = this.index === 0 ? '登录' : '注册'
       this.isLoading = true
       func(params).then(res => {
         this.isLoading = false
@@ -114,14 +115,14 @@ export default {
           this.$message.error(msg)
           return false
         }
+        this.$message.success(`${tips}成功`)
+        this.loginForm = {}
         // 缓存用户数据
         this.setUserInfo(data)
         // 关闭弹窗
         this.setShowLogin(false)
-        // 重载页面
-        window.location.reload()
       }).catch(() => {
-        this.isLoading = true
+        this.isLoading = false
         this.$message.error('服务器异常')
       })
     },
@@ -134,6 +135,17 @@ export default {
   watch: {
     index () {
       this.$refs.loginForm.resetFields()
+    }
+  },
+  computed: {
+    btnText () {
+      let text = ''
+      if (this.index === 0) {
+        text = this.isLoading ? '登录中...' : '登录'
+      } else {
+        text = this.isLoading ? '注册中...' : '注册'
+      }
+      return text
     }
   }
 }

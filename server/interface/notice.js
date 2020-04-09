@@ -123,4 +123,23 @@ router.post('/delete', async (ctx) => {
   }
 })
 
+// 是否存在未读消息
+router.get('/read/not', async (ctx) => {
+  const result = await Notice.find({
+    isRead: false
+  })
+  if (result) {
+    ctx.body = {
+      code: ERR_OK,
+      msg: '获取成功',
+      data: result.length > 0
+    }
+  } else {
+    ctx.body = {
+      code: -1,
+      msg: '获取失败'
+    }
+  }
+})
+
 export default router

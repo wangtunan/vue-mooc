@@ -16,15 +16,17 @@
         <i class="iconfont">&#xe63b;</i>
         <span class="login-text">购物车</span>
         <div class="mini-chart-container" @mouseenter="handleCartMouseEnter" @mouseleave="showMiniCart = false">
-          <mini-cart v-if="showMiniCart" :list="cartList" @close="showMiniCart=false" @delete="handleDeleteClick" />
+          <mini-cart v-if="showMiniCart" :list="cartList" @close="showMiniCart=false" />
         </div>
       </a>
     </li>
-    <template v-if="userInfo && userInfo.avatar">
-      <li class="item bell" @click="handleBellClick">
-        <mooc-badge :value="100" :max="99" is-dot>
-          <i class="iconfont">&#xe6eb;</i>
-        </mooc-badge>
+    <template v-if="userInfo && userInfo.id">
+      <li class="item bell">
+        <router-link to="/notice">
+          <mooc-badge :max="99" :is-dot="isDot">
+            <i class="iconfont">&#xe6eb;</i>
+          </mooc-badge>
+        </router-link>
       </li>
       <li class="item userinfo" @mouseenter="showUserInfo = true" @mouseleave="showUserInfo = false">
         <div class="img-box">
@@ -35,33 +37,39 @@
             <img :src="userInfo.avatar" alt="">
             <div class="userinfo-message">
               <p class="name ellipsis">
-                {{ userInfo.name }}
+                {{ userInfo.nickname }}
               </p>
               <p class="number">
-                <span class="number-item">经验 <b>{{ userInfo.experience }}</b></span>
+                <span class="number-item">经验 <b>{{ userInfo.exp }}</b></span>
                 <span class="number-item">积分 <b>{{ userInfo.integral }}</b></span>
               </p>
             </div>
           </div>
-          <div class="fast-nav" @click="showUserInfo = false">
-            <div class="fast-nav-item" @click="handleCourseClick">
+          <div class="fast-nav" @click.stop="showUserInfo = false">
+            <div class="fast-nav-item">
               <i class="iconfont">&#xe60e;</i>
-              我的课程
+              <router-link to="/user/course">
+                我的课程
+              </router-link>
             </div>
-            <div class="fast-nav-item" @click="handleOrderClick">
+            <div class="fast-nav-item">
               <i class="iconfont">&#xe611;</i>
-              订单中心
+              <router-link to="/order">
+                订单中心
+              </router-link>
             </div>
             <div class="fast-nav-item">
               <i class="iconfont">&#xe61b;</i>
               积分商城
             </div>
-            <div class="fast-nav-item" @click="handleSettingClick">
+            <div class="fast-nav-item">
               <i class="iconfont">&#xe680;</i>
-              个人设置
+              <router-link to="/user">
+                个人设置
+              </router-link>
             </div>
           </div>
-          <div class="course-history">
+          <div v-if="userInfo.lastCourse" class="course-history">
             <i class="iconfont">&#xe62f;</i>
             <span class="course-name ellipsis">{{ userInfo.lastCourse && userInfo.lastCourse.name }}</span>
             <span class="course-chapter ellipsis">{{ userInfo.lastCourse && userInfo.lastCourse.chapter }}</span>
@@ -80,19 +88,22 @@
   </ul>
 </template>
 <script>
+import { getNotReadNotice } from 'api/notice.js'
 import { getCartList } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      cartList: [], // 购物车列表数据
+      isDot: false,
+      cartList: [],
       showMiniCart: false,
       showUserInfo: false
     }
   },
   mounted () {
     this.getCartListData()
+    this.getNotReadNoticeData()
   },
   methods: {
     // 购物车：项鼠标移出
@@ -104,10 +115,6 @@ export default {
     // 购物车：鼠标移入
     handleCartMouseEnter () {
       clearTimeout(this.timer)
-    },
-    // 购物车：课程删除
-    handleDeleteClick (index) {
-      this.cartList.splice(index, 1)
     },
     // 登录点击
     handleLoginClick () {
@@ -121,28 +128,12 @@ export default {
     },
     // 安全退出
     handleUserLogout () {
-      this.setUserInfo({})
-      this.$router.push('/home')
-    },
-    // 我的课程点击
-    handleCourseClick () {
-      this.$router.push('/user/course')
-    },
-    // 订单中心点击
-    handleOrderClick () {
-      this.$router.push('/order')
-    },
-    // 个人设置点击
-    handleSettingClick () {
-      this.$router.push('/user')
-    },
-    // 消息点击
-    handleBellClick () {
-      this.$router.push('/notice')
-    },
-    // 购物车点击
-    handleCartClick () {
-      this.$router.push('/cart')
+      this.logout().then(() => {
+        this.showUserInfo = false
+        this.$router.push('/home')
+      }).catch(() => {
+        this.$message.error('退出登录失败')
+      })
     },
     // 课程历史点击
     handleHistoryClick () {
@@ -159,11 +150,27 @@ export default {
         }
       })
     },
+    // 获取未读消息数据
+    getNotReadNoticeData () {
+      getNotReadNotice().then(res => {
+        const { code, data } = res
+        if (code === ERR_OK && data === true) {
+          this.isDot = true
+        } else {
+          this.isDot = false
+        }
+      }).catch(() => {
+        this.isDot = false
+      })
+    },
     // vuex
     ...mapMutations('login', {
       'setShowLogin': 'SET_SHOW_LOGIN',
       'setLoginAction': 'SET_LOGIN_ACTION',
       'setUserInfo': 'SET_USER_INFO'
+    }),
+    ...mapActions('login', {
+      'logout': 'logout'
     })
   },
   computed: {
@@ -329,6 +336,8 @@ export default {
                 color: #000;
                 font-weight: 700;
                 font-size: 16px;
+              a
+                color: #000;
           .course-history
             position: relative;
             margin-bottom: 8px;

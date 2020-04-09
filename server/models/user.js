@@ -18,14 +18,27 @@ const UserSchema = new Schema({
     required: true
   },
   nickname: String,
-  avatar: String,
+  avatar: {
+    type: String,
+    default: 'https://static.mukewang.com/static/img/avatar_default.png'
+  },
   sex: {
     type: String,
-    enum: ['male', 'female']
+    enum: ['male', 'female'],
+    default: 'male'
   },
-  job: String,
-  city: String,
-  signature: String,
+  job: {
+    type: String,
+    default: ''
+  },
+  city: {
+    type: String,
+    default: ''
+  },
+  signature: {
+    type: String,
+    default: ''
+  },
   hour: {
     type: Number,
     default: 0
@@ -46,11 +59,26 @@ const UserSchema = new Schema({
     type: Number,
     default: 0
   },
-  email: String,
-  qq: String,
-  phone: String,
-  wechat: String,
-  weibo: String
+  email: {
+    type: String,
+    default: ''
+  },
+  qq: {
+    type: String,
+    default: ''
+  },
+  phone: {
+    type: String,
+    default: ''
+  },
+  wechat: {
+    type: String,
+    default: ''
+  },
+  weibo: {
+    type: String,
+    default: ''
+  }
 })
 
 const userModel = mongoose.model('user', UserSchema)

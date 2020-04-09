@@ -155,10 +155,12 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   let userinfo = getUserInfo()
   if (to.meta.requireAuth) {
-    if (userinfo.name) {
+    if (userinfo.id) {
       next()
     } else{
+      store.commit('login/SET_LOGIN_ACTION', 'login')
       store.commit('login/SET_SHOW_LOGIN', true)
+      next('/home')
     }
   } else {
     next()
