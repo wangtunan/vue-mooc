@@ -40,8 +40,9 @@ router.post('/register', async (ctx) => {
     return
   }
   // 判断是否成功写入数据库
+  const guid = getGuid()
   const checkRegister = await User.create({
-    id: getGuid(),
+    id: guid,
     username: username,
     password: password,
     nickname: `用户${new Date().getTime()}`
@@ -55,10 +56,13 @@ router.post('/register', async (ctx) => {
   }
   // 判断是否自动登录成功
   try {
-    const { status, data: { code, data } } = await axios.post('http://localhost:4300/user/login', {
+    const { status, data: { code, data } } = await axios.post('http://127.0.0.1:4300/user/login', {
       username,
       password
     })
+    if (!ctx.session.user_id) {
+      ctx.session.user_id = guid
+    }
     if (status !== 200 || code !== ERR_OK) {
       ctx.body = {
         code: -1,
@@ -115,17 +119,17 @@ router.post('/login', async (ctx) => {
     try {
       const params = {
         id: getGuid(),
-        userId: userInfo.id,
+        userid: userInfo.id,
         type: {
           text: '账号登陆',
           code: 0
         },
-        time: new Date().toISOString(),
+        time: new Date().toISOString().replace('T', ' ').substring(0, 19),
         ip: '192.168.2.102',
         device: 'web',
         city: '广东省广州市'
       }
-      await axios.post('http://localhost:4300/user/login', params)
+      await axios.post('http://localhost:4300/log/create', params)
       // 获取最新登录时间
       const lastLoginLog = await Log.find({
         userid: userInfo.id
@@ -134,11 +138,14 @@ router.post('/login', async (ctx) => {
       })
       if (lastLoginLog.length > 0) {
         userInfo.lastLoginTime = lastLoginLog[0].time
+        userInfo.lastLoginCity = params.city
       } else {
         userInfo.lastLoginTime = ''
+        userInfo.lastLoginCity = ''
       }
     } catch (e) {
       userInfo.lastLoginTime = ''
+      userInfo.lastLoginCity = ''
       console.log(e.message)
     }
     ctx.body = {

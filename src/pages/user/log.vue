@@ -8,7 +8,11 @@
       <!-- 表格 -->
       <el-table :data="logs">
         <el-table-column label="类型" prop="type.text" align="center" width="120" />
-        <el-table-column label="登陆时间" prop="time" align="center" width="180" />
+        <el-table-column label="登陆时间" align="center" width="180">
+          <template slot-scope="{row}">
+            {{ row.time.replace('T', ' ').substring(0, 19) }}
+          </template>
+        </el-table-column>
         <el-table-column label="城市" prop="city" align="center" width="390" />
         <el-table-column label="IP" prop="ip" align="center" width="120" />
         <el-table-column label="设备" prop="device" align="center" width="90" />

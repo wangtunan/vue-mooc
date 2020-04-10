@@ -9,6 +9,7 @@ import readRouter from './interface/read.js'
 import userRouter from './interface/user.js'
 import logRouter from './interface/log.js'
 import addressRouter from './interface/address.js'
+import integralRouter from './interface/integral.js'
 import mongoose from 'mongoose'
 import dbConfig from './config.js'
 
@@ -19,9 +20,10 @@ const port = process.env.PORT || 4300
 
 // 设置跨域
 app.use(async (ctx, next) => {
-  ctx.set('Access-Control-Allow-Origin', '*');
-  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-  ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+  ctx.set('Access-Control-Allow-Origin', '*')
+  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild')
+  ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
+  ctx.set('Access-Control-Allow-Credentials', true)
   if (ctx.method === 'OPTIONS') {
     ctx.body = 200; 
   } else {
@@ -34,7 +36,8 @@ app.keys = ['vue-mooc-keys']
 app.use(session({
   prefix: 'mooc',
   key: 'mooc',
-  maxAge: 60 * 60 * 1000
+  rolling: true,
+  maxAge: 24 * 60 * 60 * 1000
 }, app))
 app.use(bodyParser())
 app.use(json())
@@ -54,6 +57,7 @@ app.use(readRouter.routes(), readRouter.allowedMethods())
 app.use(userRouter.routes(), userRouter.allowedMethods())
 app.use(logRouter.routes(), logRouter.allowedMethods())
 app.use(addressRouter.routes(), addressRouter.allowedMethods())
+app.use(integralRouter.routes(), integralRouter.allowedMethods())
 
 // 启动服务
 app.listen(port, () => {

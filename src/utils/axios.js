@@ -2,7 +2,8 @@ import axios from 'axios'
 import  components  from '../register.js'
 const Message = components.Message
 const service = axios.create({
-  timeout: 10000
+  timeout: 10000,
+  withCredentials: true
 })
 
 // 请求拦截

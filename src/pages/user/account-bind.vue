@@ -1,7 +1,9 @@
 <template>
   <div class="account-bind">
     <p ref="loginRecord" class="last-login-record">
-      上次登录时间：{{ userinfo.lastLoginTime }}  地点：<span @click="handleRecordClick">查看最近操作记录</span>
+      <span>上次登录时间：{{ userinfo.lastLoginTime }}</span>
+      <span>地点：{{ userinfo.lastLoginCity }}</span>
+      <span class="record-btn" @click="handleRecordClick">查看最近操作记录</span>
       <i class="iconfont" @click="handleCloseRecord">&#xe619;</i>
     </p>
     <dl>
@@ -118,13 +120,16 @@ export default {
       opacity: 1;
       font-size: 12px;
       color: #f56108;
+      & > span:not(:first-child) {
+        margin-left: 10px;
+      }
       .iconfont
         float: right;
         margin-right: -10px;
         padding: 0 10px;
         cursor: pointer;
         font-size: 12px;
-      & > span
+      .record-btn
         color: #008cc8;
         cursor: pointer;
     .bind-title

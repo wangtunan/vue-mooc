@@ -22,6 +22,7 @@ const CartIndex = () => import('pages/cart/cart.vue') // 购物车路由
 const CartConfirm = () => import('pages/cart/confirm.vue') // 购物车确认路由
 const CartPay = () => import('pages/cart/pay.vue') // 购物车支付路由
 const SearchResult = () => import('pages/search-result/index.vue') // 搜索结果路由
+const IntegralIndex = () => import('pages/integral/index.vue') // 积分商场路由
 
 const routes = [
   {
@@ -139,6 +140,11 @@ const routes = [
     path: '/search/result',
     name: 'SearchResult',
     component: SearchResult
+  },
+  {
+    path: '/integral',
+    name: 'IntegralIndex',
+    component: IntegralIndex
   }
 ]
 const router = new Router({

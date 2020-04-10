@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import readTypesData from '../initData/readTypes.js'
+import readTypesData from '../initData/readType.js'
 import { getGuid } from '../../src/utils/utils.js'
 const Schema = mongoose.Schema
 const ReadTypesSchema = new Schema({

@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 import Read from '../models/read.js'
-import ReadTypes from '../models/readTypes.js'
+import ReadTypes from '../models/readType.js'
 import { ERR_OK, SIZE } from '../config.js'
 const router = new Router({
   prefix: '/read'

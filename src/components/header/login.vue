@@ -60,7 +60,9 @@
             </div>
             <div class="fast-nav-item">
               <i class="iconfont">&#xe61b;</i>
-              积分商城
+              <router-link to="/integral">
+                积分商城
+              </router-link>
             </div>
             <div class="fast-nav-item">
               <i class="iconfont">&#xe680;</i>

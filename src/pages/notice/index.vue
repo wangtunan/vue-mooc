@@ -18,7 +18,7 @@
       <div class="list-setting">
         <span class="tips">消息中心只展示最近三个月的消息</span>
         <span class="setting-box">
-          <span class="read-all" @click="handleAllReadClick">全部标记为已读</span>
+          <span v-if="noticeList.length > 0" class="read-all" @click="handleAllReadClick">全部标记为已读</span>
           <span class="read-setting" @click="handleSettingClick">通知设置</span>
         </span>
       </div>
@@ -122,8 +122,9 @@ export default {
     },
     // 全部标记已读
     handleAllReadClick () {
+      const postIds = this.noticeList.filter(notice => !notice.isRead).map(notice => notice.id)
       const data = {
-        code: this.currentCode
+        ids: postIds
       }
       noticeReadAll(data).then(res => {
         const { code, msg } = res

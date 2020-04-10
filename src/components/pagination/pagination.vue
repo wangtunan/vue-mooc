@@ -25,6 +25,10 @@ export default {
       type: Number,
       default: 1
     },
+    size: {
+      type: Number,
+      default: 10
+    },
     background: {
       type: Boolean,
       default: true
@@ -32,7 +36,7 @@ export default {
   },
   data () {
     return {
-      pageSize: 10
+      pageSize: this.size || 10
     }
   },
   computed: {

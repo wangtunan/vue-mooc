@@ -14,16 +14,6 @@ const NoticeSchema = new Schema({
     enum: [1, 2],
     required: true
   },
-  isRead: {
-    type: Boolean,
-    default: false,
-    enum: [true, false]
-  },
-  isDelete: {
-    type: Boolean,
-    default: false,
-    enum: [true, false]
-  },
   time: {
     type: String,
     required: true
