@@ -8,7 +8,7 @@
         <div class="balance-left">
           <p>当前余额</p>
           <p class="balance">
-            ¥ {{ recharge.total }}
+            ¥ {{ sum }}
           </p>
         </div>
         <div class="balance-right">
@@ -21,17 +21,24 @@
         </div>
       </div>
       <div class="balancel-list">
-        <el-table :data="recharge.data">
+        <el-table :data="recharge">
           <el-table-column label="时间" prop="time" />
-          <el-table-column label="金额" prop="balance" />
-          <el-table-column label="操作" prop="action" />
-          <el-table-column label="结余" prop="total" />
+          <el-table-column label="金额">
+            <template slot-scope="{row}">
+              ¥ {{ row.money }}
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" prop="action.text" />
           <el-table-column label="备注" prop="remark" />        
         </el-table>
       </div>
     </div>
 
-    <el-dialog title="余额充值" :visible.sync="dialogVisible" width="400px" top="25vh" :close-on-click-modal="false">
+    <!-- 分页 -->
+    <pagination :total="total" :page.sync="page" @change="handlePaginationChange"></pagination>
+
+    <!-- 充值弹窗 -->
+    <mooc-dialog title="余额充值" :visible.sync="dialogVisible" width="500px" top="25vh" :close-on-click-modal="false">
       <el-form label-position="top" label-width="100px">
         <el-form-item label="充值金额">
           <div class="recharge-amount">
@@ -75,23 +82,27 @@
       <p class="recharge-argement">
         点击立即充值则视为您已同意 <span>《慕课网用户协议》</span>
       </p>
-    </el-dialog>
+    </mooc-dialog>
   </div>
 </template>
 
 <script>
-import { rechargeList } from 'api/order.js'
+import Pagination from 'components/pagination/pagination.vue'
+import { getUserRecharges } from 'api/user.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      dialogVisible: false, // 充值弹窗是否可见
-      recharge: [], // 用户充值记录
-      amountList: [300, 500, 1000], // 充值金额列表
-      amountIndex: 0, // 当前选择的充值金额的索引
-      rechargeWay: [], // 支付方式
-      rechargeWayIndex: 0, // 当前支付方式的索引
-      amount: '' // 充值金额
+      dialogVisible: false,
+      recharge: [],
+      sum: 0,
+      page: 1,
+      total: 0,
+      amountList: [300, 500, 1000, '其他金额'],
+      amountIndex: 0,
+      rechargeWay: [],
+      rechargeWayIndex: 0,
+      amount: ''
     }
   },
   created () {
@@ -137,13 +148,33 @@ export default {
       this.amountIndex = index
       this.amount = ''
     },
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
+      this.getUserRechargeList()
+    },
     // 获取用户充值记录数据
     getUserRechargeList () {
-      rechargeList().then(res => {
-        let { code, data } = res
+      const params = {
+        page: this.page
+      }
+      getUserRecharges(params).then(res => {
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.recharge = data
+          this.recharge = data.list,
+          this.total = data.total
+          this.sum = data.sum
+        } else {
+          this.recharge = [],
+          this.total = 0
+          this.sum = 0
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.recharge = [],
+        this.total = 0
+        this.sum = 0
+        this.$message.error('接口异常')
       })
     }
   },
@@ -153,6 +184,9 @@ export default {
         this.amountIndex = this.amountIndex !== -1 ? -1 : this.amountIndex
       }
     }
+  },
+  components: {
+    Pagination
   }
 }
 </script>
@@ -239,7 +273,7 @@ export default {
         height: 50px;
         line-height: 50px;
         text-align: center;
-        border: 2px solid #d3d6d9;
+        border: 1px solid #d3d6d9;
         border-radius: 12px;
         font-size: 16px;
         font-weight: 700;

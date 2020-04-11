@@ -8,7 +8,7 @@
           :key="item.id"
           class="order-nav-item"
           :class="{active: currentIndex == index}"
-          @click="handleNavClick(index)"
+          @click="currentIndex = index"
         >
           {{ item.title }}
           <span class="arrow" />
@@ -20,8 +20,8 @@
 </template>
 <script>
 import List from './list.vue'
-import Balance from './balance.vue'
-import Curpon from './curpon.vue'
+import Recharge from './recharge.vue'
+import Coupon from './coupon.vue'
 import Consult from './consult.vue'
 import Bill from './bill.vue'
 import Invoice from './invoice.vue'
@@ -35,18 +35,18 @@ export default {
   created () {
     this.navList = [
       { id: 1, title: '我的订单', component: 'list' },
-      { id: 2, title: '我的余额', component: 'balance' },
-      { id: 4, title: '我的优惠券', component: 'curpon' },
+      { id: 2, title: '我的余额', component: 'recharge' },
+      { id: 4, title: '我的优惠券', component: 'coupon' },
       { id: 5, title: '课程咨询', component: 'consult' },
       { id: 6, title: '发票管理', component: 'invoice' },
       { id: 7, title: '消费记录', component: 'bill' }
     ]
   },
   methods: {
-    // 导航点击
-    handleNavClick (index) {
-      this.currentIndex = index
-    }
+    // // 导航点击
+    // handleNavClick (index) {
+    //   this.currentIndex = index
+    // }
   },
   computed: {
     componentName () {
@@ -55,8 +55,8 @@ export default {
   },
   components: {
     List,
-    Balance,
-    Curpon,
+    Recharge,
+    Coupon,
     Consult,
     Bill,
     Invoice

@@ -43,7 +43,9 @@ import Information from "./information.vue"
 import Log from "./log.vue"
 import Authenticate from "./authenticate.vue"
 import MAddress from "./address.vue"
-import { mapGetters } from 'vuex'
+import { getUserInfo } from 'api/user.js'
+import { ERR_OK } from 'api/config.js'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -74,8 +76,28 @@ export default {
           this.componentName = "log"
           this.currentNavIndex = 2
           break
+        case 'userinfo':
+          this.getUserInfoData()
+          break
       }
-    }
+    },
+    // 获取用户详细信息
+    getUserInfoData () {
+      getUserInfo().then(res => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.setUserInfo(data)
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
+      })
+    },
+    // vuex
+    ...mapMutations({
+      'setUserInfo': 'login/SET_USER_INFO'
+    })
   },
   computed: {
     ...mapGetters(['userInfo'])

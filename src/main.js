@@ -10,6 +10,8 @@ import {
   TableColumn,
   Form,
   FormItem,
+  RadioGroup,
+  Radio,
   Input,
   Checkbox,
   MessageBox,
@@ -21,6 +23,8 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Form)
 Vue.use(FormItem)
+Vue.use(Radio)
+Vue.use(RadioGroup)
 Vue.use(Input)
 Vue.use(Checkbox)
 Vue.use(Pagination)

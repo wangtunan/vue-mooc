@@ -1,8 +1,8 @@
 import Router from 'koa-router'
 import User from '../models/user.js'
 import axios from 'axios'
-import Log from '../models/log.js'
-import { initUserLogs } from '../models/log.js'
+import Log, { initUserLogs } from '../models/log.js'
+import { initUserRecharges } from '../models/recharge.js'
 import { ERR_OK } from '../config.js'
 import { getGuid } from '../../src/utils/utils.js'
 const router = new Router({
@@ -115,6 +115,7 @@ router.post('/login', async (ctx) => {
   } else {
     ctx.session.user_id = userInfo.id
     initUserLogs(userInfo.id)
+    initUserRecharges(userInfo.id)
     // 登录成功后，新增一条登录日志
     try {
       const params = {
@@ -213,6 +214,79 @@ router.get('/check', (ctx) => {
       code: -2,
       msg: '用户未登录',
       data: false
+    }
+  }
+})
+
+// 用户更改账号绑定信息路由
+router.post('/update/binds', async (ctx) => {
+  const userid = ctx.session.user_id
+  const { email, phone, password, qq, wechat } = ctx.request.body
+  if (!password) {
+    ctx.body = {
+      code: -1,
+      msg: '参数校验失败：密码不能为空'
+    }
+    return false
+  }
+  try {
+    const result = await User.find({
+      id: userid
+    }).update({
+      email: email,
+      password: password,
+      phone: phone,
+      qq: qq,
+      wechat: wechat
+    })
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '修改账号绑定信息成功'
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '修改账号绑定信息失败'
+      }
+    }
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      msg: e.message || '服务器异常'
+    }
+  }
+})
+
+// 用户更改个人信息路由
+router.post('/update/info', async (ctx) => {
+  const userid = ctx.session.user_id
+  const { nickname, job, city, sex, signature } = ctx.request.body
+  try {
+    const result = await User.find({
+      id: userid
+    }).update({
+      nickname,
+      job,
+      city,
+      sex,
+      signature
+    })
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '修改个人信息成功'
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '修改个人信息失败'
+      }
+    }
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      msg: '修改个人信息失败'
     }
   }
 })
