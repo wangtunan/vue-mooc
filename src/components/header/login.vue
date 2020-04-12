@@ -46,30 +46,30 @@
             </div>
           </div>
           <div class="fast-nav" @click.stop="showUserInfo = false">
-            <div class="fast-nav-item">
-              <i class="iconfont">&#xe60e;</i>
-              <router-link to="/user/course">
+            <router-link to="/user/course">
+              <div class="fast-nav-item">
+                <i class="iconfont">&#xe60e;</i>
                 我的课程
-              </router-link>
-            </div>
-            <div class="fast-nav-item">
-              <i class="iconfont">&#xe611;</i>
-              <router-link to="/order">
+              </div>
+            </router-link>
+            <router-link to="/order">
+              <div class="fast-nav-item">
+                <i class="iconfont">&#xe611;</i>
                 订单中心
-              </router-link>
-            </div>
-            <div class="fast-nav-item">
-              <i class="iconfont">&#xe61b;</i>
-              <router-link to="/integral">
+              </div>
+            </router-link>
+            <router-link to="/integral">
+              <div class="fast-nav-item">
+                <i class="iconfont">&#xe61b;</i>
                 积分商城
-              </router-link>
-            </div>
-            <div class="fast-nav-item">
-              <i class="iconfont">&#xe680;</i>
-              <router-link to="/user">
+              </div>
+            </router-link>
+            <router-link to="/user">
+              <div class="fast-nav-item">
+                <i class="iconfont">&#xe680;</i>
                 个人设置
-              </router-link>
-            </div>
+              </div>
+            </router-link>
           </div>
           <div v-if="userInfo.lastCourse" class="course-history">
             <i class="iconfont">&#xe62f;</i>

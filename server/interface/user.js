@@ -3,6 +3,7 @@ import User from '../models/user.js'
 import axios from 'axios'
 import Log, { initUserLogs } from '../models/log.js'
 import { initUserRecharges } from '../models/recharge.js'
+import { initUserCoupons } from '../models/coupon.js'
 import { ERR_OK } from '../config.js'
 import { getGuid } from '../../src/utils/utils.js'
 const router = new Router({
@@ -116,6 +117,7 @@ router.post('/login', async (ctx) => {
     ctx.session.user_id = userInfo.id
     initUserLogs(userInfo.id)
     initUserRecharges(userInfo.id)
+    initUserCoupons(userInfo.id)
     // 登录成功后，新增一条登录日志
     try {
       const params = {

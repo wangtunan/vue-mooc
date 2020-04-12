@@ -4,7 +4,18 @@ import axios from 'utils/axios.js'
 export function getQuestionList () {
   return axios.get('/mock/question/question.json')
 }
-// 获取猿问关注标签列表
-export function getLikeList () {
-  return axios.get('/mock/question/like.json')
+
+// 获取关注标签列表
+export function getFollowList () {
+  return axios.get('/mock/label/follow/list')
+}
+
+// 关注标签
+export function followLabels (data) {
+  return axios.post('/mock/label/follow', data)
+}
+
+// 获取标签列表数据
+export function getLabelList () {
+  return axios.get('/mock/label/list')
 }

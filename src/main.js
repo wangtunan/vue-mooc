@@ -16,7 +16,8 @@ import {
   Checkbox,
   MessageBox,
   Pagination,
-  Dialog
+  Dialog,
+  Scrollbar
 } from 'element-ui'
 Vue.use(Icon)
 Vue.use(Table)
@@ -29,6 +30,7 @@ Vue.use(Input)
 Vue.use(Checkbox)
 Vue.use(Pagination)
 Vue.use(Dialog)
+Vue.use(Scrollbar)
 
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;

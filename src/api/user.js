@@ -32,13 +32,6 @@ export function updateUserInfo (data) {
   return axios.post('/mock/user/update/info', data)
 }
 
-// 分页获取用户充值记录接口
-export function getUserRecharges (params) {
-  return axios.get('/mock/recharge/list', {
-    params
-  })
-}
-
 // 获取用户课程信息接口
 export function getUserCourse () {
   return axios.get('/mock/user/course.json')

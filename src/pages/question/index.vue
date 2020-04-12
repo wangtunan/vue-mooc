@@ -16,15 +16,16 @@
         <dl>
           <dt>我的关注：</dt>
           <dd
-            v-for="(item, index) in like"
+            v-for="(item, index) in followList"
             :key="index"
             :class="{
               active: currentIndex == index
             }"
             @click="handleLikeClick(item, index)"
           >
-            {{ item }}
+            {{ item.title }}
           </dd>
+          <dd @click="handleLabelManageClick">标签管理</dd>
         </dl>
       </div>
     </div>
@@ -34,8 +35,8 @@
       <div class="question-content-container">
         <div class="left">
           <div class="question-list">
-            <ul v-if="filterQuestionList && filterQuestionList.length">
-              <li v-for="(item, index) in filterQuestionList" :key="index" class="question-item">
+            <ul v-if="questionList && questionList.length">
+              <li v-for="(item, index) in questionList" :key="index" class="question-item">
                 <div class="finish">
                   <span class="iconfont">&#xe786;</span>
                   <span>{{ item.answer }}</span>
@@ -70,25 +71,58 @@
         </div>
       </div>
     </div>
+
+    <!-- 标签管理弹出 -->
+    <mooc-dialog title="选择感兴趣的标签" :visible.sync="dialogVisible" width="600px">
+      <el-scrollbar>
+        <div class="label-container">
+          <dl
+            v-for="(type, index) in labelList"
+            :key="index"
+            class="label-group"
+          >
+            <dt class="label-group-title">{{ type.title }}</dt>
+            <dd
+              v-for="(label, labelIndex) in type.list"
+              :key="labelIndex"
+              class="label-item"
+              :class="{
+                'is-active': label.isSelected
+              }"
+              @click="handleLabelClick(index, label, labelIndex)"
+            >
+              {{ label.title }}
+            </dd>
+          </dl>
+        </div>
+      </el-scrollbar>
+      <template slot="footer">
+        <mooc-button type="success" :disabled="isLoading" @click="handleFollowClick">完成</mooc-button>
+      </template>
+    </mooc-dialog>
   </div>
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
 import RecommendAuthor from 'components/recommend/recommend-author.vue'
-import { getLikeList, getQuestionList } from 'api/question.js'
+import { getFollowList, getQuestionList, getLabelList, followLabels } from 'api/question.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      isLoading: false,
+      dialogVisible: false,
       currentIndex: 0,
-      like: [],
+      followList: [],
       question: {},
       total: 100,
-      page: 1
+      page: 1,
+      labelList: [],
+      selectLabelList: []
     }
   },
   mounted () {
-    this.getLikeListData()
+    this.getFollowListData(true)
     this.getQuestionListData()
   },
   methods: {
@@ -96,13 +130,66 @@ export default {
     handleLikeClick (item, index) {
       this.currentIndex = index
     },
-    // 获取关注标签列表
-    getLikeListData () {
-      getLikeList().then(res => {
-        let { code, data } = res
+    // 标签管理点击事件
+    handleLabelManageClick () {
+      this.dialogVisible = true
+      this.getLabelListData()
+    },
+    // 标签点击事件
+    handleLabelClick (index, label, labelIndex) {
+      label.isSelected = !label.isSelected
+      this.$set(this.labelList[index]['list'], labelIndex, label)
+    },
+    // 关联标签
+    handleFollowClick () {
+      const selectList = []
+      this.labelList.forEach(type => {
+        const list = type.list
+        list.forEach(item => {
+          if (item.isSelected) {
+            selectList.push(item)
+          }
+        })
+      })
+      if (selectList.length === 0) {
+        this.$message.warning('至少选择一个要关注的标签')
+        return false
+      }
+      this.isLoading = true
+      const params = {
+        list: selectList
+      }
+      followLabels(params).then(res => {
+        this.isLoading = false
+        const { code, msg } = res
         if (code === ERR_OK) {
-          this.like = data
+          this.$message.success(msg)
+          this.dialogVisible = false
+          this.getFollowListData()
+        } else {
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.isLoading = false
+        this.$message.error('接口异常')
+      })
+    },
+    // 获取关注标签列表
+    getFollowListData (isFirst) {
+      getFollowList().then(res => {
+        let { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.followList = data
+          if (this.followList.length === 0 && isFirst) {
+            this.handleLabelManageClick()
+          }
+        } else {
+          this.followList = []
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.followList = []
+        this.$message.error('接口异常')
       })
     },
     // 获取猿问数据
@@ -113,24 +200,53 @@ export default {
           this.question = data
         }
       })
+    },
+    // 获取标签列表
+    getLabelListData () {
+      getLabelList().then(res => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.labelList = this.normalizeLabelList(data)
+        } else {
+          this.labelList = []
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.labelList = []
+        this.$message.error('接口异常')
+      })
+    },
+    // 处理标签数据
+    normalizeLabelList (array) {
+      if (array.length === 0) {
+        return []
+      }
+      const labelTreeObj = []
+      array.forEach(item => {
+        const findIndex = labelTreeObj.findIndex(filter => filter.title === item.type.text)
+        // 判断当前标签是否在已关注列表中
+        const selectIndex = this.followList.findIndex(filterItem => filterItem.labelid === item.id)
+        if (selectIndex === -1) {
+          item.isSelected = false
+        } else {
+          item.isSelected = true
+        }
+        if (findIndex === -1) {
+          labelTreeObj.push({
+            title: item.type.text,
+            list: [item]
+          })
+        } else {
+          labelTreeObj[findIndex].list.push(item)
+        }
+      })
+      return labelTreeObj
     }
   },
   computed: {
-    // 猿问列表数据
     questionList () {
       return this.question.data || []
     },
-    // 猿问列表筛选数据
-    filterQuestionList () {
-      let list = this.questionList.slice()
-      let like = this.like[this.currentIndex]
-      if (like !== '全部') {
-        return list.filter(item => item.tags.includes(like))
-      } else {
-        return list
-      }
-    },
-    // 回答排行榜
     recommend () {
       return this.question.recommend || []
     }
@@ -196,22 +312,19 @@ export default {
             background-color: #17823b;
       .question-nav
         position: relative;
-        padding-top: 8px;
-        padding-left: 80px;
+        padding: 18px 0;
         border-bottom: 1px solid rgba(7,17,27,0.1);
         dt, dd
-          font-size: 14px;
-          line-height: 24px;
-        dt
-          position: absolute;
-          top: 8px;
-          left: 0;
-        dd
           display: inline-block;
           vertical-align: middle;
-          padding-right: 20px;
-          margin-bottom: 8px;
+          margin-right: 20px;
+          font-size: 14px;
+          line-height: 24px;
+        dd
           cursor: pointer;
+          &:last-child
+            float: right;
+            margin-right: 0;
           &:hover, &.active
             color: $theme-green-color;
     .question-content-container
@@ -287,5 +400,47 @@ export default {
       .right
         margin-left: 30px;
         flex: 0 0 280px;
-        width: 280px;   
+        width: 280px; 
+     .label-container
+        padding-left: 20px;
+       .label-group
+        display: inline-block;
+        vertical-align: top;
+        margin-bottom: 18px;
+        width: 250px;
+        &:nth-child(2n + 1)
+          margin-right: 20px;
+        .label-group-title
+          margin-bottom: 18px;
+          font-size: 14px;
+          color: $theme-green-color;
+          font-weight: bold;
+        .label-item
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 8px;
+          margin-bottom: 8px;
+          padding: 8px 16px;
+          border-radius: 16px;
+          background-color: rgba(28,31,33,.08);
+          line-height: 16px;
+          cursor: pointer;
+          transition: all 0.3s;
+          &:hover, &.is-active
+            color: #fff;
+            background-color: $theme-green-color;
+    >>> .mooc-dialog
+      .mooc-dialog-body
+        padding-top: 20px;
+      .mooc-dialog-footer
+        text-align: center;
+        .mooc-button
+          width: 200px;
+          border-radius: 24px;
+      .el-scrollbar
+        height: 360px;
+        .el-scrollbar__wrap
+          overflow-x: hidden;
+        .el-scrollbar__bar.is-horizontal
+          display: none;
 </style>

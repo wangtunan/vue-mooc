@@ -8,8 +8,10 @@ const router = new Router({
 // 分页获取登录日志接口
 router.get('/list', async (ctx) => {
   const { page = 1 } = ctx.query
-  const total = await Log.find().countDocuments()
-  const result = await Log.find().skip((page - 1) * SIZE).limit(SIZE).sort({
+  const userid = ctx.session.user_id
+  const where = { userid }
+  const total = await Log.find(where).countDocuments()
+  const result = await Log.find(where).skip((page - 1) * SIZE).limit(SIZE).sort({
     time: 'desc'
   })
   if (result.length > 0) {

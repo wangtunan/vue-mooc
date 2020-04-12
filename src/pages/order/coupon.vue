@@ -6,29 +6,41 @@
         v-for="(item,index) in navList"
         :key="item.id"
         :class="{active: currentIndex == index}"
-        @click="currentIndex=index"
+        @click="handleNavClick(item, index)"
       >
         <i v-if="item.type==4" class="iconfont">&#xe622;</i>{{ item.title }}
       </dd>
     </dl>
     <ul class="curpon-list">
-      <li v-for="(item,index) in filterCurponList" :key="index" class="curpon-item" :style="getBackgroundImage(item.status)">
+      <li
+        v-for="(item,index) in couponList"
+        :key="index"
+        class="curpon-item"
+        :style="getBackgroundImage(item.status.code)"
+      >
         <p class="curpon-price-box">
-          <span class="price">¥ {{ item.price }}</span>
-          <span class="condition">{{ item.condition }}</span>
+          <span class="price" :class="{'is-enable': item.status.code == 0}">¥ {{ item.number }}</span>
+          <span class="condition">
+            <template v-if="item.limit <= 0">
+              无门槛
+            </template>
+            <template v-else>
+              满 ¥{{ item.limit }} 可用
+            </template>
+          </span>
         </p>
         <p class="range">
-          适用于：{{ item.range }}
+          适用于：{{ item.range.text }}
         </p>
         <p class="effective">
-          有效期：{{ item.effectStartTime }}-{{ item.effectEndTime }}
+          有效期：{{ item.starttime }}-{{ item.endtime }}
         </p>
-        <template v-if="item.status==1">
+        <template v-if="item.status.code==1">
           <p class="order">
-            订单号：{{ item.order }}
+            订单号：{{ item.orderid }}
           </p>
           <p class="use-time">
-            使用日期：{{ item.useTime }}
+            使用日期：{{ item.usetime }}
           </p>
         </template>
       </li>
@@ -36,34 +48,48 @@
   </div>
 </template>
 <script>
-import { curponList } from 'api/order.js'
+import { getCouponList } from 'api/order.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      currentIndex: 0, // 当前导航索引
-      navList: [], // 导航数据
-      curponList: [], // 优惠券数据
+      currentIndex: 0,
+      navList: [],
+      couponList: [],
     }
   },
   created () {
     this.navList = [
-      { id: 1, title: '未使用', status: 0},
-      { id: 2, title: '已使用', status: 1},
-      { id: 3, title: '已过期', status: 2}
+      { title: '未使用', status: 0},
+      { title: '已使用', status: 1},
+      { title: '已过期', status: 2}
     ]
   },
   mounted () {
-    this.getCurponList()
+    this.getCurponListData()
   },
   methods: {
+    // 选项卡点击
+    handleNavClick (item, index) {
+      this.currentIndex = index
+      this.getCurponListData()
+    },
     // 获取用户优惠券信息
-    getCurponList () {
-      curponList().then(res => {
-        let { code, data } = res
+    getCurponListData () {
+      const params = {
+        status: this.currentStatus
+      }
+      getCouponList(params).then(res => {
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.curponList = data
+          this.couponList = data
+        } else {
+          this.couponList = []
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.couponList = []
+        this.$message.error('接口异常')
       })
     },
     // 根据状态获取优惠券的背景图片
@@ -91,10 +117,8 @@ export default {
     }
   },
   computed: {
-    filterCurponList () {
-      return this.curponList.filter(item => {
-        return item.status === this.navList[this.currentIndex].status
-      })
+    currentStatus () {
+      return this.navList[this.currentIndex].status
     }
   }
 }
@@ -165,6 +189,8 @@ export default {
           .price
             margin-right: 12px;
             font-size: 36px;
+            &.is-enable
+              color: #f56108;
           .condition
             font-size: 14px;
 </style>

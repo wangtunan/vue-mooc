@@ -19,6 +19,11 @@ export default {
       percentage: 100
     }
   },
+  created () {
+    this.list = [
+      { title: 'xxx', list: [] }
+    ]
+  },
   methods: {
     handleReduceClick () {
       this.percentage -= 10

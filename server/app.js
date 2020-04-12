@@ -11,6 +11,8 @@ import logRouter from './interface/log.js'
 import addressRouter from './interface/address.js'
 import integralRouter from './interface/integral.js'
 import rechargeRouter from './interface/recharge.js'
+import couponRouter from './interface/coupon.js'
+import labelRouter from './interface/label.js'
 import mongoose from 'mongoose'
 import dbConfig from './config.js'
 
@@ -60,6 +62,8 @@ app.use(logRouter.routes(), logRouter.allowedMethods())
 app.use(addressRouter.routes(), addressRouter.allowedMethods())
 app.use(integralRouter.routes(), integralRouter.allowedMethods())
 app.use(rechargeRouter.routes(), rechargeRouter.allowedMethods())
+app.use(couponRouter.routes(), couponRouter.allowedMethods())
+app.use(labelRouter.routes(), labelRouter.allowedMethods())
 
 // 启动服务
 app.listen(port, () => {

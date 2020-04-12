@@ -71,7 +71,7 @@ router.post('/create', async (ctx) => {
         text: way === 0 ? '支付宝' : '微信',
         code: way
       },
-      remark: way === 0 ? '支付宝转入' : '微信转入'
+      remark: way === 0 ? '支付宝充值' : '微信充值'
     }
     const result = await Recharge.create(params)
     if (result) {

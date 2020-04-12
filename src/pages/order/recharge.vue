@@ -12,7 +12,7 @@
           </p>
         </div>
         <div class="balance-right">
-          <div class="recharge-btn" @click="handleRechargeClick">
+          <div class="recharge-btn" @click="dialogVisible = true">
             立即充值
           </div>
           <p class="recharge-text">
@@ -47,15 +47,20 @@
               :key="index"
               class="recharge-item"
               :class="{active: index == amountIndex}"
-              @click="handleAmountItemClick(index)"
+              @click="handleAmountItemClick(item, index)"
             >
-              ¥ {{ item }}
+              <template v-if="index < lastIndex">¥</template>
+              {{ item }}
               <div class="amount-active">
                 <i class="iconfont">&#xe786;</i>
               </div>
             </span>
           </div>
-          <el-input v-model="amount" placeholder="其它金额，请输入1-50000之间的整数">
+          <el-input
+            v-if="amountIndex == lastIndex"
+            v-model.number="amount"
+            placeholder="其它金额，请输入1-50000之间的整数"
+          >
             <span slot="prefix" class="amount-icon">¥</span>
           </el-input>
         </el-form-item>
@@ -76,7 +81,7 @@
           </div>
         </el-form-item>
       </el-form>
-      <div class="form-recharge-btn" @click="handleFormRechargeClick">
+      <div class="form-recharge-btn" :class="{'is-disabled': isLoading}" @click="handleFormRechargeClick">
         立即充值
       </div>
       <p class="recharge-argement">
@@ -88,11 +93,12 @@
 
 <script>
 import Pagination from 'components/pagination/pagination.vue'
-import { getUserRecharges } from 'api/user.js'
+import { getUserRecharges, createUserRecharges } from 'api/order.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      isLoading: false,
       dialogVisible: false,
       recharge: [],
       sum: 0,
@@ -107,46 +113,45 @@ export default {
   },
   created () {
     this.rechargeWay = [
-      { type: '支付宝充值', url: 'https://order.imooc.com/static/module/pay/center/img/alipay_balance.png' },
-      { type: '微信充值', url: 'https://order.imooc.com/static/module/pay/center/img/wxpay_balance.png' }
+      { type: '支付宝充值', code: 0, url: 'https://order.imooc.com/static/module/pay/center/img/alipay_balance.png' },
+      { type: '微信充值', code: 1, url: 'https://order.imooc.com/static/module/pay/center/img/wxpay_balance.png' }
     ]
   },
   mounted () {
     this.getUserRechargeList()
   },
   methods: {
-    // 头部信息立即充值点击事件
-    handleRechargeClick () {
-      this.dialogVisible = true
-    },
-    // 表单立即充值点击事件
+    // 立即充值点击事件
     handleFormRechargeClick () {
-      let params = {
-        id: Math.random(),
-        time: '2019-07-18 17:26:55',
-        balance: 0,
-        action: '转入',
-        total: 0,
-        remark: this.rechargeWay[this.rechargeWayIndex].type
+      if (this.isLoading) {
+        return false
       }
-      // 处理充值金额
-      if (this.amount && this.amount > 0 ) {
-        params.balance = parseFloat(this.amount)
-      } else {
-        params.balance = parseFloat(this.amountList[this.amountIndex])
+      const params = {
+        money: this.money,
+        way: this.currentCode
       }
-      params.total = parseFloat(this.recharge.total) + params.balance
-      this.recharge = {
-        total: params.total,
-        data: [...this.recharge.data, params]
-      }
-      this.$message.success('充值成功')
-      this.dialogVisible = false
+      this.isLoading = true
+      createUserRecharges(params).then(res => {
+        this.isLoading = false
+        const { code, msg } = res
+        if (code === ERR_OK) {
+          this.$message.success(msg)
+          this.getUserRechargeList()
+          this.dialogVisible = false
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.isLoading = false
+        this.$message.error('接口异常')
+      })
     },
     // 充值金额点击事件
-    handleAmountItemClick (index) {
+    handleAmountItemClick (item, index) {
       this.amountIndex = index
-      this.amount = ''
+      if (index === this.lastIndex) {
+        this.amount = ''
+      }
     },
     // 分页值更新
     handlePaginationChange (page) {
@@ -177,11 +182,20 @@ export default {
         this.$message.error('接口异常')
       })
     }
+
   },
-  watch: {
-    amount (newVal) {
-      if (newVal > 0) {
-        this.amountIndex = this.amountIndex !== -1 ? -1 : this.amountIndex
+  computed: {
+    currentCode () {
+      return this.rechargeWay[this.rechargeWayIndex].code
+    },
+    lastIndex () {
+      return this.amountList.length - 1
+    },
+    money () {
+      if (this.amountIndex < this.lastIndex) {
+        return this.amountList[this.amountIndex]
+      } else {
+        return this.amount
       }
     }
   },
@@ -254,6 +268,10 @@ export default {
       text-align: center;
       cursor: pointer;
       font-size: 16px;
+      &.is-disabled
+        background-color: rgba(56, 61, 66, 0.5);
+        cursor: not-allowed;
+        pointer-events: none;
     .recharge-argement
       font-size: 12px;
       color: #9199a1;
@@ -305,15 +323,15 @@ export default {
             left: -2px;
             top: -21px;
             color: #fff;
-    >>> .el-dialog
+    >>> .mooc-dialog
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
       border-radius: 12px;
-      .el-dialog__title
+      .mooc-dialog-title
         font-weight: 700;
         color: #333;
-      .el-dialog__close
+      .mooc-dialog-close
         font-size: 25px;
-      .el-dialog__body
+      .mooc-dialog-body
         padding: 10px 20px 30px;
       .el-form
         .el-form-item:last-child
