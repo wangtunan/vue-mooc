@@ -90,7 +90,9 @@ router.post('/follow', async (ctx) => {
         title: item.title
       })
     })
-    const removeResult = await LabelFollow.deleteMany()
+    const removeResult = await LabelFollow.where({
+      userid: userid
+    }).deleteMany()
     if (!removeResult) {
       ctx.body = {
         code: ERR_OK,
