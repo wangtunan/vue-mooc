@@ -2,45 +2,79 @@
   <div class="bill">
     <h2 class="bill-title">
       消费记录
-      <span class="number">目前共 <b>{{ bill.number }}</b>条记录 </span>
-      <span class="total">消费金额 <b>¥{{ bill.total }}</b> </span>
-      <span class="info">一份付出将有十分回报</span>
+      <span>目前共 <b>{{ total }}</b>条记录 </span>
+      <span>消费金额 <b>¥ {{ count }}</b> </span>
+      <span>一份付出将有十分回报</span>
     </h2>
-  
+
+    <!-- 表格 -->
     <div class="bill-list">
-      <el-table :data="bill.data">
-        <el-table-column label="订单编号" prop="order" />
+      <el-table :data="billList">
+        <el-table-column label="订单编号" prop="orderno" />
         <el-table-column label="课程" prop="name" show-overflow-tooltip />
         <el-table-column label="时间" prop="time" width="180" />
-        <el-table-column label="消费金额" prop="price" width="100" />
-        <el-table-column label="支付方式" prop="pay.way" width="100" />
-        <el-table-column label="支付结果" prop="pay.result" width="100" />
+        <el-table-column label="消费金额" width="100">
+          <template slot-scope="{row}">
+            ¥ {{ row.cost }}
+          </template>
+        </el-table-column>
+        <el-table-column label="支付方式" prop="way.text" width="100" />
       </el-table>
     </div>
+
+    <!-- 分页 -->
+    <pagination :total="total" :page.sync="page" @change="handlePaginationChange"></pagination>
   </div>
 </template>
 <script>
-import { billList } from 'api/order.js'
+import Pagination from 'components/pagination/pagination.vue'
+import { getUserBillList } from 'api/order.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      bill: []
+      page: 1,
+      total: 0,
+      count: 0,
+      billList: []
     }
   },
   mounted () {
-    this.getBillList()
+    this.getBillListData()
   },
   methods: {
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
+      this.getBillListData()
+    },
     // 获取用户消费记录数据
-    getBillList () {
-      billList().then(res => {
-        let { code, data } = res
+    getBillListData () {
+      const params = {
+        page: this.page
+      }
+      getUserBillList(params).then(res => {
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.bill = data
+          this.billList = data.list
+          this.total = data.total
+          this.count = data.count
+        } else {
+          this.billList = []
+          this.total = 0
+          this.count = 0
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.billList = []
+        this.total = 0
+        this.count = 0
+        this.$message.error('接口异常')
       })
     }
+  },
+  components: {
+    Pagination
   }
 }
 </script>

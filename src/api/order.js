@@ -19,6 +19,13 @@ export function getCouponList (params) {
   })
 }
 
+// 用户消费记录接口
+export function getUserBillList (params) {
+  return axios.get('/mock/bill/list', {
+    params
+  })
+}
+
 // 用户订单列表接口
 export function orderList () {
   return axios.get('/mock/user/order.json')
