@@ -7,6 +7,10 @@ const LessonSchema = new Schema({
     unique: true,
     index: true
   },
+  category: {
+    text: String,
+    code: Number,
+  },
   title: {
     type: String,
     required: true
@@ -55,6 +59,7 @@ const LessonSchema = new Schema({
   teacher: {
     name: String,
     avatar: String,
+    job: String,
     introduction: String
   }
 })
