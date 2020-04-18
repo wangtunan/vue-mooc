@@ -21,7 +21,7 @@
             :key="index"
             class="nav-item"
             :class="{active: currentNavIndex==index}"
-            @click="currentNavIndex=index"
+            @click="handleNavClick(item, index)"
           >
             {{ item.title }}
           </li>
@@ -29,86 +29,92 @@
       </div>
       
       <div class="list">
-        <article-list v-if="list && list.length" :filter-list="filterList" :list="list" />
-      </div>
-
-      <div class="recommend">
-        <recommend-read title="慕课专栏" :list="recommendReadList" />
-        <recommend-article title="推荐文章" :list="recommendArticleList" />
-        <recommend-author title="推荐作者" :list="recommendAuthorList" :author="true" />
+        <article-list v-if="articleList && articleList.length" :list="articleList" />
+        <pagination :total="total" :page.sync="page" @change="handlePaginationChange" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import ArticleList from './article-list.vue'
-import RecommendRead from 'components/recommend/recommend-read.vue'
-import RecommendAuthor from 'components/recommend/recommend-author.vue'
-import RecommendArticle from 'components/recommend/recommend-article.vue'
+import Pagination from 'components/pagination/pagination.vue'
+import ArticleList from './list.vue'
 import { getArticleNavList, getArticleList } from 'api/article.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      currentNavIndex: 0, // 当前导航的索引
-      articleList: {}, // 猿问列表数据
-      navList: [] // 导航数据
+      page: 1,
+      total: 0,
+      currentNavIndex: 0,
+      articleList: {},
+      navList: []
     }
   },
   mounted () {
     this.getArticleNavListData()
-    this.getArticleListData()
   },
   methods: {
+    // 导航点击
+    handleNavClick (item, index) {
+      this.currentNavIndex = index
+      this.page = 1
+      this.getArticleListData()
+    },
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
+      this.getArticleListData()
+    },
     // 获取手记导航数据
     getArticleNavListData () {
       getArticleNavList().then(res => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
           this.navList = data
+          this.getArticleListData()
+        } else {
+          this.navList = []
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.navList = []
+        this.$message.error('接口异常')
       })
     },
     // 获取猿问列表数据
     getArticleListData () {
-      getArticleList().then(res => {
-        let { code, data } = res
+      const params = {
+        page: this.page,
+        code: this.currentCode
+      }
+      getArticleList(params).then(res => {
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.articleList = data
+          this.articleList = data.list
+          this.total = data.total
+        } else {
+          this.articleList = []
+          this.total = 0
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.articleList = []
+        this.total = 0
+        this.$message.error('接口异常')
       })
     }
   },
   computed: {
-    filterList () {
-      let currentNav = this.navList[this.currentNavIndex]
-      return currentNav ? currentNav.data : []
-    },
-    list () {
-      let currentNav = this.navList[this.currentNavIndex]
-      let articleList = this.articleList      
-      if (!currentNav || !articleList.data) {
-        return
+    currentCode () {
+      if (this.navList.length === 0) {
+        return 0
       }
-      const type = currentNav.type
-      const list = articleList.data.slice()
-      return list.filter(item => item.type === type)
-    },
-    recommendReadList () {
-      return this.articleList ? this.articleList.read : []
-    },
-    recommendAuthorList () {
-      return this.articleList ? this.articleList.author : []
-    },
-    recommendArticleList () {
-      return this.articleList ? this.articleList.article : []      
+      return this.navList[this.currentNavIndex].code
     }
   },
   components: {
     ArticleList,
-    RecommendRead,
-    RecommendAuthor,
-    RecommendArticle
+    Pagination
   }
 }
 </script>

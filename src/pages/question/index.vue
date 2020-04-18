@@ -33,43 +33,38 @@
     <!-- 列表部分 -->
     <div class="m-center">
       <div class="question-content-container">
-        <div class="left">
-          <div class="question-list">
-            <ul v-if="questionList && questionList.length">
-              <li v-for="(item, index) in questionList" :key="index" class="question-item">
-                <div class="finish">
-                  <span class="iconfont">&#xe786;</span>
-                  <span>{{ item.answer }}</span>
-                </div>
-                <div class="content-box">
-                  <h3 class="title">
-                    {{ item.title }}
-                  </h3>
-                  <p class="tag">
-                    <img :src="item.icon" alt="">
-                    <span
-                      v-for="(tag, index) in item.tags"
-                      :key="index"
-                      class="name"
-                    >{{ tag }}</span>
-                    <span class="view-box">
-                      <i class="iconfont">&#xe681;</i>
-                      <span class="view-number">{{ item.view }}</span>
-                    </span>
-                  </p>
-                </div>
-              </li>
-            </ul>
-            <p v-else class="list-empty">
-              暂无数据
-            </p>
-          </div>
-          <pagination :total="total" :page.sync="page" />
-        </div>
-        <div class="right">
-          <recommend-author :title="recommend.title" :list="recommend.data" />
+        <div class="question-list">
+          <ul v-if="questionList && questionList.length">
+            <li v-for="(item, index) in questionList" :key="index" class="question-item">
+              <div class="finish">
+                <span v-if="item.isResolve" class="iconfont">&#xe786;</span>
+                <span>{{ item.answers }}</span>
+              </div>
+              <div class="content-box">
+                <h3 class="title">
+                  {{ item.title }}
+                </h3>
+                <p class="tag">
+                  <img :src="item.icon" alt="">
+                  <span
+                    v-for="(tag, index) in item.tags"
+                    :key="index"
+                    class="name"
+                  >{{ tag }}</span>
+                  <span class="view-box">
+                    <i class="iconfont">&#xe681;</i>
+                    <span class="view-number">{{ item.views }}</span>
+                  </span>
+                </p>
+              </div>
+            </li>
+          </ul>
+          <p v-else class="list-empty">
+            暂无数据
+          </p>
         </div>
       </div>
+      <pagination :size="size" :total="total" :page.sync="page" @change="handlePaginationChange" />
     </div>
 
     <!-- 标签管理弹出 -->
@@ -104,18 +99,18 @@
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
-import RecommendAuthor from 'components/recommend/recommend-author.vue'
 import { getFollowList, getQuestionList, getLabelList, followLabels } from 'api/question.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      size: 20,
       isLoading: false,
       dialogVisible: false,
       currentIndex: 0,
       followList: [],
-      question: {},
-      total: 100,
+      questionList: [],
+      total: 0,
       page: 1,
       labelList: [],
       selectLabelList: []
@@ -126,9 +121,10 @@ export default {
     this.getQuestionListData()
   },
   methods: {
-    // 关注标签点击
+    // 关注标签点击事件
     handleLikeClick (item, index) {
       this.currentIndex = index
+      this.getQuestionListData()
     },
     // 标签管理点击事件
     handleLabelManageClick () {
@@ -140,7 +136,7 @@ export default {
       label.isSelected = !label.isSelected
       this.$set(this.labelList[index]['list'], labelIndex, label)
     },
-    // 关联标签
+    // 确认关联标签点击事件
     handleFollowClick () {
       const selectList = []
       this.labelList.forEach(type => {
@@ -174,11 +170,19 @@ export default {
         this.$message.error('接口异常')
       })
     },
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
+      this.getQuestionListData()
+    },
     // 获取关注标签列表
     getFollowListData (isFirst) {
       getFollowList().then(res => {
         let { code, data, msg } = res
         if (code === ERR_OK) {
+          data.unshift({
+            title: '全部'
+          })
           this.followList = data
           if (this.followList.length === 0 && isFirst) {
             this.handleLabelManageClick()
@@ -194,11 +198,25 @@ export default {
     },
     // 获取猿问数据
     getQuestionListData () {
-      getQuestionList().then(res => {
-        let { code, data } = res
+      const params = {
+        page: this.page,
+        size: this.size,
+        label: this.currentLabel === '全部' ? '' : this.currentLabel
+      }
+      getQuestionList(params).then(res => {
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.question = data
+          this.questionList = data.list
+          this.total = data.total
+        } else {
+          this.questionList = []
+          this.total = 0
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.questionList = []
+        this.total = 0
+        this.$message.error('接口异常')
       })
     },
     // 获取标签列表
@@ -244,16 +262,15 @@ export default {
     }
   },
   computed: {
-    questionList () {
-      return this.question.data || []
-    },
-    recommend () {
-      return this.question.recommend || []
+    currentLabel () {
+      if (this.followList.length === 0) {
+        return ''
+      }
+      return this.followList[this.currentIndex].title
     }
   },
   components: {
-    Pagination,
-    RecommendAuthor
+    Pagination
   }
 }
 </script>
@@ -328,79 +345,71 @@ export default {
           &:hover, &.active
             color: $theme-green-color;
     .question-content-container
-      display: flex;
-      align-items: flex-start;
       margin-top: 30px;
-      .left
-        flex: 1;
-        .question-list
-          padding: 28px 32px;
-          background-color: #fff;
-          border-radius: 12px;
-          box-shadow: 0 4px 8px 2px rgba(7,17,27,.1)
-          .question-item
-            display: flex;
-            align-items: center;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(7,17,27,0.1);
-            &:last-child
-              border-bottom: none;
-            .finish
-              flex: 0 0 40px;
-              width: 40px;
-              padding: 8px 0;
-              margin-right: 15px;
-              background-color: rgba(31,173,78,.1);
-              color: #17823b;
+      .question-list
+        padding: 28px 32px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px 2px rgba(7,17,27,.1)
+        .question-item
+          display: flex;
+          align-items: center;
+          padding: 16px 0;
+          border-bottom: 1px solid rgba(7,17,27,0.1);
+          &:last-child
+            border-bottom: none;
+          .finish
+            flex: 0 0 40px;
+            width: 40px;
+            padding: 8px 0;
+            margin-right: 15px;
+            background-color: rgba(31,173,78,.1);
+            color: #17823b;
+            & > span
+              display: block;
+              text-align: center;
+              line-height: 18px;
+              font-size: 16px;
+              font-weight: 700;
+              &:last-child
+                font-weight: 400;
+                font-size: 14px;
+          .content-box
+            flex: 1;
+            .title
+              margin-bottom: 4px;
+              font-size: 16px;
+              color: $font-first-color;
+              font-weight: 700;
+              line-height: 24px;
+              cursor: pointer;
+              &:hover
+                color: #1fad4e;
+            .tag
+              font-size: 12px;
+              color: $font-four-color;
+              & > img
+                display: inline-block;
+                vertical-align: middle;
+                margin-top: -2px;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
               & > span
-                display: block;
-                text-align: center;
-                line-height: 18px;
-                font-size: 16px;
-                font-weight: 700;
-                &:last-child
-                  font-weight: 400;
-                  font-size: 14px;
-            .content-box
-              flex: 1;
-              .title
-                margin-bottom: 4px;
-                font-size: 16px;
-                color: $font-first-color;
-                font-weight: 700;
-                line-height: 24px;
-                cursor: pointer;
-                &:hover
-                  color: #1fad4e;
-              .tag
-                font-size: 12px;
-                color: $font-four-color;
-                & > img
-                  display: inline-block;
-                  vertical-align: middle;
-                  margin-top: -2px;
-                  width: 16px;
-                  height: 16px;
-                  border-radius: 50%;
-                & > span
-                  display: inline-block;
-                  vertical-align: middle;
-                  &.name
-                    padding: 0 10px 0 5px;
-                  &.view-box
-                    padding-left: 10px;
-                    & > i, & > span
-                      display: inline-block;
-                      vertical-align: middle;
-        .list-empty
-          padding: 10px 0;
-          text-align: center;
-          font-size: 14px;
-          color: $theme-red-color;
-      .right
-        margin-left: 30px;
-        flex: 0 0 280px;
-        width: 280px; 
+                display: inline-block;
+                vertical-align: middle;
+                &.name
+                  padding: 0 10px 0 5px;
+                &.view-box
+                  padding-left: 10px;
+                  & > i, & > span
+                    display: inline-block;
+                    vertical-align: middle;
+      .list-empty
+        padding: 10px 0;
+        text-align: center;
+        font-size: 14px;
+        color: $theme-red-color;
      .label-container
         padding-left: 20px;
        .label-group

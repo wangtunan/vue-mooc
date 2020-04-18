@@ -1,8 +1,10 @@
 import axios from 'utils/axios.js'
 
 // 获取猿问列表数据
-export function getQuestionList () {
-  return axios.get('/mock/question/question.json')
+export function getQuestionList (params) {
+  return axios.get('/mock/question/list', {
+    params
+  })
 }
 
 // 获取关注标签列表

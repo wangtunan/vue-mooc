@@ -14,6 +14,8 @@ import rechargeRouter from './interface/recharge.js'
 import couponRouter from './interface/coupon.js'
 import labelRouter from './interface/label.js'
 import billRouter from './interface/bill.js'
+import questionRouter from './interface/question.js'
+import articleRouter from './interface/article.js'
 import mongoose from 'mongoose'
 import dbConfig from './config.js'
 
@@ -66,6 +68,8 @@ app.use(rechargeRouter.routes(), rechargeRouter.allowedMethods())
 app.use(couponRouter.routes(), couponRouter.allowedMethods())
 app.use(labelRouter.routes(), labelRouter.allowedMethods())
 app.use(billRouter.routes(), billRouter.allowedMethods())
+app.use(questionRouter.routes(), questionRouter.allowedMethods())
+app.use(articleRouter.routes(), articleRouter.allowedMethods())
 
 // 启动服务
 app.listen(port, () => {
