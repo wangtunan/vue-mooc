@@ -19,9 +19,10 @@
 **数据请求**：
 * `axios`：一个非常出名的`HTTP`请求工具，[axios官网](http://www.axios-js.com/)
 
-**Mock数据**：
-* `json`数据：本项目接口全部采用手写`json`数据的形式来模拟请求。
-* `easy-mock`：使用`easy-mock`接口服务+ `json`数据的形式来`Mock`数据。
+**服务端接口**：
+* `koa`框架：使用`koa2`Node服务端框架，[Koa官网](https://koa.bootcss.com/)
+* `mongoose`：使用`mongoose`来链接和操作`mongodb`。[Mongoose官网](https://www.mongoose.com/)
+* `mongodb`：使用非关系型数据库`mongodb`来存储数据。[Mongodb官网](https://www.mongodb.com/)
 
 ## 背景
 在目前的业务搬砖中，接触到的项目大多是中后台项目，每日搬砖无非就是拿`element-ui`轮子一把嗦，轮子仔当久了自己也安逸了，痛定思痛后决定当一会轮子的制造者。<br/>
@@ -47,8 +48,7 @@
 
 ## 未来计划
 - 开发`vue-mooc`后台管理系统 <br/>
-- 开发`vue-mooc`Node.js后端版 <br/>
-- 开发`vue-mooc`服务端渲染(SSR)版 <br/>
+- 开发`vue-mooc`Node.js后端版(开发中) <br/>
 - 开发`vue-mooc`React版 <br/>
 
 
@@ -77,6 +77,9 @@
 ### 订单中心
 ![订单中心](./docs/images/7.gif)
 
+
+## 准备
+本地下载并安装Mongodb数据库
 
 ## 安装
 ```sh
