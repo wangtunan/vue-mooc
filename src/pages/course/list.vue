@@ -25,7 +25,7 @@
         <div class="img-box">
           <img :src="item.img" alt="">
           <div class="tags">
-            <span v-for="(tag, index) in item.tags" :key="index" class="tag-item">{{ tag }}</span>
+            <span v-for="(label, index) in item.labels" :key="index" class="tag-item">{{ label }}</span>
           </div>
           <div v-if="item.rate" class="rate">
             {{ item.rate }}%
@@ -36,14 +36,14 @@
             {{ item.title }}
           </h2>
           <p>
-            <span class="rank">{{ item.rank }}</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>{{ item.number }}</span>
+            <span class="rank">{{ item.hard.text }}</span>
+            <span class="number"><i class="iconfont">&#xe607;</i>{{ item.persons }}</span>
           </p>
           <p class="desc">
-            {{ item.desc }}
+            {{ item.introduction }}
           </p>
           <p>
-            <span class="price">{{ item.price }}</span>
+            <span class="price">免费</span>
             <span class="collect" :class="{like: item.isLike}" @click="handleCollectClick(item,index)">
               <i class="iconfont">&#xe716;</i>
               {{ item.isLike ? '已收藏' : '收藏' }}
@@ -131,6 +131,7 @@ export default {
       .list-item
         display: inline-block;
         margin: 0 15px 25px 0;
+        vertical-align: top;
         width: 216px;
         cursor: pointer;
         &:hover
@@ -195,6 +196,7 @@ export default {
               &.like
                 color: $red!important;
                 font-weight: 700;
-            .desc
+            &.desc
+              height: 50px;
               multline-ellipsis(2)
 </style>

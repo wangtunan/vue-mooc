@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import lessonData from '../initData/lesson.js'
+import { getGuid, getRandomNum } from '../../src/utils/utils.js'
 const Schema = mongoose.Schema
 const LessonSchema = new Schema({
   id: {
@@ -24,8 +26,7 @@ const LessonSchema = new Schema({
     required: true
   },
   banner: {
-    type: String,
-    required: true
+    type: String
   },
   type: {
     text: String,
@@ -51,15 +52,38 @@ const LessonSchema = new Schema({
     type: Number,
     default: 0
   },
-  labels: [String],
-  scripts: {
-    text: String,
-    code: Number
-  },
   teacher: {
     name: String,
     avatar: String,
     job: String,
     introduction: String
+  },
+  time: String,
+  persons: {
+    type: Number,
+    default: 0
+  },
+  comments: {
+    type: Number,
+    default: 0
+  },
+  labels: {
+    type: Array
   }
 })
+
+const lessonModel = mongoose.model('lesson', LessonSchema)
+// 判断有无数据，没有则初始化
+lessonModel.find((err, data) => {
+  if (!data || data.length === 0) {
+    lessonData.forEach(item => {
+      item.id = getGuid()
+      item.time = new Date().toISOString().repeat('T', ' ').substring(0, 19)
+      item.persons = getRandomNum(1, 10000)
+      item.comments = getRandomNum(1, 10000)
+      lessonModel.create(item)
+    })
+  }
+})
+
+export default lessonModel

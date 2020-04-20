@@ -31,16 +31,11 @@
       <li v-for="(item, index) in computeList" :key="index" class="list-item" @click="handleLessonClick(item)">
         <div class="img-box">
           <img :src="item.img" alt="">
-          <span v-if="item.type" class="type">{{ item.type }}</span>
           <span v-if="item.rate" class="rate">{{ item.rate }}%</span>
           <div class="lesson-mask">
             <div v-if="item.teacher" class="teacher-info">
               <img :src="item.teacher.avatar" alt="">
               <span class="name">{{ item.teacher.name }}</span>
-            </div>
-            <div v-if="item.lastUpdate" class="update-info">
-              <span>更新于</span>
-              <span>{{ item.lastUpdate }}</span>
             </div>
           </div>
         </div>
@@ -49,16 +44,16 @@
             {{ item.title }}
           </h2>
           <p>
-            <span>{{ item.rank }}</span>
-            <span class="number"><i class="iconfont">&#xe607;</i>{{ item.number }}</span>
-            <span class="comment">{{ item.comment }}人评价</span>
+            <span>{{ item.hard.text }}</span>
+            <span class="number"><i class="iconfont">&#xe607;</i>{{ item.persons || 0 }}</span>
+            <span class="comment">{{ item.comments || 0 }}人评价</span>
           </p>
           <p class="desc">
-            {{ item.desc }}
+            {{ item.introduction }}
           </p>
           <p class="price">
-            <span class="old">¥{{ item.oldPrice }}</span>
-            <span v-if="item.newPrice" class="new">¥{{ item.newPrice }}</span>
+            <span v-if="item.isDiscount" class="new">¥{{ item.discountPrice }}</span>
+            <span class="old" :class="{'is-discount': item.isDiscount}">¥{{ item.price }}</span>
             <span class="price-right">
               <span class="like" :class="{active: item.isLike}" @click="handleLikeClick(item,index)">
                 <i class="iconfont">&#xe716;</i>
@@ -87,10 +82,10 @@ export default {
   },
   data () {
     return {
-      isShowLike: false, // 是否展示已收藏课程
-      isHide: false, // 是否隐藏已参与的课程
-      currentFilterIndex: 0, // 当前筛选项的索引
-      filter: ['默认排序', '最新', '销量', '更新'] // 筛选项
+      isShowLike: false,
+      isHide: false,
+      currentFilterIndex: 0,
+      filter: ['默认排序', '最新', '销量', '更新']
     }
   },
   methods: {
@@ -217,18 +212,6 @@ export default {
           img-box(270px, 148px);
           & > img
             border-radius: 16px;
-          .type
-            position: absolute;
-            left: -8px;
-            top: 8px;
-            padding: 0 8px;
-            border-radius: 12px;
-            border: 2px solid #fff;
-            line-height: 20px;
-            background: linear-gradient(90deg,#fa0 17%,#f76b1c 100%);
-            font-size: 12px;
-            font-weight: 700;
-            color: #fff;
           .rate
             position: absolute;
             right: -8px;
@@ -255,24 +238,19 @@ export default {
               left: 16px;
               bottom: 16px;
               & > img
+                display: inline-block;
+                vertical-align: text-bottom;
                 margin-right: 12px;
                 width: 36px;
                 height: 36px;
                 background-color: #eee;
                 border-radius: 50%;
               .name
+                display: inline-block;
+                margin-top: -2px;
                 font-size: 14px;
                 font-weight: 700;
                 color: #fff;
-            .update-info
-              position: absolute;
-              right: 16px;
-              bottom: 14px;
-              & > span
-                display: block;
-                line-height: 20px;
-                color: #fff;
-                font-size: 12px;
         .lesson-content
           padding: 0 8px;
           .title
@@ -303,10 +281,11 @@ export default {
               float: right;
             .old
               color: $font-second-color;
+              &.is-discount
+                margin-left: 8px;
+                text-decoration: line-through;
             .new
-              margin-left: 5px;
               color: $font-second-color;
-              text-decoration: line-through;
             .price-right
               float: right;
               .like

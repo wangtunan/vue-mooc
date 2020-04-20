@@ -13,26 +13,29 @@
     <course-nav v-if="navList.length" :list="navList" @change="handleNavChange" />
     
     <!-- 课程列表 -->
-    <course-list v-if="courseList.length" :list.sync="courseList" />
+    <course-list v-if="courseList.length" :list="courseList" />
 
     <!-- 分页 -->
-    <pagination :total.sync="total" />
+    <pagination :total="total" :page.sync="page" :size="size" @change="handlePaginationChange" />
   </div>
 </template>
 <script>
-import CourseSearch from './course-search.vue'
-import CourseNav from './course-nav.vue'
-import CourseList from './course-list.vue'
+import CourseSearch from './search.vue'
+import CourseNav from './nav.vue'
+import CourseList from './list.vue'
 import Pagination from 'components/pagination/pagination.vue'
-import { getCourseNav, getCourseList } from 'api/course.js'
+import { getCourseNav } from 'api/course.js'
+import { getLessonList } from 'api/lesson.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      params: {}, // 导航选中的值
-      navList: [], // 课程导航信息
-      courseList: [], // 课程信息
-      total: 100 // 课程总页数
+      params: {},
+      navList: [],
+      courseList: [],
+      page: 1,
+      size: 15,
+      total: 0
     }
   },
   mounted () {
@@ -43,6 +46,11 @@ export default {
     // 导航值更新事件
     handleNavChange (params) {
       this.params = params
+      this.getCourseListData()
+    },
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
       this.getCourseListData()
     },
     // 收藏or取消收藏点击事件
@@ -60,11 +68,25 @@ export default {
     },
     // 获取课程信息接口
     getCourseListData () {
-      getCourseList(this.params).then(res => {
-        let { code, data } = res
+      const params = {
+        page: this.page,
+        size: this.size,
+        type: 0
+      }
+      getLessonList(params).then(res => {
+        let { code, data, msg } = res
         if(code === ERR_OK) {
-          this.courseList = data
+          this.courseList = data.list
+          this.total = data.total
+        } else {
+          this.courseList = []
+          this.total = 0
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.courseList = []
+        this.total = 0
+        this.$message.error('接口异常')
       })
     }
   },

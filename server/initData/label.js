@@ -20,6 +20,14 @@ const labelData = [
       text: '前端开发',
       code: 0
     },
+    title: 'TypeScript',
+    sort: 2
+  },
+  {
+    type: {
+      text: '前端开发',
+      code: 0
+    },
     title: 'Vue.js',
     sort: 2
   },
@@ -28,7 +36,7 @@ const labelData = [
       text: '前端开发',
       code: 0
     },
-    title: 'React.JS',
+    title: 'React.js',
     sort: 3
   },
   {
@@ -262,6 +270,14 @@ const labelData = [
     },
     title: '算法与数据结构',
     sort: 1
+  },
+  {
+    type: {
+      text: '计算机基础',
+      code: 3
+    },
+    title: '数学',
+    sort: 2
   },
   {
     type: {

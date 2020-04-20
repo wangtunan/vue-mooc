@@ -16,6 +16,7 @@ import labelRouter from './interface/label.js'
 import billRouter from './interface/bill.js'
 import questionRouter from './interface/question.js'
 import articleRouter from './interface/article.js'
+import lessonRouter from './interface/lesson.js'
 import mongoose from 'mongoose'
 import dbConfig from './config.js'
 
@@ -70,6 +71,7 @@ app.use(labelRouter.routes(), labelRouter.allowedMethods())
 app.use(billRouter.routes(), billRouter.allowedMethods())
 app.use(questionRouter.routes(), questionRouter.allowedMethods())
 app.use(articleRouter.routes(), articleRouter.allowedMethods())
+app.use(lessonRouter.routes(), lessonRouter.allowedMethods())
 
 // 启动服务
 app.listen(port, () => {

@@ -77,3 +77,8 @@ export function getOrderId () {
   }
   return `${year}${month}${day}${date.getTime()}`
 }
+
+// 获取指定范围的随机数
+export function getRandomNum (min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
