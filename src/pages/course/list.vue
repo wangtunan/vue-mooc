@@ -3,11 +3,11 @@
     <!-- 课程筛选 -->
     <div class="course-filter">
       <span
-        v-for="(item,index) in filter"
+        v-for="(item,index) in filterList"
         :key="index"
         :class="{active: index == filterIndex}"
-        @click="filterIndex=index"
-      >{{ item }}</span>
+        @click="handleFilterClick(item, index)"
+      >{{ item.title }}</span>
 
       <div class="hide-course-box">
         <mooc-switch
@@ -20,8 +20,8 @@
     </div>
 
     <!-- 课程列表 -->
-    <ul v-if="computeList.length" class="course-list">
-      <li v-for="(item,index) in computeList" :key="index" class="list-item" @click="handleCourseClick(item)">
+    <ul v-if="list.length" class="course-list">
+      <li v-for="(item,index) in list" :key="index" class="list-item" @click="handleCourseClick(item)">
         <div class="img-box">
           <img :src="item.img" alt="">
           <div class="tags">
@@ -66,12 +66,24 @@ export default {
   },
   data () {
     return {
-      isHide: false, // 是否隐藏已参与的课程
-      filter: ['最新', '最热'], // 课程筛选列表
-      filterIndex: 0, // 课程筛选索引
+      isHide: false,
+      filterList: [],
+      filterIndex: 0
     }
   },
+  created () {
+    this.filterList = [
+      { title: '默认排序', code: '' },
+      { title: '最新', code: 'time' },
+      { title: '最热', code: 'persons' }
+    ]
+  },
   methods: {
+    // 排序方式点击
+    handleFilterClick (item, index) {
+      this.filterIndex = index
+      this.$emit('update:sort', item.code)
+    },
     // 收藏or取消收藏点击事件
     handleCollectClick (item, index) {
       let list = this.list.slice()
@@ -82,22 +94,6 @@ export default {
     handleCourseClick () {
       let random = new Date().getTime()
       this.$router.push({ path: `/course/${random}` })
-    }
-  },
-  computed: {
-    computeList () {
-      let result = this.list.slice()
-      // 处理最热最新
-      if (this.filterIndex === 1) {
-        result = result.sort((a, b) => {
-          return b.number - a.number
-        })
-      }
-      // 处理是否隐藏已参与课程
-      if (this.isHide) {
-        result = result.filter(item => item.rate === 0)
-      }
-      return result
     }
   }
 }

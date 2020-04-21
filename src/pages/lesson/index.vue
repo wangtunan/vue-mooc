@@ -82,7 +82,7 @@ export default {
         size: this.size,
         type: 1,
         category: this.params.category,
-        label: this.params.label || '',
+        label: this.params.label,
         sort: this.sort
       }
       getLessonList(params).then(res => {

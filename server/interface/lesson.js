@@ -13,6 +13,7 @@ router.get('/list', async (ctx) => {
     type = 0,
     category = '',
     label = '',
+    diff = '',
     sort = ''
   } = ctx.query
   try {
@@ -31,6 +32,10 @@ router.get('/list', async (ctx) => {
           $eq: label
         }
       }
+    }
+    // 难度
+    if (diff) {
+      where['hard.code'] = +diff
     }
     // 排序放肆
     if (sort) {

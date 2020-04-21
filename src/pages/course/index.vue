@@ -10,10 +10,10 @@
     </div>
 
     <!-- 导航模块 -->
-    <course-nav v-if="navList.length" :list="navList" @change="handleNavChange" />
+    <course-nav v-if="navList.length" :list="navList" :params.sync="params" />
     
     <!-- 课程列表 -->
-    <course-list v-if="courseList.length" :list="courseList" />
+    <course-list v-if="courseList.length" :list="courseList" :sort.sync="sort" />
 
     <!-- 分页 -->
     <pagination :total="total" :page.sync="page" :size="size" @change="handlePaginationChange" />
@@ -24,12 +24,12 @@ import CourseSearch from './search.vue'
 import CourseNav from './nav.vue'
 import CourseList from './list.vue'
 import Pagination from 'components/pagination/pagination.vue'
-import { getCourseNav } from 'api/course.js'
-import { getLessonList } from 'api/lesson.js'
+import { getLessonNav, getLessonList } from 'api/lesson.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      sort: '',
       params: {},
       navList: [],
       courseList: [],
@@ -59,11 +59,17 @@ export default {
     },
     // 获取课程导航信息
     getCourseNavList () {
-      getCourseNav(this.params).then(res => {
+      getLessonNav().then(res => {
         let { code, data } = res
         if (code === ERR_OK) {
           this.navList = data
+        } else {
+          this.navList = []
+          this.$message.error('获取课程分类数据失败')
         }
+      }).catch(() => {
+        this.navList = []
+        this.$message.error('接口异常')
       })
     },
     // 获取课程信息接口
@@ -71,7 +77,11 @@ export default {
       const params = {
         page: this.page,
         size: this.size,
-        type: 0
+        type: 0,
+        category: this.params.direction,
+        label: this.params.category,
+        diff: this.params.diff,
+        sort: this.sort
       }
       getLessonList(params).then(res => {
         let { code, data, msg } = res
@@ -88,6 +98,14 @@ export default {
         this.total = 0
         this.$message.error('接口异常')
       })
+    }
+  },
+  watch: {
+    params () {
+      this.getCourseListData()
+    },
+    sort () {
+      this.getCourseListData()
     }
   },
   components: {
