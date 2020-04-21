@@ -23,12 +23,12 @@ export default {
   },
   data () {
     return {
-      directionIndex: 0, // 方向索引
-      directionList: [], // 方向数据
-      categortIndex: 0, // 分类索引
-      categortList: [], // 分类数据
-      difficultIndex: 0, // 难度索引
-      difficultList: [], // 难度数据
+      directionIndex: 0,
+      directionList: [],
+      categortIndex: 0,
+      categortList: [],
+      difficultIndex: 0,
+      difficultList: [],
       params: {
         direction: '全部',
         category: '全部',

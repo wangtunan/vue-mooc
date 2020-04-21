@@ -76,9 +76,9 @@ const lessonModel = mongoose.model('lesson', LessonSchema)
 // 判断有无数据，没有则初始化
 lessonModel.find((err, data) => {
   if (!data || data.length === 0) {
-    lessonData.forEach(item => {
+    lessonData.forEach((item, index) => {
       item.id = getGuid()
-      item.time = new Date().toISOString().repeat('T', ' ').substring(0, 19)
+      item.time = new Date(new Date().getTime() + index * 1000).toISOString().replace('T', ' ').substring(0, 19)
       item.persons = getRandomNum(1, 10000)
       item.comments = getRandomNum(1, 10000)
       lessonModel.create(item)

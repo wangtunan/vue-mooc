@@ -10,7 +10,7 @@
           :class="{active: currentFilterIndex == index}"
           @click="handleFilterClick(filter,index)"
         >
-          {{ filter }}
+          {{ filter.title }}
         </li>
       </ul>
       <div class="hide-course-box">
@@ -28,7 +28,7 @@
 
     <!-- 课程列表 -->
     <ul class="lesson-list">
-      <li v-for="(item, index) in computeList" :key="index" class="list-item" @click="handleLessonClick(item)">
+      <li v-for="(item, index) in list" :key="index" class="list-item" @click="handleLessonClick(item)">
         <div class="img-box">
           <img :src="item.img" alt="">
           <span v-if="item.rate" class="rate">{{ item.rate }}%</span>
@@ -85,13 +85,21 @@ export default {
       isShowLike: false,
       isHide: false,
       currentFilterIndex: 0,
-      filter: ['默认排序', '最新', '销量', '更新']
+      filter: []
     }
+  },
+  created () {
+    this.filter = [
+      { title: '默认排序', code: '' },
+      { title: '最新', code: 'time' },
+      { title: '销量', code: 'persons' }
+    ]
   },
   methods: {
     // 筛选项点击事件
     handleFilterClick (filter, index) {
       this.currentFilterIndex = index
+      this.$emit('update:sort', filter.code)
     },
     // 收藏or取消收藏点击事件
     handleLikeClick (item, index) {
@@ -110,33 +118,6 @@ export default {
     }
   },
   computed: {
-    // 课程筛选列表
-    computeList () {
-      let list = this.list.slice()
-      
-      // 处理最新
-      if (this.currentFilterIndex === 1) {
-        list = list.filter(item => item.type === '新课')
-      }
-
-      // 处理销量
-      if (this.currentFilterIndex === 2) {
-        list = list.sort((a, b) => {
-          return b.number - a.number
-        })
-      }
-
-      // 处理更新
-      if (this.currentFilterIndex === 3) {
-        list = list.filter(item => item.lastUpdate)
-      }
-
-      // 处理已收藏的课程
-      if (this.isShowLike) {
-        list = list.filter(item => item.isLike)
-      }
-      return list
-    },
     // 已收藏课程数量
     computeLikeLesson () {
       return this.list.filter(item => item.isLike).length || 0
@@ -270,6 +251,7 @@ export default {
               cursor: pointer;
             &.desc
               margin-top: 4px;
+              height: 42px;
               multline-ellipsis(2);
               &:hover
                 color: $font-second-color;

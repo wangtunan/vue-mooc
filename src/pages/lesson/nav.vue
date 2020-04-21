@@ -3,25 +3,25 @@
     <div class="lesson-nav">
       <ul class="ml-center">
         <li
-          v-for="(item,index) in directionList"
+          v-for="(item,index) in categoryList"
           :key="index"
           class="nav-item"
-          :class="{active: index == currentDirectionIndex}"
-          @click="handleNavClick(item,index)"
+          :class="{active: index == currentCategoryIndex}"
+          @click="handleCategoryClick(item, index)"
         >
-          {{ item }}
+          {{ item.title }}
         </li>
       </ul>
     </div>
-    <dl class="category-list ml-center">
+    <dl class="label-list ml-center">
       <dd
-        v-for="(category,index) in computeCategoryList"
+        v-for="(label,index) in currentLabels"
         :key="index"
-        class="category-item"
-        :class="{active: index == currentCategoryIndex}"
-        @click="handleCategoryClick(category,index)"
+        class="label-item"
+        :class="{active: index == currentLabelIndex}"
+        @click="handleLabelClick(label, index)"
       >
-        {{ category }}
+        {{ label.title }}
       </dd>
     </dl>
   </div>
@@ -38,44 +38,75 @@ export default {
   },
   data () {
     return {
-      currentCategoryIndex: 0, // 类型当前索引
-      currentDirectionIndex: 0, // 方向当前索引
-      directionList: [], // 方向数据
-      categoryList: [] // 类型数据
+      currentCategoryIndex: 0,
+      currentLabelIndex: 0
     }
   },
-  created () {
-    this.nav.forEach(item => {
-      if (item.code === 'direction') {
-        this.directionList = item.data
-      } else if (item.code === 'category') {
-        this.categoryList = item.data
-      }
-    })
-  },
   methods: {
-    // 导航点击事件
-    handleNavClick (item, index) {
-      this.currentDirectionIndex = index
-    },
-    // 类型点击事件
-    handleCategoryClick (category, index) {
+    // 主分类点击事件
+    handleCategoryClick (item, index) {
       this.currentCategoryIndex = index
-      this.$emit('change', category)
+      this.currentLabelIndex = 0
+      this.$emit('update:params', this.emitParams)
+    },
+    // 标签点击事件
+    handleLabelClick (label, index) {
+      this.currentLabelIndex = index
+      this.$emit('update:params', this.emitParams)
     }
   },
   computed: {
-    computeCategoryList () {
-      let result = []
-      let categoryList = this.categoryList.slice()
-      if (this.currentDirectionIndex !== 0) {
-        let direction = this.directionList[this.currentDirectionIndex]
-        categoryList = categoryList.filter(item => item.direction === '全部' || item.direction === direction)
+    categoryList () {
+      if (this.nav.length === 0) {
+        return []
       }
-      categoryList.forEach(item => {
-        result = result.concat(item.data)
+      let categoryList = []
+      this.nav.forEach(nav => {
+        const findIndex = categoryList.findIndex(item => item.title === nav.type.text)
+        if (findIndex  === -1) {
+          categoryList.push({
+            title: nav.type.text,
+            code: nav.type.code,
+            list: [nav]
+          })
+        } else {
+          categoryList[findIndex].list.push(nav)
+        }
       })
-      return result
+      categoryList.unshift({
+        title: '全部',
+        list: []
+      })
+      return categoryList
+    },
+    currentLabels () {
+      const currentCategory = this.categoryList[this.currentCategoryIndex]
+      let ret = []
+      if (!currentCategory) {
+        return []
+      } else if (currentCategory.title !== '全部') {
+        ret = currentCategory.list.slice()
+        ret.unshift({
+          title: '不限'
+        })
+        return ret
+      } else {
+        ret = this.categoryList.map(item => item.list).reduce((prev, curr) => {
+          return prev.concat(curr)
+        }, [])
+        ret.unshift({
+          title: '不限'
+        })
+        return ret
+      }
+    },
+    emitParams () {
+      const category = this.categoryList[this.currentCategoryIndex]
+      const label = this.currentLabels[this.currentLabelIndex].title
+      return {
+        category: category.title === '全部' ? '' : category.code,
+        label: label === '不限' ? '' : label
+      }
     }
   }
 }
@@ -116,9 +147,9 @@ export default {
             height: 3px;
             background-color: $theme-orange-dark-color;
             border-radius: 2px;
-    .category-list
+    .label-list
       margin-top: 24px;
-      .category-item
+      .label-item
         display: inline-block;
         margin-right: 20px;
         margin-bottom: 12px;

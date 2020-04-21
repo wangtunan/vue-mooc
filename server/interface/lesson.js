@@ -7,13 +7,37 @@ const router = new Router({
 
 // 课程列表路由
 router.get('/list', async (ctx) => {
-  const { page = 1, size = SIZE, type = 0 } = ctx.query
+  const { 
+    page = 1,
+    size = SIZE,
+    type = 0,
+    category = '',
+    label = '',
+    sort = ''
+  } = ctx.query
   try {
     let where = {
       'type.code': type
     }
+    let sortWhere = {}
+    // 分类
+    if (category || category === 0) {
+      where['category.code'] = category
+    }
+    // 标签
+    if (label) {
+      where.labels = {
+        $elemMatch: {
+          $eq: label
+        }
+      }
+    }
+    // 排序放肆
+    if (sort) {
+      sortWhere[sort] = -1
+    }
     const total = await Lesson.find(where).countDocuments()
-    const result = await Lesson.find(where).skip((page - 1) * size).limit(+size)
+    const result = await Lesson.find(where).skip((page - 1) * size).limit(+size).sort(sortWhere)
     if (result) {
       ctx.body = {
         code: ERR_OK,

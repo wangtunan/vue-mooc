@@ -4,7 +4,7 @@
     <i class="iconfont">&#xe63c;</i>
     <ul v-if="isFocus" class="search-result">
       <li v-for="(item,index) in result" :key="index" class="result-item">
-        {{ item }}
+        {{ item.value }}
       </li>
     </ul>
   </div>
@@ -15,8 +15,8 @@ import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      isFocus: false, // 是否聚焦
-      result: [] // 搜索历史
+      isFocus: false,
+      result: []
     }
   },
   mounted () {
@@ -26,10 +26,16 @@ export default {
     // 获取搜索热词
     getSearchHistoryList () {
       getSearchHistory().then(res => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
           this.result = data
+        } else {
+          this.result = []
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.result = []
+        this.$message.error('接口异常')
       })
     }
   }

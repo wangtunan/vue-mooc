@@ -4,10 +4,10 @@
     <lesson-search :hot="hotList" />
 
     <!-- 导航 -->
-    <lesson-nav v-if="navList.length" :nav="navList" @change="handleNavChange" />
+    <lesson-nav v-if="navList.length" :nav="navList" :params.sync="params" />
 
     <!-- 列表 -->
-    <lesson-list :list="lessonList" />
+    <lesson-list :list="lessonList" :sort.sync="sort" />
     
     <!-- 分页 -->
     <pagination :total="total" :page.sync="page" :size="size" @change="handlePaginationChange" />
@@ -24,6 +24,7 @@ import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      sort: '',
       params: {},
       page: 1,
       size: 15,
@@ -39,11 +40,6 @@ export default {
     this.getLessonListData()
   },
   methods: {
-    // 导航值更新事件
-    handleNavChange (category) {
-      this.params.category = category
-      this.getLessonListData()
-    },
     // 分页值更新
     handlePaginationChange (page) {
       this.page = page
@@ -70,7 +66,13 @@ export default {
         let { code, data } = res
         if (code === ERR_OK) {
           this.navList = data
+        } else {
+          this.navList = []
+          this.$message.error('获取课程类型数据失败')
         }
+      }).catch(() => {
+        this.navList = []
+        this.$message.error('接口异常')
       })
     },
     // 获取课程列表数据
@@ -78,7 +80,10 @@ export default {
       const params = {
         page: this.page,
         size: this.size,
-        type: 1
+        type: 1,
+        category: this.params.category,
+        label: this.params.label || '',
+        sort: this.sort
       }
       getLessonList(params).then(res => {
         let { code, data, msg } = res
@@ -95,6 +100,14 @@ export default {
         this.total = 0
         this.$message.error('接口异常')
       })
+    }
+  },
+  watch: {
+    params () {
+      this.getLessonListData()
+    },
+    sort () {
+      this.getLessonListData()
     }
   },
   components: {
