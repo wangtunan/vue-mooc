@@ -1,62 +1,66 @@
 <template>
-  <div class="mini-cart">
+  <div class="mini-cart" @click="handleCloseClick">
     <!-- 列表 -->
     <dl>
       <dt class="title">
         我的购物车
-        <span class="total">共加入0门课程</span>
+        <span class="total">共加入{{ cartList.length || 0 }}门课程</span>
       </dt>
-      <div v-if="list.length > 0" class="cart-item-wrapper">
-        <dd v-for="(item,index) in list" :key="index" class="cart-item" @click="handleCartItemClick">
-          <div class="img-box">
-            <img :src="item.img" alt="">
+      <el-scrollbar>
+        <div v-if="cartList.length > 0" class="cart-item-wrapper">
+          <div v-for="(item,index) in cartList" :key="index" class="cart-item" @click="handleCartItemClick">
+            <div class="img-box">
+              <img :src="item.img" alt="">
+            </div>
+            <div class="cart-content">
+              <p class="name">
+                {{ item.title }}
+              </p>
+              <p class="price-box">
+                <span class="price">¥ {{ item.price }}</span>
+                <span class="delete" @click.stop="handleDeleteClick(item)">删除</span>
+              </p>
+            </div>
           </div>
-          <div class="cart-content">
-            <p class="name">
-              {{ item.name }}
-            </p>
-            <p class="price-box">
-              <span class="price">¥ {{ item.price }}</span>
-              <span class="delete" @click.stop="handleDeleteClick(index)">删除</span>
-            </p>
-          </div>
-        </dd>
-      </div>
-      <div v-else class="empty-box">
-        <span class="iconfont">&#xe63b;</span>
-        <h2 class="empty-title">
-          购物车里空空如也
-        </h2>
-        <p class="empty-desc">
-          快去选购你中意的课程
-        </p>
-        <p class="empty-link" @click="handleLessonClick">
-          实战课程
-        </p>
-      </div>
+        </div>
+        <div v-else class="empty-box">
+          <span class="iconfont">&#xe63b;</span>
+          <h2 class="empty-title">
+            购物车里空空如也
+          </h2>
+          <p class="empty-desc">
+            快去选购你中意的课程
+          </p>
+          <router-link class="empty-link" tag="p" to="/lesson">实战课程</router-link>
+        </div>
+      </el-scrollbar>
     </dl>
 
     <!-- 底部 -->
     <div class="cart-bottom">
-      <span class="text" @click="handleOrderClick">我的订单中心</span>
-      <span class="account-btn" @click="handleCartClick">去购物车</span>
+      <router-link class="text" to="/order">我的订单中心</router-link>
+      <router-link class="account-btn" to="/cart">去购物车</router-link>
     </div>
   </div>
 </template>
 <script>
+import { getCartList, deleteCart } from 'api/cart.js'
+import { ERR_OK } from 'api/config.js'
+import { mapGetters } from 'vuex'
 export default {
-  props: {
-    list: {
-      type: Array,
-      default () {
-        return []
-      }
+  data () {
+    return {
+      cartList: []
+    }
+  },
+  mounted () {
+    if (this.userInfo.id) {
+      this.getCartListData()
     }
   },
   methods: {
-    // 购物车点击
-    handleCartClick () {
-      this.$router.push('/cart')
+    // emit父组件事件
+    handleCloseClick () {
       this.$emit('close')
     },
     // 购物车课程点击
@@ -65,19 +69,40 @@ export default {
       this.$emit('close')
     },
     // 购物车课程删除点击
-    handleDeleteClick (index) {
-      this.$emit('delete', index)
+    handleDeleteClick (item) {
+      const params = {
+        id: item.id
+      }
+      deleteCart(params).then(res => {
+        const { code, msg } = res
+        if (code === ERR_OK) {
+          this.$message.success(msg)
+          this.getCartListData()
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
+      })
     },
-    // 订单中心点击
-    handleOrderClick () {
-      this.$router.push('/order')
-      this.$emit('close')
-    },
-    // 实战课程点击
-    handleLessonClick () {
-      this.$router.push('/lesson')
-      this.$emit('close')
+    // 获取购物车数据
+    getCartListData () {
+      getCartList().then(res => {
+        let { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.cartList = data
+        } else {
+          this.cartList = []
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.cartList = []
+        this.$message.error('接口异常')
+      })
     }
+  },
+  computed: {
+    ...mapGetters(['userInfo'])
   }
 }
 </script>
@@ -98,9 +123,9 @@ export default {
         float: right;
         color: #9199A1;
         font-size: 12px;
+    >>>.el-scrollbar
+      height: 300px;
     .cart-item-wrapper
-      max-height: 300px;
-      overflow-y: scroll;
       border-bottom: 1px solid #D3D6D9;
       .cart-item
         display: flex;

@@ -90,7 +90,7 @@ const lessonData = [
     },
     title: 'React服务器渲染原理解析与实践',
     introduction: '从零开始，带你搭建属于自己的React SSR框架，从根本上解决客户端渲染问题 。',
-    img: 'https://img.mukewang.com/szimg/5c6bdb3e08e4674a06000338-360-202.jpg',
+    img: 'https://img.mukewang.com/szimg/5ba07190000135b505400300-360-202.jpg',
     banner: 'https://img.mukewang.com/szimg/5c6bdb4f09c2401020000400.jpg',
     type: {
       text: '实战',

@@ -91,7 +91,6 @@
 </template>
 <script>
 import { getNotReadNotice } from 'api/notice.js'
-import { getCartList } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
 import { mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
@@ -104,7 +103,6 @@ export default {
     }
   },
   mounted () {
-    this.getCartListData()
     this.getNotReadNoticeData()
   },
   methods: {
@@ -142,15 +140,6 @@ export default {
       let random = new Date().getTime()
       this.showUserInfo = false
       this.$router.push(`/lesson/${random}`)
-    },
-    // 获取购物车数据
-    getCartListData () {
-      getCartList().then(res => {
-        let { code, data } = res
-        if (code === ERR_OK) {
-          this.cartList = data
-        }
-      })
     },
     // 获取未读消息数据
     getNotReadNoticeData () {

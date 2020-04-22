@@ -19,7 +19,7 @@
           active-color="#13ce66"
           inactive-color="#9199a1"
         />隐藏已参与的课程
-        <span class="like-number" :class="{active: isShowLike}" @click="handleShowLikeClick">
+        <span class="like-number" :class="{active: isShowLike}">
           <i class="iconfont">&#xe716;</i>
           我的收藏{{ computeLikeLesson }}
         </span>
@@ -55,11 +55,11 @@
             <span v-if="item.isDiscount" class="new">¥{{ item.discountPrice }}</span>
             <span class="old" :class="{'is-discount': item.isDiscount}">¥{{ item.price }}</span>
             <span class="price-right">
-              <span class="like" :class="{active: item.isLike}" @click="handleLikeClick(item,index)">
+              <span class="like" :class="{active: item.isLike}">
                 <i class="iconfont">&#xe716;</i>
                 {{ item.isLike ? '已收藏' : '收藏' }}
               </span>
-              <span class="cart">加入购物车</span>
+              <span class="cart" @click.stop="handleAddCartClick(item)">加入购物车</span>
             </span>
           </p>
           <p v-if="item.isDiscount">
@@ -71,6 +71,8 @@
   </div>
 </template>
 <script>
+import { addCart } from 'api/cart.js'
+import { ERR_OK } from 'api/config.js'
 export default {
   props: {
     list: {
@@ -101,15 +103,25 @@ export default {
       this.currentFilterIndex = index
       this.$emit('update:sort', filter.code)
     },
-    // 收藏or取消收藏点击事件
-    handleLikeClick (item, index) {
-      let list = this.list.slice()
-      list[index].isLike = !item.isLike
-      this.$emit('update:list', list)
-    },
-    // 展示已收藏的课程
-    handleShowLikeClick () {
-      this.isShowLike = true
+    // 加入购物车
+    handleAddCartClick (item) {
+      const params = item
+      addCart(params).then(res => {
+        const { code, msg } = res
+        if (code === ERR_OK) {
+          this.$confirm('添加购物车成功', '提示', {
+            confirmButtonText: '去购物车结算',
+            cancelButtonText: '再逛逛',
+            type: 'success'
+          }).then(() => {
+            this.$router.push('/cart')
+          })
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
+      })
     },
     // 课程点击事件
     handleLessonClick () {
@@ -236,6 +248,7 @@ export default {
           padding: 0 8px;
           .title
             margin-top: 16px;
+            height: 48px;
             font-size: 16px;
             font-weight: 700;
             line-height: 24px;

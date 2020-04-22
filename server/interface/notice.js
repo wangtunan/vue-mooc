@@ -158,18 +158,6 @@ router.post('/read/all', async (ctx) => {
       msg: e.message || '全部消息已读失败'
     }
   }
-  // if (result) {
-  //   ctx.body = {
-  //     code: ERR_OK,
-  //     msg: "消息全部已读成功",
-  //     where
-  //   }
-  // } else {
-  //   ctx.body = {
-  //     code: -1,
-  //     msg: "消息全部已读失败"
-  //   }
-  // }
 })
 
 // 单个删除消息

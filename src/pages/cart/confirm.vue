@@ -17,11 +17,11 @@
           </div>
           <div class="confirm-content">
             <p class="course-name">
-              {{ item.name }}
+              {{ item.title }}
             </p>
           </div>
           <div class="confirm-price">
-            ¥ {{ item.price }}
+            ¥ {{ item.isDiscount ? item.discountPrice : item.price }}
           </div>
         </dd>
       </dl>
@@ -48,12 +48,13 @@
 </template>
 <script>
 import CartHeader from './cart-header.vue'
-import { getCartList } from 'api/cart.js'
+import { getCheckLessons, removeCheckLessons } from 'utils/cache.js'
+import { multipleDeleteCart } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      cartList: [] // 购物车列表数据
+      cartList: []
     }
   },
   mounted () {
@@ -62,17 +63,36 @@ export default {
   methods: {
     // 提交订单
     handleSubmitOrder () {
-      let randomOrder = new Date().getTime()
-      this.$router.push(`/cart/pay/${randomOrder}`)
+      const ids = this.cartList.map(item => item.id)
+      const params = {
+        ids: ids
+      }
+      multipleDeleteCart(params).then(res => {
+        const { code, msg } = res
+        if (code === ERR_OK) {
+          removeCheckLessons()
+          let randomOrder = new Date().getTime()
+          this.$router.push(`/cart/pay/${randomOrder}`)
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
+      })
     },
     // 获取购物车列表接口数据
     getCartListData () {
-      getCartList().then(res => {
-        let { code, data } = res
-        if (code === ERR_OK) {
-          this.cartList = data
-        }
-      })
+      const checkLessons = getCheckLessons()
+      if (checkLessons.length !== 0) {
+        this.cartList = checkLessons
+      } else {
+        this.$confirm('暂无数据，是否返回课程中心？', '提示', {
+          confirmButtonText: '返回',
+          cancelButtonText: '不返回'
+        }).then(() => {
+          this.$router.replace('/lesson')
+        })
+      }
     }
   },
   computed: {

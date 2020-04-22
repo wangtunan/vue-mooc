@@ -4,14 +4,14 @@
     <cart-header>
       <span class="cart-name">我的购物车</span>
       <span class="number">共{{ cartList.length }}门，已选{{ checkNumber }}门</span>
-      <span class="history-order" @click="handleHistoryClick">我的订单历史</span>
+      <router-link class="history-order" to="/order">我的订单历史</router-link>
     </cart-header>
 
     <!-- 购物车列表 -->
     <div class="cart-list m-center">
       <dl>
         <dt class="cart-list-header">
-          <span class="checkbox-all">
+          <span class="checkbox-all" @click="handleAllCheckClick">
             <i v-if="isCheckAll" class="iconfont">&#xe617;</i>
             <i v-else class="iconfont no-check">&#xe630;</i>
             全选
@@ -33,15 +33,14 @@
             </div>
             <div class="course-content">
               <p class="name">
-                {{ course.name }}
+                {{ course.title }}
               </p>
-              <span class="package">{{ course.package.length }}个组合套餐可选择</span>
             </div>
           </div>
           <div class="price">
-            ¥ {{ course.price }}
+            ¥ {{ course.isDiscount ? course.discountPrice : course.price }}
           </div>
-          <div class="close" @click="handleDeleteClick(index)">
+          <div class="close" @click="handleDeleteClick(course)">
             <i class="iconfont">&#xe619;</i>
           </div>
         </dd>
@@ -56,9 +55,13 @@
               ¥ {{ getTotal() }}
             </p>
           </div>
-          <div class="account-btn" @click="handleAccountClick">
+          <button
+            class="account-btn"
+            :class="{'is-disabled': checkNumber == 0}"
+            @click="handleAccountClick"
+          >
             去结算
-          </div>
+          </button>
         </div>
       </div>
     </div>
@@ -67,41 +70,75 @@
 
 <script>
 import CartHeader from './cart-header.vue'
-import { getCartList } from 'api/cart.js'
+import { getCartList, deleteCart } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
+import { setCheckLessons } from 'utils/cache.js'
 export default {
   data () {
     return {
-      cartList: [] // 购物车列表数据
+      cartList: []
     }
   },
   mounted () {
     this.getCartListData()
   },
   methods: {
-    // 历史订单
-    handleHistoryClick () {
-      this.$router.push('/order')
+    // 全选事件
+    handleAllCheckClick () {
+      const isCheckAll = this.isCheckAll
+      this.cartList.forEach((item, index) => {
+        item.isCheck = !isCheckAll
+        this.$set(this.cartList, index, item)
+      })
     },
     // 勾选事件
     handleCheckClick (course, index) {
-      this.cartList[index].isCheck = !course.isCheck
+      course.isCheck = !course.isCheck
+      this.$set(this.cartList, index, course)
     },
     // 删除事件
-    handleDeleteClick (index) {
-      this.cartList.splice(index, 1)
+    handleDeleteClick (item) {
+      const params = {
+        id: item.id
+      }
+      deleteCart(params).then(res => {
+        const { code, msg } = res
+        if (code === ERR_OK) {
+          this.$message.success(msg)
+          this.getCartListData()
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
+      })
     },
     // 去结算
     handleAccountClick () {
-      this.$router.push('/cart/confirm')
+      if (this.isDisabled) {
+        return
+      }
+      const checkCartList = this.cartList.filter(item => item.isCheck)
+      if (checkCartList.length > 0) {
+        setCheckLessons(checkCartList)
+        this.$router.push('/cart/confirm')
+      } else {
+        this.$message.warning('请选择待结算的课程')
+      }
     },
     // 获取购物车列表接口数据
     getCartListData () {
       getCartList().then(res => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.cartList = data
+          this.cartList = this.normalizeCartData(data)
+        } else {
+          this.cartList = []
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.cartList = []
+        this.$message.error('接口异常')
       })
     },
     // 获取总计金额
@@ -114,6 +151,18 @@ export default {
         }
       })
       return reuslt || 0
+    },
+    // 处理购物车数据
+    normalizeCartData (array) {
+      if (array.length === 0) {
+        return []
+      }
+      array = array.map(item => {
+        return Object.assign({
+          isCheck: true
+        }, item)
+      })
+      return array
     }
   },
   computed: {
@@ -264,8 +313,14 @@ export default {
             padding: 13px 32px;
             border-radius: 6px;
             background-color: #f01414;
+            border: none;
+            outline: none;
             line-height: 24px;
             color: #fff;
             font-size: 16px;
             cursor: pointer;
+            &.is-disabled
+              background-color: rgba(240, 20, 20, 0.5);
+              cursor: not-allowed;
+              pointer-events: none;
 </style>

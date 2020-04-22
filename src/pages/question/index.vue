@@ -448,8 +448,4 @@ export default {
           border-radius: 24px;
       .el-scrollbar
         height: 360px;
-        .el-scrollbar__wrap
-          overflow-x: hidden;
-        .el-scrollbar__bar.is-horizontal
-          display: none;
 </style>
