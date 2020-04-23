@@ -1,5 +1,6 @@
 <template>
   <div class="list">
+    <!-- 选项卡 -->
     <dl class="list-tab">
       <dt>我的订单</dt>
       <dd
@@ -12,79 +13,91 @@
       </dd>
     </dl>
 
-    <ul class="order-list">
+    <!-- 列表 -->
+    <ul v-if="orderList.length > 0" class="order-list">
       <li
-        v-for="item in filterOrderList"
+        v-for="item in orderList"
         :key="item.id"
         class="order-item"
       >
         <h2 class="order-title">
           <i class="iconfont">&#xe70b;</i>
-          订单编号：{{ item.id }}
+          订单编号：{{ item.code }}
           <span class="order-time">{{ item.time }}</span>
-          <i class="iconfont delete" title="删除订单">&#xe622;</i>
+          <i class="iconfont delete" title="删除订单" @click="handleDeleteClick(item)">&#xe622;</i>
         </h2>
         <div class="order-list-box">
           <dl>
-            <dd v-for="(course,index) in item.course" :key="index" class="order-content">
+            <dd v-for="(course,index) in item.list" :key="index" class="order-content">
               <div class="img-box">
                 <img :src="course.img" width="160" height="90" alt="">
               </div>
               <div class="order-name-box">
                 <p class="order-name">
-                  {{ course.name }}
+                  {{ course.title }}
                 </p>
                 <p class="order-real-price">
-                  <span v-if="item.status==2">实付</span> ¥{{ course.realPrice }}
+                  ¥ {{ course.isDiscount ? course.discountPrice : course.price }}
                 </p>
               </div>
             </dd>
           </dl>
           <div class="order-price-box">
-            <template v-if="item.status==2">
-              <p class="price-item old">
+            <template>
+              <!-- <p class="price-item old">
                 原价 ¥{{ item.oldPrice }}
               </p>
               <p class="price-item">
                 折扣 -¥{{ item.discount }}
-              </p>
+              </p> -->
               <p class="price-item real">
-                实付 ¥<span>{{ item.oldPrice }}</span>
+                <span>¥ {{ getTotal(item.list) }}</span>
               </p>
-            </template>
-            <p v-else class="price-item real">
-              ¥<span>{{ item.oldPrice }}</span>
-            </p>            
+            </template>         
           </div>
           <div class="order-status-box">
-            <template v-if="item.status==1">
-              <p class="order-pay-btn">
+            <template v-if="item.status.code==0">
+              <p class="order-pay-btn" @click="handlePayClick(item)">
                 立即支付
               </p>
-              <p class="order-cancel">
+              <p class="order-cancel" @click="handleCancelClick(item)">
                 取消订单
               </p>
             </template>
             <template v-else>
               <p class="order-status">
-                {{ item.statusText }}
+                {{ item.status.text }}
               </p>
-              <p class="order-pay">
-                {{ item.payType }}
+              <p v-if="item.status.code == 1" class="order-pay">
+                {{ item.way.text }}
               </p>
             </template>
           </div>
         </div>
       </li>
     </ul>
+    <p v-else class="order-empty">
+      暂无订单数据
+    </p>
+
+    <!-- 分页 -->
+    <pagination
+      :size="size"
+      :page.sync="page"
+      :total="total"
+    ></pagination>
   </div>
 </template>
 <script>
-import { orderList } from 'api/order.js'
+import Pagination from 'components/pagination/pagination.vue'
+import { getOrderList, cancelOrder, deleteOrder } from 'api/order.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      size: 15,
+      page: 1,
+      total: 0,
       currentIndex: 0,
       navList: [],
       orderList: []
@@ -92,39 +105,113 @@ export default {
   },
   created () {
     this.navList = [
-      { id: 1, title: '全部', status: 0},
-      { id: 2, title: '未支付', status: 1},
-      { id: 3, title: '已完成', status: 2},
-      { id: 4, title: '已失效', status: 3},
-      { id: 5, title: '订单回收站', status: 4}
+      { id: 1, title: '全部', status: ''},
+      { id: 2, title: '未支付', status: 0},
+      { id: 3, title: '已完成', status: 1},
+      { id: 4, title: '已失效', status: 2}
     ]
-    this.getOrderList()
+    this.getOrderListData()
   },
   methods: {
     // 导航点击
     handleNavClick (index) {
       this.currentIndex = index
+      this.getOrderListData()
+    },
+    // 删除订单
+    handleDeleteClick (order) {
+      this.$confirm('是否确认删除订单？', '提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const params = {
+          id: order.id
+        }
+        deleteOrder(params).then(res => {
+          const { code, msg } = res
+          if (code === ERR_OK) {
+            this.$message.success(msg)
+            this.getOrderListData()
+          } else {
+            this.$message.error(msg)
+          }
+        }).catch(() => {
+          this.$message.error('接口异常')
+        })
+      })
+    },
+    // 取消订单
+    handleCancelClick (order) {
+      this.$confirm('是否确认取消订单？', '提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const params = {
+          id: order.id
+        }
+        cancelOrder(params).then(res => {
+          const { code, msg } = res
+          if (code === ERR_OK) {
+            this.$message.success(msg)
+            this.getOrderListData()
+          } else {
+            this.$message.error(msg)
+          }
+        }).catch(() => {
+          this.$message.error('接口异常')
+        })
+      })
+    },
+    // 订单支付
+    handlePayClick (order) {
+      this.$router.push(`/cart/pay/${order.code}`)
     },
     // 获取用户订单列表
-    getOrderList () {
-      orderList().then(res => {
-        let { code, data } = res
+    getOrderListData () {
+      const params = {
+        page: this.page,
+        size: this.size,
+        status: this.currentStatus
+      }
+      getOrderList(params).then(res => {
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.orderList = data
+          this.orderList = data.list
+          this.total = data.total
+        } else {
+          this.orderList = []
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.orderList = []
+        this.$message.error('接口异常')
+      })
+    },
+    // 计算总额度
+    getTotal (list) {
+      if (!list || list.length === 0) {
+        return 0
+      }
+      let total = 0
+      list.forEach(item => {
+        if (item.isDiscount) {
+          total += parseFloat(Number(total + parseFloat(item.discountPrice)).toFixed(2))
+        } else {
+          total += parseFloat(Number(total + parseFloat(item.price)).toFixed(2))
         }
       })
+      return total
     }
   },
   computed:{
-    filterOrderList () {
-      return this.orderList.filter (item => {
-        if (this.currentIndex === 0) {
-          return true
-        } else {
-          return item.status === this.navList[this.currentIndex].status
-        }
-      })
+    currentStatus () {
+      return this.navList[this.currentIndex].status
     }
+  },
+  components: {
+    Pagination
   }
 }
 </script>
@@ -156,12 +243,15 @@ export default {
         font-size:12px;
         color: #5e5e5e;
         cursor: pointer;
-        &:last-child
-          float: right;
         &.active
           background-color: #4d555d;
           border-radius: 16px;
           color: #fff;
+    .order-empty
+      font-size: 16px;
+      text-align: center;
+      margin-top: 30px;
+      color: #f01414;
     .order-list
       margin-top: 24px;
       .order-item
@@ -224,8 +314,9 @@ export default {
                   margin-bottom: 8px;
                   color: #07111b;
                   line-height: 24px;
+                  font-size: 14px;
                 .order-real-price
-                  font-size: 12px;
+                  font-size: 13px;
                   color: #f01414;
           .order-price-box, .order-status-box
             flex: 0 0 200px;
@@ -243,12 +334,13 @@ export default {
             .old
               text-decoration: line-through;
             .real
+              color: #f01414;
               & > span
-                margin-left: 5px;
+                margin-top: 20px;
+                margin-left: 20px;
                 display: inline-block;
                 vertical-align: middle;
                 font-size: 16px;
-              color: #f01414;
           .order-status-box
             padding-top: 20px;
             text-align: center;

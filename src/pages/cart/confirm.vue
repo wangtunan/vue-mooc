@@ -49,7 +49,7 @@
 <script>
 import CartHeader from './cart-header.vue'
 import { getCheckLessons, removeCheckLessons } from 'utils/cache.js'
-import { multipleDeleteCart } from 'api/cart.js'
+import { createOrder } from 'api/order.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
@@ -63,16 +63,14 @@ export default {
   methods: {
     // 提交订单
     handleSubmitOrder () {
-      const ids = this.cartList.map(item => item.id)
       const params = {
-        ids: ids
+        list: this.cartList
       }
-      multipleDeleteCart(params).then(res => {
-        const { code, msg } = res
+      createOrder(params).then(res => {
+        const { code, data, msg } = res
         if (code === ERR_OK) {
           removeCheckLessons()
-          let randomOrder = new Date().getTime()
-          this.$router.push(`/cart/pay/${randomOrder}`)
+          this.$router.push(`/cart/pay/${data.code}`)
         } else {
           this.$message.error(msg)
         }

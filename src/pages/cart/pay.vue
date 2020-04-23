@@ -9,7 +9,7 @@
     <div class="pay-container m-center">
       <dl>
         <dt class="pay-title">
-          <span>订单号：{{ $route.params.order }}</span>
+          <span>订单号：{{ code }}</span>
           <span class="detail" @click="showList=!showList">{{ showList ? '收起' : '详情' }}</span>
         </dt>
         <template v-if="showList">
@@ -19,11 +19,11 @@
             </div>
             <div class="content">
               <p class="name">
-                {{ item.name }}
+                {{ item.title }}
               </p>
             </div>
             <div class="price">
-              实际支付金额：<span>¥{{ item.price }}</span>
+              实际支付金额：<span>¥{{ item.isDiscount ? item.discountPrice : item.price }}</span>
             </div>
           </dd>
         </template>
@@ -44,15 +44,11 @@
             @click="currentWayIndex=index"
           >
             <!-- 我的余额 -->
-            <div v-if="item.type==4" class="account-info">
+            <div v-if="item.type==2" class="account-info">
               <p class="title">
                 我的余额
               </p>
-              <span class="balance">¥ {{ item.balance }}</span>
-            </div>
-            <!-- 可分期 -->
-            <div v-if="item.way && item.way.length > 0" class="way-tag">
-              可分期
+              <span class="balance">¥ 999</span>
             </div>
             <!-- 勾选样式 -->
             <div v-if="currentWayIndex == index" class="way-check">
@@ -61,38 +57,13 @@
           </div>
         </div>
 
-        <!-- 具体支付分期 -->
-        <div v-if="payDetailList && payDetailList.length" class="way-detial">
-          <dl>
-            <dt>
-              <p class="number">
-                ¥ {{ total }}
-              </p>
-              <p class="desc">
-                不分期
-              </p>
-              <span class="pay-btn">选择该支付方式</span>
-            </dt>
-            <dd v-for="(item,index) in payDetailList" :key="index">
-              <p class="number">
-                <span class="tag-title">{{ getTagTitle(item) }}</span>
-                <span class="price-desc">{{ getPriceDesc(item) }}</span>
-              </p>
-              <p class="desc">
-                手续费¥ {{ rate }}/期
-              </p>
-              <span class="pay-btn">选择该分期方式</span>
-            </dd>
-          </dl>
-        </div>
-
         <!-- 支付按钮 -->
         <div class="pay-bottom">
           <div class="right">
             <p class="pay-total">
               应付金额：<span>¥ {{ total }}</span>
             </p>
-            <div class="pay-btn">
+            <div class="pay-btn" @click="handlePayClick">
               立即支付
             </div>
             <p class="tips">
@@ -106,42 +77,81 @@
 </template>
 <script>
 import CartHeader from './cart-header.vue'
-import { getCartList, getPayWay } from 'api/cart.js'
+import { getOrderInfo, orderPay } from 'api/order.js'
 import { ERR_OK } from 'api/config.js'
-const MAX_LIST = 2
 export default {
   data () {
     return {
-      showList: true, // 是否显示购物车内容
-      currentWayIndex: 0, // 当前选择的支付方式
-      payWayList: [], // 支付方式列表数据
-      cartList: [] // 购物车列表数据
+      showList: true,
+      currentWayIndex: 0,
+      payWayList: [],
+      cartList: []
     }
   },
+  created () {
+    this.payWayList = [
+      {
+        "type": 0,
+        "name": "支付宝",
+        "img": "https://order.imooc.com/static/module/pay/center/img/pay_s.png"
+      },
+      {
+        "type": 1,
+        "name": "微信",
+        "img": "https://order.imooc.com/static/module/pay/center/img/pay_s.png"
+      },
+      {
+        
+        "type": 2,
+        "name": "我的余额",
+        "img": "https://order.imooc.com/static/module/pay/center/img/yue.png"
+      }
+    ]
+  },
   mounted () {
-    this.getCartPayList()
-    this.getPayWayData()
+    this.getOrderInfoData()
   },
   methods: {
-    // 获取购物车支付数据
-    getCartPayList () {
-      getCartList().then(res => {
-        let { code, data } = res
+    // 订单支付
+    handlePayClick () {
+      const params = {
+        code: this.code,
+        way: this.way
+      }
+      orderPay(params).then(res => {
+        const { code, msg } = res
         if (code === ERR_OK) {
-          this.cartList = data
-          if (this.cartList.length > MAX_LIST) {
-            this.showList = false
-          }
+          this.$confirm('支付成功，是否查看订单详情？', '提示', {
+            confirmButtonText: '确定',
+            type: 'success'
+          }).then(() => {
+            this.$router.replace('/order')
+          }, () => {
+            this.$router.replace('/lesson')
+          })
+        } else {
+          this.$message.error(msg)
         }
+      }).catch(() => {
+        this.$message.error('接口异常')
       })
     },
-    // 获取支付方式数据
-    getPayWayData () {
-      getPayWay().then(res => {
-        let { code, data } = res
+    // 获取订单详情
+    getOrderInfoData () {
+      const params = {
+        code: this.code
+      }
+      getOrderInfo(params).then(res => {
+        const { code, data, msg } = res
         if (code === ERR_OK) {
-          this.payWayList = data
+          this.cartList = data.list
+        } else {
+          this.cartList = []
+          this.$message.error(msg)
         }
+      }).catch (() => {
+        this.cartList = []
+        this.$message.error('接口异常')
       })
     },
     // 获取支付方式的样式
@@ -149,9 +159,7 @@ export default {
       const classMap = {
         '0': 'Alipay',
         '1': 'Wxpay',
-        '2': 'JdPay',
-        '3': 'HbeiPay',
-        '4': 'Account'
+        '2': 'Account'
       }
       return classMap[item.type]
     },
@@ -160,27 +168,9 @@ export default {
       return {
         'background-image': `url(${item.img})`
       }
-    },
-    // 获取分期标题
-    getTagTitle () {
-      const titleMap = {
-        '2': '白条分期',
-        '3': '花呗分期'
-      }
-      return titleMap[this.type]
-    },
-    // 获取分期描述
-    getPriceDesc (item) {
-      let rate = +this.rate
-      let price = ((this.total / item) + rate).toFixed(2)
-      return `¥ ${price} × ${item}期`
     }
   },
   computed: {
-    payDetailList () {
-      let currentWay = this.payWayList[this.currentWayIndex]
-      return currentWay ? currentWay.way : []
-    },
     total () {
       let result = 0
       this.cartList.forEach(item => {
@@ -188,11 +178,11 @@ export default {
       })
       return result.toFixed(2)
     },
-    rate () {
-      return this.payWayList[this.currentWayIndex].rate || 0
+    way () {
+      return this.payWayList[this.currentWayIndex].type
     },
-    type () {
-      return this.payWayList[this.currentWayIndex].type || ''
+    code () {
+      return this.$route.params.code
     }
   },
   components: {
@@ -235,10 +225,15 @@ export default {
           flex: 0 0 160px;
           width: 160px;
           height: 90px;
+          img
+            display: block;
+            width: 100%;
+            height: 100%;
         .content
           flex: 1;
           align-self: flex-start;
           .name
+            margin-top: 8px;
             line-height: 24px;
         .price
           flex: 0 0 28%;
@@ -271,15 +266,6 @@ export default {
             border-radius: 6px;
             background-repeat: no-repeat;
             background-position: center center;
-            .way-tag
-              position: absolute;
-              top: 0;
-              right: 0;
-              padding: 3px 8px;
-              border-radius: 0 3px 0 0;
-              background-color: #f01414;
-              color: #fff;
-              font-size: 12px;
             .way-check
               position: absolute;
               right: 0;
@@ -299,8 +285,6 @@ export default {
                 font-size: 12px;
             &.active
               border: 2px solid #f01414;
-            &:nth-child(5n+1)
-              margin-right: 0;
             &.Alipay
               background-position: 33px -304px;
             &.Wxpay
@@ -323,61 +307,6 @@ export default {
                   font-size: 12px;
                   color: #9199a1;
                   line-height: 16px;
-        .way-detial
-          margin-top: 20px;
-          padding-top: 36px;
-          padding-bottom: 36px;
-          background-color: #f3f5f7;
-          border-radius: 6px;
-          dt,dd
-            display: inline-block;
-            vertical-align: middle;
-            width: 25%;
-            box-sizing: border-box;
-            text-align: center;
-            .number
-              font-size: 20px;
-              color: #f01414;
-              line-height: 24px;
-              font-weight: 700;
-            .desc
-              margin-top: 4px;
-              font-size: 12px;
-              line-height: 24px;
-              color: #93999f;
-            .pay-btn
-              display: block;
-              margin: 20px auto 0;
-              width: 146px;
-              height: 36px;
-              text-align: center;
-              line-height: 36px;
-              border: 1px solid #f01414;
-              color: #f01414;
-              border-radius: 18px;
-              font-size: 14px;
-              cursor: pointer;
-              &:hover
-                background-color: #f01414;
-                color: #fff;
-          dd
-            border-left: 1px solid #d9dde1;
-            .number
-              font-size: 14px;
-              & > span
-                display: inline-block;
-                vertical-align: middle;
-                &.tag-title
-                  margin-right: 10px;
-                  padding: 3px 5px;
-                  background-color: #f01414;
-                  border-radius: 3px;
-                  color: #fff;
-                  font-weight: 700;
-                  line-height: 1;
-                &.price-desc
-                  font-size: 20px;
-                  font-weight: 700;
         .pay-bottom
           margin-top: 48px;
           padding-top: 36px;

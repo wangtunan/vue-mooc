@@ -13,10 +13,15 @@ const OrderSchema = new Schema({
   },
   code: {
     type: String,
+    unique: true,
     required: true
   },
   time: String,
   status: {
+    text: String,
+    code: Number
+  },
+  way: {
     text: String,
     code: Number
   },

@@ -42,12 +42,6 @@ export default {
       { id: 7, title: '消费记录', component: 'bill' }
     ]
   },
-  methods: {
-    // // 导航点击
-    // handleNavClick (index) {
-    //   this.currentIndex = index
-    // }
-  },
   computed: {
     componentName () {
       return this.navList[this.currentIndex].component

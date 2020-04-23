@@ -18,6 +18,7 @@ import questionRouter from './interface/question.js'
 import articleRouter from './interface/article.js'
 import lessonRouter from './interface/lesson.js'
 import cartRouter from './interface/cart.js'
+import orderRouter from './interface/order.js'
 import mongoose from 'mongoose'
 import dbConfig from './config.js'
 
@@ -74,6 +75,7 @@ app.use(questionRouter.routes(), questionRouter.allowedMethods())
 app.use(articleRouter.routes(), articleRouter.allowedMethods())
 app.use(lessonRouter.routes(), lessonRouter.allowedMethods())
 app.use(cartRouter.routes(), cartRouter.allowedMethods())
+app.use(orderRouter.routes(), orderRouter.allowedMethods())
 
 // 启动服务
 app.listen(port, () => {

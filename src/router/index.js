@@ -109,7 +109,7 @@ const routes = [
     }
   },
   {
-    path: '/cart/pay/:order',
+    path: '/cart/pay/:code',
     name: 'CartPay',
     component:CartPay,
     meta: {
