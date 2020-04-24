@@ -45,16 +45,16 @@ export default {
   },
   data () {
     return {
-      currentTabIndex: 0, // 当前选项卡的索引
-      tabList: [] // 选项卡数据
+      currentTabIndex: 0,
+      tabList: []
     }
   },
   created () {
     // 初始化选项卡数据
     this.tabList = [
-      { title: '慕课小课', type: 0 },
-      { title: '最近学习', type: 1 },
-      { title: '我的收藏', type: 2 }
+      { title: '全部课程', type: '' },
+      { title: '免费课程', type: 0 },
+      { title: '实战课程', type: 1 }
     ]
   },
   methods: {

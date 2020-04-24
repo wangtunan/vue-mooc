@@ -281,7 +281,7 @@ const labelData = [
   },
   {
     type: {
-      text: '前言技术',
+      text: '前沿技术',
       code: 4
     },
     title: '微服务',
@@ -289,7 +289,7 @@ const labelData = [
   },
   {
     type: {
-      text: '前言技术',
+      text: '前沿技术',
       code: 4
     },
     title: '区块链',
@@ -297,7 +297,7 @@ const labelData = [
   },
   {
     type: {
-      text: '前言技术',
+      text: '前沿技术',
       code: 4
     },
     title: '机器学习',
@@ -305,7 +305,7 @@ const labelData = [
   },
   {
     type: {
-      text: '前言技术',
+      text: '前沿技术',
       code: 4
     },
     title: '深度学习',
@@ -313,7 +313,7 @@ const labelData = [
   },
   {
     type: {
-      text: '前言技术',
+      text: '前沿技术',
       code: 4
     },
     title: '计算机视觉',
@@ -321,7 +321,7 @@ const labelData = [
   },
   {
     type: {
-      text: '前言技术',
+      text: '前沿技术',
       code: 4
     },
     title: '自然语言处理',
@@ -329,7 +329,7 @@ const labelData = [
   },
   {
     type: {
-      text: '前言技术',
+      text: '前沿技术',
       code: 4
     },
     title: '数据分析&挖掘',

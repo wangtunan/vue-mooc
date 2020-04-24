@@ -12,6 +12,11 @@ export function createUserRecharges (data) {
   return axios.post('/mock/recharge/create', data)
 }
 
+// 查询用户余额接口
+export function getUserCharge () {
+  return axios.get('/mock/recharge/charge')
+}
+
 // 用户优惠券接口
 export function getCouponList (params) {
   return axios.get('/mock/coupon/list', {

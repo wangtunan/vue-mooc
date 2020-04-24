@@ -236,7 +236,7 @@ router.post('/update/binds', async (ctx) => {
   try {
     const result = await User.find({
       id: userid
-    }).update({
+    }).updateOne({
       email: email,
       password: password,
       phone: phone,
@@ -269,7 +269,7 @@ router.post('/update/info', async (ctx) => {
   try {
     const result = await User.find({
       id: userid
-    }).update({
+    }).updateOne({
       nickname,
       job,
       city,

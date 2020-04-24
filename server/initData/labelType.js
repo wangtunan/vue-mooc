@@ -20,7 +20,7 @@ const labelTypeData = [
     sort: 3
   },
   {
-    title: '前言技术',
+    title: '前沿技术',
     code: 4,
     sort: 4
   },

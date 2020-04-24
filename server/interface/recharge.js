@@ -13,9 +13,14 @@ router.get('/list', async (ctx) => {
   const where = { userid }
   try {
     const searchResult = await Recharge.find(where)
-    const sum = searchResult.map(item => item.money).reduce((prev, current) => {
-      return prev + current
-    }, 0)
+    let sum = 0
+    searchResult.forEach(item => {
+      if (item.action.code === 0) {
+        sum = Number((sum + parseFloat(item.money)).toFixed(2))
+      } else if (item.action.code === 1) {
+        sum = sum - parseFloat(item.money)
+      }
+    })
     const total = searchResult.length
     const result = await Recharge.find(where).skip((page - 1) * size).limit(+size).sort({
       time: 'desc'
@@ -89,6 +94,43 @@ router.post('/create', async (ctx) => {
     ctx.body = {
       code: -1,
       msg: e.message || '服务器异常'
+    }
+  }
+})
+
+// 用户余额路由
+router.get('/charge', async (ctx) => {
+  const userid = ctx.session.user_id || ctx.query.userid
+  try {
+    const result = await Recharge.find({
+      userid: userid
+    })
+    let charge = 0
+    if (result.length === 0) {
+      ctx.body = {
+        code: 0,
+        msg: '当前用户暂无充值记录',
+        data: 0
+      }
+    } else {
+      result.forEach(item => {
+        if (item.action.code === 0) {
+          charge = Number((charge + parseFloat(item.money)).toFixed(2))
+        } else if (item.action.code === 1) {
+          charge = charge - parseFloat(item.money)
+        }
+      })
+      ctx.body = {
+        code: ERR_OK,
+        msg: '查询用户余额数据成功',
+        data: charge
+      }
+    }
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      msg: e.message || '服务器异常',
+      data: 0
     }
   }
 })

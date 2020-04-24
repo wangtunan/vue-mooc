@@ -48,7 +48,7 @@
               <p class="title">
                 我的余额
               </p>
-              <span class="balance">¥ 999</span>
+              <span class="balance">¥ {{ charge }}</span>
             </div>
             <!-- 勾选样式 -->
             <div v-if="currentWayIndex == index" class="way-check">
@@ -59,13 +59,18 @@
 
         <!-- 支付按钮 -->
         <div class="pay-bottom">
+          <div class="left">
+            <p v-if="currentWayIndex == 2 && charge < total" class="pay-tips">
+              余额不足，无法支付!
+            </p>
+          </div>
           <div class="right">
             <p class="pay-total">
               应付金额：<span>¥ {{ total }}</span>
             </p>
-            <div class="pay-btn" @click="handlePayClick">
+            <button class="pay-btn" :class="{'is-disabled': isDisabled }" @click="handlePayClick">
               立即支付
-            </div>
+            </button>
             <p class="tips">
               付款有问题？点我
             </p>
@@ -77,11 +82,13 @@
 </template>
 <script>
 import CartHeader from './cart-header.vue'
-import { getOrderInfo, orderPay } from 'api/order.js'
+import { getOrderInfo, orderPay, getUserCharge } from 'api/order.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
+      isDisabled: false,
+      charge: 0,
       showList: true,
       currentWayIndex: 0,
       payWayList: [],
@@ -110,15 +117,18 @@ export default {
   },
   mounted () {
     this.getOrderInfoData()
+    this.getUserChargeData()
   },
   methods: {
     // 订单支付
     handlePayClick () {
+      this.isDisabled = true
       const params = {
         code: this.code,
         way: this.way
       }
       orderPay(params).then(res => {
+        this.isDisabled = false
         const { code, msg } = res
         if (code === ERR_OK) {
           this.$confirm('支付成功，是否查看订单详情？', '提示', {
@@ -133,6 +143,7 @@ export default {
           this.$message.error(msg)
         }
       }).catch(() => {
+        this.isDisabled = false
         this.$message.error('接口异常')
       })
     },
@@ -151,6 +162,21 @@ export default {
         }
       }).catch (() => {
         this.cartList = []
+        this.$message.error('接口异常')
+      })
+    },
+    // 获取用户余额
+    getUserChargeData () {
+      getUserCharge().then(res => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.charge = data
+        } else {
+          this.charge = 0
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.charge = 0
         this.$message.error('接口异常')
       })
     },
@@ -174,15 +200,28 @@ export default {
     total () {
       let result = 0
       this.cartList.forEach(item => {
-        result = result + parseInt(item.price)
+        if (item.isDiscount) {
+          result = Number((result +  parseFloat(item.discountPrice)).toFixed(2))
+        } else {
+          result = Number((result +  parseFloat(item.price)).toFixed(2))
+        }
       })
-      return result.toFixed(2)
+      return result
     },
     way () {
       return this.payWayList[this.currentWayIndex].type
     },
     code () {
       return this.$route.params.code
+    }
+  },
+  watch: {
+    currentWayIndex (val) {
+      if (val === 2 && this.charge < this.total) {
+        this.isDisabled = true
+      } else {
+        this.isDisabled = false
+      }
     }
   },
   components: {
@@ -312,6 +351,12 @@ export default {
           padding-top: 36px;
           overflow: hidden;
           border-top: 1px solid #d9dde1;
+          .left
+            float: left;
+            .pay-tips
+              color: #f01414;
+              font-size: 14px;
+              line-height: 30px;
           .right
             float: right;
             .pay-total
@@ -329,6 +374,8 @@ export default {
               margin-bottom: 16px;
               width: 140px;
               height: 40px;
+              border: none;
+              outline: none;
               text-align: center;
               line-height: 36px;
               background-color: #f01414;
@@ -336,6 +383,10 @@ export default {
               font-size: 14px;
               font-weight: 700;
               cursor: pointer;
+              &.is-disabled
+                cursor: not-allowed;
+                pointer-events: none;
+                background-color: rgba(240, 20, 20, 0.5);
             .tips
               font-size: 12px;
               color: #4d555d;

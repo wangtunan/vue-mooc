@@ -2,6 +2,8 @@ import Router from 'koa-router'
 import Order from '../models/order.js'
 import Cart from '../models/cart.js'
 import Bill from '../models/bill.js'
+import Recharge from '../models/recharge.js'
+import axios from 'axios'
 import { getGuid, getOrderId } from '../../src/utils/utils.js'
 import { ERR_OK, payWay, SIZE } from '../config.js';
 const router = new Router({
@@ -111,6 +113,7 @@ router.post('/pay', async (ctx) => {
       userid: userid,
       code: code
     })
+    const list = searchResult.list
     // 判断是否有订单信息
     if (!searchResult) {
       ctx.body = {
@@ -130,7 +133,7 @@ router.post('/pay', async (ctx) => {
       }
       return false
     }
-    // 判断订是否已支付
+    // 判断订单是否已支付
     if (+searchResult.status.code === 1) {
       ctx.body = {
         code: -1,
@@ -138,7 +141,57 @@ router.post('/pay', async (ctx) => {
       }
       return false
     }
-    const list = searchResult.list
+    // 如果是余额支付，则扣除余额
+    if (+way === 2) {
+      try {
+        let cost = 0
+        list.forEach(item => {
+          if (item.isDiscount) {
+            cost = Number((cost +  parseFloat(item.discountPrice)).toFixed(2))
+          } else {
+            cost = Number((cost +  parseFloat(item.price)).toFixed(2))
+          }
+        })
+        // 判断余额是否充足
+        const { data } = await axios.get(`http://127.0.0.1:4300/recharge/charge?userid=${userid}`)
+        if (data.data < cost) {
+          ctx.body = {
+            code: -1,
+            msg: '余额不足'
+          }
+          return false
+        }
+        const result = await Recharge.create({
+          id: getGuid(),
+          userid: userid,
+          time: new Date().toISOString().replace('T', '').substring(0, 19),
+          money: cost,
+          action: {
+            text: '转出',
+            code: 1
+          },
+          way: {
+            text: '余额',
+            code: 2
+          },
+          remark: `订单支出，订单号：${code}`
+        })
+
+        if (!result) {
+          ctx.body = {
+            code: -1,
+            msg: '余额支付失败'
+          }
+          return false
+        }
+      } catch (e) {
+        ctx.body = {
+          code: -1,
+          msg: e.message || '余额支付失败'
+        }
+        return false
+      }
+    }
     list.forEach(item => {
       insertBillData.push({
         id: getGuid(),

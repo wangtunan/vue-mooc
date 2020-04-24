@@ -22,13 +22,13 @@
       </div>
       <div class="balancel-list">
         <el-table :data="recharge">
-          <el-table-column label="时间" prop="time" />
-          <el-table-column label="金额">
+          <el-table-column label="时间" prop="time" width="200" />
+          <el-table-column label="金额" width="120">
             <template slot-scope="{row}">
               ¥ {{ row.money }}
             </template>
           </el-table-column>
-          <el-table-column label="操作" prop="action.text" />
+          <el-table-column label="操作" prop="action.text" width="100" />
           <el-table-column label="备注" prop="remark" />        
         </el-table>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="user-course">
     <!-- 头部 -->
-    <course-header :base="base" />
+    <course-header />
 
     <!-- 内容部分 -->
     <div class="m-center">
@@ -32,25 +32,23 @@
   </div>
 </template>
 <script>
-import CourseHeader from './course-header.vue'
+import CourseHeader from './header.vue'
 import { getUserCourse } from 'api/user.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      currentNavIndex: 0, // 当前课程的导航索引
-      userCourse: {}, // 用户课程信息
-      navList: [] // 导航数据
+      currentNavIndex: 0,
+      userCourse: {},
+      navList: []
     }
   },
   created () {
     // 初始化导航数据
     this.navList = [
-      { title: '免费课程', code: 0,  componentName: 'FreeCourse', key: 'free' },
-      { title: '实战', code: 1, componentName: 'PracticeCourse', key: 'practice' },
-      { title: '猿问', code: 2, componentName: 'Question', key: 'question' },
-      { title: '手记', code: 3, componentName: 'Article', key: 'article' },
-      { title: '专栏', code: 4, componentName: 'FreeCourse', key: '' }
+      { title: '我的课程', code: 0,  componentName: 'Course', key: 'free' },
+      { title: '猿问', code: 1, componentName: 'Question', key: 'question' },
+      { title: '手记', code: 2, componentName: 'Article', key: 'article' }
     ]
   },
   mounted () {
@@ -75,9 +73,6 @@ export default {
     componentName () {
       return this.navList[this.currentNavIndex].componentName
     },
-    base () {
-      return this.userCourse.base || {}
-    },
     currentList () {
       let currNav = this.navList[this.currentNavIndex]
       return this.userCourse[currNav.key] || []
@@ -85,8 +80,7 @@ export default {
   },
   components: {
     CourseHeader,
-    FreeCourse: () => import('./free-course.vue'),
-    PracticeCourse: () => import('./pratice-course.vue'),
+    Course: () => import('./course.vue'),
     Question: () => import('./question.vue'),
     Article: () => import('./article.vue')
   }

@@ -101,7 +101,7 @@ router.post('/read', async (ctx) => {
       const updateResult = await UserNotice.where({
         messageid: id,
         userid: userid,
-      }).update({
+      }).updateOne({
         isRead: true
       })
       if (updateResult) {
@@ -200,7 +200,7 @@ router.post('/delete', async (ctx) => {
       const updateResult = await UserNotice.where({
         messageid: id,
         userid: userid,
-      }).update({
+      }).updateOne({
         isDelete: true
       })
       if (updateResult) {

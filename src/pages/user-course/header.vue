@@ -3,42 +3,44 @@
     <div class="m-center">
       <div class="left">
         <div class="img-box">
-          <img :src="base.avatar" alt="">
+          <img :src="userInfo.avatar" alt="">
         </div>
         <div class="user-info">
           <p class="name">
-            {{ base.name }}
+            {{ userInfo.nickname }}
           </p>
           <p class="other">
-            <span>{{ base.sex }}</span>
-            <span>{{ base.job }}</span>
+            <span>{{ userInfo.sex === 'male' ? '男' : '女' }}</span>
+            <span>{{ userInfo.job }}</span>
           </p>
         </div>
       </div>
       <div class="right">
         <dl>
           <dd>
-            <span>{{ base.duration }}h</span>
+            <span>{{ userInfo.hour }}h</span>
             <span>学习时长</span>
           </dd>
           <dd>
-            <span>{{ base.exp }}</span>
+            <span>{{ userInfo.exp }}</span>
             <span>经验</span>
           </dd>
           <dd>
-            <span>{{ base.integral }}</span>
+            <span>{{ userInfo.integral }}</span>
             <span>积分</span>
           </dd>
           <dd>
-            <span>{{ base.like }}</span>
+            <span>{{ userInfo.follow }}</span>
             <span>关注</span>
           </dd>
           <dd>
-            <span>{{ base.fans }}</span>
+            <span>{{ userInfo.fans }}</span>
             <span>粉丝</span>
           </dd>
-          <dt @click="handleSettingClick">
-            <i class="iconfont">&#xe680;</i>个人设置
+          <dt>
+            <router-link class="setting" to="/user">
+              <i class="iconfont">&#xe680;</i>个人设置
+            </router-link>
           </dt>
         </dl>
       </div>
@@ -46,17 +48,12 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  props: {
-    base: {
-      type: Object,
-      default () {
-        return {}
-      }
-    }
+  computed: {
+    ...mapGetters(['userInfo'])
   },
   methods: {
-    // 个人设置点击
     handleSettingClick () {
       this.$router.push('/user')
     }
@@ -68,7 +65,7 @@ export default {
     padding-top: 24px;
     width: 100%;
     height: 148px;
-    background: url('./bg.png') no-repeat center top;
+    background: url('~@/assets/images/course-bg.png') no-repeat center top;
     background-size: cover;
     box-sizing: border-box;
     color: #fff;
@@ -135,4 +132,7 @@ export default {
             color: #fff;
           .iconfont
             padding-right: 5px;
+          .setting
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
 </style>
