@@ -9,42 +9,42 @@
           @click="handleTabClick(tab,index)"
         >{{ tab.title }}</span>
       </dt>
-      <dd v-for="(item,index) in filterList" :key="index" class="course-item">
+      <dd v-for="(item,index) in lessonList" :key="index" class="course-item">
         <div class="img-box">
           <img :src="item.img" alt="">
         </div>
         <div class="course-content">
           <p class="title">
-            {{ item.title }} <span class="status">{{ item.status }}</span>
+            {{ item.title }}
           </p>
           <p class="learn">
-            <span class="rate">已学{{ item.learn.rate }}%</span>
-            <span class="duration">用时{{ item.learn.duration }}</span>
-            <span class="chapter">学习至{{ item.learn.chapter }}</span>
+            <span class="rate">已学{{ item.percent }}%</span>
+            <span class="duration">用时{{ item.hours }}</span>
+            <span v-if="item.lastChapter" class="chapter">学习至{{ item.lastChapter }}</span>
           </p>
           <p class="other">
-            <span>笔记{{ item.note }}</span>
-            <span>代码{{ item.code }}</span>
-            <span>问答{{ item.question }}</span>
+            <span>笔记{{ item.notes }}</span>
+            <span>代码{{ item.codes }}</span>
+            <span>问答{{ item.questions }}</span>
             <span class="learn-btn">继续学习</span>
           </p>
         </div>
       </dd>
     </dl>
+
+    <pagination :page.sync="page" :total="total" @change="handlePaginationChange"></pagination>
   </div>
 </template>
 <script>
+import Pagination from 'components/pagination/pagination.vue'
+import { getUserCourse } from 'api/user.js'
+import { ERR_OK } from 'api/config.js'
 export default {
-  props: {
-    list: {
-      type: Array,
-      default () {
-        return []
-      }
-    }
-  },
   data () {
     return {
+      page: 1,
+      total: 0,
+      lessonList: [],
       currentTabIndex: 0,
       tabList: []
     }
@@ -57,17 +57,47 @@ export default {
       { title: '实战课程', type: 1 }
     ]
   },
+  mounted () {
+    this.getUserCourseData()
+  },
   methods: {
     // 选项卡点击事件
     handleTabClick (tab, index) {
       this.currentTabIndex = index
+      this.getUserCourseData()
+    },
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
+      this.getUserCourseData()
+    },
+    // 获取用户课程信息
+    getUserCourseData () {
+      const params = {
+        page: 1,
+        type: this.currentType
+      }
+      getUserCourse(params).then(res => {
+        let { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.lessonList = data.list
+        } else {
+          this.lessonList = []
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.lessonList = []
+        this.$message.error('接口异常')
+      })
     }
   },
   computed: {
-    filterList () {
-      let currTab = this.tabList[this.currentTabIndex]
-      return this.list.filter(item => item.type === currTab.type)
+    currentType () {
+      return this.tabList[this.currentTabIndex].type
     }
+  },
+  components: {
+    Pagination
   }
 }
 </script>

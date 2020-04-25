@@ -1,13 +1,21 @@
 <template>
   <div class="home-nav-container">
     <ul class="home-nav" @mouseleave="handleMouseLeave">
-      <li v-for="(item,index) in navList" :key="index" class="nav-item" @mouseenter="handleMouseEnter(item)">
+      <li
+        v-for="(item,index) in navList"
+        :key="index"
+        class="nav-item"
+        @mouseenter="handleMouseEnter(item)"
+      >
         <span class="nav-title">{{ item.title }}</span>
         <span class="arr-right" />
       </li>
     </ul>
-    <div @mouseenter="handleContentEnter" @mouseleave="handleContentLeave">
-      <nav-content v-show="showNavContent" :content="currentNav" />
+    <div
+      @mouseenter="handleContentEnter"
+      @mouseleave="handleContentLeave"
+    >
+      <nav-content v-show="showNavContent" :tags="currentTags" />
     </div>
   </div>
 </template>
@@ -19,7 +27,7 @@ export default {
   data () {
     return {
       navList: [],
-      currentNav: {},
+      currentTags: [],
       showNavContent: false
     }
   },
@@ -30,7 +38,7 @@ export default {
     // 导航鼠标移入
     handleMouseEnter (item) {
       this.showNavContent = true
-      this.currentNav = item.data
+      this.currentTags = item.tags
     },
     // 导航鼠标移除
     handleMouseLeave () {
@@ -50,14 +58,20 @@ export default {
     // 获取首页导航信息
     getHomeNavList () {
       getHomeNav().then(res => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
           this.navList = data
-          this.currentNav = data[0].data
+          this.currentTags = data[0].tags
+        } else {
+          this.navList = []
+          this.currentTags = []
+          this.$message.error(msg)
         }
       }).catch(() => {
         this.navList = []
-        this.currentNav = {}
+        this.currentTags = []
+        // this.currentNav = {}
+        this.$message.error('接口异常')
       })
     }
   },

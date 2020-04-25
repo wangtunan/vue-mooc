@@ -18,8 +18,6 @@
               <i v-if="nav.code == 0" class="iconfont">&#xe981;</i>
               <i v-if="nav.code == 1" class="iconfont">&#xe668;</i>
               <i v-if="nav.code == 2" class="iconfont">&#xe685;</i>
-              <i v-if="nav.code == 3" class="iconfont">&#xe602;</i>
-              <i v-if="nav.code == 4" class="iconfont">&#xe635;</i>
               {{ nav.title }}
             </li>
           </ul>
@@ -33,8 +31,6 @@
 </template>
 <script>
 import CourseHeader from './header.vue'
-import { getUserCourse } from 'api/user.js'
-import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
@@ -51,22 +47,10 @@ export default {
       { title: '手记', code: 2, componentName: 'Article', key: 'article' }
     ]
   },
-  mounted () {
-    this.getUserCourseData()
-  },
   methods: {
     // 导航点击
     handleNavClick (item, index) {
       this.currentNavIndex = index
-    },
-    // 获取用户课程信息
-    getUserCourseData () {
-      getUserCourse().then(res => {
-        let { code, data } = res
-        if (code === ERR_OK) {
-          this.userCourse = data
-        }
-      })
     }
   },
   computed: {

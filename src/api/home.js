@@ -2,7 +2,7 @@ import axios from 'utils/axios.js'
 
 // 获取主页导航信息
 export function getHomeNav () {
-  return axios.get('/mock/home/nav.json')
+  return axios.get('/mock/home/nav')
 }
 
 // 获取主页滚动轮播数据

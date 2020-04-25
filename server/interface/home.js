@@ -2,6 +2,8 @@ import Router from 'koa-router'
 import Slider from '../models/slider.js'
 import Teacher from '../models/teacher.js'
 import Student from '../models/student.js'
+import Navigation from '../models/navigation.js'
+import Label from '../models/label.js'
 import { ERR_OK } from '../config.js'
 const router = new Router({
   prefix: '/home'
@@ -21,6 +23,62 @@ router.get('/slider', async (ctx) => {
       code: -1,
       msg: '获取首页轮播数据失败',
       data: []
+    }
+  }
+})
+
+// 首页导航接口
+router.get('/nav', async (ctx) => {
+  try {
+    const labelList = await Label.find()
+    const navList = await Navigation.find().sort({
+      sort: 1
+    }).lean()
+    if (labelList.length === 0 || navList.length === 0) {
+      ctx.body = {
+        code: -1,
+        msg: '获取首页导航数据失败',
+        data: []
+      }
+      return false
+    }
+    let LabelNormalizeList = []
+    for (let index = 0; index < labelList.length; index++) {
+      const label = labelList[index]
+      const findIndex = LabelNormalizeList.findIndex(item => item.code === label.type.code)
+      if (findIndex === -1) {
+        LabelNormalizeList.push({
+          title: label.type.text,
+          code: label.type.code,
+          list: [label.title]
+        })
+      } else {
+        LabelNormalizeList[findIndex].list.push(label.title)
+      }
+    }
+    for (let index = 0; index < navList.length; index++) {
+      const nav = navList[index]
+      const splitCodeArr = nav.code.split(',')
+      splitCodeArr.forEach(code => {
+        const findIndex = LabelNormalizeList.findIndex(item => +item.code === +code)
+        if (findIndex !== -1) {
+          if (!navList[index].hasOwnProperty('tags')) {
+            navList[index]['tags'] = [LabelNormalizeList[findIndex]]
+          } else {
+            navList[index]['tags'].push(LabelNormalizeList[findIndex])
+          }
+        } 
+      })
+    }
+    ctx.body = {
+      code: ERR_OK,
+      msg: '获取首页导航数据成功',
+      data: navList
+    }
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      msg: e.message || '服务器异常'
     }
   }
 })

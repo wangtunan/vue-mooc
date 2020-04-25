@@ -3,6 +3,7 @@ import Order from '../models/order.js'
 import Cart from '../models/cart.js'
 import Bill from '../models/bill.js'
 import Recharge from '../models/recharge.js'
+import UserLesson from '../models/userLesson.js'
 import axios from 'axios'
 import { getGuid, getOrderId } from '../../src/utils/utils.js'
 import { ERR_OK, payWay, SIZE } from '../config.js';
@@ -109,6 +110,7 @@ router.post('/pay', async (ctx) => {
   }
   try {
     let insertBillData = []
+    let userLessonData = []
     const searchResult = await Order.findOne({
       userid: userid,
       code: code
@@ -205,6 +207,17 @@ router.post('/pay', async (ctx) => {
           code: way
         }
       })
+      userLessonData.push({
+        id: getGuid(),
+        userid: userid,
+        lessonid: item.id,
+        title: item.title,
+        img: item.img,
+        type: {
+          text: '实战课程',
+          code: 1
+        }
+      })
     })
     const orderResult = await Order.findOneAndUpdate({
       userid: userid,
@@ -219,8 +232,9 @@ router.post('/pay', async (ctx) => {
         code: way
       }
     })
-    const result = await Bill.insertMany(insertBillData)
-    if (orderResult && result) {
+    const billResult = await Bill.insertMany(insertBillData)
+    const userLessonResult = await UserLesson.insertMany(userLessonData)
+    if (orderResult && billResult && userLessonResult) {
       ctx.body = {
         code: ERR_OK,
         msg: '订单支付成功'

@@ -33,6 +33,8 @@ export function updateUserInfo (data) {
 }
 
 // 获取用户课程信息接口
-export function getUserCourse () {
-  return axios.get('/mock/user/course.json')
+export function getUserCourse (params) {
+  return axios.get('/mock/user/course/list', {
+    params
+  })
 }

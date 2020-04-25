@@ -15,6 +15,14 @@ const UserLessonSchema = new Schema({
     type: String,
     required: true
   },
+  title: {
+    type: String,
+    required: true
+  },
+  img: {
+    type: String,
+    required: true
+  },
   percent: {
     type: Number,
     default: 0
@@ -42,6 +50,14 @@ const UserLessonSchema = new Schema({
   questions: {
     type: Number,
     default: 0
+  },
+  type: {
+    text: String,
+    code: Number
+  },
+  lastChapter: {
+    type: String,
+    default: ''
   }
 })
 

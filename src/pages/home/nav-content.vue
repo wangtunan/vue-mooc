@@ -1,20 +1,28 @@
 <template>
   <div class="nav-content">
     <div class="tags">
-      <div v-for="(tags,index) in content.tags" :key="index" class="tags-item">
+      <div
+        v-for="(tags,index) in tags"
+        :key="index"
+        class="tags-item"
+      >
         <h2 class="title-box">
-          <span class="title">{{ tags.subtitle }}</span>
+          <span class="title">{{ tags.title }}</span>
           <span class="line" />
         </h2>
         <ul class="list">
-          <li v-for="(tag, index) in tags.list" :key="index" class="tag">
+          <li
+            v-for="(tag, index) in tags.list"
+            :key="index"
+            class="tag"
+          >
             {{ tag }}
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="nav-course">
+    <!-- <div class="nav-course">
       <div v-for="(course,index) in content.course" :key="index" class="course-item">
         <div class="img-box">
           <img :src="course.img" width="64" height="42" alt="">
@@ -33,14 +41,14 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 export default {
   props: {
-    content: {
-      type: Object,
+    tags: {
+      type: Array,
       required: true
     }
   }
