@@ -1,33 +1,35 @@
 <template>
   <ul class="course-list">
-    <li v-for="(item,index) in list" :key="index" class="course-item" @click="handleCourseClick">
+    <li
+      v-for="(item,index) in list"
+      :key="index"
+      class="course-item"
+      @click="handleCourseClick(item)"
+    >
       <div class="img-box">
         <img :src="item.img" alt="">
-        <div v-if="item.tags && item.tags.length > 0" class="tags">
-          <span v-for="(tag, index) in item.tags" :key="index" class="tag-item">{{ tag }}</span>
+        <div v-if="item.labels && item.labels.length > 0" class="tags">
+          <span v-for="(label, index) in item.labels" :key="index" class="tag-item">{{ label }}</span>
         </div>
         <div v-if="item.process > 0" class="badge rate">
           {{ item.process }}%
         </div>
-        <div v-if="item.script" class="badge script">
-          {{ item.script }}
-        </div>
       </div>
       <p class="course-name">
-        {{ item.name }}
+        {{ item.title }}
       </p>
       <p class="info">
-        <span>{{ item.type }}</span>
-        <span>{{ item.rank }}</span>
-        <span><i class="iconfont icon-user">&#xe607;</i>{{ item.number }}</span>
+        <span>{{ item.type.text }}</span>
+        <span>{{ item.hard.text }}</span>
+        <span><i class="iconfont icon-user">&#xe607;</i>{{ item.persons }}</span>
         <span>
-          <mooc-star class="star-box" :value="item.star" :disabled="true" />
+          <mooc-star class="star-box" :value="5" :disabled="true" />
         </span>
       </p>
       <p class="price">
-        <span>¥ {{ item.price + '.00' }}</span>
+        <span>¥ {{ item.price }}</span>
         <template v-if="item.isDiscount">
-          <span class="old-price">¥{{ item.oldPrice + '.00' }}</span>
+          <span class="old-price">¥ {{ item.discountPrice }}</span>
           <span class="discount-title">限时优惠</span>
         </template>
       </p>
@@ -46,8 +48,8 @@ export default {
   },
   methods: {
     // 课程点击事件
-    handleCourseClick () {
-      this.$emit('courseClick')
+    handleCourseClick (item) {
+      this.$router.push(`/lesson/${item.id}`)
     } 
   }
 }
@@ -100,10 +102,6 @@ export default {
           right: -7px;
           top: 8px;
           background-image: linear-gradient(-90deg, #65da98 0%, #0cba4d 100%);
-        .script
-          left: -7px;
-          top: 8px;
-          background-image: linear-gradient(90deg, #ffaa00 17%, #f76b1c 100%)
       & > p
         padding: 0 8px;
         box-sizing: border-box;

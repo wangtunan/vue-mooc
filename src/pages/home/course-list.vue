@@ -2,14 +2,18 @@
   <div class="course-list-container m-center">
     <!-- 标题 -->
     <h2 class="home-title">
-      <i class="title-icon left-icon" :style="getBackgroundPosition(course.leftIcon)" />
-      {{ course.title }}
-      <i class="title-icon right-icon" :style="getBackgroundPosition(course.rightIcon)" />
+      <i class="title-icon left-icon" :style="getBackgroundPosition(true)" />
+      {{ title }}
+      <i class="title-icon right-icon" :style="getBackgroundPosition(false)" />
     </h2>
 
     <!-- 课程banner -->
-    <div v-if="course.banner && course.banner.length > 0" class="split-banner">
-      <div v-for="(item,index) in course.banner" :key="index" class="split-banner-item">
+    <div v-if="currentBanner && currentBanner.length > 0" class="split-banner">
+      <div
+        v-for="(item,index) in currentBanner"
+        :key="index"
+        class="split-banner-item"
+      >
         <img :src="item.url" alt="">
         <h2 class="title main">
           {{ item.title }}
@@ -22,33 +26,77 @@
     </div>
 
     <!-- 课程列表 -->
-    <course-list
-      v-if="course.data"
-      class="course-list"
-      :list="course.data"
-      @courseClick="handleCourseClick"
-    />
+    <course-list v-if="list.length" class="course-list" :list="list" />
   </div>
 </template>
 <script>
 import CourseList from 'components/course/course.vue'
 export default {
   props: {
-    course: {
-      type: Object,
+    list: {
+      type: Array,
       required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    type: String,
+    position: {
+      type: Number,
+      default: 0
+    }
+  },
+  created () {
+    this.bannerList = {
+      easy: [
+        { 
+          title: "站上微信小程序风口，实现职业华丽转身",
+          subtitle: "入门技能+项目开发，逐步深入学习微信小程序开发",
+          url: "https://img.mukewang.com/5cbd837c0001b18b05670108.jpg"
+        },
+        { 
+          title: "慕课微课",
+          subtitle: "超值课程最低一元体验",
+          url: "https://img.mukewang.com/5bf224930001991905670108.jpg"
+        }
+      ],
+      improve: [
+        { 
+          title: "Vue高级工程师实战之路",
+          subtitle: "从Vue基础语法入门最流行的SSR技术实现，完美学习路线打造快速晋升之路！",
+          url: "https://img.mukewang.com/5bf225290001b0f105670108.jpg"
+        },
+        { 
+          title: "Python开发一站式学习",
+          subtitle: "从入门到开发，学习 好玩 好用 好未来的Python语言",
+          url: "https://img.mukewang.com/5b86024c0001e0a805670108.jpg"
+        }
+      ],
+      advanced: [
+        { 
+          title: "盘点最主流的前端框架有哪些？",
+          subtitle: "上万人的选择打消你对主流框架的疑惑",
+          url: "https://img.mukewang.com/5b8602900001bd8905670108.jpg"
+        },
+        { 
+          title: "改变职场命运，修炼全栈工程师的必修课",
+          subtitle: "练就编程十八般武艺，快速转型全栈开发，做全能型工程师！",
+          url: "https://img.mukewang.com/5b70eebd0001bf7a05670108.jpg"
+        }
+      ]
     }
   },
   methods: {
-    // 课程点击
-    handleCourseClick () {
-      let random = new Date().getTime()
-      this.$router.push(`/lesson/${random}`)
-    },
-    getBackgroundPosition (position) {
+    getBackgroundPosition (isLeft) {
       return {
-        'background-position': position
+        'background-position': `center ${ - (isLeft ? this.position : this.position + 1) * 36}px`
       }
+    }
+  },
+  computed: {
+    currentBanner () {
+      return this.bannerList[this.type]
     }
   },
   components: {

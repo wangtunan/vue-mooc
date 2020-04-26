@@ -104,6 +104,7 @@ export default {
   },
   watch: {
     params () {
+      this.page = 1
       this.getLessonListData()
     },
     sort () {

@@ -16,19 +16,19 @@
     </div>
 
     <!--  实战导航 -->
-    <course-list :course="practiceList" />
+    <course-list :list="lessonData.recommend" title="实／战／推／荐" type="recommend" :position="0" />
 
     <!-- 新上好课 -->
-    <course-list :course="newList" />
+    <course-list :list="lessonData.new" title="新／上／好／课" type="new" :position="1" />
 
     <!-- 新手入门 -->
-    <course-list :course="guideList" />
+    <course-list :list="lessonData.easy" title="新／手／入／门" type="easy" :position="2" />
 
     <!-- 技能提升 -->
-    <course-list :course="improveList" />
+    <course-list :list="lessonData.improve" title="技／能／提／升" type="improve" :position="3" />
 
     <!-- 前言技术 -->
-    <course-list :course="technologyList" />
+    <course-list :list="lessonData.advanced" title="前／沿／技／术" type="advanced" :position="4" />
 
     <!-- 猿问和手记 -->
     <Article :article="articleList" />
@@ -53,16 +53,18 @@ export default {
   name: 'Home',
   data () {
     return {
-      swiperList: [], //首页轮播信息
-      allstar: [], // 全明星
-      teacherList: [], // 精英讲师
-      articleList: {}, // 猿问和手记
-      technologyList: {}, // 前言技术
-      improveList: {}, // 技能提升
-      guideList: {}, // 新手入门
-      newList: {}, // 新上好课
-      practiceList: {}, // 实战课程
-      currentSwiper: '' // 当前的轮播图片
+      swiperList: [],
+      allstar: [],
+      teacherList: [],
+      articleList: {},
+      currentSwiper: '',
+      lessonData: {
+        recommend: [],
+        new: [],
+        easy: [],
+        improve: [],
+        advanced: []
+      }
     }
   },
   created () {
@@ -99,20 +101,16 @@ export default {
     // 获取课程信息
     getCourseList () {
       getHomeCourse().then(res => {
-        let { code, data } = res
+        let { code, data, msg } = res
         if (code === ERR_OK) {
-          this.practiceList = data.practice
-          this.newList = data.new
-          this.guideList = data.guide
-          this.improveList = data.improve
-          this.technologyList = data.technology
+          this.lessonData = data
+        } else {
+          this.lessonData = {}
+          this.$message.error(msg)
         }
       }).catch(() => {
-        this.practiceList = {}
-        this.newList = {}
-        this.guideList = {}
-        this.improveList = {}
-        this.technologyList = {}
+        this.lessonData = {}
+        this.$message.error('接口异常')
       })
     },
     // 获取猿问和手记

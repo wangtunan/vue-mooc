@@ -12,7 +12,7 @@ export function getSliderList () {
 
 // 获取主页课程信息
 export function getHomeCourse () {
-  return axios.get('/mock/home/course.json')
+  return axios.get('/mock/home/lesson')
 }
 
 // 获取主页猿问和手记信息

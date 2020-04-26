@@ -4,6 +4,7 @@ import Teacher from '../models/teacher.js'
 import Student from '../models/student.js'
 import Navigation from '../models/navigation.js'
 import Label from '../models/label.js'
+import Lesson from '../models/lesson.js'
 import { ERR_OK } from '../config.js'
 const router = new Router({
   prefix: '/home'
@@ -79,6 +80,52 @@ router.get('/nav', async (ctx) => {
     ctx.body = {
       code: -1,
       msg: e.message || '服务器异常'
+    }
+  }
+})
+
+// 首页课程
+router.get('/lesson', async (ctx) => {
+  try {
+    const where = {
+      'type.code': 1
+    }
+    // 推荐课程
+    const recommendList = await Lesson.find(where).sort({ persons: -1 }).limit(5)
+    // 新上好课
+    const newList = await Lesson.find(where).sort({ time: -1 }).limit(10)
+    // 新手入门
+    const easyList = await Lesson.find({ 'hard.code': 0 }).limit(10)
+    // 技能提升
+    const improveList = await Lesson.find({
+      'hard.code': {
+        $gte: 2
+      }
+    }).limit(10)
+    // 前沿技术
+    const advancedList = await Lesson.find({ 'category.code': 4 }).limit(10)
+    ctx.body = {
+      code: ERR_OK,
+      msg: '获取首页课程成功',
+      data: {
+        recommend: recommendList,
+        new: newList,
+        easy: easyList,
+        improve: improveList,
+        advanced: advancedList
+      }
+    }
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      msg: '获取首页课程数据失败',
+      data: {
+        recommend: [],
+        new: [],
+        easy: [],
+        improve: [],
+        advanced: []
+      }
     }
   }
 })
