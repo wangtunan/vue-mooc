@@ -68,8 +68,16 @@ router.get('/nav', async (ctx) => {
           } else {
             navList[index]['tags'].push(LabelNormalizeList[findIndex])
           }
-        } 
+        }
       })
+      if (!navList[index].hasOwnProperty('lessons')) {
+        navList[index]['lessons'] = await Lesson.find({ 
+          'type.code': 1,
+          'category.code': {
+            $in: splitCodeArr
+          }
+        }).limit(4)
+      }
     }
     ctx.body = {
       code: ERR_OK,

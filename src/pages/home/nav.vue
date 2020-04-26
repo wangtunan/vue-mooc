@@ -15,7 +15,7 @@
       @mouseenter="handleContentEnter"
       @mouseleave="handleContentLeave"
     >
-      <nav-content v-show="showNavContent" :tags="currentTags" />
+      <nav-content v-show="showNavContent" :tags="currentTags" :lessons="currentLessons" />
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@ export default {
     return {
       navList: [],
       currentTags: [],
+      currentLessons: [],
       showNavContent: false
     }
   },
@@ -39,6 +40,7 @@ export default {
     handleMouseEnter (item) {
       this.showNavContent = true
       this.currentTags = item.tags
+      this.currentLessons = item.lessons
     },
     // 导航鼠标移除
     handleMouseLeave () {
@@ -53,7 +55,8 @@ export default {
     // 导航内容鼠标移除
     handleContentLeave () {
       this.showNavContent = false
-      this.currentNav = {}
+      this.currentTags = []
+      this.currentLessons = []
     },
     // 获取首页导航信息
     getHomeNavList () {
@@ -62,15 +65,17 @@ export default {
         if (code === ERR_OK) {
           this.navList = data
           this.currentTags = data[0].tags
+          this.currentLessons = data[0].lessons
         } else {
           this.navList = []
           this.currentTags = []
+          this.currentLessons = []
           this.$message.error(msg)
         }
       }).catch(() => {
         this.navList = []
         this.currentTags = []
-        // this.currentNav = {}
+        this.currentLessons = []
         this.$message.error('接口异常')
       })
     }

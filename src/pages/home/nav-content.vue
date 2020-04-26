@@ -22,26 +22,26 @@
       </div>
     </div>
 
-    <!-- <div class="nav-course">
-      <div v-for="(course,index) in content.course" :key="index" class="course-item">
+    <div class="nav-course">
+      <div v-for="(lesson,index) in lessons" :key="index" class="course-item">
         <div class="img-box">
-          <img :src="course.img" width="64" height="42" alt="">
+          <img :src="lesson.img" width="64" height="42" alt="">
         </div>
         <div class="course-content">
           <h2 class="title ellipsis">
-            {{ course.title }}
+            {{ lesson.title }}
           </h2>
           <p class="information">
-            <span v-if="course.money >0" class="money">¥{{ course.money }} / </span>
-            <span>{{ course.rank }} / </span>
+            <span class="money">¥ {{ lesson.isDiscount ? lesson.discountPrice : lesson.price }} / </span>
+            <span>{{ lesson.hard.text }} / </span>
             <span>
               <i class="iconfont user-icon">&#xe607;</i>
-              {{ course.number }}
+              {{ lesson.persons }}
             </span>
           </p>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
@@ -50,6 +50,12 @@ export default {
     tags: {
       type: Array,
       required: true
+    },
+    lessons: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   }
 }
