@@ -22,16 +22,15 @@
         <component :is="componentName" :list="componentList" />
       </div>
       <div v-if="showSideBar" class="info-right">
-        <detail-score :score="data.base" />
+        <detail-score :score="data" />
         <detail-teacher :teacher="data.teacher" />
-        <recommend :list="data.recommend.data" :title="data.recommend.title" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import DetailScore from './lesson-detal-score.vue'
-import DetailTeacher from './lesson-detail-teacher.vue'
+import DetailScore from './score.vue'
+import DetailTeacher from './teacher.vue'
 import Recommend from 'components/recommend/recommend.vue'
 export default {
   props: {
@@ -41,14 +40,14 @@ export default {
   },
   data () {
     return {
-      currentNavIndex: 0, // 当前导航的索引
-      navList: [] // 导航数据
+      currentNavIndex: 0,
+      navList: []
     }
   },
   created () {
     // 初始化导航数据
     this.navList = [
-      { title: '课程', code: 0, componentName: 'chapter', key: 'chapter', show: true },
+      { title: '课程', code: 0, componentName: 'chapter', key: 'catalog', show: true },
       { title: '问答', code: 1, componentName: 'comment', key: 'comment', show: true },
       { title: '同学', code: 2, componentName: 'classmate', key: 'classmate', show: false }
     ]
@@ -71,7 +70,7 @@ export default {
     Recommend,
     Chapter: () => import('components/chapter/chapter.vue'),
     Comment: () => import('components/comment/comment.vue'),
-    classmate: () => import('./lesson-detail-classmate.vue')
+    classmate: () => import('./classmate.vue')
   }
 }
 </script>
@@ -91,12 +90,12 @@ export default {
         & > span
           display: inline-block;
           vertical-align: middle;
-          color: rgba(255,255,255,.6);
+          color: rgba(255,255,255,1);
           font-size: 16px;
           &.iconfont
             margin-right: 10px;
             font-size: 32px;
-            color: rgba(255,255,255,.6);
+            color: rgba(255,255,255,1);
         &.active
           background-color: #fff;
           border-radius: 4px 4px 0 0;

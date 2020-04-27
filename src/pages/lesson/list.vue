@@ -124,9 +124,8 @@ export default {
       })
     },
     // 课程点击事件
-    handleLessonClick () {
-      let random = new Date().getTime()
-      this.$router.push(`/lesson/${random}`)
+    handleLessonClick (lesson) {
+      this.$router.push(`/lesson/${lesson.id}`)
     }
   },
   computed: {

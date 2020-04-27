@@ -3,7 +3,7 @@
     <div class="header">
       <div class="header-content m-center">
         <p class="breadcrumb-box">
-          <span>课程 \ 前端开发 \ Vue.js \ vue2.5入门</span>
+          <span>课程 \ {{ base.title }}</span>
         </p>
         <p class="share-box">
           <span class="iconfont">&#xe716;</span>
@@ -15,7 +15,7 @@
           {{ base.title }}
         </h2>
         <div class="information">
-          <div class="teacher">
+          <div v-if="base.teacher" class="teacher">
             <img :src="base.teacher.avatar" class="avatar" alt="">
             <div class="teacher-introduce">
               <p class="name">
@@ -26,10 +26,10 @@
               </p>
             </div>
             <dl>
-              <dd>难度：{{ base.rank }}</dd>
-              <dd>时长：{{ base.duration }}</dd>
-              <dd>学习人数：{{ base.number }}</dd>
-              <dd>综合评分：{{ base.score }}</dd>
+              <dd>难度：{{ base.hard.text }}</dd>
+              <dd>时长：{{ base.hours || 0 }}小时</dd>
+              <dd>学习人数：{{ base.persons }}</dd>
+              <dd>综合评分：{{ base.score || 100 }}%</dd>
             </dl>
           </div>
         </div>

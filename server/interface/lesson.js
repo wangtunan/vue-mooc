@@ -1,6 +1,7 @@
 import Router from 'koa-router'
 import Lesson from '../models/lesson.js'
 import UserLesson from '../models/userLesson.js'
+import Catalog from '../models/catalog.js'
 import { ERR_OK, SIZE } from '../config.js'
 const router = new Router({
   prefix: '/lesson'
@@ -71,6 +72,44 @@ router.get('/list', async (ctx) => {
         list: [],
         total: 0
       }
+    }
+  }
+})
+
+// 课程详情路由
+router.get('/info', async (ctx) => {
+  const { id } = ctx.query
+  if (!id) {
+    ctx.body = {
+      code: -1,
+      msg: '缺少关键参数id'
+    }
+    return false
+  }
+  try {
+    const lessonInfo = await Lesson.findOne({
+      id: id
+    }).lean()
+    const catalog = await Catalog.findOne({
+      lessonid: id
+    })
+    if (lessonInfo && catalog) {
+      lessonInfo.catalog = catalog
+      ctx.body = {
+        code: ERR_OK,
+        msg: "获取课程详情数据成功",
+        data: lessonInfo
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取课程详情失败',
+      }
+    }
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      msg: e.message || '服务器异常'
     }
   }
 })

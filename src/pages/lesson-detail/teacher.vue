@@ -8,7 +8,7 @@
       {{ teacher.job }}
     </p>
     <p class="introduce">
-      {{ teacher.introduce }}
+      {{ teacher.introduction }}
     </p>
   </div>
 </template>

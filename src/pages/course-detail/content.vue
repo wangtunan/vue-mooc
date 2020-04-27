@@ -22,18 +22,15 @@
         <component :is="componentName" :list="content" />
       </div>
       <div class="information-right">
-        <detail-tips :lastest="lastest" />
-        <recommend :list="recommend.data" :title="recommend.title" />
-        <detail-tags v-if="tags.length" :list="tags" />
-        <recommend :list="related.data" :title="related.title" />
+        <detail-tips :lastest="data" />
+        <detail-tags></detail-tags>
       </div>
     </div>
   </div>
 </template>
 <script>
-import DetailTips from './course-detail-tips.vue'
-import Recommend from 'components/recommend/recommend.vue'
-import DetailTags from './course-detail-tags.vue'
+import DetailTips from './tips.vue'
+import DetailTags from './tags.vue'
 export default {
   props: {
     data: {
@@ -52,9 +49,8 @@ export default {
   created () {
     // 初始化导航数据
     this.navList = [
-      { title: '课程章节', number: 0, componentName: 'chapter', key: "chapter" },
+      { title: '课程章节', number: 0, componentName: 'chapter', key: "catalog" },
       { title: '问答', number: 1155, componentName: 'question-answer', key: 'answer' },
-      // { title: '同学笔记', number: 0, componentName: '' },
       { title: '用户评价', number: 251, componentName: 'comment', key: 'comment' }
     ]
   },
@@ -65,27 +61,10 @@ export default {
     content () {
       const key = this.navList[this.currentNavIndex].key
       return this.data[key] || {}
-    },
-    // 推荐课程
-    recommend () {
-      return this.data.recommend || {}
-    },
-    // 相关课程
-    related () {
-      return this.data.related || {}
-    },
-    // 专题标签
-    tags () {
-      return this.data.tags || []
-    },
-    // 学习情况
-    lastest () {
-      return this.data.lastest || {}
     }
   },
   components: {
     DetailTips,
-    Recommend,
     DetailTags,
     Chapter: () => import('components/chapter/chapter.vue'),
     QuestionAnswer: () => import('components/question-answer/question-answer.vue'),

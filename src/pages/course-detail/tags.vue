@@ -19,18 +19,15 @@
 <script>
 export default {
   props: {
-    list: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
     colors: {
       type: Array,
       default () {
         return ['rgba(255,102,0,0.5)', 'rgba(255,153,0,0.5)', 'rgba(255,51,0,0.5)']
       }
     }
+  },
+  created () {
+    this.list = ["职场必杀技清单", "Vue.js项目实例", "React Native开发跨平台", "最实用的前端开发框架教程", "React.js高级实战"]
   },
   methods: {
     // 获取随机背景色

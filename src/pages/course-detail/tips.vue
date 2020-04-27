@@ -3,8 +3,8 @@
     <!-- 学习情况 -->
     <div v-if="lastest && lastest.percent > 0" class="learn-info">
       <p>
-        <span class="percent">已学习{{ lastest.percent }}%</span>
-        <span class="duration">学习耗时{{ lastest.duration }}分钟</span>
+        <span class="percent">已学习{{ lastest.percent || 0 }}%</span>
+        <span class="duration">学习耗时{{ lastest.duration || 0 }}分钟</span>
       </p>
       <mooc-progress
         :percentage="lastest.percent"

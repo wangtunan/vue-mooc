@@ -1,33 +1,33 @@
 <template>
   <div class="chapter">
-    <div v-if="list.introduce" class="chapter-introduce">
-      {{ list.introduce }}
+    <div v-if="list.introduction" class="chapter-introduce">
+      {{ list.introduction }}
     </div>
-    <div v-for="(chapter,index) in list.data" :key="index" class="chapter-item">
+    <div v-for="(item,index) in list.chapter" :key="index" class="chapter-item">
       <h2 class="chapter-title">
-        {{ chapter.title }}
+        {{ item.title }}
       </h2>
       <p class="chapter-desc">
-        {{ chapter.desc }}
+        {{ item.introduction }}
       </p>
       <ul>
-        <li v-for="(term, index) in chapter.term" :key="index" class="term-item">
+        <li v-for="(term, index) in item.term" :key="index" class="term-item">
           <p>
             <span class="iconfont play">&#xe615;</span>
-            <span>{{ term.title }}({{ term.duration }})</span>
+            <span>{{ term.title }}({{ term.seconds }})</span>
             <span class="right">
-              <i v-if="term.rate == 100" class="iconfont complete">&#xe60f;</i>
+              <!-- <i v-if="term.rate == 100" class="iconfont complete">&#xe60f;</i>
               <span v-else-if="term.rate > 0 && term.rate < 100" class="doning">
                 最近学习
                 <i class="iconfont">&#xe601;</i>
-              </span>
-              <i v-else class="iconfont ready">&#xe6e8;</i>
+              </span> -->
+              <i class="iconfont ready">&#xe6e8;</i>
             </span>
           </p>
         </li>
       </ul>
     </div>
-    <p class="complete-info">
+    <p v-if="list.isComplete" class="complete-info">
       <i class="iconfont">&#xe786;</i>
       本课程已完结
     </p>
@@ -37,7 +37,7 @@
 export default {
   props: {
     list: {
-      type: [Object],
+      type: Object,
       default () {
         return {}
       }

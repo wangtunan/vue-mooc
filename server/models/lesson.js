@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 import lessonData from '../initData/lesson.js'
+import Catalog from '../models/catalog.js'
+import { freeCatalogData, lessonCatalogData } from '../initData/catalog.js'
 import { getGuid, getRandomNum } from '../../src/utils/utils.js'
 const Schema = mongoose.Schema
 const LessonSchema = new Schema({
@@ -76,12 +78,26 @@ const lessonModel = mongoose.model('lesson', LessonSchema)
 // 判断有无数据，没有则初始化
 lessonModel.find((err, data) => {
   if (!data || data.length === 0) {
+    Catalog.deleteMany()
     lessonData.forEach((item, index) => {
       item.id = getGuid()
       item.time = new Date(new Date().getTime() + index * 1000).toISOString().replace('T', ' ').substring(0, 19)
       item.persons = getRandomNum(1, 10000)
       item.comments = getRandomNum(1, 10000)
       lessonModel.create(item)
+      
+      // 添加课程目录
+      if (item.type.code === 1) {
+        Catalog.create(Object.assign({
+          id: getGuid(),
+          lessonid: item.id
+        }, lessonCatalogData))
+      } else {
+        Catalog.create(Object.assign({
+          id: getGuid(),
+          lessonid: item.id
+        }, freeCatalogData))
+      }
     })
   }
 })

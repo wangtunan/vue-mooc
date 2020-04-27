@@ -8,7 +8,7 @@
         好评率
       </p>
       <p class="rate">
-        {{ score.praise }}%
+        {{ score.praise || 100 }}%
       </p>
       <p class="comment-btn">
         立即评价
@@ -19,15 +19,15 @@
       <div class="bottom">
         <dl>
           <dt>难度</dt>
-          <dd>{{ score.rank }}</dd>
+          <dd>{{ score.hard.text }}</dd>
         </dl>
         <dl>
           <dt>时长</dt>
-          <dd>{{ score.duration }}</dd>
+          <dd>{{ score.hours || 0 }}小时</dd>
         </dl>
         <dl>
           <dt>人数</dt>
-          <dd>{{ score.number }}</dd>
+          <dd>{{ score.persons }}</dd>
         </dl>
       </div>
     </div>

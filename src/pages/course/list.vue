@@ -91,9 +91,8 @@ export default {
       this.$emit('update:list', list)
     },
     // 课程点击事件
-    handleCourseClick () {
-      let random = new Date().getTime()
-      this.$router.push({ path: `/course/${random}` })
+    handleCourseClick (lesson) {
+      this.$router.push({ path: `/course/${lesson.id}` })
     }
   }
 }
