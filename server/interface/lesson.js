@@ -89,7 +89,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 课程详情路由
-router.get('/info', checkUser, async (ctx) => {
+router.get('/info', async (ctx) => {
   const { id } = ctx.query
   if (!id) {
     ctx.body = {
