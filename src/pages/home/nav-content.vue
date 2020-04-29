@@ -23,7 +23,7 @@
     </div>
 
     <div class="nav-course">
-      <div v-for="(lesson,index) in lessons" :key="index" class="course-item">
+      <div v-for="(lesson,index) in lessons" :key="index" class="course-item" @click="handleCourseClick">
         <div class="img-box">
           <img :src="lesson.img" width="64" height="42" alt="">
         </div>
@@ -56,6 +56,11 @@ export default {
       default () {
         return []
       }
+    }
+  },
+  methods: {
+    handleCourseClick () {
+      this.$router.push('/lesson')
     }
   }
 }

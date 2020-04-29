@@ -3,12 +3,14 @@ import Lesson from '../models/lesson.js'
 import UserLesson from '../models/userLesson.js'
 import Catalog from '../models/catalog.js'
 import { ERR_OK, SIZE } from '../config.js'
+import checkUser from '../middleware/auth.js'
 const router = new Router({
   prefix: '/lesson'
 })
 
 // 课程列表路由
 router.get('/list', async (ctx) => {
+  const userid = ctx.session.user_id
   const { 
     page = 1,
     size = SIZE,
@@ -44,8 +46,18 @@ router.get('/list', async (ctx) => {
       sortWhere[sort] = -1
     }
     const total = await Lesson.find(where).countDocuments()
-    const result = await Lesson.find(where).skip((page - 1) * size).limit(+size).sort(sortWhere)
+    const result = await Lesson.find(where).skip((page - 1) * size).limit(+size).sort(sortWhere).lean()
     if (result) {
+      // 处理是否购买，是否收藏
+      if (+type === 1) {
+        for (let index = 0; index < result.length; index++) {
+          const isBuyed = await UserLesson.findOne({
+            userid: userid,
+            lessonid: result[index].id
+          })
+          result[index]['isBuy'] = !!isBuyed
+        }
+      }
       ctx.body = {
         code: ERR_OK,
         msg: '获取课程数据成功',
@@ -77,7 +89,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 课程详情路由
-router.get('/info', async (ctx) => {
+router.get('/info', checkUser, async (ctx) => {
   const { id } = ctx.query
   if (!id) {
     ctx.body = {
@@ -115,7 +127,7 @@ router.get('/info', async (ctx) => {
 })
 
 // 用户课程列表路由
-router.get('/user', async (ctx) => {
+router.get('/user', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { page = 1, size = SIZE } = ctx.query
   try {

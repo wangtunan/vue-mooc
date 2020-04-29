@@ -2,12 +2,13 @@ import Router from 'koa-router'
 import Address from '../models/address.js'
 import { ERR_OK } from '../config.js'
 import { getGuid } from '../../src/utils/utils.js'
+import checkUser from '../middleware/auth.js'
 const router = new Router({
   prefix: '/address'
 })
 
 // 获取收获地址接口
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser, async (ctx) => {
   const result = await Address.find({
     userid: ctx.session.user_id
   }).sort({
@@ -29,7 +30,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 新增收获地址接口
-router.post('/create', async (ctx) => {
+router.post('/create', checkUser, async (ctx) => {
   const params = ctx.request.body
   params.id = getGuid()
   params.userid = ctx.session.user_id
@@ -49,7 +50,7 @@ router.post('/create', async (ctx) => {
 })
 
 // 编辑收获地址接口
-router.post('/update', async (ctx) => {
+router.post('/update', checkUser, async (ctx) => {
   const params = ctx.request.body
   const result = await Address.findOneAndUpdate({
     userid: ctx.session.user_id,
@@ -75,7 +76,7 @@ router.post('/update', async (ctx) => {
 })
 
 // 删除收获地址接口
-router.get('/delete', async (ctx) => {
+router.get('/delete', checkUser, async (ctx) => {
   const { id } = ctx.query
   if (!id) {
     ctx.body = {
@@ -102,7 +103,7 @@ router.get('/delete', async (ctx) => {
 })
 
 // 设为默认收获地址
-router.get('/default', async (ctx) => {
+router.get('/default', checkUser, async (ctx) => {
   const { id } = ctx.query
   const userid = ctx.session.user_id
   const setResult = await Address.find({

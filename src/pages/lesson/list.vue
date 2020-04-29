@@ -13,17 +13,6 @@
           {{ filter.title }}
         </li>
       </ul>
-      <div class="hide-course-box">
-        <mooc-switch
-          v-model="isHide"
-          active-color="#13ce66"
-          inactive-color="#9199a1"
-        />隐藏已参与的课程
-        <span class="like-number" :class="{active: isShowLike}">
-          <i class="iconfont">&#xe716;</i>
-          我的收藏{{ computeLikeLesson }}
-        </span>
-      </div>
     </div>
 
     <!-- 课程列表 -->
@@ -55,11 +44,7 @@
             <span v-if="item.isDiscount" class="new">¥{{ item.discountPrice }}</span>
             <span class="old" :class="{'is-discount': item.isDiscount}">¥{{ item.price }}</span>
             <span class="price-right">
-              <span class="like" :class="{active: item.isLike}">
-                <i class="iconfont">&#xe716;</i>
-                {{ item.isLike ? '已收藏' : '收藏' }}
-              </span>
-              <span class="cart" @click.stop="handleAddCartClick(item)">加入购物车</span>
+              <span v-if="!item.isBuy" class="cart" @click.stop="handleAddCartClick(item)">加入购物车</span>
             </span>
           </p>
           <p v-if="item.isDiscount">
@@ -125,7 +110,9 @@ export default {
     },
     // 课程点击事件
     handleLessonClick (lesson) {
-      this.$router.push(`/lesson/${lesson.id}`)
+      if (lesson.isBuy) {
+        this.$router.push(`/lesson/${lesson.id}`)
+      }
     }
   },
   computed: {
@@ -162,25 +149,6 @@ export default {
         &.active
           background-color: $font-second-color;
           color: #fff;
-      .hide-course-box
-        float: right;
-        color: $font-three-color;
-        font-size: 12px;
-        .mooc-switch
-          margin-right: 15px;
-      .like-number
-        display: inline-block;
-        margin-left: 25px;
-        padding: 0 12px;
-        line-height: 24px;
-        border-radius: 12px;
-        background-color: rgba(204,136,0,.1);
-        color: $theme-orange-dark-color;
-        font-size: 12px;
-        cursor: pointer;
-        &:hover, &.active
-          color: #fff;
-          background-color: rgba(204,136,0,1);
     .lesson-list
       .list-item
         display: inline-block;
@@ -282,16 +250,8 @@ export default {
               color: $font-second-color;
             .price-right
               float: right;
-              .like
-                margin-right: 10px;
-                cursor: pointer;
-                &:hover
-                  color: $font-second-color;
-                &.active
-                  color: $theme-red-color;
               .cart
                 padding-left: 10px;
-                border-left: 2px solid $border-second-color;
                 &:hover
                   color: $font-second-color;
             .discount

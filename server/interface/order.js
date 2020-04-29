@@ -5,6 +5,7 @@ import Bill from '../models/bill.js'
 import Recharge from '../models/recharge.js'
 import UserLesson from '../models/userLesson.js'
 import axios from 'axios'
+import checkUser from '../middleware/auth.js'
 import { getGuid, getOrderId } from '../../src/utils/utils.js'
 import { ERR_OK, payWay, SIZE } from '../config.js';
 const router = new Router({
@@ -12,7 +13,7 @@ const router = new Router({
 })
 
 // 生成订单
-router.post('/create', async (ctx) => {
+router.post('/create', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { list } = ctx.request.body
 
@@ -68,7 +69,7 @@ router.post('/create', async (ctx) => {
 })
 
 // 订单详情
-router.get('/info', async (ctx) => {
+router.get('/info', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { code } = ctx.query
   try {
@@ -99,7 +100,7 @@ router.get('/info', async (ctx) => {
 })
 
 // 订单支付
-router.post('/pay', async (ctx) => {
+router.post('/pay', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { code, way = 0 } = ctx.request.body
   if (!code) {
@@ -210,7 +211,7 @@ router.post('/pay', async (ctx) => {
       userLessonData.push({
         id: getGuid(),
         userid: userid,
-        lessonid: item.id,
+        lessonid: item.lessonid,
         title: item.title,
         img: item.img,
         type: {
@@ -254,7 +255,7 @@ router.post('/pay', async (ctx) => {
 })
 
 // 订单列表
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { page = 1, status = '', size = SIZE } = ctx.query
   // 主动处理过期数据
@@ -326,7 +327,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 取消订单
-router.get('/cancel', async (ctx) => {
+router.get('/cancel', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { id } = ctx.query
   if (!id) {
@@ -366,7 +367,7 @@ router.get('/cancel', async (ctx) => {
 })
 
 // 删除订单
-router.get('/delete', async (ctx) => {
+router.get('/delete', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { id } = ctx.query
   if (!id) {

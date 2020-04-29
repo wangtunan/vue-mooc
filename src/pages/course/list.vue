@@ -8,15 +8,6 @@
         :class="{active: index == filterIndex}"
         @click="handleFilterClick(item, index)"
       >{{ item.title }}</span>
-
-      <div class="hide-course-box">
-        <mooc-switch
-          v-model="isHide"
-          active-color="#13ce66"
-          inactive-color="#9199a1"
-        ></mooc-switch>
-        隐藏已参与的课程
-      </div>
     </div>
 
     <!-- 课程列表 -->
@@ -44,10 +35,6 @@
           </p>
           <p>
             <span class="price">免费</span>
-            <span class="collect" :class="{like: item.isLike}" @click="handleCollectClick(item,index)">
-              <i class="iconfont">&#xe716;</i>
-              {{ item.isLike ? '已收藏' : '收藏' }}
-            </span>
           </p>
         </div>
       </li>
@@ -84,12 +71,6 @@ export default {
       this.filterIndex = index
       this.$emit('update:sort', item.code)
     },
-    // 收藏or取消收藏点击事件
-    handleCollectClick (item, index) {
-      let list = this.list.slice()
-      list[index].isLike = !item.isLike
-      this.$emit('update:list', list)
-    },
     // 课程点击事件
     handleCourseClick (lesson) {
       this.$router.push({ path: `/course/${lesson.id}` })
@@ -115,12 +96,6 @@ export default {
           background-color: $font-four-color;
           color: #fff;
           border-radius: 12px;
-      .hide-course-box
-        float: right;
-        color: $font-three-color;
-        font-size: 12px;
-        .mooc-switch
-          margin-right: 15px;
     .course-list
       padding: 10px 0 20px;
       .list-item
@@ -182,15 +157,6 @@ export default {
             .price
               color: $font-second-color;
               font-weight: 700;
-            .collect
-              float: right;
-              cursor: pointer;
-              &:hover
-                color: $font-second-color;
-                font-weight: 700;
-              &.like
-                color: $red!important;
-                font-weight: 700;
             &.desc
               height: 50px;
               multline-ellipsis(2)

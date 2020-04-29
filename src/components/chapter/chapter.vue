@@ -14,7 +14,7 @@
         <li v-for="(term, index) in item.term" :key="index" class="term-item">
           <p>
             <span class="iconfont play">&#xe615;</span>
-            <span>{{ term.title }}({{ term.seconds }})</span>
+            <span>{{ term.title }}({{ term.seconds | filterSecond }})</span>
             <span class="right">
               <!-- <i v-if="term.rate == 100" class="iconfont complete">&#xe60f;</i>
               <span v-else-if="term.rate > 0 && term.rate < 100" class="doning">
@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+import { normalSeconds } from 'utils/utils.js'
 export default {
   props: {
     list: {
@@ -41,6 +42,11 @@ export default {
       default () {
         return {}
       }
+    }
+  },
+  filters: {
+    filterSecond (val) {
+      return normalSeconds(val)
     }
   }
 }

@@ -1,12 +1,13 @@
 import Router from 'koa-router'
 import UserLesson from '../models/userLesson.js'
+import checkUser from '../middleware/auth.js'
 import { SIZE, ERR_OK } from '../config.js'
 const router = new Router({
   prefix: '/user/course'
 })
 
 // 课程列表
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { page = 1, size = SIZE, type } = ctx.query
   try {

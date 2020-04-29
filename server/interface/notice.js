@@ -1,6 +1,7 @@
 import Router from 'koa-router'
 import Notice from '../models/notice.js'
 import UserNotice from '../models/userNotice.js'
+import checkUser from '../middleware/auth.js'
 import { SIZE, ERR_OK } from '../config.js'
 import { getGuid } from '../../src/utils/utils.js'
 const router = new Router({
@@ -8,7 +9,7 @@ const router = new Router({
 })
 
 // 消息分页列表接口
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser, async (ctx) => {
   const { page = 1, code } = ctx.query
   const userid = ctx.session.user_id
   let where = {}
@@ -61,7 +62,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 单个消息已读
-router.post('/read', async (ctx) => {
+router.post('/read', checkUser, async (ctx) => {
   const { id } = ctx.request.body
   const userid = ctx.session.user_id
   // 判断是否传入id
@@ -126,7 +127,7 @@ router.post('/read', async (ctx) => {
 })
 
 // 消息全部已读
-router.post('/read/all', async (ctx) => {
+router.post('/read/all', checkUser, async (ctx) => {
   const { ids } = ctx.request.body
   const userid = ctx.session.user_id
   try {
@@ -161,7 +162,7 @@ router.post('/read/all', async (ctx) => {
 })
 
 // 单个删除消息
-router.post('/delete', async (ctx) => {
+router.post('/delete', checkUser, async (ctx) => {
   const { id } = ctx.request.body
   const userid = ctx.session.user_id
   if (!id) {
@@ -224,7 +225,7 @@ router.post('/delete', async (ctx) => {
 })
 
 // 是否存在未读消息
-router.get('/read/not', async (ctx) => {
+router.get('/read/not', checkUser, async (ctx) => {
   try {
     const noticeCount = await Notice.find().countDocuments()
     const userCount = await UserNotice.find({

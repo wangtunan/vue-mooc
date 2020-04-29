@@ -12,7 +12,7 @@
           提问
         </div>
       </div>
-      <div class="question-nav">
+      <div v-if="userInfo.id" class="question-nav">
         <dl>
           <dt>我的关注：</dt>
           <dd
@@ -101,6 +101,7 @@
 import Pagination from 'components/pagination/pagination.vue'
 import { getFollowList, getQuestionList, getLabelList, followLabels } from 'api/question.js'
 import { ERR_OK } from 'api/config.js'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -117,7 +118,9 @@ export default {
     }
   },
   mounted () {
-    this.getFollowListData(true)
+    if (this.userInfo.id) {
+      this.getFollowListData(true)
+    }
     this.getQuestionListData()
   },
   methods: {
@@ -177,22 +180,22 @@ export default {
     },
     // 获取关注标签列表
     getFollowListData (isFirst) {
+      this.followList = []
       getFollowList().then(res => {
         let { code, data, msg } = res
         if (code === ERR_OK) {
-          data.unshift({
-            title: '全部'
-          })
-          this.followList = data
-          if (this.followList.length === 0 && isFirst) {
+          if (data.length === 0 && isFirst) {
             this.handleLabelManageClick()
+          } else {
+            data.unshift({
+              title: '全部'
+            })
+            this.followList = data
           }
         } else {
-          this.followList = []
           this.$message.error(msg)
         }
       }).catch(() => {
-        this.followList = []
         this.$message.error('接口异常')
       })
     },
@@ -203,34 +206,32 @@ export default {
         size: this.size,
         label: this.currentLabel === '全部' ? '' : this.currentLabel
       }
+      this.questionList = []
       getQuestionList(params).then(res => {
         let { code, data, msg } = res
         if (code === ERR_OK) {
           this.questionList = data.list
           this.total = data.total
         } else {
-          this.questionList = []
           this.total = 0
           this.$message.error(msg)
         }
       }).catch(() => {
-        this.questionList = []
         this.total = 0
         this.$message.error('接口异常')
       })
     },
     // 获取标签列表
     getLabelListData () {
+      this.labelList = []
       getLabelList().then(res => {
         const { code, data, msg } = res
         if (code === ERR_OK) {
           this.labelList = this.normalizeLabelList(data)
         } else {
-          this.labelList = []
           this.$message.error(msg)
         }
       }).catch(() => {
-        this.labelList = []
         this.$message.error('接口异常')
       })
     },
@@ -267,7 +268,8 @@ export default {
         return ''
       }
       return this.followList[this.currentIndex].title
-    }
+    },
+    ...mapGetters(['userInfo'])
   },
   components: {
     Pagination

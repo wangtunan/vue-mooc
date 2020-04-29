@@ -2,6 +2,7 @@ import Router from 'koa-router'
 import Label from '../models/label.js'
 import LableType from '../models/labelType.js'
 import LabelFollow from '../models/labelFollow.js'
+import checkUser from '../middleware/auth.js'
 import { ERR_OK } from '../config.js'
 import { getGuid } from '../../src/utils/utils.js';
 const router = new Router({
@@ -69,7 +70,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 用户关注标签路由
-router.post('/follow', async (ctx) => {
+router.post('/follow', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { list } = ctx.request.body
   // 验证是否有要关注的标签
@@ -121,7 +122,7 @@ router.post('/follow', async (ctx) => {
 })
 
 // 用户关注标签列表路由
-router.get('/follow/list', async (ctx) => {
+router.get('/follow/list', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   try {
     const result = await LabelFollow.find({

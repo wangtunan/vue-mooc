@@ -48,8 +48,8 @@ export default {
   },
   methods: {
     // 课程点击事件
-    handleCourseClick (item) {
-      this.$router.push(`/lesson/${item.id}`)
+    handleCourseClick () {
+      this.$router.push(`/lesson`)
     } 
   }
 }

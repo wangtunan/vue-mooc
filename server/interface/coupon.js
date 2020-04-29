@@ -1,12 +1,13 @@
 import Router from 'koa-router'
 import Coupon from '../models/coupon.js'
+import checkUser from '../middleware/auth.js'
 import { ERR_OK } from '../config.js'
 const router = new Router({
   prefix: '/coupon'
 })
 
 // 优惠券列表数据
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { status } = ctx.query
   try {

@@ -103,7 +103,9 @@ export default {
     }
   },
   mounted () {
-    this.getNotReadNoticeData()
+    if (this.userInfo.id) {
+      this.getNotReadNoticeData()
+    }
   },
   methods: {
     // 购物车：项鼠标移出

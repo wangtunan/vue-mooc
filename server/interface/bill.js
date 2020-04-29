@@ -1,12 +1,13 @@
 import Router from 'koa-router'
 import Bill from '../models/bill.js'
+import checkUser from '../middleware/auth.js'
 import { ERR_OK, SIZE } from '../config.js'
 const router = new Router({
   prefix: '/bill'
 })
 
 // 消费记录列表
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { page = 1, size = SIZE } = ctx.query
   try {

@@ -1,5 +1,6 @@
 import axios from 'axios'
-import  components  from '../register.js'
+import store from '../store/index.js'
+import components from '../register.js'
 const Message = components.Message
 const service = axios.create({
   timeout: 10000,
@@ -24,7 +25,16 @@ service.interceptors.response.use(
       Message.error('网络异常，请刷新或者重试!')
       return Promise.reject('网络异常!')
     }
-    return Promise.resolve(data)
+    if (data.code === 401) {
+      store.commit('login/SET_SHOW_LOGIN', true)
+      store.dispatch('login/logout')
+      return Promise.resolve({
+        code: -1,
+        msg: data.msg
+      })
+    } else {
+      return Promise.resolve(data)
+    }
   },
   error => {
     return Promise.reject(error)

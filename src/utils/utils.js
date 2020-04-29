@@ -82,3 +82,20 @@ export function getOrderId () {
 export function getRandomNum (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
+
+// 将秒格式化为分：秒的形式
+export function normalSeconds (seconds = 0) {
+  let minutes = Math.floor(seconds / 60)
+  let second = seconds % 60
+  if (minutes === 0) {
+    minutes = '00'
+  } else if (minutes > 0 && minutes < 10) {
+    minutes = `0${minutes}`
+  }
+  if (second === 0) {
+    second = '00'
+  } else if (second > 0 && second < 10) {
+    second = `0${second}`
+  }
+  return `${minutes}:${second}`
+}

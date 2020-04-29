@@ -1,6 +1,7 @@
 import Router from 'koa-router'
 import User from '../models/user.js'
 import axios from 'axios'
+import checkUser from '../middleware/auth.js'
 import Log, { initUserLogs } from '../models/log.js'
 import { initUserRecharges } from '../models/recharge.js'
 import { initUserCoupons } from '../models/coupon.js'
@@ -178,7 +179,7 @@ router.get('/logout', (ctx) => {
 })
 
 // 获取用户信息
-router.get('/info', async (ctx) => {
+router.get('/info', checkUser, async (ctx) => {
   const userId = ctx.session.user_id
   if (!userId) {
     ctx.body = {
@@ -223,7 +224,7 @@ router.get('/check', (ctx) => {
 })
 
 // 用户更改账号绑定信息路由
-router.post('/update/binds', async (ctx) => {
+router.post('/update/binds', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { email, phone, password, qq, wechat } = ctx.request.body
   if (!password) {
@@ -263,7 +264,7 @@ router.post('/update/binds', async (ctx) => {
 })
 
 // 用户更改个人信息路由
-router.post('/update/info', async (ctx) => {
+router.post('/update/info', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { nickname, job, city, sex, signature } = ctx.request.body
   try {

@@ -48,8 +48,7 @@ export default {
     // 初始化导航数据
     this.navList = [
       { title: '课程', code: 0, componentName: 'chapter', key: 'catalog', show: true },
-      { title: '问答', code: 1, componentName: 'comment', key: 'comment', show: true },
-      { title: '同学', code: 2, componentName: 'classmate', key: 'classmate', show: false }
+      { title: '问答', code: 1, componentName: 'comment', key: 'comment', show: true }
     ]
   },
   computed: {
@@ -69,8 +68,7 @@ export default {
     DetailTeacher,
     Recommend,
     Chapter: () => import('components/chapter/chapter.vue'),
-    Comment: () => import('components/comment/comment.vue'),
-    classmate: () => import('./classmate.vue')
+    Comment: () => import('components/comment/comment.vue')
   }
 }
 </script>

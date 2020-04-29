@@ -1,12 +1,13 @@
 import Router from 'koa-router'
 import Log from '../models/log.js'
+import checkUser from '../middleware/auth.js'
 import { SIZE, ERR_OK } from '../config.js'
 const router = new Router({
   prefix: '/log'
 })
 
 // 分页获取登录日志接口
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser,  async (ctx) => {
   const { page = 1 } = ctx.query
   const userid = ctx.session.user_id
   const where = { userid }
@@ -33,7 +34,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 新增一条登录日志
-router.post('/create', async (ctx) => {
+router.post('/create', checkUser,  async (ctx) => {
   const params = ctx.request.body
   const result = await Log.create(params)
   if (result) {

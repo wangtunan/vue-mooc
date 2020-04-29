@@ -7,7 +7,7 @@
     <lesson-nav v-if="navList.length" :nav="navList" :params.sync="params" />
 
     <!-- 列表 -->
-    <lesson-list :list="lessonList" :sort.sync="sort" />
+    <lesson-list :list="lessonList" :sort.sync="sort" @change="getLessonListData" />
     
     <!-- 分页 -->
     <pagination :total="total" :page.sync="page" :size="size" @change="handlePaginationChange" />

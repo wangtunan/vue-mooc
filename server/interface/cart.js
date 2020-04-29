@@ -1,5 +1,6 @@
 import Router from 'koa-router'
 import Cart from '../models/cart.js'
+import checkUser from '../middleware/auth.js'
 import { getGuid } from '../../src/utils/utils.js'
 import { ERR_OK } from '../config.js';
 const router = new Router({
@@ -7,7 +8,7 @@ const router = new Router({
 })
 
 // 购物车列表接口
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser,  async (ctx) => {
   const userid = ctx.session.user_id
   try {
     const where = { userid: userid }
@@ -35,7 +36,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 添加购物车
-router.post('/create', async (ctx) => {
+router.post('/create', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { id, title, img, price, isDiscount, discountPrice } = ctx.request.body
   try {
@@ -81,7 +82,7 @@ router.post('/create', async (ctx) => {
 })
 
 // 删除购物车
-router.post('/delete', async (ctx) => {
+router.post('/delete', checkUser, async (ctx) => {
   const userid = ctx.session.user_id
   const { id } = ctx.request.body
   if (!id) {
@@ -117,7 +118,7 @@ router.post('/delete', async (ctx) => {
 })
 
 // 批量删除购物车
-router.post('/delete/ids', async (ctx) => {
+router.post('/delete/ids', checkUser,  async (ctx) => {
   const userid = ctx.session.user_id
   const { ids } = ctx.request.body
   if (!ids || ids.length === 0) {

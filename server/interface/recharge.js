@@ -1,5 +1,6 @@
 import Router from 'koa-router'
 import Recharge from '../models/recharge.js'
+import checkUser from '../middleware/auth.js'
 import { ERR_OK, SIZE } from '../config.js'
 import { getGuid } from '../../src/utils/utils.js'
 const router = new Router({
@@ -7,7 +8,7 @@ const router = new Router({
 })
 
 // 用户充值记录路由
-router.get('/list', async (ctx) => {
+router.get('/list', checkUser,  async (ctx) => {
   const userid = ctx.session.user_id
   const { page = 1, size = SIZE } = ctx.query
   const where = { userid }
@@ -43,7 +44,7 @@ router.get('/list', async (ctx) => {
 })
 
 // 新增用户充值记录路由
-router.post('/create', async (ctx) => {
+router.post('/create', checkUser,  async (ctx) => {
   const userid = ctx.session.user_id
   const { money, way } = ctx.request.body
   // 判断金额
@@ -99,7 +100,7 @@ router.post('/create', async (ctx) => {
 })
 
 // 用户余额路由
-router.get('/charge', async (ctx) => {
+router.get('/charge', checkUser, async (ctx) => {
   const userid = ctx.session.user_id || ctx.query.userid
   try {
     const result = await Recharge.find({
