@@ -19,17 +19,16 @@
           :key="index"
           class="filter-item"
           :class="{active: index == currentIndex}"
-          @click="currentIndex = index"
+          @click="handleFilterClick(index)"
         >
           {{ filter.title }}
         </li>
       </ul>
-      <span class="desc">共有{{ list.total }}个问题，已解决{{ list.resolve }}个</span>
     </div>
 
     <!-- 问答列表 -->
     <ul class="qa-list">
-      <li v-for="(item,index) in answerList" :key="index" class="qa-item">
+      <li v-for="(item,index) in qaList" :key="index" class="qa-item">
         <div class="avatar-box">
           <img :src="item.avatar" alt="">
         </div>
@@ -37,85 +36,80 @@
           <h3 class="title">
             {{ item.title }}
           </h3>
-          <template v-if="item.status">
+          <template v-if="item.answer">
             <p class="answer-status">
-              <span class="status">{{ item.status.type }}</span>
+              <span class="status">讲师回答</span>
               <span class="split">/</span>
-              <span class="name">{{ item.status.name }}</span>
+              <span class="name">{{ item.answer.teacher }}</span>
             </p>
             <p class="answer">
               {{ item.answer.content }}
             </p>
           </template>
           <p class="qa-bottom">
-            <span>{{ item.answer ? item.answer.number : 0 }}回答</span>
-            <span>{{ item.view }}浏览</span>
+            <span>{{ item.answers }}回答</span>
+            <span>{{ item.views }}浏览</span>
             <span>{{ item.chapter }}</span>
-            <span class="time">{{ item.time }}天前</span>
+            <span class="time">{{ item.time }}</span>
           </p>
         </div>
-        <div v-if="item.status && item.status.resolve" class="icon">
+        <div v-if="item.status && item.status.code == 1" class="icon">
           已采纳
         </div>
       </li>
     </ul>
-
-    <!-- 分页 -->
-    <pagination :total="total" :page.sync="page" />
   </div>
 </template>
 <script>
-import Pagination from 'components/pagination/pagination.vue'
+import { getLessonQa } from 'api/lesson.js'
+import { ERR_OK } from 'api/config.js'
 export default {
-  props: {
-    list: {
-      type: Object,
-      default () {
-        return []
-      }
-    }
-  },
   data () {
     return {
-      total: 100,
-      page: 1,
-      currentIndex: 0, // 当前筛选类型的索引
-      filterList: [] // 筛选列表
+      currentIndex: 0,
+      qaList: []
     }
   },
   created () {
     // 初始化筛选列表
     this.filterList = [
-      { code: 0, title: '全部' },
-      { code: 1, title: '热门' },
-      { code: 2, title: '待解决' },
-      { code: 3, title: '已采纳' },
-      { code: 4, title: '我的提问' }
+      { title: '全部', code: '',  },
+      { title: '待解决', code: 0,  },
+      { title: '已采纳', code: 1,  }
     ]
   },
-  computed: {
-    // 问答列表
-    answerList () {
-      let list = this.list.data.slice()
-      let code = this.filterList[this.currentIndex].code
-      if (code === 1) {
-        // 热门
-        list.sort((a, b) => b.view - a.view)
-      } else if(code === 2) {
-        // 待解决
-        list = list.filter(item => {
-          return !item.hasOwnProperty('answer') || +item.answer.number === 0
-        })
-      } else if(code === 3) {
-        list = list.filter(item => item.status && item.status.resolve)
-      } else if(code === 4) {
-        list = list.filter(item => item.isMe)
+  mounted () {
+    this.getLessonQa()
+  },
+  methods: {
+    // 选项卡点击
+    handleFilterClick (index) {
+      this.currentIndex = index
+      this.getLessonQa()
+    },
+    // 获取课程问答数据
+    getLessonQa () {
+      const params = {
+        id: this.$route.params.id,
+        code: this.currentCode
       }
-      return list || []
+      this.qaList = []
+      getLessonQa(params).then(res => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.qaList = data
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
+      })
     }
   },
-  components: {
-    Pagination
+  computed: {
+    currentCode () {
+      return this.filterList[this.currentIndex].code
+    }
   }
 }
 </script>

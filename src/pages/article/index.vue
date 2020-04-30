@@ -29,8 +29,11 @@
       </div>
       
       <div class="list">
-        <article-list v-if="articleList && articleList.length" :list="articleList" />
-        <pagination :total="total" :page.sync="page" @change="handlePaginationChange" />
+        <template v-if="articleList && articleList.length">
+          <article-list :list="articleList" />
+          <pagination :total="total" :page.sync="page" @change="handlePaginationChange" />
+        </template>
+        <empty v-else message="暂无相关手记数据"></empty>
       </div>
     </div>
   </div>
@@ -38,6 +41,7 @@
 <script>
 import Pagination from 'components/pagination/pagination.vue'
 import ArticleList from './list.vue'
+import Empty from 'components/empty/empty.vue'
 import { getArticleNavList, getArticleList } from 'api/article.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -114,7 +118,8 @@ export default {
   },
   components: {
     ArticleList,
-    Pagination
+    Pagination,
+    Empty
   }
 }
 </script>

@@ -59,9 +59,7 @@
               </div>
             </li>
           </ul>
-          <p v-else class="list-empty">
-            暂无数据
-          </p>
+          <empty v-else message="暂无相关猿问数据"></empty>
         </div>
       </div>
       <pagination :size="size" :total="total" :page.sync="page" @change="handlePaginationChange" />
@@ -99,6 +97,7 @@
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
+import Empty from 'components/empty/empty.vue'
 import { getFollowList, getQuestionList, getLabelList, followLabels } from 'api/question.js'
 import { ERR_OK } from 'api/config.js'
 import { mapGetters } from 'vuex'
@@ -272,7 +271,8 @@ export default {
     ...mapGetters(['userInfo'])
   },
   components: {
-    Pagination
+    Pagination,
+    Empty
   }
 }
 </script>

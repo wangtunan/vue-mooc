@@ -19,7 +19,7 @@
     <div class="search-suggestion">
       <template v-if="searchResult && searchResult.length > 0">
         <dl class="result">
-          <dd v-for="(item,index) in searchResult" :key="index" @click.stop="handleResultClick(item)">
+          <dd v-for="(item,index) in searchResult" :key="index">
             {{ item.word }}
           </dd>
         </dl>
@@ -27,13 +27,13 @@
       <template v-else>
         <dl class="hot-key">
           <dt>热搜</dt>
-          <dd v-for="(item,index) in hot" :key="index" @click.stop="handleResultClick(item)">
+          <dd v-for="(item,index) in hot" :key="index">
             {{ item.value }}
           </dd>
         </dl>
         <dl class="history">
           <dt>搜索历史</dt>
-          <dd v-for="(item,index) in history" :key="index" @click.stop="handleResultClick(item)">
+          <dd v-for="(item,index) in history" :key="index">
             {{ item.value }}
           </dd>
         </dl>
@@ -42,18 +42,18 @@
   </div>
 </template>
 <script>
-import { getHot, getSearchHistory, getSearch, createSearchHistory } from 'api/common.js'
+import { getHot, getSearchHistory, getSearch } from 'api/common.js'
 import { debounce } from 'utils/utils.js'
 import { ERR_OK } from 'api/config.js'
 export default {
   data () {
     return {
-      keyword: '',      // 搜索关键词
-      searchResult: [], // 实时搜索结果
-      history: [],      // 搜索历时
-      hot: [],          // 热搜
-      isFocus: false,   // 是否聚焦
-      tags: [],         // tags
+      keyword: '',
+      searchResult: [],
+      history: [],
+      hot: [],
+      isFocus: false,
+      tags: [],
     }
   },
   mounted () {
@@ -90,29 +90,6 @@ export default {
       this.blurTimer = setTimeout(() => {
         this.isFocus = false
       }, 200)
-    },
-    // 搜索结果点击
-    handleResultClick (item) {
-      const keyword = item.value || item.word
-      createSearchHistory(keyword).then(res => {
-        const { code, msg } = res
-        if (code !== ERR_OK) {
-          console.log(msg)
-        }
-      }).catch(() => {
-        console.log('生成搜索历史结果失败')
-      })
-      // 判断是否已经是搜索结果页面，如果是不跳转
-      if (this.$route.name !== 'SearchResult') {
-        this.$router.push({
-          path: '/search/result',
-          query: {
-            keyword: keyword
-          }
-        })
-      }
-      this.keyword = ''
-      this.searchResult = []
     },
     // 获取热搜数据
     getHotData () {

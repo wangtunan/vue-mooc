@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 import lessonData from '../initData/lesson.js'
+import CommentData from '../initData/comment.js'
+import QaData from '../initData/qa.js'
 import Catalog from '../models/catalog.js'
+import Comment from '../models/comment.js'
+import Qa from '../models/qa.js'
 import { freeCatalogData, lessonCatalogData } from '../initData/catalog.js'
 import { getGuid, getRandomNum } from '../../src/utils/utils.js'
 const Schema = mongoose.Schema
@@ -79,6 +83,8 @@ const lessonModel = mongoose.model('lesson', LessonSchema)
 lessonModel.find((err, data) => {
   if (!data || data.length === 0) {
     Catalog.deleteMany()
+    Comment.deleteMany()
+    Qa.deleteMany()
     lessonData.forEach((item, index) => {
       item.id = getGuid()
       item.time = new Date(new Date().getTime() + index * 1000).toISOString().replace('T', ' ').substring(0, 19)
@@ -98,6 +104,20 @@ lessonModel.find((err, data) => {
           lessonid: item.id
         }, freeCatalogData))
       }
+
+      // 添加课程评论
+      Comment.create({
+        id: getGuid(),
+        lessonid: item.id,
+        list: CommentData
+      })
+
+      // 添加课程问答
+      Qa.create({
+        id: getGuid(),
+        lessonid: item.id,
+        list: QaData
+      })
     })
   }
 })

@@ -11,7 +11,6 @@
       >
         <span v-if="nav.code==0" class="iconfont">&#xe602;</span>
         <span v-if="nav.code==1" class="iconfont">&#xe7c8;</span>
-        <span v-if="nav.code==2" class="iconfont">&#xe981;</span>
         <span>{{ nav.title }}</span>
       </li>
     </ul>
@@ -19,9 +18,9 @@
     <!-- 内容部分 -->
     <div class="lesson-information">
       <div class="info-left">
-        <component :is="componentName" :list="componentList" />
+        <component :is="componentName" :catalog="catalogList" />
       </div>
-      <div v-if="showSideBar" class="info-right">
+      <div class="info-right">
         <detail-score :score="data" />
         <detail-teacher :teacher="data.teacher" />
       </div>
@@ -31,7 +30,6 @@
 <script>
 import DetailScore from './score.vue'
 import DetailTeacher from './teacher.vue'
-import Recommend from 'components/recommend/recommend.vue'
 export default {
   props: {
     data: {
@@ -47,26 +45,21 @@ export default {
   created () {
     // 初始化导航数据
     this.navList = [
-      { title: '课程', code: 0, componentName: 'chapter', key: 'catalog', show: true },
-      { title: '问答', code: 1, componentName: 'comment', key: 'comment', show: true }
+      { title: '课程', code: 0, componentName: 'chapter' },
+      { title: '问答', code: 1, componentName: 'comment' }
     ]
   },
   computed: {
     componentName () {
       return this.navList[this.currentNavIndex].componentName
     },
-    componentList () {
-      let key = this.navList[this.currentNavIndex].key
-      return this.data[key]
-    },
-    showSideBar () {
-      return this.navList[this.currentNavIndex].show
+    catalogList () {
+      return this.data.catalog || {}
     }
   },
   components: {
     DetailScore,
     DetailTeacher,
-    Recommend,
     Chapter: () => import('components/chapter/chapter.vue'),
     Comment: () => import('components/comment/comment.vue')
   }

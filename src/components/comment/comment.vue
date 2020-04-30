@@ -4,26 +4,30 @@
     <div class="score-overview">
       <div class="star-box">
         <span class="title">综合评分</span>
-        <span class="score">{{ list.score.total }}</span>
-        <mooc-star :value="list.score.total/2" :size="20" />
+        <span class="score">{{ totalScore.total }}</span>
+        <mooc-star :value="totalScore.total / 2" :size="18" disabled />
       </div>
       <div class="score-box">
         <span>内容实用</span>
-        <span class="score">{{ list.score.content }}</span>
+        <span class="score">{{ totalScore.content_score }}</span>
       </div>
       <div class="score-box">
         <span>简洁易懂</span>
-        <span class="score">{{ list.score.difficult }}</span>
+        <span class="score">{{ totalScore.easy_score }}</span>
       </div>
       <div class="score-box">
         <span>逻辑清晰</span>
-        <span class="score">{{ list.score.logic }}</span>
+        <span class="score">{{ totalScore.logic_score }}</span>
       </div>
     </div>
 
     <!-- 评价列表 -->
     <ul class="comment-list">
-      <li v-for="(comment,index) in list.data" :key="index" class="comment-item">
+      <li
+        v-for="(comment,index) in commentList"
+        :key="index"
+        class="comment-item"
+      >
         <div class="img-box">
           <img :src="comment.avatar" alt="">
         </div>
@@ -31,47 +35,96 @@
           <p>
             <span class="name">{{ comment.name }}</span>
             <span class="score">
-              <MoocStar :value="comment.score/2" :size="16" :disabled="true" />
-              {{ comment.score }}分
+              <MoocStar :value="getCommentScore(comment)" :size="16" :disabled="true" />
+              {{ getCommentScore(comment) }}分
             </span>
           </p>
           <p class="content">
             {{ comment.comment }}
           </p>
           <p>
-            <span class="like">
-              <i class="iconfont">&#xe60c;</i>
-              {{ comment.like }}
-            </span>
             <span class="time">时间：{{ comment.time }}</span>
           </p>
         </div>
       </li>
     </ul>
-
-    <!-- 分页 -->
-    <pagination :total="total" :page.sync="page" />
   </div>
 </template>
 <script>
-import Pagination from 'components/pagination/pagination.vue'
+import { getLessonComment } from 'api/lesson.js'
+import { ERR_OK } from 'api/config.js'
 export default {
-  props: {
-    list: {
-      type: Object,
-      default () {
-        return {}
-      }
-    }
-  },
   data () {
     return {
-      total: 100,
-      page: 1
+      commentList: []
     }
   },
-  components: {
-    Pagination
+  mounted () {
+    this.getLessonComment()
+  },
+  methods: {
+    // 分页值更新
+    handlePaginationChange (page) {
+      this.page = page
+      this.getLessonComment()
+    },
+    // 获取课程评价列表
+    getLessonComment () {
+      const params = {
+        id: this.$route.params.id
+      }
+      this.commentList = []
+      getLessonComment(params).then((res) => {
+        const { code, data, msg } = res
+        if (code === ERR_OK) {
+          this.commentList = data
+        } else {
+          this.$message.error(msg)
+        }
+      }).catch(() => {
+        this.$message.error('接口异常')
+      })
+    },
+    // 获取单个评价总分
+    getCommentScore (comment) {
+      const cacheScore = {}
+      if (cacheScore[comment['_id']]) {
+        return cacheScore[comment['_id']]
+      }
+      const { content_score = 0, easy_score = 0, logic_score = 0 } = comment
+      const score = Number(((content_score + easy_score + logic_score) / 3).toFixed(2))
+      cacheScore[comment['_id']] = score
+      return Number(((content_score + easy_score + logic_score) / 3).toFixed(2))
+    }
+  }, 
+  computed: {
+    totalScore () {
+      if (this.commentList.length === 0) {
+        return {
+          total: 0,
+          content_score: 0,
+          easy_score: 0,
+          logic_score: 0
+        }
+      }
+      let score = {
+        total: 0,
+        content_score: 0,
+        easy_score: 0,
+        logic_score: 0
+      }
+      const length = this.commentList.length
+      this.commentList.forEach(item => {
+        score['content_score'] += parseFloat(item['content_score'])
+        score['easy_score'] += parseFloat(item['easy_score'])
+        score['logic_score'] += parseFloat(item['logic_score'])
+      })
+      score['total'] = (score['content_score'] + score['easy_score'] + score['logic_score']) / 3
+      for (const key in score) {
+        score[key] = Number((score[key] / length).toFixed(2))
+      }
+      return score
+    }
   }
 }
 </script>
@@ -158,10 +211,4 @@ export default {
             .time
               color: #b5b9bc;
               font-size: 12px;
-            .like
-              padding: 7px 15px;
-              border-radius: 18px;
-              background-color: rgba(84,92,99,0.1);
-              color: #545c63;
-              cursor: pointer;
 </style>

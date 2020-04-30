@@ -29,7 +29,7 @@
 
     <!-- 列表部分 -->
     <div class="integral-list">
-      <ul>
+      <ul v-if="integralList.length">
         <li
           v-for="(item, index) in integralList"
           :key="index"
@@ -40,15 +40,23 @@
           <p class="integral-item-number">{{ item.integral }}积分</p>
         </li>
       </ul>
+      <empty v-else message="暂无相关积分商品数据"></empty>
     </div>
 
 
     <!-- 分页部分 -->
-    <pagination :total="total" :size="size" :page.sync="page" @change="handlePaginationChange"></pagination>
+    <pagination
+      v-if="integralList.length"
+      :total="total"
+      :size="size"
+      :page.sync="page"
+      @change="handlePaginationChange"
+    ></pagination>
   </div>
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
+import Empty from 'components/empty/empty.vue'
 import { getIntegralTypes, getIntegralList } from 'api/integral.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -138,7 +146,8 @@ export default {
     }
   },
   components: {
-    Pagination
+    Pagination,
+    Empty
   }
 }
 </script>

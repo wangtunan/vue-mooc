@@ -22,7 +22,7 @@
           <span class="read-setting" @click="handleSettingClick">通知设置</span>
         </span>
       </div>
-      <ul>
+      <ul v-if="noticeList.length">
         <li
           v-for="(item,index) in noticeList"
           :key="index"
@@ -44,10 +44,11 @@
           </div>
         </li>
       </ul>
+      <empty v-else message="暂无相关消息数据"></empty>
     </div>
 
     <!-- pagination -->
-    <pagination :total="total" :page.sync="page" @change="handlePaginationChange" />
+    <pagination v-if="noticeList.length" :total="total" :page.sync="page" @change="handlePaginationChange" />
 
     <!-- dialog -->
     <notice-setting :list="settingList" :visible.sync="dialogVisible"></notice-setting>
@@ -55,6 +56,7 @@
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
+import Empty from 'components/empty/empty.vue'
 import { ERR_OK } from 'api/config.js'
 import { getNoticeList, getNoticeSetting, noticeReadOne, noticeReadAll, noticeNoticeDelete } from 'api/notice.js'
 export default {
@@ -191,6 +193,7 @@ export default {
   },
   components: {
     Pagination,
+    Empty,
     NoticeSetting: () => import('./notice-setting.vue')
   },
   beforeDestroy () {

@@ -9,32 +9,36 @@
           @click="handleTabClick(tab,index)"
         >{{ tab.title }}</span>
       </dt>
-      <dd v-for="(item,index) in filterList" :key="index" class="course-item">
-        <div class="img-box">
-          <img src="https://img3.mukewang.com/5ab477e700015ea202400240.jpg" alt="">
-        </div>
-        <div class="course-content">
-          <p class="from">
-            来自 {{ item.from }}
-          </p>
-          <p class="title">
-            {{ item.title }}
-          </p>
-          <p v-if="item.isAnswer" class="answer-box">
-            <span class="title">我的回答</span>
-            <span class="answer">{{ item.answer }}</span>
-          </p>
-          <p class="other">
-            <span>{{ item.time }}</span>
-            <span v-if="item.isAnswer">{{ item.reply }}个回复</span>
-            <span v-else>{{ item.answer }}个回答</span>
-          </p>
-        </div>
-      </dd>
+      <template v-if="filterList.length">
+        <dd v-for="(item,index) in filterList" :key="index" class="course-item">
+          <div class="img-box">
+            <img src="https://img3.mukewang.com/5ab477e700015ea202400240.jpg" alt="">
+          </div>
+          <div class="course-content">
+            <p class="from">
+              来自 {{ item.from }}
+            </p>
+            <p class="title">
+              {{ item.title }}
+            </p>
+            <p v-if="item.isAnswer" class="answer-box">
+              <span class="title">我的回答</span>
+              <span class="answer">{{ item.answer }}</span>
+            </p>
+            <p class="other">
+              <span>{{ item.time }}</span>
+              <span v-if="item.isAnswer">{{ item.reply }}个回复</span>
+              <span v-else>{{ item.answer }}个回答</span>
+            </p>
+          </div>
+        </dd>
+      </template>
+      <empty v-else></empty>
     </dl>
   </div>
 </template>
 <script>
+import Empty from 'components/empty/empty.vue'
 export default {
   props: {
     list: {
@@ -46,8 +50,8 @@ export default {
   },
   data () {
     return {
-      currentTabIndex: 0, // 当前选项卡的索引
-      tabList: [] // 选项卡数据
+      currentTabIndex: 0,
+      tabList: []
     }
   },
   created () {
@@ -69,6 +73,9 @@ export default {
       let currTab = this.tabList[this.currentTabIndex]
       return this.list.filter(item => item.type === currTab.type)
     }
+  },
+  components: {
+    Empty
   }
 }
 </script>

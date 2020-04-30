@@ -1,9 +1,9 @@
 <template>
   <div class="chapter">
-    <div v-if="list.introduction" class="chapter-introduce">
-      {{ list.introduction }}
+    <div v-if="catalog.introduction" class="chapter-introduce">
+      {{ catalog.introduction }}
     </div>
-    <div v-for="(item,index) in list.chapter" :key="index" class="chapter-item">
+    <div v-for="(item,index) in catalog.chapter" :key="index" class="chapter-item">
       <h2 class="chapter-title">
         {{ item.title }}
       </h2>
@@ -27,7 +27,7 @@
         </li>
       </ul>
     </div>
-    <p v-if="list.isComplete" class="complete-info">
+    <p v-if="catalog.isComplete" class="complete-info">
       <i class="iconfont">&#xe786;</i>
       本课程已完结
     </p>
@@ -37,7 +37,7 @@
 import { normalSeconds } from 'utils/utils.js'
 export default {
   props: {
-    list: {
+    catalog: {
       type: Object,
       default () {
         return {}

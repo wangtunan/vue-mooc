@@ -4,7 +4,6 @@ import store from '../store/index.js'
 import { getUserInfo } from 'utils/cache.js'
 Vue.use(Router)
 
-const Test  = () => import('pages/test/test.vue') // 测试路由
 const Home = () => import('pages/home/index.vue') // 首页路由
 const CourseIndex = () => import('pages/course/index.vue') // 免费课程路由
 const CourseDetail = () => import('pages/course-detail/index.vue') // 免费课程详情路由
@@ -21,7 +20,6 @@ const NoticeIndex = () => import('pages/notice/index.vue') // 消息中心路由
 const CartIndex = () => import('pages/cart/cart.vue') // 购物车路由
 const CartConfirm = () => import('pages/cart/confirm.vue') // 购物车确认路由
 const CartPay = () => import('pages/cart/pay.vue') // 购物车支付路由
-const SearchResult = () => import('pages/search-result/index.vue') // 搜索结果路由
 const IntegralIndex = () => import('pages/integral/index.vue') // 积分商场路由
 
 const routes = [
@@ -29,11 +27,6 @@ const routes = [
     path: '/',
     name: 'Index',
     redirect: '/home'
-  },
-  {
-    path: '/test',
-    name: 'Test',
-    component:Test 
   },
   {
     path: '/home',
@@ -135,11 +128,6 @@ const routes = [
     path: '/article',
     name: 'ArticleIndex',
     component:ArticleIndex
-  },
-  {
-    path: '/search/result',
-    name: 'SearchResult',
-    component: SearchResult
   },
   {
     path: '/integral',

@@ -11,7 +11,6 @@
           @click="currentNavIndex = index"
         >
           {{ nav.title }}
-          <span v-if="nav.number" class="nav-number">{{ nav.number }}</span>  
         </li>
       </ul>
     </div>
@@ -19,7 +18,7 @@
     <!-- 内容部分 -->
     <div class="detail-information m-center">
       <div class="information-left">
-        <component :is="componentName" :list="content" />
+        <component :is="componentName" :catalog="catalogList" />
       </div>
       <div class="information-right">
         <detail-tips :lastest="data" />
@@ -42,25 +41,24 @@ export default {
   },
   data () {
     return {
-      currentNavIndex: 0, // 当前导航的索引
-      navList: [] // 导航数据
+      currentNavIndex: 0,
+      navList: []
     }
   },
   created () {
     // 初始化导航数据
     this.navList = [
-      { title: '课程章节', number: 0, componentName: 'chapter', key: "catalog" },
-      { title: '问答', number: 1155, componentName: 'question-answer', key: 'answer' },
-      { title: '用户评价', number: 251, componentName: 'comment', key: 'comment' }
+      { title: '课程章节', componentName: 'chapter' },
+      { title: '问答', componentName: 'question-answer' },
+      { title: '用户评价', componentName: 'comment' }
     ]
   },
   computed: {
     componentName () {
       return this.navList[this.currentNavIndex].componentName
     },
-    content () {
-      const key = this.navList[this.currentNavIndex].key
-      return this.data[key] || {}
+    catalogList () {
+      return this.data.catalog || {}
     }
   },
   components: {
@@ -98,14 +96,6 @@ export default {
             border-radius: 15px;
             background-color: #f20d0d;
           }
-        .nav-number
-          display: inline-block;
-          position: absolute;
-          top: 10px;
-          right: -20px;
-          font-size: 12px;
-          line-height: 1;
-          color: #9199a1;
     .detail-information
       margin-top: 36px;
       margin-bottom: 36px;

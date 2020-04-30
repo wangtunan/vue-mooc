@@ -2,6 +2,8 @@ import Router from 'koa-router'
 import Lesson from '../models/lesson.js'
 import UserLesson from '../models/userLesson.js'
 import Catalog from '../models/catalog.js'
+import Comment from '../models/comment.js'
+import Qa from '../models/qa.js'
 import { ERR_OK, SIZE } from '../config.js'
 import checkUser from '../middleware/auth.js'
 const router = new Router({
@@ -105,8 +107,8 @@ router.get('/info', async (ctx) => {
     const catalog = await Catalog.findOne({
       lessonid: id
     })
-    if (lessonInfo && catalog) {
-      lessonInfo.catalog = catalog
+    if (lessonInfo) {
+      lessonInfo.catalog = catalog || {}
       ctx.body = {
         code: ERR_OK,
         msg: "获取课程详情数据成功",
@@ -116,6 +118,83 @@ router.get('/info', async (ctx) => {
       ctx.body = {
         code: -1,
         msg: '获取课程详情失败',
+      }
+    }
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      msg: e.message || '服务器异常'
+    }
+  }
+})
+
+// 课程评论
+router.get('/comment', async (ctx) => {
+  const { id } = ctx.query
+  if (!id) {
+    ctx.body = {
+      code: -1,
+      msg: '缺少关键参数id'
+    }
+    return false
+  }
+  try {
+    const result = await Comment.findOne({
+      lessonid: id
+    })
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: "获取课程评论数据成功",
+        data: result.list
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取课程评论数据失败',
+      }
+    }
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      msg: e.message || '服务器异常'
+    }
+  }
+})
+
+// 课程问答
+router.get('/qa', async (ctx) => {
+  const { id, code } = ctx.query
+  if (!id) {
+    ctx.body = {
+      code: -1,
+      msg: '缺少关键参数id'
+    }
+    return false
+  }
+  try {
+    let where = {
+      lessonid: id
+    }
+    let parseCode = parseInt(code)
+    const result = await Qa.findOne(where).lean()
+    if (result) {
+      let list = result.list
+      if (parseCode === 0 || parseCode === 1) {
+        list = list.filter(item => item.status.code === parseCode)
+      }
+      list.sort((a, b) => {
+        return new Date(b.time) - new Date(a.time)
+      })
+      ctx.body = {
+        code: ERR_OK,
+        msg: "获取课程问答数据成功",
+        data: list
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取课程问答数据失败',
       }
     }
   } catch (e) {

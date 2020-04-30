@@ -16,7 +16,7 @@
     </div>
 
     <!-- 课程列表 -->
-    <ul class="lesson-list">
+    <ul v-if="list.length" class="lesson-list">
       <li v-for="(item, index) in list" :key="index" class="list-item" @click="handleLessonClick(item)">
         <div class="img-box">
           <img :src="item.img" alt="">
@@ -53,9 +53,11 @@
         </div>
       </li>
     </ul>
+    <empty v-else message="暂无相关课程数据"></empty>
   </div>
 </template>
 <script>
+import Empty from 'components/empty/empty.vue'
 import { addCart } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -120,6 +122,9 @@ export default {
     computeLikeLesson () {
       return this.list.filter(item => item.isLike).length || 0
     }
+  },
+  components: {
+    Empty
   },
   watch: {
     isHide () {

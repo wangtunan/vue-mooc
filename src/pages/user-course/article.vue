@@ -9,33 +9,37 @@
           @click="handleTabClick(tab,index)"
         >{{ tab.title }}</span>
       </dt>
-      <dd v-for="(item,index) in filterList" :key="index" class="article-item">
-        <h3 class="title">
-          {{ item.title }}
-        </h3>
-        <div class="content-container">
-          <div v-if="item.img" class="img-box">
-            <img :src="item.img" alt="">
+      <template v-if="filterList.length">
+        <dd v-for="(item,index) in filterList" :key="index" class="article-item">
+          <h3 class="title">
+            {{ item.title }}
+          </h3>
+          <div class="content-container">
+            <div v-if="item.img" class="img-box">
+              <img :src="item.img" alt="">
+            </div>
+            <div class="course-content">
+              <p class="desc">
+                {{ item.desc }}
+              </p>
+            </div>
           </div>
-          <div class="course-content">
-            <p class="desc">
-              {{ item.desc }}
+          <div class="other">
+            <span>{{ item.author }}</span>
+            <p class="fr">
+              <span>{{ item.view }}浏览</span>
+              <span>{{ item.like }}推荐</span>
+              <span>{{ item.comment }}评论</span>
             </p>
           </div>
-        </div>
-        <div class="other">
-          <span>{{ item.author }}</span>
-          <p class="fr">
-            <span>{{ item.view }}浏览</span>
-            <span>{{ item.like }}推荐</span>
-            <span>{{ item.comment }}评论</span>
-          </p>
-        </div>
-      </dd>
+        </dd>
+      </template>
+      <empty v-else></empty>
     </dl>
   </div>
 </template>
 <script>
+import Empty from 'components/empty/empty.vue'
 export default {
   props: {
     list: {
@@ -47,8 +51,8 @@ export default {
   },
   data () {
     return {
-      currentTabIndex: 0, // 当前选项卡的索引
-      tabList: [] // 选项卡数据
+      currentTabIndex: 0,
+      tabList: []
     }
   },
   created () {
@@ -71,6 +75,9 @@ export default {
       let currTab = this.tabList[this.currentTabIndex]
       return this.list.filter(item => item.type === currTab.type)
     }
+  },
+  components: {
+    Empty
   }
 }
 </script>

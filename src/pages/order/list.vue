@@ -76,9 +76,7 @@
         </div>
       </li>
     </ul>
-    <p v-else class="order-empty">
-      暂无订单数据
-    </p>
+    <empty v-else message="暂无相关订单数据"></empty>
 
     <!-- 分页 -->
     <pagination
@@ -90,6 +88,7 @@
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
+import Empty from 'components/empty/empty.vue'
 import { getOrderList, cancelOrder, deleteOrder } from 'api/order.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -211,7 +210,8 @@ export default {
     }
   },
   components: {
-    Pagination
+    Pagination,
+    Empty
   }
 }
 </script>
@@ -247,11 +247,6 @@ export default {
           background-color: #4d555d;
           border-radius: 16px;
           color: #fff;
-    .order-empty
-      font-size: 16px;
-      text-align: center;
-      margin-top: 30px;
-      color: #f01414;
     .order-list
       margin-top: 24px;
       .order-item

@@ -26,7 +26,7 @@
     </div>
 
     <!-- 列表 -->
-    <div class="read-list">
+    <div v-if="readList.length" class="read-list">
       <ul>
         <li
           v-for="(item, index) in readList"
@@ -65,6 +65,7 @@
         </li>
       </ul>
     </div>
+    <empty v-else message="暂无相关专栏数据"></empty>
 
     <!-- 分页 -->
     <pagination :total="total" :page.sync="page" @change="handlePaginationChange" />
@@ -72,6 +73,7 @@
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
+import Empty from 'components/empty/empty.vue'
 import { getReadTypes, getReadList } from 'api/read.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -153,7 +155,8 @@ export default {
     }
   },
   components: {
-    Pagination
+    Pagination,
+    Empty
   }
 }
 </script>

@@ -78,7 +78,7 @@ export default {
   },
   data () {
     return {
-      currentValue: this.value
+      currentValue: Math.round(this.value)
     }
   },
   methods: {
@@ -103,6 +103,11 @@ export default {
     },
     getIconColor (n) {
       return n <= this.currentValue ? this.color : '#eee'
+    }
+  },
+  watch: {
+    value () {
+      this.currentValue = Math.round(this.value)
     }
   },
   computed: {

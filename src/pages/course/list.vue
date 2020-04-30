@@ -39,9 +39,11 @@
         </div>
       </li>
     </ul>
+    <empty v-else message="暂无相关课程数据"></empty>
   </div>
 </template>
 <script>
+import Empty from 'components/empty/empty.vue'
 export default {
   props: {
     list: {
@@ -75,6 +77,9 @@ export default {
     handleCourseClick (lesson) {
       this.$router.push({ path: `/course/${lesson.id}` })
     }
+  },
+  components: {
+    Empty
   }
 }
 </script>

@@ -9,67 +9,71 @@
 
     <!-- 购物车列表 -->
     <div class="cart-list m-center">
-      <dl>
-        <dt class="cart-list-header">
-          <span class="checkbox-all" @click="handleAllCheckClick">
-            <i v-if="isCheckAll" class="iconfont">&#xe617;</i>
-            <i v-else class="iconfont no-check">&#xe630;</i>
-            全选
-          </span>
-          <span class="course-name">课程</span>
-          <span class="price">金额</span>
-          <span>操作</span>
-        </dt>
-        <dd v-for="(course,index) in cartList" :key="index" class="cart-item">
-          <div class="checkbox">
-            <span @click="handleCheckClick(course,index)">
-              <i v-if="course.isCheck" class="iconfont">&#xe617;</i>
+      <template v-if="cartList.length">
+        <dl>
+          <dt class="cart-list-header">
+            <span class="checkbox-all" @click="handleAllCheckClick">
+              <i v-if="isCheckAll" class="iconfont">&#xe617;</i>
               <i v-else class="iconfont no-check">&#xe630;</i>
+              全选
             </span>
-          </div>
-          <div class="course-box">
-            <div class="img-box">
-              <img :src="course.img" alt="">
+            <span class="course-name">课程</span>
+            <span class="price">金额</span>
+            <span>操作</span>
+          </dt>
+          <dd v-for="(course,index) in cartList" :key="index" class="cart-item">
+            <div class="checkbox">
+              <span @click="handleCheckClick(course,index)">
+                <i v-if="course.isCheck" class="iconfont">&#xe617;</i>
+                <i v-else class="iconfont no-check">&#xe630;</i>
+              </span>
             </div>
-            <div class="course-content">
-              <p class="name">
-                {{ course.title }}
+            <div class="course-box">
+              <div class="img-box">
+                <img :src="course.img" alt="">
+              </div>
+              <div class="course-content">
+                <p class="name">
+                  {{ course.title }}
+                </p>
+              </div>
+            </div>
+            <div class="price">
+              ¥ {{ course.isDiscount ? course.discountPrice : course.price }}
+            </div>
+            <div class="close" @click="handleDeleteClick(course)">
+              <i class="iconfont">&#xe619;</i>
+            </div>
+          </dd>
+        </dl>
+        <div class="account-box">
+          <div class="right">
+            <div class="price-box">
+              <p class="title">
+                总计金额：
+              </p>
+              <p class="price">
+                ¥ {{ getTotal() }}
               </p>
             </div>
+            <button
+              class="account-btn"
+              :class="{'is-disabled': checkNumber == 0}"
+              @click="handleAccountClick"
+            >
+              去结算
+            </button>
           </div>
-          <div class="price">
-            ¥ {{ course.isDiscount ? course.discountPrice : course.price }}
-          </div>
-          <div class="close" @click="handleDeleteClick(course)">
-            <i class="iconfont">&#xe619;</i>
-          </div>
-        </dd>
-      </dl>
-      <div class="account-box">
-        <div class="right">
-          <div class="price-box">
-            <p class="title">
-              总计金额：
-            </p>
-            <p class="price">
-              ¥ {{ getTotal() }}
-            </p>
-          </div>
-          <button
-            class="account-btn"
-            :class="{'is-disabled': checkNumber == 0}"
-            @click="handleAccountClick"
-          >
-            去结算
-          </button>
         </div>
-      </div>
+      </template>
+      <empty v-else message="购物车内空空如也"></empty>
     </div>
   </div>
 </template>
 
 <script>
 import CartHeader from './cart-header.vue'
+import Empty from 'components/empty/empty.vue'
 import { getCartList, deleteCart } from 'api/cart.js'
 import { ERR_OK } from 'api/config.js'
 import { setCheckLessons } from 'utils/cache.js'
@@ -174,7 +178,8 @@ export default {
     }
   },
   components: {
-    CartHeader
+    CartHeader,
+    Empty
   }
 }
 </script>

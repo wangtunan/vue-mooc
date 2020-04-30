@@ -9,34 +9,44 @@
           @click="handleTabClick(tab,index)"
         >{{ tab.title }}</span>
       </dt>
-      <dd v-for="(item,index) in lessonList" :key="index" class="course-item">
-        <div class="img-box">
-          <img :src="item.img" alt="">
-        </div>
-        <div class="course-content">
-          <p class="title">
-            {{ item.title }}
-          </p>
-          <p class="learn">
-            <span class="rate">已学{{ item.percent }}%</span>
-            <span class="duration">用时{{ item.hours }}</span>
-            <span v-if="item.lastChapter" class="chapter">学习至{{ item.lastChapter }}</span>
-          </p>
-          <p class="other">
-            <span>笔记{{ item.notes }}</span>
-            <span>代码{{ item.codes }}</span>
-            <span>问答{{ item.questions }}</span>
-            <span class="learn-btn">继续学习</span>
-          </p>
-        </div>
-      </dd>
+      <template v-if="lessonList.length">
+        <dd v-for="(item,index) in lessonList" :key="index" class="course-item">
+          <div class="img-box">
+            <img :src="item.img" alt="">
+          </div>
+          <div class="course-content">
+            <p class="title">
+              {{ item.title }}
+            </p>
+            <p class="learn">
+              <span class="rate">已学{{ item.percent }}%</span>
+              <span class="duration">用时{{ item.hours }}</span>
+              <span v-if="item.lastChapter" class="chapter">学习至{{ item.lastChapter }}</span>
+            </p>
+            <p class="other">
+              <span>笔记{{ item.notes }}</span>
+              <span>代码{{ item.codes }}</span>
+              <span>问答{{ item.questions }}</span>
+              <span class="learn-btn">继续学习</span>
+            </p>
+          </div>
+        </dd>
+      </template>
+      <empty v-else message="暂无相关课程信息"></empty>
     </dl>
 
-    <pagination :page.sync="page" :total="total" @change="handlePaginationChange"></pagination>
+    <!-- 分页 -->
+    <pagination
+      v-if="lessonList.length"
+      :page.sync="page"
+      :total="total"
+      @change="handlePaginationChange"
+    ></pagination>
   </div>
 </template>
 <script>
 import Pagination from 'components/pagination/pagination.vue'
+import Empty from 'components/empty/empty.vue'
 import { getUserCourse } from 'api/user.js'
 import { ERR_OK } from 'api/config.js'
 export default {
@@ -97,7 +107,8 @@ export default {
     }
   },
   components: {
-    Pagination
+    Pagination,
+    Empty
   }
 }
 </script>

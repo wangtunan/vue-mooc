@@ -13,7 +13,7 @@
     <course-nav v-if="navList.length" :list="navList" :params.sync="params" />
     
     <!-- 课程列表 -->
-    <course-list v-if="courseList.length" :list="courseList" :sort.sync="sort" />
+    <course-list :list="courseList" :sort.sync="sort" />
 
     <!-- 分页 -->
     <pagination :total="total" :page.sync="page" :size="size" @change="handlePaginationChange" />
