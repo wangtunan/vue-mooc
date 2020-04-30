@@ -38,7 +38,9 @@ module.exports = {
             '/guide/basic/start.md',
             '/guide/basic/mock.md',
             '/guide/basic/vuex.md',
-            '/guide/basic/router.md'
+            '/guide/basic/router.md',
+            '/guide/basic/node.md',
+            '/guide/basic/mongoose.md'
           ]
         },
         {
@@ -48,19 +50,20 @@ module.exports = {
             '/guide/components/',
             '/guide/components/star.md',
             '/guide/components/badge.md',
-            '/guide/components/switch.md',
-            '/guide/components/timeline.md',
-            '/guide/components/progress.md',
-            '/guide/components/steps.md',
-            '/guide/components/breadcrumb.md',
-            '/guide/components/backtop.md',
-            '/guide/components/button.md',
-            '/guide/components/message.md',
-            '/guide/components/message-box.md',
-            '/guide/components/carousel.md',
-            '/guide/components/pagination.md',
-            '/guide/components/dialog.md',
-            '/guide/components/divider.md'
+            '/guide/components/switch.md'
+            // '/guide/components/button.md'
+            // '/guide/components/timeline.md',
+            // '/guide/components/progress.md',
+            // '/guide/components/steps.md',
+            // '/guide/components/breadcrumb.md',
+            // '/guide/components/backtop.md',
+            // '/guide/components/button.md',
+            // '/guide/components/message.md',
+            // '/guide/components/message-box.md',
+            // '/guide/components/carousel.md',
+            // '/guide/components/pagination.md',
+            // '/guide/components/dialog.md',
+            // '/guide/components/divider.md'
           ]
         },
         {
@@ -68,17 +71,17 @@ module.exports = {
           collapsable: false,
           children: [
             '/guide/develop/layout.md',
-            '/guide/develop/sidebar.md',
+            // '/guide/develop/sidebar.md',
             '/guide/develop/login.md',
             '/guide/develop/home.md',
             '/guide/develop/lesson.md',
             '/guide/develop/read.md',
-            '/guide/develop/question.md',
-            '/guide/develop/article.md',
+            // '/guide/develop/question.md',
+            // '/guide/develop/article.md',
             '/guide/develop/cart.md',
-            '/guide/develop/course.md',
+            // '/guide/develop/course.md',
             '/guide/develop/order.md',
-            '/guide/develop/user.md',
+            // '/guide/develop/user.md',
             '/guide/develop/notice.md'
           ]
         },

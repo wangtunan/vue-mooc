@@ -39,7 +39,7 @@ app.use(async (ctx, next) => {
   } else {
     await next();
   }
-});
+})
 app.keys = ['vue-mooc-keys']
 
 // 中间件

@@ -149,10 +149,16 @@ img-box($width, $height)
 良好的项目结构设计，能在一定程度上能够帮助我们更好的管理和维护我们的项目，以下是`vue-mooc`的目录结构设计：
 ``` sh
 |-- docs                            # vuepress站点文档
+|-- serve                           # node后端接口
+|   |-- initData                    # 一些初始化MongoDB数据库的模拟数据
+|   |-- interface                   # 所有接口
+|   |-- middleward                  # 中间件
+|   |-- models                      # mongoose模型
+|   |-- app.js                      # 后端接口入口文件
+|   |-- config.js                   # 后端接口相关配置文件
 |-- public                          # 静态资源
 |   |-- favicon.ico                 # icon图标
 |   |-- index.html                  # html模板
-|   |-- mock                        # mock .json文件
 |-- src                             # 源代码目录
 |   |-- api                         # 请求接口目录
 |   |-- assets                      # 字体、js和样式资源目录
@@ -161,6 +167,7 @@ img-box($width, $height)
 |   |-- pages                       # 业务页面目录
 |   |-- App.vue                     # 入口页面
 |   |-- main.js                     # 入口js
+|   |-- register.js                 # 全局注册base基础组件
 |   |-- router                      # 路由目录
 |   |-- store                       # 全局Vuex目录
 |   |-- utils                       # 工具类js目录
@@ -188,7 +195,7 @@ img-box($width, $height)
 :::
 ```js
 // .eslintrc.js
-module.exports =  {
+ module.exports =  {
   "root": true,
   "env": {
     "browser": true,
@@ -211,6 +218,10 @@ module.exports =  {
     "vue/max-attributes-per-line": 0,
     // 不允许在template组件上绑定某些属性，例如key
     "vue/no-template-shadow": 0,
+    // vue组件自闭和标签
+    'vue/html-self-closing': 0,
+    // 单行内容必须换行
+    'vue/singleline-html-element-content-newline': 0,
     // 生产环境下不允许debugger调试
     "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
     // 允许console打印
@@ -303,7 +314,10 @@ module.exports = {
     port: 3400,
     proxy: {
       '/mock': {
-        target: 'http://localhost:3400'
+        target: 'http://localhost:3400',
+        pathRewrite: {
+          '/mock': ''
+        }
       }
     }
   },
@@ -331,6 +345,7 @@ import { getHot } from 'src/api/common.js'
 我们先来看一看`package.json`中一共有多少条打包命令：
 ```json
 "scripts": {
+  "node": "nodemon server/app.js --exec babel-node --presets env",
   "serve": "vue-cli-service serve",
   "build": "vue-cli-service build",
   "lint": "vue-cli-service lint",
@@ -340,6 +355,7 @@ import { getHot } from 'src/api/common.js'
 }
 ```
 对于每一条打包命令，它们的解释如下：
+* `node`：启动`Node`后端接口服务。
 * `serve`和`build`，这两条命令不需要多解释。
 * `lint`：使用此条命令，可以启用`eslint-loader`对我们的代码进行校验，它会把错误输出在控制台，还会进行简单的格式修复。
 * `docs:dev`和`docs:build`，同`serve`和`build`类似，它们是`VuePress`本地写作和打包的命令。

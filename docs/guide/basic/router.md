@@ -9,8 +9,8 @@
 :::
 由于我们是`SPA`单页面应用，假设有两个模块`a`和`b`，我们使用路由懒加载的方式：
 ```js
-const AModule = import('./a.vue')
-const BModule = import('./b.vue')
+const AModule = () => import('./a.vue')
+const BModule = () => import('./b.vue')
 ```
 这样懒加载以后，我们就能实现：当我们去访问模块`a`的时候才会去加载`a`这一块的内容，当我们去访问模块`b`的时候才会去加载`b`这一块的内容。
 
@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
   let userinfo = getUserInfo()
   if (to.meta.requireAuth) {
     // 登录以后才可以访问
-    if (userinfo.name) {
+    if (userinfo.id) {
       next()
     } else{
       store.commit('login/SET_SHOW_LOGIN', true)
@@ -110,7 +110,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   let userinfo = getUserInfo()
   if (to.meta.requireAuth) {
-    if (userinfo.name) {
+    if (userinfo.id) {
       next()
     } else{
       store.commit('login/SET_SHOW_LOGIN', true)
