@@ -4,12 +4,12 @@ import { ERR_OK } from 'api/config.js'
 
 // 获取用户搜索历史
 export function getSearchHistory () {
-  return axios.get(`/mock/common/history`)
+  return axios.get(`/api/common/history`)
 }
 
 // 生成一条搜索历史
 export function createSearchHistory (keyword) {
-  return axios.get('/mock/common/history/create', {
+  return axios.get('/api/common/history/create', {
     params: {
       keyword
     }
@@ -18,17 +18,17 @@ export function createSearchHistory (keyword) {
 
 // 获取热搜词接口
 export function getHot () {
-  return axios.get(`/mock/common/hot`)
+  return axios.get(`/api/common/hot`)
 }
 
 // 获取底部版权footer数据
 export function getFooter () {
-  return axios.get(`/mock/common/footer`)
+  return axios.get(`/api/common/footer`)
 }
 
 // 获取头部数据接口
 export function getHeader () {
-  return axios.get(`/mock/common/nav`)
+  return axios.get(`/api/common/nav`)
 }
 
 // 获取实时搜索数据

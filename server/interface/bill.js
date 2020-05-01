@@ -18,13 +18,25 @@ router.get('/list', checkUser, async (ctx) => {
       return prev + curr.cost
     }, 0)
     const result = await Bill.find(where).skip((page - 1) * size).limit(+size)
-    ctx.body = {
-      code: ERR_OK,
-      msg: '获取消费记录数据成功',
-      data: {
-        list: result,
-        total: total,
-        count: count
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '获取消费记录数据成功',
+        data: {
+          list: result,
+          total: total,
+          count: count
+        }
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取消费记录数据失败',
+        data: {
+          list: [],
+          total: 0,
+          count: 0
+        }
       }
     }
   } catch (e) {

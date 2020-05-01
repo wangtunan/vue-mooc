@@ -10,25 +10,32 @@ const router = new Router({
 router.get('/list', checkUser,  async (ctx) => {
   const { page = 1 } = ctx.query
   const userid = ctx.session.user_id
-  const where = { userid }
-  const total = await Log.find(where).countDocuments()
-  const result = await Log.find(where).skip((page - 1) * SIZE).limit(SIZE).sort({
-    time: 'desc'
-  })
-  if (result.length > 0) {
-    ctx.body = {
-      code: ERR_OK,
-      msg: '获取登录日志数据成功',
-      data: {
-        list: result,
-        total: total
+  try {
+    const where = { userid }
+    const total = await Log.find(where).countDocuments()
+    const result = await Log.find(where).skip((page - 1) * SIZE).limit(SIZE).sort({
+      time: 'desc'
+    })
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '获取登录日志数据成功',
+        data: {
+          list: result,
+          total: total
+        }
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取登录日志数据失败',
+        data: []
       }
     }
-  } else {
+  } catch (e) {
     ctx.body = {
       code: -1,
-      msg: '获取登录日志数据失败',
-      data: []
+      msg: e.message || '服务器异常'
     }
   }
 })
@@ -36,16 +43,23 @@ router.get('/list', checkUser,  async (ctx) => {
 // 新增一条登录日志
 router.post('/create', checkUser,  async (ctx) => {
   const params = ctx.request.body
-  const result = await Log.create(params)
-  if (result) {
-    ctx.body = {
-      code: ERR_OK,
-      msg: '新增登录日志成功'
+  try {
+    const result = await Log.create(params)
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '新增登录日志成功'
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '新增登录日志失败'
+      }
     }
-  } else {
+  } catch (e) {
     ctx.body = {
       code: -1,
-      msg: '新增登录日志失败'
+      msg: e.message || '服务器异常'
     }
   }
 })

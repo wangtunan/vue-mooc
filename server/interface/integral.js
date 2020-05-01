@@ -10,15 +10,23 @@ const router = new Router({
 router.get('/type', async (ctx) => {
   try {
     const result = await IntegralTypes.find()
-    ctx.body = {
-      code: ERR_OK,
-      msg: '获取积分商品类别数据成功',
-      data: result
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '获取积分商品类别数据成功',
+        data: result
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取积分商品类别数据失败',
+        data: []
+      }
     }
   } catch (e) {
     ctx.body = {
       code: -1,
-      msg: e.message || '获取积分商品类别数据失败',
+      msg: e.message || '服务器异常',
       data: []
     }
   }
@@ -41,18 +49,29 @@ router.get('/list', async (ctx) => {
     const result = await Integral.find(where).skip(( page - 1) * size).limit(+size).sort({
       type: 'asc'
     })
-    ctx.body = {
-      code: ERR_OK,
-      msg: '获取积分商品数据成功',
-      data: {
-        list: result,
-        total: total
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '获取积分商品数据成功',
+        data: {
+          list: result,
+          total: total
+        }
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取积分商品数据失败',
+        data: {
+          list: [],
+          total: 0
+        }
       }
     }
   } catch (e) {
     ctx.body = {
       code: -1,
-      msg: e.message || '获取积分商品列表数据失败',
+      msg: e.message || '服务器异常',
     }
   }
 })

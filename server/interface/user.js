@@ -188,19 +188,26 @@ router.get('/info', checkUser, async (ctx) => {
     }
     return
   }
-  const info = await User.findOne({
-    id: userId
-  })
-  if (!info) {
+  try {
+    const info = await User.findOne({
+      id: userId
+    })
+    if (info) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '获取用户信息成功',
+        data: info
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取用户信息失败'
+      }
+    }
+  } catch (e) {
     ctx.body = {
       code: -1,
-      msg: '获取用户信息失败'
-    }
-  } else {
-    ctx.body = {
-      code: ERR_OK,
-      msg: '获取用户信息成功',
-      data: info
+      msg: e.message || '服务器异常'
     }
   }
 })

@@ -27,7 +27,7 @@ const mutations = {
 const actions = {
   logout ({commit }) {
     return new Promise((resolve, reject) => {
-      axios.get('/mock/user/logout').then(res => {
+      axios.get('/api/user/logout').then(res => {
         const { code } = res
         if (code === ERR_OK) {
           commit(types.SET_USER_INFO, '')

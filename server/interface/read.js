@@ -8,20 +8,27 @@ const router = new Router({
 
 // 专栏类型接口
 router.get('/types', async (ctx) => {
-  const result = await ReadTypes.find().sort({
-    sort: 1
-  })
-  if (result.length > 0) {
-    ctx.body = {
-      code: ERR_OK,
-      msg: '获取专栏类型数据成功',
-      data: result
+  try {
+    const result = await ReadTypes.find().sort({
+      sort: 1
+    })
+    if (result.length > 0) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '获取专栏类型数据成功',
+        data: result
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取专栏类型数据失败',
+        data: []
+      }
     }
-  } else {
+  } catch (e) {
     ctx.body = {
       code: -1,
-      msg: '获取专栏类型数据失败',
-      data: []
+      msg: e.message || '服务器异常'
     }
   }
 })
@@ -29,27 +36,34 @@ router.get('/types', async (ctx) => {
 // 专栏列表接口
 router.get('/list', async (ctx) => {
   const { page = 1, type } = ctx.query
-  let where = type ? { type } : {}
-  const total = await Read.find(where).countDocuments()
-  const result = await Read.find(where).skip((page - 1) * SIZE).limit(SIZE).lean()
-  if (result.length > 0) {
-    let list = getTryRead(result.slice())
-    ctx.body = {
-      code: ERR_OK,
-      msg: "获取专栏列表数据成功",
-      data: {
-        list: list,
-        total: total
+  try {
+    let where = type ? { type } : {}
+    const total = await Read.find(where).countDocuments()
+    const result = await Read.find(where).skip((page - 1) * SIZE).limit(SIZE).lean()
+    if (result.length > 0) {
+      let list = getTryRead(result.slice())
+      ctx.body = {
+        code: ERR_OK,
+        msg: "获取专栏列表数据成功",
+        data: {
+          list: list,
+          total: total
+        }
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: "获取专栏列表数据失败",
+        data: {
+          list: [],
+          total: 0
+        }
       }
     }
-  } else {
+  } catch (e) {
     ctx.body = {
       code: -1,
-      msg: "获取专栏列表数据失败",
-      data: {
-        list: [],
-        total: 0
-      }
+      msg: e.message || '服务器异常'
     }
   }
 })
@@ -64,38 +78,52 @@ router.get('/detail/:id', async (ctx) => {
     }
     return false
   }
-  const result = await Read.findOne({ id: id })
-  if (result) {
-    ctx.body = {
-      code: ERR_OK,
-      msg: '获取专栏详情成功',
-      data: result
+  try {
+    const result = await Read.findOne({ id: id })
+    if (result) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '获取专栏详情成功',
+        data: result
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取专栏详情失败',
+        data: null
+      }
     }
-  } else {
+  } catch (e) {
     ctx.body = {
       code: -1,
-      msg: '获取专栏详情失败',
-      data: null
+      msg: e.message || '服务器异常'
     }
   }
 })
 
 // 推荐专栏接口
 router.get('/recommend', async (ctx) => {
-  const where = { isRecommend: true }
-  const result = await Read.find(where).limit(5)
-  if (result.length > 0) {
-    ctx.body = {
-      code: ERR_OK,
-      msg: '获取推荐专栏数据成功',
-      data: result
+  try {
+    const where = { isRecommend: true }
+    const result = await Read.find(where).limit(5)
+    if (result.length > 0) {
+      ctx.body = {
+        code: ERR_OK,
+        msg: '获取推荐专栏数据成功',
+        data: result
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '获取推荐专栏数据失败',
+        data: [],
+        result
+      }
     }
-  } else {
+  } catch (e) {
     ctx.body = {
       code: -1,
-      msg: '获取推荐专栏数据失败',
-      data: [],
-      result
+      msg: e.message || '服务器异常'
     }
   }
 })
