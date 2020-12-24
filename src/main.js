@@ -41,8 +41,6 @@ import Mooc from './register.js'
 import 'assets/theme/index.styl'
 Vue.use(Mooc)
 
-import 'assets/stylus/index.styl'
-
 
 Vue.config.productionTip = false
 
