@@ -1,0 +1,58 @@
+// 字体颜色规范
+$dark-text: #000;
+$primary-text: #333;
+$regular-text: #666;
+$secondary-text: #999;
+$placeholder-text: #c0c0c0;
+
+// 主体色彩规范
+$theme-dark: #333333;
+$theme-blue: #2688E8;
+$theme-green: #09BB07;
+$theme-orange: #FAAD15;
+$theme-red: #E22D2D;
+$theme-info: #8896B3;
+
+// 圆角大小规范
+$border-radius-mini: 2px;
+$border-radius-small: 4px;
+$border-radius-normal: 8px;
+$border-radius-large: 16px;
+$border-radius-largex: 20px;
+
+// 字体大小规范
+$font-small: 12px;
+$font-normal: 14px;
+$font-medium: 16px;
+$font-large: 18px;
+$font-largex: 20px;
+
+// 圆角投影规范
+$box-shadow-color: rgba(17,17,27,0.1);
+$box-shadow-small: 0 2px 4px 0 $box-shadow-color;
+$box-shadow-normal: 0 4px 8px 0 $box-shadow-color;
+$box-shadow-large: 0 12px 20px 0 $box-shadow-color;
+
+:export {
+  darkText: $dark-text;
+  primaryText: $primary-text;
+  regularText: $regular-text;
+  secondaryText: $regular-text;
+  placeHolderText: $placeholder-text;
+  themeDark: $theme-dark;
+  themeBlue: $theme-blue;
+  themeGreen: $theme-green;
+  themeOrange: $theme-orange;
+  themeRed: $theme-red;
+  themeInfo: $theme-info;
+  borderRadiusMini: $border-radius-mini;
+  borderRadiusSmall: $border-radius-small;
+  borderRadiusNormal: $border-radius-normal;
+  borderRadiusLarge: $border-radius-large;
+  borderRadiusLargex: $border-radius-largex;
+  fontSmall: $font-small;
+  fontNormal: $font-normal;
+  fontMedium: $font-medium;
+  fontLarge: $font-large;
+  fontLargex: $font-largex;
+}

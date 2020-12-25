@@ -1,5 +1,9 @@
+import { AppRouteRecordRaw, AppRouteMetaConfig } from '@/types'
+import { App } from 'vue'
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-const routes: Array<RouteRecordRaw> = [
+import { scrollBehavior } from './scrollBehavior'
+
+const routes: AppRouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/home',
@@ -13,13 +17,30 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/login/index.vue')
+    component: () => import('@/views/login/index.vue'),
+    meta: {
+      title: '登陆',
+      hideFooter: true,
+      hideHeader: true,
+      hideSidebar: true
+    }
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  scrollBehavior: scrollBehavior,
+  routes: routes as RouteRecordRaw[]
 })
+
+router.beforeEach((to, from, next) => {
+  const meta = to.meta as AppRouteMetaConfig
+  document.title = meta.title ? `慕课网-${meta.title}` : '慕课网-程序员的梦工厂'
+  next()
+})
+
+export function setupRouter (app: App<Element>) {
+  app.use(router)
+}
 
 export default router

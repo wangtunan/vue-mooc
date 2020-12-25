@@ -4,6 +4,7 @@
       v-for="(nav, index) in navList"
       :key="index"
       class="navigation-item"
+      :title="nav.title"
     >
       <router-link :to="nav.url">{{nav.title}}</router-link>
     </li>
@@ -15,7 +16,7 @@ export default defineComponent({
   name: 'HeaderNavigation',
   setup () {
     const navList = reactive([
-      { title: '免费课程', url: '/course' },
+      { title: '免费课程', url: '/login' },
       { title: '实战课程', url: '/coding' },
       { title: '金职位', url: '/job' },
       { title: '慕课教程', url: '/wiki' },
@@ -27,20 +28,21 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
+  @import '~@/assets/styles/variables.scss';
+  $header-height: 72px;
   .navigation {
-    display: inline-block;
-    vertical-align: middle;
+    float: left;
     &-item {
       display: inline-block;
       vertical-align: middle;
       padding: 0 20px;
-      height: 72px;
-      line-height: 72px;
-      font-size: 16px;
-      color: #666;
+      height: $header-height;
+      line-height: $header-height;
+      font-size: $font-medium;
+      color: $primary-text;
       cursor: pointer;
       &:hover {
-        color: #333;
+        color: $dark-text;
       }
       a {
         color: inherit;

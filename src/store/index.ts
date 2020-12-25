@@ -1,6 +1,7 @@
+import { App } from 'vue'
 import { createStore } from 'vuex'
 
-export default createStore({
+export const router = createStore({
   state: {
   },
   mutations: {
@@ -10,3 +11,9 @@ export default createStore({
   modules: {
   }
 })
+
+export function setupStore (app: App<Element>) {
+  app.use(router)
+}
+
+export default router

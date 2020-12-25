@@ -1,0 +1,43 @@
+// 当行折叠省略
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// 多行折叠省略
+@mixin multline-ellipsis($line) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+// 取消滚动条
+@mixin no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    width: 0!important;
+  }
+}
+
+// 扩展可点击区域
+@mixin extend-click($extend: -5px) {
+  &::after {
+    content: '';
+    position: absolute;
+    left: $extend;
+    right: $extend;
+    top: $extend;
+    bottom: $extend;
+  }
+}
+
+// 版心
+@mixin mooc-center($width: 1152px) {
+  margin: 0 auto;
+  width: $width;
+}
+  

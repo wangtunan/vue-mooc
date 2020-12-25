@@ -18,6 +18,9 @@
     </ul>
 
     <!-- icon -->
+    <div class="search-icon">
+      <i class="iconfont icon-search"></i>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -32,10 +35,11 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
+  @import '~@/assets/styles/variables.scss';
+  @import '~@/assets/styles/mixin.scss';
   .search {
     position: relative;
-    display: inline-block;
-    vertical-align: middle;
+    float: left;
     margin-left: 24px;
     padding: 16px 0;
     height: 72px;
@@ -43,9 +47,9 @@ export default defineComponent({
     &-input {
       padding: 8px 4px;
       height: 40px;
-      border-radius: 8px;
+      border-radius: $border-radius-normal;
       box-sizing: border-box;
-      background-color: #e9e9e9;
+      background-color:#E9E9E9;
       input {
         padding: 0 12px;
         width: 280px;
@@ -54,29 +58,38 @@ export default defineComponent({
         border: none;
         outline: none;
         background-color: transparent;
-        color :#a6a6a6;
-        font-size: 14px;
+        color: $regular-text;
+        font-size: $font-normal;
         &::placeholder {
-          color :#a6a6a6;
+          color: $placeholder-text;
         }
       }
     }
     &-hot-tags {
       position: absolute;
-      right: 20px;
+      right: 40px;
       top: 50%;
       transform: translateY(-50%);
       .tag-item {
         display: inline-block;
         vertical-align: middle;
         padding: 0 8px;
-        font-size: 14px;
-        color: #555;
+        font-size: $font-normal;
+        color: $regular-text;
         cursor: pointer;
         &:hover {
-          color: #f21f1f;
+          color: $theme-red;
         }
       }
+    }
+    &-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $font-largex;
+      cursor: pointer;
+      @include extend-click(-5px);
     }
   }
 </style>

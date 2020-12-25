@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      margin: 10px;
+    }
+    .box-item {
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    .color-item {
+      display: inline-block;
+      vertical-align: middle;
+      width: 180px;
+      height: 100px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      color: #fff;
+      text-align: center;
+      line-height: 100px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="box-item">
+      字体颜色规范：
+      <div class="color-item" style="background-color:#333">$dark-text:#000</div>
+      <div class="color-item" style="background-color:#333">$primary-text:#333</div>
+      <div class="color-item" style="background-color:#666">$regular-text:#666</div>
+      <div class="color-item" style="background-color:#999">$secondary-text:#999</div>
+      <div class="color-item" style="background-color:#C0C0C0">$placeholder-text:#c0c0c0</div>
+    </div>
+    <div class="box-item">
+      主题色彩规范：
+      <div class="color-item" style="background-color:#2688E8">$theme-blue:#2688E8</div>
+      <div class="color-item" style="background-color:#09BB07">$theme-green:#09BB07</div>
+      <div class="color-item" style="background-color:#FAAD15">$theme-orange:#FAAD15</div>
+      <div class="color-item" style="background-color:#E22D2D">$theme-red:#E22D2D</div>
+      <div class="color-item" style="background-color:#8896B3">$theme-info:#8896B3</div>
+    </div>
+    <div class="box-item">
+      圆角大小规范：
+      <div class="color-item" style="border-radius:2px;background-color:#333">$border-radius-mini: 2px</div>
+      <div class="color-item" style="border-radius:4px;background-color:#333">$border-radius-small: 4px</div>
+      <div class="color-item" style="border-radius:8px;background-color:#333">$border-radius-normal: 8px</div>
+      <div class="color-item" style="border-radius:16px;background-color:#333">$border-radius-large: 16px</div>
+      <div class="color-item" style="border-radius:20px;background-color:#333">$border-radius-largex: 20px</div>
+    </div>
+    <div class="box-item">
+      字体大小规范：
+      <div class="color-item" style="background-color: #333;font-size: 12px;">$font-small:12px</div>
+      <div class="color-item" style="background-color: #333;font-size: 14px;">$font-normal:14px</div>
+      <div class="color-item" style="background-color: #333;font-size: 16px;">$font-medium:16px</div>
+      <div class="color-item" style="background-color: #333;font-size: 18px;">$font-large:18px</div>
+      <div class="color-item" style="background-color: #333;font-size: 20px;">$font-largex:20px</div>
+    </div>
+    <div class="box-item">
+      圆角投影规范：
+      <div class="color-item" style="background-color: #fff;border-radius: 8px;color:#000;box-shadow:0 2px 4px 0 rgba(7,17,27, 0.1)">$box-shadow-small</div>
+      <div class="color-item" style="background-color: #fff;border-radius: 8px;color:#000;box-shadow:0 4px 8px 0 rgba(7,17,27, 0.1)">$box-shadow-normal</div>
+      <div class="color-item" style="background-color: #fff;border-radius: 8px;color:#000;box-shadow:0 12px 20px 0 rgba(7,17,27, 0.1)">$box-shadow-large</div>
+    </div>
+  </div>
+</body>
+</html>
