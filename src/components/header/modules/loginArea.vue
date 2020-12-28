@@ -11,18 +11,27 @@
         </span>
       </li>
       <li class="login-area-item login">
-        <span title="登陆">登陆</span> / <span title="注册">注册</span>
+        <span title="登陆" @click="handleLoginClick(0)">登陆</span> /
+        <span title="注册" @click="handleLoginClick(1)">注册</span>
       </li>
     </ul>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
 import AppDownload from './appDownload.vue'
 export default defineComponent({
   name: 'HeaderLoginArea',
   components: {
     AppDownload
+  },
+  setup () {
+    const router = useRouter()
+    const handleLoginClick = (type: number) => {
+      router.push({ path: '/login', query: { type } })
+    }
+    return { handleLoginClick }
   }
 })
 </script>

@@ -27,6 +27,15 @@
           {{loginBtnText}}
         </el-button>
       </el-form-item>
+
+      <div class="login-form-sns">
+        <p class="title">其它方式登录</p>
+        <ul class="list">
+          <li class="iconfont icon-weibo"></li>
+          <li class="iconfont icon-wechat"></li>
+          <li class="iconfont icon-qq"></li>
+        </ul>
+      </div>
     </el-form>
   </div>
 </template>
@@ -67,7 +76,6 @@ export default defineComponent({
         return
       }
       form.validate(async (valid: boolean) => {
-        debugger
         if (!valid) {
           return
         }
@@ -102,6 +110,25 @@ export default defineComponent({
   .login-form {
     &-btn {
       width: 100%;
+    }
+    &-sns {
+      text-align: center;
+      .title {
+        margin-bottom: 15px;
+        font-size: $font-normal;
+        color: $regular-text;
+      }
+      .iconfont {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 10px;
+        font-size: $font-largex;
+        color: $secondary-text;
+        cursor: pointer;
+        &:hover {
+          color: $theme-red;
+        }
+      }
     }
     ::v-deep .el-form {
       .el-form-item {

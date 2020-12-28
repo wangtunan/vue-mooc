@@ -34,10 +34,14 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
+  @import '~@/assets/styles/responsive.scss';
   .header {
     &-brand {
       float: left;
       margin: 0 20px;
+      @include respond-to {
+        margin: 0 10px;
+      }
     }
   }
 </style>

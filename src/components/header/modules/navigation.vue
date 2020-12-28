@@ -11,24 +11,27 @@
   </ul>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, onBeforeMount } from 'vue'
+import { getHeaderNav } from '@/api/common'
+import { ERR_OK } from '@/api/config'
+import { HeaderNavConfig } from '@/types'
 export default defineComponent({
   name: 'HeaderNavigation',
   setup () {
-    const navList = reactive([
-      { title: '免费课程', url: '/login' },
-      { title: '实战课程', url: '/coding' },
-      { title: '金职位', url: '/job' },
-      { title: '慕课教程', url: '/wiki' },
-      { title: '专栏', url: '/read' },
-      { title: '手记', url: '/article' }
-    ])
+    let navList = reactive<HeaderNavConfig[]>([])
+    onBeforeMount(async () => {
+      const { code, data } = await getHeaderNav()
+      if (code === ERR_OK && data) {
+        navList = data
+      }
+    })
     return { navList }
   }
 })
 </script>
 <style lang="scss" scoped>
   @import '~@/assets/styles/variables.scss';
+  @import '~@/assets/styles/responsive.scss';
   $header-height: 72px;
   .navigation {
     float: left;
@@ -46,6 +49,9 @@ export default defineComponent({
       }
       a {
         color: inherit;
+      }
+      @include respond-to {
+        padding: 0 10px;
       }
     }
   }

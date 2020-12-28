@@ -37,6 +37,7 @@ export default defineComponent({
 <style lang="scss" scoped>
   @import '~@/assets/styles/variables.scss';
   @import '~@/assets/styles/mixin.scss';
+  @import '~@/assets/styles/responsive.scss';
   .search {
     position: relative;
     float: left;
@@ -44,6 +45,9 @@ export default defineComponent({
     padding: 16px 0;
     height: 72px;
     box-sizing: border-box;
+    @include respond-to {
+      margin-left: 14px;
+    }
     &-input {
       padding: 8px 4px;
       height: 40px;
@@ -62,6 +66,10 @@ export default defineComponent({
         font-size: $font-normal;
         &::placeholder {
           color: $placeholder-text;
+        }
+        @include respond-to {
+          width: 260px;
+          padding: 0 8px;
         }
       }
     }

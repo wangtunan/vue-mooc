@@ -1,0 +1,15 @@
+{
+  "code": 0,
+  "msg": "请求成功",
+  "data": [
+    { "title": "企业服务", "url": "/", "target": "_blank" },
+    { "title": "关于我们", "url": "/", "target": "_blank" },
+    { "title": "联系我们", "url": "/", "target": "_blank" },
+    { "title": "讲师招募", "url": "/", "target": "_blank" },
+    { "title": "帮助中心", "url": "/", "target": "_blank" },
+    { "title": "意见反馈", "url": "/", "target": "_blank" },
+    { "title": "慕课大学", "url": "/", "target": "_blank" },
+    { "title": "代码托管", "url": "/", "target": "_blank" },
+    { "title": "友情链接", "url": "/", "target": "_blank" }
+  ]
+}
