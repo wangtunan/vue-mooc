@@ -15,22 +15,26 @@
   </ul>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useScroll } from '@/hooks/event/useScroll'
+import { getSidebar } from '@/api/common'
+import { ERR_OK } from '@/api/config'
+import { SidebarItemConfig } from '@/types'
 export default defineComponent({
   name: 'Sidebar',
   setup () {
     const showBackBtn = ref(false)
-    const sidebarList = reactive([
-      { title: '意见反馈', icon: 'feedback' },
-      { title: '帮助中心', icon: 'help' },
-      { title: 'APP下载', icon: 'app' },
-      { title: '官方微信', icon: 'weixin' }
-    ])
+    const sidebarList = ref<SidebarItemConfig[]>([])
     const { scrollTo } = useScroll(window, (scrollTop: number) => {
       showBackBtn.value = scrollTop > 200
     })
     const handleScrollToTop = () => scrollTo()
+    onBeforeMount(async () => {
+      const { code, data } = await getSidebar()
+      if (code === ERR_OK && data) {
+        sidebarList.value = data
+      }
+    })
     return {
       sidebarList,
       showBackBtn,

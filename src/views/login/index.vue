@@ -26,7 +26,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import LoginForm from './modules/login.vue'
 export default defineComponent({
@@ -39,7 +39,7 @@ export default defineComponent({
     // login or register
     const { query } = useRoute()
     activeIndex.value = query.type === '1' ? 1 : 0
-    const tabList = reactive(['登录', '注册'])
+    const tabList = ref(['登录', '注册'])
     return { activeIndex, tabList }
   }
 })

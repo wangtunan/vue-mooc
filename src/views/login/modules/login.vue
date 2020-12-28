@@ -130,7 +130,7 @@ export default defineComponent({
         }
       }
     }
-    ::v-deep .el-form {
+    :deep .el-form {
       .el-form-item {
         margin-bottom: 30px;
       }

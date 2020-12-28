@@ -7,9 +7,12 @@
           v-for="(item, index) in linkList"
           :key="index"
           class="footer-link-item"
-          :title="item.title"
         >
-          <router-link :to="item.url" :target="item.target">{{item.title}}</router-link>
+          <router-link
+            :to="item.url"
+            :target="item.target"
+            :title="item.title"
+          >{{item.title}}</router-link>
         </li>
       </ul>
 
@@ -34,21 +37,20 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, ref, onBeforeMount } from 'vue'
+import { getFooterLink } from '@/api/common'
+import { FooterLinkConfig } from '@/types'
+import { ERR_OK } from '@/api/config'
 export default defineComponent({
   name: 'Footer',
   setup () {
-    const linkList = reactive([
-      { title: '企业服务', url: '/read', target: '_blank' },
-      { title: '关于我们', url: '', target: '_blank' },
-      { title: '联系我们', url: '', target: '_blank' },
-      { title: '讲师招募', url: '', target: '_blank' },
-      { title: '帮助中心', url: '', target: '_blank' },
-      { title: '意见反馈', url: '', target: '_blank' },
-      { title: '慕课大学', url: '', target: '_blank' },
-      { title: '代码托管', url: '', target: '_blank' },
-      { title: '友情链接', url: '', target: '_blank' }
-    ])
+    const linkList = ref<FooterLinkConfig[]>([])
+    onBeforeMount(async () => {
+      const { code, data } = await getFooterLink()
+      if (code === ERR_OK && data) {
+        linkList.value = data
+      }
+    })
     return { linkList }
   }
 })

@@ -11,18 +11,18 @@
   </ul>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, onBeforeMount } from 'vue'
+import { defineComponent, ref, onBeforeMount } from 'vue'
 import { getHeaderNav } from '@/api/common'
 import { ERR_OK } from '@/api/config'
 import { HeaderNavConfig } from '@/types'
 export default defineComponent({
   name: 'HeaderNavigation',
   setup () {
-    let navList = reactive<HeaderNavConfig[]>([])
+    const navList = ref<HeaderNavConfig[]>([])
     onBeforeMount(async () => {
       const { code, data } = await getHeaderNav()
       if (code === ERR_OK && data) {
-        navList = data
+        navList.value = data
       }
     })
     return { navList }

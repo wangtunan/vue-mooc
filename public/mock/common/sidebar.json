@@ -1,0 +1,10 @@
+{
+  "code": 0,
+  "msg": "请求成功",
+  "data": [
+    { "title": "意见反馈", "icon": "feedback" },
+    { "title": "帮助中心", "icon": "help" },
+    { "title": "APP下载", "icon": "app" },
+    { "title": "官方微信", "icon": "weixin" }
+  ]
+}

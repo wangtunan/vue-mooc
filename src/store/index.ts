@@ -1,14 +1,12 @@
 import { App } from 'vue'
 import { createStore } from 'vuex'
+import user from './modules/user'
+import * as getters from './getters'
 
 export const router = createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  getters,
   modules: {
+    user
   }
 })
 

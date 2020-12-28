@@ -9,6 +9,7 @@ const instance = axios.create({
 // 请求拦截
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
   // add token TDD
+  console.log(config)
   return config
 })
 

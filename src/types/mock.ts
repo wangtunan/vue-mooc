@@ -13,3 +13,9 @@ export interface FooterLinkConfig extends HeaderNavConfig {
 export interface SidebarItemConfig extends HeaderNavConfig {
   icon: string;
 }
+
+// login or register params
+export interface LoginParams {
+  account: string;
+  password: string;
+}
