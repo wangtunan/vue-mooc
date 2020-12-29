@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-plus": "^1.0.1-beta.14",
+    "good-storage": "^1.1.1",
     "normalize.css": "^8.0.1",
     "throttle-debounce": "^3.0.1",
     "vue": "^3.0.0",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/good-storage": "^1.1.0",
     "@types/jest": "^24.0.19",
     "@types/throttle-debounce": "^2.1.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",

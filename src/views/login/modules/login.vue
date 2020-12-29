@@ -41,6 +41,8 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, unref, reactive, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import { useMessage } from '@/hooks/core/useMessage'
 export default defineComponent({
   name: 'LoginForm',
@@ -49,6 +51,8 @@ export default defineComponent({
   },
   setup (props) {
     const Message = useMessage()
+    const store = useStore()
+    const router = useRouter()
     const formRef = ref<any>(null)
     const formData = reactive({
       account: '',
@@ -70,7 +74,7 @@ export default defineComponent({
       return isLoading ? `${txt}中...` : txt
     })
 
-    function handleSubmitClick () {
+    const handleSubmitClick = () => {
       const form = unref(formRef)
       if (!form) {
         return
@@ -81,9 +85,20 @@ export default defineComponent({
         }
         formData.isLoading = true
         try {
-          const submitResult = await Promise.resolve(Math.random() > 0.2)
+          const loginParams = {
+            account: formData.account,
+            password: formData.password
+          }
+          const submitResult = await store.dispatch('user/login', loginParams)
           if (submitResult) {
-            Message.success('登录成功')
+            Message({
+              type: 'success',
+              message: '登录成功',
+              duration: 2000,
+              onClose: () => {
+                router.push('/')
+              }
+            })
           } else {
             throw new Error('登录失败')
           }
