@@ -2,6 +2,7 @@
   "code": 0,
   "msg": "请求成功",
   "data": {
+    "uid": "22334455",
     "avatar": "https://img1.sycdn.imooc.com/5882f5f70001525e01000100.jpg",
     "nickname": "汪汪汪",
     "job": "Web前端工程师",

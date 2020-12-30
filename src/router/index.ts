@@ -1,7 +1,9 @@
-import { AppRouteRecordRaw, AppRouteMetaConfig } from '@/types'
 import { App } from 'vue'
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { scrollBehavior } from './scrollBehavior'
+import store from '@/store/index'
+import { AppRouteRecordRaw, AppRouteMetaConfig } from '@/types'
+import { getToken, getUserInfo } from '@/utils/cache'
 
 const routes: AppRouteRecordRaw[] = [
   {
@@ -36,7 +38,18 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const meta = to.meta as AppRouteMetaConfig
   document.title = meta.title ? `慕课网-${meta.title}` : '慕课网-程序员的梦工厂'
-  next()
+  const token = getToken()
+  if (token) {
+    const userInfo = getUserInfo()
+    if (!userInfo.uid) {
+      store.dispatch('user/getInfo')
+    }
+  }
+  if (meta && meta.auth) {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export function setupRouter (app: App<Element>) {

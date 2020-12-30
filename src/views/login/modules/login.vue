@@ -89,18 +89,18 @@ export default defineComponent({
             account: formData.account,
             password: formData.password
           }
-          const submitResult = await store.dispatch('user/login', loginParams)
+          const dispatchAction = formData.type === 0 ? 'user/login' : 'user/register'
+          const messageType = formData.type === 0 ? '登录' : '注册'
+          const submitResult = await store.dispatch(dispatchAction, loginParams)
           if (submitResult) {
             Message({
               type: 'success',
-              message: '登录成功',
-              duration: 2000,
+              message: `${messageType}成功`,
+              duration: 1500,
               onClose: () => {
                 router.push('/')
               }
             })
-          } else {
-            throw new Error('登录失败')
           }
         } catch (e) {
           formData.password = ''

@@ -22,6 +22,7 @@ export interface LoginParams {
 
 // userInfo类型
 export interface UserInfo {
+  uid: string | number;
   avatar?: string;
   nickname?: string;
   job?: string;

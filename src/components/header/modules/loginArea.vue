@@ -10,7 +10,19 @@
           <i class="iconfont icon-cart"></i>购物车
         </span>
       </li>
-      <li class="login-area-item login">
+      <template v-if="userInfo.uid">
+        <li class="login-area-item bell">
+          <span class="iconfont icon-bell"></span>
+        </li>
+        <li class="login-area-item lesson">
+          <span>我的课程</span>
+        </li>
+        <li class="login-area-item user">
+          <img :src="userInfo.avatar" width="32" height="32" alt="头像">
+          <UserCard class="user-card" />
+        </li>
+      </template>
+      <li v-else class="login-area-item login">
         <span title="登陆" @click="handleLoginClick(0)">登陆</span> /
         <span title="注册" @click="handleLoginClick(1)">注册</span>
       </li>
@@ -18,20 +30,26 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { UserInfo } from '@/types'
+import { computed, defineAsyncComponent, defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
-import AppDownload from './appDownload.vue'
+import { useStore } from 'vuex'
+const AppDownload = defineAsyncComponent(() => import('./appDownload.vue'))
+const UserCard = defineAsyncComponent(() => import('./userCard.vue'))
 export default defineComponent({
   name: 'HeaderLoginArea',
   components: {
-    AppDownload
+    AppDownload,
+    UserCard
   },
   setup () {
     const router = useRouter()
+    const store = useStore()
     const handleLoginClick = (type: number) => {
       router.push({ path: '/login', query: { type } })
     }
-    return { handleLoginClick }
+    const userInfo = computed<UserInfo>(() => store.getters.userInfo)
+    return { handleLoginClick, userInfo }
   }
 })
 </script>
@@ -45,7 +63,7 @@ export default defineComponent({
     &-item {
       position: relative;
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: top;
       line-height: $header-height;
       font-size: $font-normal;
       color: $regular-text;
@@ -72,11 +90,38 @@ export default defineComponent({
         border: 1px solid $placeholder-text;
         border-radius: $border-radius-large;
         box-sizing: border-box;
+        &:hover {
+          border-color: $theme-red;
+        }
         span {
           padding: 0 18px;
         }
         .iconfont {
           margin-right: 8px;
+        }
+      }
+      &.bell, &.lesson, &.user {
+        width: 60px;
+        text-align: center;
+        cursor: pointer;
+      }
+      &.user {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        height: 72px;
+        &:hover {
+          img {
+            border-color: $theme-red;
+          }
+          .user-card {
+            display: block;
+          }
+        }
+        img {
+          display: inline-block;
+          border-radius: 50%;
+          border: 2px solid transparent;
         }
       }
       &.login {
