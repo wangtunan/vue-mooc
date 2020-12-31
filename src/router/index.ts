@@ -42,7 +42,7 @@ router.beforeEach((to, from, next) => {
   if (token) {
     const userInfo = getUserInfo()
     if (!userInfo.uid) {
-      store.dispatch('user/getInfo')
+      store.dispatch('user/getInfo', token)
     }
   }
   if (meta && meta.auth) {

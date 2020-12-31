@@ -12,7 +12,7 @@
       </li>
       <template v-if="userInfo.uid">
         <li class="login-area-item bell">
-          <span class="iconfont icon-bell"></span>
+          <span class="iconfont icon-notice"></span>
         </li>
         <li class="login-area-item lesson">
           <span>我的课程</span>

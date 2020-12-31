@@ -25,5 +25,5 @@ export function userRegister (params: LoginParams): Promise<MoocResponseConfig<s
 
 // get user info 获取用户详情
 export function getUserInfo (token: string): Promise<MoocResponseConfig<UserInfo>> {
-  return axios.get(`/api/mock/user/info.json?token=${token}`)
+  return axios.get(`/auth/mock/user/info.json?token=${token}`)
 }

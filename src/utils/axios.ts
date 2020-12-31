@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
-import { baseURL } from '@/api/config'
 import Message from 'element-plus/lib/el-message'
+import { getToken } from './cache'
+import { baseURL } from '@/api/config'
 const instance = axios.create({
   timeout: 10000,
   baseURL: baseURL
@@ -9,6 +10,10 @@ const instance = axios.create({
 // 请求拦截
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
   // add token TDD
+  const { url } = config
+  if (url?.indexOf('/auth') !== -1) {
+    config.headers.token = getToken()
+  }
   return config
 })
 
