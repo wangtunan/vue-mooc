@@ -5,7 +5,8 @@ import store from '@/store/index'
 import { AppRouteRecordRaw, AppRouteMetaConfig } from '@/types'
 import { getToken, getUserInfo } from '@/utils/cache'
 
-const routes: AppRouteRecordRaw[] = [
+// basic routes 基础路由
+const basicRoutes: AppRouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/home',
@@ -29,10 +30,28 @@ const routes: AppRouteRecordRaw[] = [
   }
 ]
 
+// auth routes 权限路由
+const authRoutes: AppRouteRecordRaw[] = [
+  {
+    path: '/notice',
+    component: () => import('@/views/notice/index.vue'),
+    meta: {
+      title: '我的通知',
+      auth: true
+    }
+  }
+]
+
+// full routes 全部路由
+const routes = [
+  ...basicRoutes,
+  ...authRoutes
+] as RouteRecordRaw[]
+
 const router = createRouter({
   history: createWebHashHistory(),
   scrollBehavior: scrollBehavior,
-  routes: routes as RouteRecordRaw[]
+  routes: routes
 })
 
 router.beforeEach((to, from, next) => {
@@ -46,7 +65,7 @@ router.beforeEach((to, from, next) => {
     }
   }
   if (meta && meta.auth) {
-    next('/login')
+    token ? next() : next('/login')
   } else {
     next()
   }
