@@ -55,13 +55,14 @@ export default defineComponent({
       box-sizing: border-box;
       background-color:#E9E9E9;
       input {
-        padding: 0 12px;
+        padding: 0 40px 0 12px;
         width: 280px;
         height: 24px;
         line-height: 24px;
         border: none;
         outline: none;
         background-color: transparent;
+        box-sizing: border-box;
         color: $regular-text;
         font-size: $font-normal;
         &::placeholder {

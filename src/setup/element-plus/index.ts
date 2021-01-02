@@ -5,6 +5,7 @@ import {
   ElInput,
   ElCheckbox,
   ElButton,
+  ElBadge,
   ElMessage
 } from 'element-plus'
 
@@ -13,7 +14,8 @@ const components = [
   ElFormItem,
   ElInput,
   ElCheckbox,
-  ElButton
+  ElButton,
+  ElBadge
 ]
 
 const plugins = [ElMessage]

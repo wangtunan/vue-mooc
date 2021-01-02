@@ -3,10 +3,19 @@
     <!-- brand -->
     <router-link
       to="/"
-      tag="div"
-      class="header-brand"
+      custom
+      v-slot="{navigate}"
     >
-      <img src="@/assets/images/common/brand.png" width="136" height="72" alt="慕课网" title="慕课网">
+      <div class="header-brand">
+        <img
+          src="@/assets/images/common/brand.png"
+          width="136"
+          height="72"
+          alt="慕课网"
+          title="慕课网"
+          @click="navigate"
+        >
+      </div>
     </router-link>
 
     <!-- navigation -->
@@ -39,6 +48,7 @@ export default defineComponent({
     &-brand {
       float: left;
       margin: 0 20px;
+      cursor: pointer;
       @include respond-to {
         margin: 0 10px;
       }

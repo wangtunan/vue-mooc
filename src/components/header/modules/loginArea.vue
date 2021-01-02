@@ -12,7 +12,15 @@
       </li>
       <template v-if="userInfo.uid">
         <li class="login-area-item bell">
-          <span class="iconfont icon-notice"></span>
+          <el-badge
+            type="danger"
+            :value="userInfo.notice"
+            is-dot
+          >
+            <router-link to="/notice" target="_blank">
+              <span class="iconfont icon-notice"></span>
+            </router-link>
+          </el-badge>
         </li>
         <li class="login-area-item lesson">
           <span>我的课程</span>
@@ -31,7 +39,7 @@
 </template>
 <script lang="ts">
 import { UserInfo } from '@/types'
-import { computed, defineAsyncComponent, defineComponent } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 const AppDownload = defineAsyncComponent(() => import('./appDownload.vue'))
@@ -45,11 +53,12 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     const store = useStore()
+    const isBellHovering = ref(false)
+    const userInfo = computed<UserInfo>(() => store.getters.userInfo)
     const handleLoginClick = (type: number) => {
       router.push({ path: '/login', query: { type } })
     }
-    const userInfo = computed<UserInfo>(() => store.getters.userInfo)
-    return { handleLoginClick, userInfo }
+    return { isBellHovering, userInfo, handleLoginClick }
   }
 })
 </script>
@@ -104,6 +113,16 @@ export default defineComponent({
         width: 60px;
         text-align: center;
         cursor: pointer;
+      }
+      &.bell {
+        &:hover {
+          .iconfont {
+            color: $theme-red;
+          }
+        }
+        :deep .el-badge {
+          line-height: 1.4;
+        }
       }
       &.user {
         display: inline-flex;
