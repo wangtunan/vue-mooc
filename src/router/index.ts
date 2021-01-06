@@ -39,6 +39,45 @@ const authRoutes: AppRouteRecordRaw[] = [
       title: '我的通知',
       auth: true
     }
+  },
+  {
+    path: '/user',
+    redirect: '/user/binding',
+    component: () => import('@/views/user/index.vue'),
+    children: [
+      {
+        path: 'binding',
+        component: () => import('@/views/user/binding/index.vue'),
+        meta: {
+          title: '账号绑定',
+          auth: true
+        }
+      },
+      {
+        path: 'profile',
+        component: () => import('@/views/user/profile/index.vue'),
+        meta: {
+          title: '个人资料',
+          auth: true
+        }
+      },
+      {
+        path: 'log',
+        component: () => import('@/views/user/log/index.vue'),
+        meta: {
+          title: '操作记录',
+          auth: true
+        }
+      },
+      {
+        path: 'address',
+        component: () => import('@/views/user/address/index.vue'),
+        meta: {
+          title: '收件地址',
+          auth: true
+        }
+      }
+    ]
   }
 ]
 

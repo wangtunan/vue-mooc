@@ -7,7 +7,7 @@ export function userLogin (params: LoginParams): Promise<MoocResponseConfig<stri
   if (account && password) {
     return axios.get('/api/mock/user/login.json')
   } else {
-    const result = { code: -1, msg: '用户名或密码错误', data: null }
+    const result = { code: -1, msg: '用户名或密码错误', data: '' }
     return Promise.resolve(result)
   }
 }
@@ -18,7 +18,7 @@ export function userRegister (params: LoginParams): Promise<MoocResponseConfig<s
   if (account && password) {
     return axios.get('/api/mock/user/register.json')
   } else {
-    const result = { code: -1, msg: '用户名或密码不能为空', data: null }
+    const result = { code: -1, msg: '用户名或密码不能为空', data: '' }
     return Promise.resolve(result)
   }
 }
