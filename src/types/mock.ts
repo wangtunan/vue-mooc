@@ -33,3 +33,10 @@ export interface UserInfo {
   notice?: number | string;
   latest?: any;
 }
+
+export interface NoticeConfig {
+  isRead: boolean;
+  code: number;
+  title: string;
+  time: string;
+}

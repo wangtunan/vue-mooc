@@ -10,42 +10,82 @@
           active: index === activeIndex
         }"
         @click="activeIndex = index"
-      >{{item}}(1)</li>
+      >{{item}}({{total[index]}})</li>
     </ul>
 
     <!-- bar -->
     <div class="notice-bar">
       <span>系统自动清理三个月前的已读通知</span>
-      <span class="notice-bar-btn">全部标记已读</span>
+      <span class="notice-bar-btn" @click="handleReadAll">全部标记已读</span>
     </div>
 
     <!-- notice list -->
     <ul class="notice-list">
-      <li class="notice-list-item">
-        <div class="type">实战</div>
+      <li
+        v-for="(item, index) in filterList"
+        :key="index"
+        class="notice-list-item"
+        :class="{
+          readed: item.isRead
+        }"
+      >
+        <div class="type">{{item.code === 1 ? '实战' : '系统'}}</div>
         <div class="content">
-          <p class="title">同学你好，你的学弟王独秀，请教了你一个问题</p>
-          <p class="date">2020-12-28 10:29:08</p>
-        </div>
-      </li>
-      <li class="notice-list-item readed">
-        <div class="type">实战</div>
-        <div class="content">
-          <p class="title">同学你好，你的学弟王独秀，请教了你一个问题</p>
-          <p class="date">2020-12-28 10:29:08</p>
+          <p class="title">{{item.title}}</p>
+          <p class="date">{{item.time}}</p>
         </div>
       </li>
     </ul>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onBeforeMount, computed } from 'vue'
+import { getNoticeList } from '@/api/notice'
+import { ERR_OK } from '@/api/config'
+import { NoticeConfig } from '@/types'
+import { useMessage } from '@/hooks/core/useMessage'
 export default defineComponent({
   name: 'Notice',
   setup () {
+    const message = useMessage()
     const activeIndex = ref(0)
     const tabList = ref(['实战', '系统'])
-    return { activeIndex, tabList }
+    const noticeList = ref<NoticeConfig[]>([])
+    const currentCode = computed(() => {
+      return activeIndex.value === 0 ? 1 : 2
+    })
+    const filterList = computed(() => {
+      return noticeList.value.filter(item => item.code === currentCode.value)
+    })
+    const total = computed(() => {
+      const ret = [0, 0]
+      noticeList.value.forEach(item => {
+        ret[item.code - 1]++
+      })
+      return ret
+    })
+    const handleReadAll = () => {
+      noticeList.value = noticeList.value.map(item => {
+        return {
+          ...item,
+          isRead: item.code === currentCode.value ? true : item.isRead
+        }
+      })
+      message.success('标记成功')
+    }
+    onBeforeMount(async () => {
+      const { code, data } = await getNoticeList<NoticeConfig>()
+      if (code === ERR_OK) {
+        noticeList.value = data.list
+      }
+    })
+    return {
+      activeIndex,
+      tabList,
+      filterList,
+      total,
+      handleReadAll
+    }
   }
 })
 </script>
