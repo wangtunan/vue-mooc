@@ -14,11 +14,11 @@
 import { defineComponent, ref, onBeforeMount } from 'vue'
 import { getHeaderNav } from '@/api/common'
 import { ERR_OK } from '@/api/config'
-import { HeaderNavConfig } from '@/types'
+import { NavConfig } from '@/types'
 export default defineComponent({
   name: 'HeaderNavigation',
   setup () {
-    const navList = ref<HeaderNavConfig[]>([])
+    const navList = ref<NavConfig[]>([])
     onBeforeMount(async () => {
       const { code, data } = await getHeaderNav()
       if (code === ERR_OK && data) {

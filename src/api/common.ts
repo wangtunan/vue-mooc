@@ -1,8 +1,8 @@
 import axios from '@/utils/axios'
-import { FooterLinkConfig, HeaderNavConfig, MoocResponseConfig, SidebarItemConfig } from '@/types'
+import { FooterLinkConfig, NavConfig, MoocResponseConfig, SidebarItemConfig } from '@/types'
 
 // header navigation list
-export function getHeaderNav (): Promise<MoocResponseConfig<HeaderNavConfig[]>> {
+export function getHeaderNav (): Promise<MoocResponseConfig<NavConfig[]>> {
   return axios.get('/api/mock/common/header.json')
 }
 

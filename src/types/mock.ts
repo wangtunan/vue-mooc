@@ -1,16 +1,16 @@
 // header导航数组类型
-export interface HeaderNavConfig {
+export interface NavConfig {
   title: string;
   url?: string;
 }
 
 // footer链接数组类型
-export interface FooterLinkConfig extends HeaderNavConfig {
+export interface FooterLinkConfig extends NavConfig {
   target?: string;
 }
 
 // sidebar数组类型
-export interface SidebarItemConfig extends HeaderNavConfig {
+export interface SidebarItemConfig extends NavConfig {
   icon: string;
 }
 

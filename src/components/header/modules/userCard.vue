@@ -50,10 +50,10 @@ export default defineComponent({
       return store.getters.userInfo
     })
     const linkList = ref([
-      { icon: 'icon-lesson', title: '我的课程', url: '/login' },
-      { icon: 'icon-order', title: '订单中心', url: '/' },
-      { icon: 'icon-integral', title: '积分商场', url: '/' },
-      { icon: 'icon-setting', title: '个人设置', url: '/' }
+      { icon: 'icon-lesson', title: '我的课程', url: '/lesson' },
+      { icon: 'icon-order', title: '订单中心', url: '/order' },
+      { icon: 'icon-integral', title: '积分商场', url: '/integral' },
+      { icon: 'icon-setting', title: '个人设置', url: '/user' }
     ])
     const handleLogoutClick = () => store.dispatch('user/logout')
     return { userInfo, linkList, handleLogoutClick }

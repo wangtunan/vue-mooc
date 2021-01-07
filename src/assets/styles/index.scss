@@ -1,5 +1,5 @@
 // @import './iconfont.scss';
-@import '//at.alicdn.com/t/font_2293706_il9m8xug8k9.css';
+@import '//at.alicdn.com/t/font_2293706_gpima33pjbr.css';
 html, body {
   width: 100%;
   height: 100%;
@@ -7,7 +7,7 @@ html, body {
 #app {
   height: 100%;
 }
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, dl, dt, dd {
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -19,4 +19,5 @@ ul, ol {
 }
 a {
   text-decoration: none;
+  color: inherit;
 }
