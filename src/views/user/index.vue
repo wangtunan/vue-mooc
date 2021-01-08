@@ -31,15 +31,16 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { NavConfig, UserInfo } from '@/types'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 export default defineComponent({
   name: 'UserIndex',
   setup () {
     const store = useStore()
     const router = useRouter()
+    const route = useRoute()
     const activeIndex = ref(0)
     const navList = ref<NavConfig[]>([
       { title: '账号绑定', url: '/user/binding' },
@@ -50,10 +51,15 @@ export default defineComponent({
     const userInfo = computed<UserInfo>(() => {
       return store.getters.userInfo
     })
-    const handleNavClick = (item: NavConfig, index: number) => {
-      activeIndex.value = index
+    const handleNavClick = (item: NavConfig) => {
       router.push(item.url as string)
     }
+    const setActiveIndex = () => {
+      const findIndex = navList.value.findIndex(item => item.url === route.path)
+      activeIndex.value = findIndex !== -1 ? findIndex : 0
+    }
+    setActiveIndex()
+    watch(() => route.path, setActiveIndex)
     return {
       userInfo,
       navList,
@@ -68,10 +74,9 @@ export default defineComponent({
   @import '~@/assets/styles/mixin.scss';
   .user {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
     padding: 40px 0;
-    height: 500px;
     @include mooc-center();
     &-nav {
       flex: 0 0 216px;
@@ -118,8 +123,6 @@ export default defineComponent({
     &-page {
       flex: 1;
       margin-left: 48px;
-      height: 100%;
-      background-color: #58a;
     }
     &-info {
       padding: 32px 0 24px;

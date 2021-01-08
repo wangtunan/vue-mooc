@@ -1,0 +1,9 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": {
+    "email": "why583440138@gmail.com",
+    "phone": "182******33",
+    "password": true
+  }
+}

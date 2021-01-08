@@ -1,0 +1,10 @@
+.slide-up-enter-active, .slide-up-leave-active {
+  transition: all 0.3s linear;
+  transform-origin: center top;
+  transform: scaleY(1);
+  opacity: 1;
+}
+.slide-up-enter, .slide-up-leave-to {
+  opacity: 0;
+  transform: scaleY(0)
+}

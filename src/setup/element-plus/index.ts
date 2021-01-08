@@ -6,7 +6,9 @@ import {
   ElCheckbox,
   ElButton,
   ElBadge,
-  ElMessage
+  ElMessage,
+  ElTable,
+  ElTableColumn
 } from 'element-plus'
 
 const components = [
@@ -15,14 +17,16 @@ const components = [
   ElInput,
   ElCheckbox,
   ElButton,
-  ElBadge
+  ElBadge,
+  ElTable,
+  ElTableColumn
 ]
 
 const plugins = [ElMessage]
 
 export function setupElementPlus (app: App<any>) {
   components.forEach(component => {
-    app.use(component)
+    app.use(component as any)
   })
   plugins.forEach(plugin => {
     // @ts-ignore

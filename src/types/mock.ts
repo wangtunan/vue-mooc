@@ -34,9 +34,27 @@ export interface UserInfo {
   latest?: any;
 }
 
+// notice通知类型
 export interface NoticeConfig {
   isRead: boolean;
   code: number;
   title: string;
   time: string;
+}
+
+// binding 类型
+export interface BindingConfig {
+  email?: string;
+  phone?: string;
+  password?: boolean;
+}
+
+// log 类型
+export interface LogConfig {
+  type: string;
+  time: string;
+  city: string;
+  ip: string;
+  device: string;
+  system: string;
 }
