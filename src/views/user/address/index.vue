@@ -35,8 +35,6 @@
           <span>删除</span>
         </p>
       </li>
-      <li class="address-list-item"></li>
-      <li class="address-list-item"></li>
     </ul>
   </div>
 </template>

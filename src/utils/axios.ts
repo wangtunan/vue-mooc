@@ -17,7 +17,7 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
   return config
 })
 
-// 相应拦截
+// 响应拦截
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
     const { status, data } = response

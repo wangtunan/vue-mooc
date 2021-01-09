@@ -44,12 +44,12 @@ import { getNoticeList } from '@/api/notice'
 import { ERR_OK } from '@/api/config'
 import { NoticeConfig } from '@/types'
 import { useMessage } from '@/hooks/core/useMessage'
+const tabList = ['实战', '系统']
 export default defineComponent({
   name: 'Notice',
   setup () {
     const message = useMessage()
     const activeIndex = ref(0)
-    const tabList = ref(['实战', '系统'])
     const noticeList = ref<NoticeConfig[]>([])
     const currentCode = computed(() => {
       return activeIndex.value === 0 ? 1 : 2

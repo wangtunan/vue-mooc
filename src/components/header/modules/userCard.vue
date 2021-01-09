@@ -40,8 +40,14 @@
   </div>
 </template>
 <script>
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
+const linkList = [
+  { icon: 'icon-lesson', title: '我的课程', url: '/lesson' },
+  { icon: 'icon-order', title: '订单中心', url: '/order' },
+  { icon: 'icon-integral', title: '积分商场', url: '/integral' },
+  { icon: 'icon-setting', title: '个人设置', url: '/user' }
+]
 export default defineComponent({
   name: 'UserCard',
   setup () {
@@ -49,12 +55,6 @@ export default defineComponent({
     const userInfo = computed(() => {
       return store.getters.userInfo
     })
-    const linkList = ref([
-      { icon: 'icon-lesson', title: '我的课程', url: '/lesson' },
-      { icon: 'icon-order', title: '订单中心', url: '/order' },
-      { icon: 'icon-integral', title: '积分商场', url: '/integral' },
-      { icon: 'icon-setting', title: '个人设置', url: '/user' }
-    ])
     const handleLogoutClick = () => store.dispatch('user/logout')
     return { userInfo, linkList, handleLogoutClick }
   }
