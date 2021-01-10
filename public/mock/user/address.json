@@ -1,0 +1,30 @@
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": [
+    {
+      "id": "123456",
+      "name": "张三",
+      "phone": "13877778888",
+      "address": "广东省广州市天河区",
+      "postcode": "000000",
+      "isDefault": true
+    },
+    {
+      "id": "456789",
+      "name": "李四",
+      "phone": "13877778888",
+      "address": "湖北省武汉市武昌区",
+      "postcode": "000000",
+      "isDefault": false
+    },
+    {
+      "id": "987654",
+      "name": "王五",
+      "phone": "13877778888",
+      "address": "广东省深圳市南山区",
+      "postcode": "000000",
+      "isDefault": false
+    }
+  ]
+}

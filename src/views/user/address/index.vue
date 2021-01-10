@@ -13,35 +13,44 @@
           <p class="add-title">添加新地址</p>
         </div>
       </li>
-      <li class="address-list-item">
-        <p class="name">汪先生</p>
-        <p>电话：18277776666</p>
-        <p>地址：广东广州市天河区</p>
-        <p>邮编：000000</p>
+      <li
+        v-for="item in addressList"
+        :key="item.id"
+        class="address-list-item"
+      >
+        <p class="name">{{item.name}}</p>
+        <p>电话：{{item.phone}}</p>
+        <p>地址：{{item.address}}</p>
+        <p>邮编：{{item.postcode}}</p>
         <p class="btns">
-          <span class="btn-default">设为默认地址</span>
+          <span v-if="!item.isDefault" class="btn-default">设为默认地址</span>
           <span>修改</span>
           <span>删除</span>
         </p>
-      </li>
-      <li class="address-list-item">
-        <p class="name">汪先生</p>
-        <p>电话：18277776666</p>
-        <p>地址：广东广州市天河区</p>
-        <p>邮编：000000</p>
-        <p class="btns">
-          <span class="btn-default">设为默认地址</span>
-          <span>修改</span>
-          <span>删除</span>
-        </p>
+        <div v-if="item.isDefault" class="icon">
+          <span>默认</span>
+        </div>
       </li>
     </ul>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onBeforeMount, ref } from 'vue'
+import { AddressConfig } from '@/types'
+import { getUserAddresses } from '@/api/user'
+import { ERR_OK } from '@/api/config'
 export default defineComponent({
-  name: 'UserAddress'
+  name: 'UserAddress',
+  setup () {
+    const addressList = ref<AddressConfig[]>([])
+    onBeforeMount(async () => {
+      const { code, data } = await getUserAddresses<AddressConfig[]>()
+      if (code === ERR_OK) {
+        addressList.value = data
+      }
+    })
+    return { addressList }
+  }
 })
 </script>
 <style lang="scss" scoped>
@@ -129,6 +138,25 @@ export default defineComponent({
             &.btn-default {
               float: left;
             }
+          }
+        }
+        .icon {
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 0;
+          height: 0;
+          border: 24px solid;
+          border-color: $theme-green $theme-green transparent transparent;
+          span {
+            position: absolute;
+            left: -2px;
+            top: -12px;
+            display: inline-block;
+            width: 24px;
+            transform: rotate(45deg);
+            font-size: $font-small;
+            color: #fff;
           }
         }
       }

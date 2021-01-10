@@ -58,3 +58,13 @@ export interface LogConfig {
   device: string;
   system: string;
 }
+
+// address 类型
+export interface AddressConfig {
+  id: string;
+  name: string;
+  phone: string;
+  address: string;
+  postcode: string;
+  isDefault: boolean;
+}
