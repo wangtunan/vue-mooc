@@ -120,7 +120,7 @@ export default defineComponent({
             color: $theme-red;
           }
         }
-        :deep .el-badge {
+        :deep(.el-badge) {
           line-height: 1.4;
         }
       }

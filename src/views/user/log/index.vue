@@ -54,7 +54,7 @@ export default defineComponent({
         font-weight: normal;
       }
     }
-    :deep .el-table {
+    :deep(.el-table) {
       th.is-leaf {
         background-color: #f3f5f7;
       }

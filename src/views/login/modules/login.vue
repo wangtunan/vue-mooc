@@ -145,7 +145,7 @@ export default defineComponent({
         }
       }
     }
-    :deep .el-form {
+    :deep(.el-form) {
       .el-form-item {
         margin-bottom: 30px;
       }
