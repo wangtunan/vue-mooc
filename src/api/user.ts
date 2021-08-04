@@ -37,3 +37,8 @@ export function getUserBinding (): Promise<MoocResponseConfig<BindingConfig>> {
 export function getUserLogs<T> (): Promise<MoocResponseConfig<MoocListResponseConfig<T>>> {
   return axios.get('/auth/mock/user/log.json')
 }
+
+// get user address 获取用户地址
+export function getUserAddresses<T> (): Promise<MoocResponseConfig<T>> {
+  return axios.get('/auth/mock/user/address.json')
+}

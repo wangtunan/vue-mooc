@@ -35,6 +35,12 @@ import { computed, defineComponent, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { NavConfig, UserInfo } from '@/types'
 import { useRoute, useRouter } from 'vue-router'
+const navList = [
+  { title: '账号绑定', url: '/user/binding' },
+  { title: '个人信息', url: '/user/profile' },
+  { title: '操作记录', url: '/user/log' },
+  { title: '收件地址', url: '/user/address' }
+]
 export default defineComponent({
   name: 'UserIndex',
   setup () {
@@ -42,12 +48,6 @@ export default defineComponent({
     const router = useRouter()
     const route = useRoute()
     const activeIndex = ref(0)
-    const navList = ref<NavConfig[]>([
-      { title: '账号绑定', url: '/user/binding' },
-      { title: '个人信息', url: '/user/profile' },
-      { title: '操作记录', url: '/user/log' },
-      { title: '收件地址', url: '/user/address' }
-    ])
     const userInfo = computed<UserInfo>(() => {
       return store.getters.userInfo
     })
@@ -55,7 +55,7 @@ export default defineComponent({
       router.push(item.url as string)
     }
     const setActiveIndex = () => {
-      const findIndex = navList.value.findIndex(item => item.url === route.path)
+      const findIndex = navList.findIndex(item => item.url === route.path)
       activeIndex.value = findIndex !== -1 ? findIndex : 0
     }
     setActiveIndex()
